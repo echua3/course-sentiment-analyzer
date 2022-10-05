@@ -12,7 +12,7 @@ axios
 
 2. do `npm install react-scripts`
 
-3. Run `npm start` to create an instance of a local host  
+3. In the server src/server directory Run `npm start` to create an instance of a local host  
 Make sure in the package.json the instance of 
  "scripts": {
     "start": "react-scripts start",
