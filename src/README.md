@@ -1,6 +1,6 @@
 > This README file shall be updated to contain info about the specific details of your app source code (how it is organized/structured, assumptions made etc.)
 
-## Running The Webpage 
+## Running the Webpage 
 1. Prerequisites: Make sure you have node.js as well as the basic npm functions downloaded on your end.
 
 If this node module needs anything specific to run locally know that note that your computer will probably have to download it locally. The only plugins used are 
