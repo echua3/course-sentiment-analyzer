@@ -32,7 +32,9 @@ reviewRoutes.route("/review/add").post(function (req, response) {
   let myobj = {
     classID: req.body.name,
     reviewID: req.body.id,
-    valueReview: req.body.valueReview
+    stars: req.body,stars,
+    initialReview: req.body.initialReview,
+    sentiment: req.body.sentiment
   };
   db_connect.collection("reviews").insertOne(myobj, function (err, res) {
     if (err) throw err;
@@ -47,7 +49,9 @@ reviewRoutes.route("/update/:id").post(function (req, response) {
     $set: {
       classID: req.body.name,
       reviewID: req.body.id,
-      valueReview: req.body.valueReview
+      stars: req.body,stars,
+      initialReview: req.body.initialReview,
+      sentiment: req.body.sentiment
     },
   };
   db_connect
