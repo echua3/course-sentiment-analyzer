@@ -23,5 +23,5 @@
 - We can update and push the github repository more often.
 - Better utilize the project backlog by defining more specific tasks for each user story.
 - We should update the readme as often as we get new features put out on the project, at least in terms of how to run the deliverable 
-- To make it easier on us in the long wrong we should seperate the frontend into more components as designated in the UML as we go along with this iteration
+- To make it easier on us in the long run we should seperate the frontend into more components as designated in the UML as we go along with this iteration
 
