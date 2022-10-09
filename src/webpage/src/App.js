@@ -3,13 +3,14 @@ import "./components/Searchbar";
 import SearchBar from "./components/Searchbar";
 
 import axios from "axios";
-
-import { message, Table } from "antd";
+import { message, Table, Card, Row, Col } from "antd";
 import React, { useState } from "react";
 
-
 function App() {
+  
   const [datasource,setDatasource]=useState([])
+  const [keys,expandedKeys]=useState([])
+
   const columns=[
     {
       title: 'School Name',
@@ -35,8 +36,47 @@ function App() {
       title: 'Instructors',
       dataIndex: 'Instructors',
       key: 'Instructors',
-    },
+    }, {
+      title: 'ID',
+      dataIndex: 'SSS_SectionsID',
+      key: 'SSS_SectionsID',
+      hidden: true
+    }
   ]
+
+  const tabListSkeleton = [
+    {
+      key: 'Rating',
+      tab: 'Rating',
+    },
+    {
+      key: 'ReviewSpotlight',
+      tab: 'Review Spotlight',
+    },
+    {
+      key: 'AddAReview',
+      tab: 'Add A Review',
+    },
+    {
+      key: 'ViewAllReviews',
+      tab: 'View All Reviews',
+    },
+  ];
+  
+  const contentList: Record<string, React.ReactNode> = {
+    Rating: <p>Add Rating Feature Here</p>,
+    ReviewSpotlight: <p>Add Review Spotlight Feature Here</p>,
+    AddAReview: <p>Add Review Feature Here</p>,
+    ViewAllReviews: <p>Add View All Review Feature Here</p>,
+  };
+
+  const [activeTabKey, setActiveTabKey] = useState('app');
+  const [expandedRowKeys, setExpandedRowKeys] = useState([]);
+
+  const onTab2Change = (key) => {
+    setActiveTabKey(key);
+  };
+
   function onSubmit(values){
     const { CourseTitle, courseID } = values;
     //
@@ -56,10 +96,41 @@ function App() {
         console.log("failed: ", err.message);
       });
 }
+
+const onTableRowExpand = (expanded, record) => {
+  const keys = [];
+  if(expanded){
+      keys.push(record.SSS_SectionsID); // I have set my record.id as row key. Check the documentation for more details.
+  }
+
+  setExpandedRowKeys(keys);
+}
+
   return (
     <div className="App">
       <SearchBar  onFinish={onSubmit}/>
-      <Table dataSource={datasource} columns={columns}/>
+      <Table 
+      dataSource={datasource} 
+      columns={columns.filter(col => col.title !== 'ID')}
+      rowKey = "SSS_SectionsID"
+      expandable={{
+        expandedRowRender: record => <Card
+        style={{ width: '100%' }}
+        tabList={tabListSkeleton}
+        activeTabKey={activeTabKey}
+        tabBarExtraContent={<a href="#">More</a>}
+        onTabChange={key => {
+          onTab2Change(key);
+        }}
+      >
+        {contentList[activeTabKey]}
+      </Card>,
+        rowExpandable: record => record.OfferingName + record.SchoolName + record.Title + record.Instructors !== 'Not Expandable',
+      }}
+      expandedRowKeys={expandedRowKeys}
+      onExpand={onTableRowExpand}
+      
+      />
     </div>
   );
 }
