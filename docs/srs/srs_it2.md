@@ -13,7 +13,7 @@ How exactly can one base their entire future and the potential differences of of
 
 ## Proposed Solution 
 
-The proposed solution is to build a responsive web application which has a sentiment analysis engine which can be accessed using a mobile or a desktop computer. Students can splurge all the details they want to give about a class by touching on a variety of different sectors of what would compile to make up the complete value the course has to offer, and a summary of the course as well. Once the data is compiled on the student’s end it is shunted back to the server to perform some computations on the text and generate either a sentiment or a detailed analysis of the course regarding the difficulty, workload, etc. through graphs and charts. The student can view this analysis on that particular course page.
+The proposed solution is to build a responsive web application which has a sentiment analysis engine which can be accessed using a mobile or a desktop computer. Students can splurge all the details they want to give about a class by touching on a variety of different sectors of what would compile to make up the complete value the course has to offer, and a summary of the course as well. Once the data is compiled on the student’s end it is shunted back to the server to perform some computations on the text and generate either a sentiment or a detailed analysis of the course regarding the difficulty, workload, etc. through graphs and charts. The student can view this analysis on that particular course's page, which is not currently available on other currently existing review websites.
 
 For students who want to learn more information about the course they are interested in, they can search with keywords and filters and even post a question which has not been answered yet. Based on the keywords, responses and overall gratifying or grating notions of the class the information will then be parsed through potentially a variety of methods, any student can access the reviews for any course. The professor of a particular course can review and share his thoughts about the course he would teach. Their review will have a higher priority than the student reviews. The students can upvote or downvote the reviews depending on how helpful they are. The most helpful reviews will have a higher priority and will show up on top of the screen.
 
@@ -28,14 +28,15 @@ For students who want to learn more information about the course they are intere
 6. As a user, there should be charts and Graph analysis based on information given through the sentiment analysis form (Might not need a certain sample size threshold for this specific analysis, because even one review could lead to a world of information), these graphs have to relate to different parts of the sentiment analysis form, so that the reviews could be digested in a different medium allowing us to compare courses and other selections properly.
 7. As a user, I want to be able to edit my reviews, so that I can update my thoughts about a class. 
 8. As a user, I want to be able to delete my reviews (pending approval from admin), so that I can take away a post. 
-9. As a user, I want to view my personal details on my user profile page so I can make sure my information is accurate.
 
 
 ### Nice to have:
 
 1. As a user, I want to view an in-depth analysis of the reviews for a course, so that I can know what it will be like to take the class
 2. As a user, I want to see the most helpful reviews first, so that I can efficiently go through only the reviews that are relevant and not waste time reading unhelpful reviews
-3. As a user, I want to see recommended courses, so that I can more easily find courses that suit both my course requirements and preferences
+3. As a user, I want to see recommended courses, so that I can more easily find courses that suit both my course requirements and preferences.
+4. As a user, I want to view my personal details on my user profile page so I can make sure my information is accurate.
+5. As a professor, I want to share my own thoughts about the course I am teaching and what I expect from students wanting to register.
 
 
 ## Non-functional Requirements:
