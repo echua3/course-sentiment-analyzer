@@ -42,14 +42,24 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+The point of this project is to create a web application that can allow students to touch base on classes positively and negatively, giving an outlook that students can use to help their own understandings of the course at large and give them just the right amount of information to hopefully not confuse them even further! 
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+We can accomplish this through allowing: 
+*Individuals to search for courses and write reviews based on those courses
+*View reviews in a easy to digest format, so they can learn about other people’s journey through the class being searched through including automatic sentiment analysis
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+So at the end of the day the students can take back and use college for what it's actually meant to be, not a wild russian roulette service of random classes but a product, that you buy, and double, triple, quadruple check to make sure that you are getting the best bang for your buck.
+
+## Webpage
+
+The webpage in its current state is capable of running through the sis.api and using it to search up classes through running the sis.api through a middleware function setupProxy.js to convert into JSONP and then read the code through the App.js and Searchbar.js function and component respectively.
+
+## Sentiment Analysis
+
+The 'finetune_review_dataset.ipynb' finetunes the 'bert-base-cased' model on the 'coursera course review' dataset. The training of the model takes 4 hours to process.
+The 'course_review_analyser.ipynb' imports the finetuned model we created above and runs it on the review input by the user. To run this file in current state, you can used Google Colab.
+The output is a rating between 1 to 5 and the confidence of the model in that rating itself. This helps us understand the emotion of the reviewer and it can be analysed to give a final output on the website.
+In the next iterations, this code will be attached to the backend so that the reviews uploaded on the website will be reviewed by the analyser automatically.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -61,14 +71,13 @@ MERN stack, Python
 
 This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* Ant Design (AntD)
+* React
+* MongoDB
+* Express
+* Node.js
+* Http-Proxy-Middleware
+* Axios
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -80,6 +89,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites and Installation
+Firstly download and/or clone the repo on to your local machine
 
 Make sure you have node.js as well as the basic npm functions downloaded on your end.
 If this node module needs anything specific to run locally know that note that your computer will probably have to download it locally. The only plugins used are
@@ -105,16 +115,10 @@ If not add it or run `npm react-scipts start`
 
 You can view the tests for this branch of code here: https://colab.research.google.com/drive/1JEmG7M4BLVaegpEoqAs6XFxxKtGsbzmL?usp=sharing
 
-## Webpage
+## Running Website
 
-The webpage in its current state is capable of running through the sis.api and using it to search up classes through running the sis.api through a middleware function setupProxy.js to convert into JSONP and then read the code through the App.js and Searchbar.js function and component respectively.
-
-## Sentiment Analysis
-
-The 'finetune_review_dataset.ipynb' finetunes the 'bert-base-cased' model on the 'coursera course review' dataset. The training of the model takes 4 hours to process.
-The 'course_review_analyser.ipynb' imports the finetuned model we created above and runs it on the review input by the user. To run this file in current state, you can used Google Colab.
-The output is a rating between 1 to 5 and the confidence of the model in that rating itself. This helps us understand the emotion of the reviewer and it can be analysed to give a final output on the website.
-In the next iterations, this code will be attached to the backend so that the reviews uploaded on the website will be reviewed by the analyser automatically.
+If you have it installed correctly, run the website through: 
+npm react-script start
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -137,11 +141,6 @@ Don't forget to give the project a star! Thanks again!
 ## Contact
 
 sentienceteam@gmail.com
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
