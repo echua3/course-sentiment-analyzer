@@ -22,8 +22,7 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#prerequisites-and-installation">Prerequisites and Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -38,9 +37,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+# About The Project
 
 The point of this project is to create a web application that can allow students to touch base on classes positively and negatively, giving an outlook that students can use to help their own understandings of the course at large and give them just the right amount of information to hopefully not confuse them even further! 
 
@@ -65,7 +62,7 @@ In the next iterations, this code will be attached to the backend so that the re
 
 
 
-### Built With
+## Built With
 
 MERN stack, Python
 
@@ -84,10 +81,11 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+# Getting Started
 
 To get a local copy up and running follow these simple example steps.
-
+<!-- Prerequisites -->
+<!-- Installation -->
 ### Prerequisites and Installation
 Firstly download and/or clone the repo on to your local machine
 
@@ -109,19 +107,19 @@ If not add it or run `npm react-scipts start`
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+# Usage
 
-# Running Sentiment Analysis
+## Running Sentiment Analysis
 
 You can view the tests for this branch of code here: https://colab.research.google.com/drive/1JEmG7M4BLVaegpEoqAs6XFxxKtGsbzmL?usp=sharing
 
-# Running Website
+## Running Website
 
 If you have it installed correctly, run the website through: 
 npm react-script start
 
 <!-- CONTRIBUTING -->
-## Contributing
+# Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -136,6 +134,8 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Roadmap
+View our progress on the project here! https://github.com/jhu-oose-f22/team-teamsentience/projects?query=is%3Aopen
 
 <!-- CONTACT -->
 ## Contact
