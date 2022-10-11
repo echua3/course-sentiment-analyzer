@@ -111,11 +111,11 @@ If not add it or run `npm react-scipts start`
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-## Running Sentiment Analysis
+# Running Sentiment Analysis
 
 You can view the tests for this branch of code here: https://colab.research.google.com/drive/1JEmG7M4BLVaegpEoqAs6XFxxKtGsbzmL?usp=sharing
 
-## Running Website
+# Running Website
 
 If you have it installed correctly, run the website through: 
 npm react-script start
