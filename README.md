@@ -45,8 +45,8 @@
 The point of this project is to create a web application that can allow students to touch base on classes positively and negatively, giving an outlook that students can use to help their own understandings of the course at large and give them just the right amount of information to hopefully not confuse them even further! 
 
 We can accomplish this through allowing: 
-*Individuals to search for courses and write reviews based on those courses
-*View reviews in a easy to digest format, so they can learn about other people’s journey through the class being searched through including automatic sentiment analysis
+* Individuals to search for courses and write reviews based on those courses
+* View reviews in a easy to digest format, so they can learn about other people’s journey through the class being searched through including automatic sentiment analysis
 
 So at the end of the day the students can take back and use college for what it's actually meant to be, not a wild russian roulette service of random classes but a product, that you buy, and double, triple, quadruple check to make sure that you are getting the best bang for your buck.
 
