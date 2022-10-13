@@ -10,13 +10,13 @@ function WriteReview(record) {
         initialReview: ""
     });
       
-      function updateForm(value) {
+    function updateForm(value) {
         return setForm((prev) => {
           return { ...prev, ...value };
         });
-      }
+    }
 
-      async function onSubmit(e) {
+    async function onSubmit(e) {
         e.preventDefault();
       
         const newPerson = { ...form };
@@ -34,7 +34,7 @@ function WriteReview(record) {
         });
       
         setForm({ classID: {record}, reviewID: "", stars: "", initialReview: "" });
-      }
+    }
 
     return (
         <div>
@@ -59,6 +59,5 @@ function WriteReview(record) {
       </div>
     );
   }
-  
   
   export default WriteReview;

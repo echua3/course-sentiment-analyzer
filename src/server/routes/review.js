@@ -68,3 +68,5 @@ reviewRoutes.route("/update/:id").post(function (req, response) {
     response.json(obj);
   });
  });
+
+ module.exports = reviewRoutes;
