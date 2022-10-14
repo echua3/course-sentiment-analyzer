@@ -96,6 +96,8 @@ react
 http-proxy-middleware
 axios
 
+
+In the src/webpage/src directory
 do `npm install react-scripts`
 
 In the server src/server directory Run `npm start` to create an instance of a local host
