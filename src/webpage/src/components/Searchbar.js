@@ -8,10 +8,16 @@ function SearchBar(props) {
   return (
     <Form onFinish={props.onFinish}>
       <Form.Item name="CourseTitle" label="Course Title">
-        <Input placeholder="CourseTitle" />
+        <Input placeholder="course title" />
       </Form.Item>
       <Form.Item name="CourseNumber" label="Course Number">
-        <Input placeholder="CourseNumber" />
+        <Input placeholder="course number" />
+      </Form.Item>
+      <Form.Item name="Credits" label="Credits">
+        <Input placeholder="credits" />
+      </Form.Item>
+      <Form.Item name="Department" label="Department">
+        <Input placeholder="department" />
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">Submit</Button>
