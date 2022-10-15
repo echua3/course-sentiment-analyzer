@@ -9,7 +9,7 @@ import { message, Table, Card, Row, Col } from "antd";
 import React, { useState } from "react";
 
 function CourseSearch() {
-  
+
   const [datasource,setDatasource]=useState([])
   const [keys,expandedKeys]=useState([])
 
@@ -64,7 +64,7 @@ function CourseSearch() {
       tab: 'View All Reviews',
     },
   ];
-  
+
   const contentList: Record<string, React.ReactNode> = {
     Rating: <p>Add Rating Feature Here</p>,
     ReviewSpotlight: <p>Add Review Spotlight Feature Here</p>,
@@ -82,11 +82,11 @@ function CourseSearch() {
   };
 
   function onSubmit(values){
-    const { CourseTitle, courseID } = values;
+    const { CourseTitle, CourseNumber, Credits, Department } = values;
     //
     const opt = {
       method: "GET",
-      params:{CourseTitle,courseID},
+      params:{CourseTitle,CourseNumber, Credits, Department},
       url: `/api/classes?key=9N7pYLkUVHSf8xzgFWMK5Cv7jnmQAzFo`,
     };
     axios(opt)
@@ -114,8 +114,8 @@ const onTableRowExpand = (expanded, record) => {
   return (
     <div className="App">
       <SearchBar  onFinish={onSubmit}/>
-      <Table 
-      dataSource={datasource} 
+      <Table
+      dataSource={datasource}
       columns={columns.filter(col => col.title !== 'ID')}
       rowKey = "SSS_SectionsID"
       expandable={{
@@ -135,10 +135,9 @@ const onTableRowExpand = (expanded, record) => {
       }}
       expandedRowKeys={expandedRowKeys}
       onExpand={onTableRowExpand}
-      
+
       />
     </div>
   );
 }
 export default CourseSearch;
-
