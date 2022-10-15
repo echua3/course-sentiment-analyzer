@@ -1,9 +1,13 @@
+import { OmitProps } from "antd/lib/transfer/ListBody";
 import React from "react";
 import { useState } from "react";
+import Axios from "axios";
 
 function WriteReview(record) {
 
-    const [form, setForm] = useState({        
+    const [initialReview, setInitialReview] = useState("");
+
+    /*const [form, setForm] = useState({        
         classID: "",
         reviewID: "",
         stars: "",
@@ -14,12 +18,20 @@ function WriteReview(record) {
         return setForm((prev) => {
           return { ...prev, ...value };
         });
-    }
+    }*/
 
     async function onSubmit(e) {
         e.preventDefault();
-      
-        const newPerson = { ...form };
+        const data = new FormData();
+        data.append("classID", {record});
+        data.append("reviewID", "");
+        data.append("stars", "");
+        data.append("initialReview", initialReview);
+        setInitialReview("");
+        const newReview = await Axios.post("/write-review", data, { headers: { "Content-Type": "multipart/form-data" } })
+        record.setInitialReview(prev => prev.concat([newReview.data]))
+
+        /*const newPerson = { ...form };
       
         await fetch("http://localhost:1000/review/add", {
           method: "POST",
@@ -33,27 +45,20 @@ function WriteReview(record) {
           return;
         });
       
-        setForm({ classID: {record}, reviewID: "", stars: "", initialReview: "" });
+        setForm({ classID: {record}, reviewID: "", stars: "", initialReview: "" });*/
     }
 
     return (
         <div>
             <label htmlFor="name">Write a review:</label>
-            <div className="form-group">
-            <textarea
-                type="text"
-                className="form-control"
-                id="name"
-                value={form.initialReview}
-                onChange={(e) => updateForm({ initialReview: e.target.value })}
-            />
+            <div className="initialReview">
+                <textarea onChange={e => setInitialReview(e.target.value)} value={initialReview} type="text" className="initialReview" />
             </div>
-            <div className="form-group">
+            <div className="submitButton" onSubmit={onSubmit}>
                 <input
                 type="submit"
                 value="Submit review"
                 className="btn btn-primary"
-                onFinish={onSubmit}
                 />
             </div>
       </div>
