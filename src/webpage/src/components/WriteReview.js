@@ -2,67 +2,83 @@ import { OmitProps } from "antd/lib/transfer/ListBody";
 import React from "react";
 import { useState } from "react";
 import Axios from "axios";
+import './CourseComponent.scss';
 
-function WriteReview(record) {
+function WriteReview({record}) {
 
     const [initialReview, setInitialReview] = useState("");
-
-    /*const [form, setForm] = useState({        
-        classID: "",
-        reviewID: "",
+    const [form, setForm] = useState({        
+        sectionID: {record}.record,
         stars: "",
-        initialReview: ""
+        initialReview: "",
+        author: ""
     });
+    const [reviewSubmitted, setReview] = useState(false);
       
     function updateForm(value) {
         return setForm((prev) => {
           return { ...prev, ...value };
         });
-    }*/
+    }
 
-    async function onSubmit(e) {
+    async function enterReview(e) {
         e.preventDefault();
-        const data = new FormData();
-        data.append("classID", {record});
-        data.append("reviewID", "");
-        data.append("stars", "");
-        data.append("initialReview", initialReview);
-        setInitialReview("");
-        const newReview = await Axios.post("/write-review", data, { headers: { "Content-Type": "multipart/form-data" } })
-        record.setInitialReview(prev => prev.concat([newReview.data]))
-
-        /*const newPerson = { ...form };
-      
-        await fetch("http://localhost:1000/review/add", {
+        setForm((prev) => {
+          return { ...prev, sectionID: {record}.record}})
+        const newReview = { ...form };
+        
+        await fetch("http://localhost:5000/review/add", { 
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newPerson),
+         },
+         body: JSON.stringify(newReview),
         })
-        .catch(error => {
+         .catch(error => {
           window.alert(error);
-          return;
+         return;
         });
-      
-        setForm({ classID: {record}, reviewID: "", stars: "", initialReview: "" });*/
+        setReview(true)
+        
     }
 
+    if (!reviewSubmitted) {
     return (
         <div>
-            <label htmlFor="name">Write a review:</label>
-            <div className="initialReview">
-                <textarea onChange={e => setInitialReview(e.target.value)} value={initialReview} type="text" className="initialReview" />
-            </div>
-            <div className="submitButton" onSubmit={onSubmit}>
-                <input
-                type="submit"
-                value="Submit review"
-                className="btn btn-primary"
-                />
-            </div>
+            <span class="writereview-form-title">
+               Write A Review
+            </span>
+            <div class="wrap-input1 validate-input">
+				     	<input class="input1" type="text" name="name" placeholder="Name" onChange={e => updateForm({ author: e.target.value })} value={form.author}/>
+					    <span class="shadow-input1"></span>
+			    	</div>
+            <div class="wrap-input1 validate-input">
+					   <textarea class="input1" name="message" placeholder="Add the basis of your review here!" onChange={e => updateForm({ initialReview: e.target.value })} value={form.initialReview}></textarea>
+					   <span class="shadow-input1"></span>
+			   	  </div>
+            <div class="container-writereview-form-btn">
+            <form class="container-writereview-form-btn" className="submitButton" onSubmit={enterReview}>
+					   <button class="writereview-form-btn">
+					   	  <span>
+							    Submit Review
+							  <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+						   </span>
+			  		  </button>
+            </form>
+				   </div>
       </div>
     );
+    } else {
+      return (
+        <div>
+            <span class="writereview-form-title">
+               Thank you for adding your review!
+            </span>
+        </div>
+      );
+    }
+
   }
+
   
   export default WriteReview;

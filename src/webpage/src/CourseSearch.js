@@ -2,16 +2,24 @@ import "./index.css";
 import "./components/Searchbar";
 import "./components/WriteReview";
 import SearchBar from "./components/Searchbar";
-import WriteReview from "./components/WriteReview"
-
+import WriteReview from "./components/WriteReview";
+import CourseSummary from "./components/CourseSummary";
+import ReadReview from "./components/ReadReviews";
 import axios from "axios";
-import { message, Table, Card, Row, Col } from "antd";
+import { message, Table, Card, Row, Col, Icon} from "antd";
 import React, { useState } from "react";
 
 function CourseSearch() {
 
   const [datasource,setDatasource]=useState([])
   const [keys,expandedKeys]=useState([])
+  const [activeTabKey, setActiveTabKey] = useState('ClassPrompt');
+  const [expandedRowKeys, setExpandedRowKeys] = useState([]);
+
+  const [recordValue, setRecord] = useState([]);
+
+  const [classInfo, setClassInfo]=useState([])
+
 
   const columns=[
     {
@@ -48,12 +56,8 @@ function CourseSearch() {
 
   const tabListSkeleton = [
     {
-      key: 'Rating',
-      tab: 'Rating',
-    },
-    {
-      key: 'ReviewSpotlight',
-      tab: 'Review Spotlight',
+      key: 'ClassPrompt',
+      tab: 'Class Summary',
     },
     {
       key: 'AddAReview',
@@ -66,17 +70,12 @@ function CourseSearch() {
   ];
 
   const contentList: Record<string, React.ReactNode> = {
-    Rating: <p>Add Rating Feature Here</p>,
-    ReviewSpotlight: <p>Add Review Spotlight Feature Here</p>,
-    AddAReview: <WriteReview> record = [recordValue] </WriteReview>,
-    ViewAllReviews: <p>Add View All Review Feature Here</p>,
+    ClassPrompt: <CourseSummary record = {classInfo}/>,
+    AddAReview: <WriteReview record = {recordValue}/>,
+    ViewAllReviews:<ReadReview record = {classInfo}/>
   };
 
-  const [activeTabKey, setActiveTabKey] = useState('app');
-  const [expandedRowKeys, setExpandedRowKeys] = useState([]);
-
-  const [recordValue, setRecord] = useState([]);
-
+  
   const onTab2Change = (key) => {
     setActiveTabKey(key);
   };
@@ -107,10 +106,14 @@ const onTableRowExpand = (expanded, record) => {
       keys.push(record.SSS_SectionsID); // I have set my record.id as row key. Check the documentation for more details.
   }
 
+
   setRecord(record.SSS_SectionsID);
+  setClassInfo(record);
   setExpandedRowKeys(keys);
+  setActiveTabKey('ClassPrompt')
 }
 
+  
   return (
     <div className="App">
       <SearchBar  onFinish={onSubmit}/>
@@ -123,10 +126,12 @@ const onTableRowExpand = (expanded, record) => {
         style={{ width: '100%' }}
         tabList={tabListSkeleton}
         activeTabKey={activeTabKey}
-        tabBarExtraContent={<a href="#">More</a>}
+
         onTabChange={key => {
           onTab2Change(key);
           setRecord(record.SSS_SectionsID);
+          setClassInfo(record);
+          
         }}
       >
         {contentList[activeTabKey]}

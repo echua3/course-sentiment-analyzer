@@ -6,9 +6,9 @@ const reviewRoutes = express.Router();
 
 
 reviewRoutes.route("/review").get(function (req, res) {
-    let db_connect = dbo.getDb("classID");
+    let db_connect = dbo.getDb("Reviews");
     db_connect
-      .collection("reviews")
+      .collection("Reviews")
       .find({})
       .toArray(function (err, result) {
         if (err) throw err;
@@ -20,22 +20,41 @@ reviewRoutes.route("/review/:id").get(function (req, res) {
     let db_connect = dbo.getDb();
     let myquery = { _id: ObjectId(req.params.id) };
     db_connect
-    .collection("reviews")
+    .collection("Reviews")
     .findOne(myquery, function (err, result) {
      if (err) throw err;
      res.json(result);
    });
 });
 
+reviewRoutes.route("/review/sectionID/:sectionID/:page").get(function (req, res) {
+  const LIMIT = 3
+  const startIndex = (Number(req.params.page) - 1) * LIMIT;
+  let db_connect = dbo.getDb();
+  let myquery = { sectionID: req.params.sectionID };
+  
+  db_connect.collection("Reviews").countDocuments(myquery).then((total) =>{
+    db_connect
+    .collection("Reviews")
+    .find(myquery).limit(LIMIT).skip(startIndex).toArray(function (err, result) {
+      if (err) throw err;
+      res.status(200).json({data: result, 
+                            currentPage: Number(req.params.page),
+                            numberOfPage: Math.ceil(total / LIMIT),
+                            numberTotal: total});
+    })}
+  ); 
+});
+
 reviewRoutes.route("/review/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
-    classID: req.body.name,
-    reviewID: req.body.id,
-    stars: req.body,stars,
-    initialReview: req.body.initialReview
+    sectionID: req.body.sectionID,
+    stars: req.body.stars,
+    initialReview: req.body.initialReview,
+    author: req.body.author
   };
-  db_connect.collection("reviews").insertOne(myobj, function (err, res) {
+  db_connect.collection("Reviews").insertOne(myobj, function (err, res) {
     if (err) throw err;
     response.json(res);
   });
@@ -46,10 +65,10 @@ reviewRoutes.route("/update/:id").post(function (req, response) {
   let myquery = { _id: ObjectId(req.params.id) };
   let newvalues = {
     $set: {
-      classID: req.body.name,
-      reviewID: req.body.id,
-      stars: req.body,stars,
-      initialReview: req.body.initialReview
+      sectionID: req.body.sectionID,
+      stars: req.body.stars,
+      initialReview: req.body.initialReview,
+      author: req.body.author
     },
   };
   db_connect
@@ -63,7 +82,7 @@ reviewRoutes.route("/update/:id").post(function (req, response) {
  reviewRoutes.route("/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId(req.params.id) };
-  db_connect.collection("reviews").deleteOne(myquery, function (err, obj) {
+  db_connect.collection("Reviews").deleteOne(myquery, function (err, obj) {
     if (err) throw err;
     response.json(obj);
   });
