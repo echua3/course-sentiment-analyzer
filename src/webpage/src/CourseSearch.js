@@ -13,25 +13,25 @@ function CourseSearch() {
   const [datasource, setDatasource]=useState([])
 
 
-//   function onSubmit(values){
-//     const { CourseTitle, CourseNumber, Credits, Department } = values;
-//     //
-//     const opt = {
-//       method: "GET",
-//       params:{CourseTitle,CourseNumber, Credits, Department},
-//       url: `/api/classes?key=9N7pYLkUVHSf8xzgFWMK5Cv7jnmQAzFo`,
-//     };
-//     axios(opt)
-//       .then((res) => {
-//         if (res.status === 200) {
-//           setDatasource(res.data)
-//           // message.success("Login succeed! ");
-//         }
-//       })
-//       .catch((err) => {
-//         console.log("failed: ", err.message);
-//       });
-// }
+  function onSubmit(values){
+    const { CourseTitle, CourseNumber, Credits, Department } = values;
+    //
+    const opt = {
+      method: "GET",
+      params:{CourseTitle,CourseNumber, Credits, Department},
+      url: `/api/classes?key=9N7pYLkUVHSf8xzgFWMK5Cv7jnmQAzFo`,
+    };
+    axios(opt)
+      .then((res) => {
+        if (res.status === 200) {
+          setDatasource(res.data)
+          // message.success("Login succeed! ");
+        }
+      })
+      .catch((err) => {
+        console.log("failed: ", err.message);
+      });
+}
 
 
 
