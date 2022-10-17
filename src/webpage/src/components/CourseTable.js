@@ -64,7 +64,7 @@ const CourseTable = (props) => {
     const contentList = {
         ClassPrompt: <CourseSummary record = {classInfo}/>,
         AddAReview: <WriteReview record = {recordValue}/>,
-        ViewAllReviews:<ReadReview record = {classInfo}/>
+        ViewAllReviews: <ReadReview record = {classInfo}/>
     };
 
 
@@ -87,6 +87,7 @@ const CourseTable = (props) => {
 
     return (
         <Table
+
             dataSource={props.data}
             columns={columns.filter(col => col.title !== 'ID')}
             rowKey = "SSS_SectionsID"
