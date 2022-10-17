@@ -4,6 +4,9 @@ import { useState } from "react";
 import Axios from "axios";
 import './CourseComponent.scss';
 
+
+
+
 function WriteReview({record}) {
 
     const [initialReview, setInitialReview] = useState("");
@@ -56,6 +59,12 @@ function WriteReview({record}) {
 					   <textarea class="input1" name="message" placeholder="Add the basis of your review here!" onChange={e => updateForm({ initialReview: e.target.value })} value={form.initialReview}></textarea>
 					   <span class="shadow-input1"></span>
 			   	  </div>
+
+             <div class="slidecontainer">
+             <p for="myRange" class="rangeValue">Difficulty: </p>
+            <input type="range" min="0" max="5" class="slider" id="myRange" onInput={e => updateForm({ stars: e.target.value})} value={form.stars}/>
+            <span class="rangeValue">&nbsp; 0 &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 1 &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 2 &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 3 &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 4 &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 5</span>
+            </div>
             <div class="container-writereview-form-btn">
             <form class="container-writereview-form-btn" className="submitButton" onSubmit={enterReview}>
 					   <button class="writereview-form-btn">
@@ -67,6 +76,8 @@ function WriteReview({record}) {
             </form>
 				   </div>
       </div>
+
+      
     );
     } else {
       return (
