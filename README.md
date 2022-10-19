@@ -38,17 +38,19 @@
 <!-- ABOUT THE PROJECT -->
 # About The Project
 
-The point of this project is to create a web application that can allow students to touch base on classes positively and negatively, giving an outlook that students can use to help their own understandings of the course at large and give them just the right amount of information to hopefully not confuse them even further! 
+This project aims to create a web application that allows students to touch base on classes positively and negatively, giving an outlook that students can use to help their own understandings of the course at large and give them just the right amount of information to hopefully not confuse them even further! 
 
 We can accomplish this through allowing: 
 * Individuals to search for courses and write reviews based on those courses
-* View reviews in a easy to digest format, so they can learn about other people’s journey through the class being searched through including automatic sentiment analysis
+* View reviews in a easy to digest format, so they can learn about other people’s journey in the class using automatic sentiment analysis
 
 So at the end of the day the students can take back and use college for what it's actually meant to be, not a wild russian roulette service of random classes but a product, that you buy, and double, triple, quadruple check to make sure that you are getting the best bang for your buck.
 
 ## Webpage
 
-The webpage in its current state is capable of running through the sis.api and using it to search up classes through running the sis.api through a middleware function setupProxy.js to convert into JSONP and then read the code through the App.js and Searchbar.js function and component respectively.
+Briefly, iteration 2 is a free-form text course review website for all JHU fall 2022 courses.
+
+In the current state, the webpage utilizes course information from the SIS.API stored in a MongoDB database to contain information about all JHU Fall 2022 courses. Users can utilize various search filters and an autocomplete dropdown menu to find the course they are looking for. After clicking the desired course, it expands to show the Class Summary, Add a Review, and View All Reviews windows. Users are given a free-form text box to write a course review and rate the difficulty on a 1-5 sliding scale. After submission, users can view their review and all other reivews under the View All Reviews tab.
 
 ## Sentiment Analysis
 
@@ -58,8 +60,6 @@ The output is a rating between 1 to 5 and the confidence of the model in that ra
 In the next iterations, this code will be attached to the backend so that the reviews uploaded on the website will be reviewed by the analyser automatically.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 ## Built With
 
