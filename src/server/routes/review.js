@@ -16,17 +16,6 @@ reviewRoutes.route("/review").get(function (req, res) {
       });
    });
 
-reviewRoutes.route("/review/:id").get(function (req, res) {
-    let db_connect = dbo.getDb();
-    let myquery = { _id: ObjectId(req.params.id) };
-    db_connect
-    .collection("reviews")
-    .findOne(myquery, function (err, result) {
-     if (err) throw err;
-     res.json(result);
-   });
-});
-
 reviewRoutes.route("/review/sectionID/:sectionID/:page").get(function (req, res) {
   const LIMIT = 3
   const startIndex = (Number(req.params.page) - 1) * LIMIT;
@@ -57,34 +46,6 @@ reviewRoutes.route("/review/add").post(function (req, response) {
   db_connect.collection("reviews").insertOne(myobj, function (err, res) {
     if (err) throw err;
     response.json(res);
-  });
- });
-
-reviewRoutes.route("/update/:id").post(function (req, response) {
-  let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId(req.params.id) };
-  let newvalues = {
-    $set: {
-      sectionID: req.body.sectionID,
-      stars: req.body.stars,
-      initialReview: req.body.initialReview,
-      author: req.body.author
-    },
-  };
-  db_connect
-    .collection("reviews")
-    .updateOne(myquery, newvalues, function (err, res) {
-      if (err) throw err;
-      response.json(res);
-    });
- });
-
- reviewRoutes.route("/:id").delete((req, response) => {
-  let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId(req.params.id) };
-  db_connect.collection("reviews").deleteOne(myquery, function (err, obj) {
-    if (err) throw err;
-    response.json(obj);
   });
  });
 
