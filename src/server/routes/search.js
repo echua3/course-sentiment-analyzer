@@ -6,7 +6,7 @@ const searchRoutes = express.Router();
 searchRoutes.route("/courselist").get(function (req, res) {
 
 
-    const LIMIT = 200000;
+    const LIMIT = 20000;
     const startIndex = (Number(req.query.page) - 1) * LIMIT;
     let db_connect = dbo.getDb("Classes");
 
