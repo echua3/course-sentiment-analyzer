@@ -86,14 +86,14 @@ To get a local copy up and running follow these simple example steps.
 <!-- Prerequisites -->
 <!-- Installation -->
 ### Prerequisites and Installation
-Firstly download and/or clone the repo on to your local machine
+First, download and/or clone the repo on to your local machine.
 
 Make sure you have node.js as well as the basic npm functions downloaded on your end.
 If this node module needs anything specific to run locally know that note that your computer will probably have to download it locally. The only plugins used are
 
-antd
-react
-http-proxy-middleware
+antd  
+react  
+http-proxy-middleware  
 axios
 
 
@@ -101,10 +101,10 @@ In the src/webpage/src directory
 do `npm install react-scripts`
 
 In the server src/server directory Run `npm start` to create an instance of a local host
-Make sure in the package.json the instance of "scripts": { "start": "react-scripts start", "build": "react-scripts build", "test": "react-scripts test", "eject": "react-scripts eject" },
+Make sure in the package.json the instance of "scripts": { "start": "react-scripts start", "build": "react-scripts build", "test": "react-scripts test", "eject": "react-scripts eject" },  
 Is there to make sure that npm start is converted into npm react-scripts start
 
-If not add it or run `npm react-scipts start`
+If not add it or run `npm react-scripts start`
 
 
 <!-- USAGE EXAMPLES -->
