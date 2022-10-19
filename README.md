@@ -38,9 +38,9 @@
 <!-- ABOUT THE PROJECT -->
 # About The Project
 
-This project aims to create a web application that allows students to touch base on classes positively and negatively, giving an outlook that students can use to help their own understandings of the course at large and give them just the right amount of information to hopefully not confuse them even further! 
+This project aims to create a web application that allows students to touch base on classes positively and negatively, giving an outlook that students can use to help their own understandings of the course at large and give them just the right amount of information to hopefully not confuse them even further!
 
-We can accomplish this through allowing: 
+We can accomplish this through allowing:
 * Individuals to search for courses and write reviews based on those courses
 * View reviews in a easy to digest format, so they can learn about other people’s journey in the class using automatic sentiment analysis
 
@@ -50,7 +50,14 @@ So at the end of the day the students can take back and use college for what it'
 
 Briefly, iteration 2 is a free-form text course review website for all JHU fall 2022 courses.
 
-In the current state, the webpage utilizes course information from the SIS.API stored in a MongoDB database to contain information about all JHU Fall 2022 courses. Users can utilize various search filters and an autocomplete dropdown menu to find the course they are looking for. After clicking the desired course, it expands to show the Class Summary, Add a Review, and View All Reviews windows. Users are given a free-form text box to write a course review and rate the difficulty on a 1-5 sliding scale. After submission, users can view their review and all other reivews under the View All Reviews tab.
+In the current state, the webpage utilizes course information from the SIS.API stored in a MongoDB database to contain information about all JHU Fall 2022 courses. Users can utilize various search filters and an autocomplete dropdown menu to find the course they are looking for.
+
+At this stage, our search function has four filter conditions: Course Title, Course Number, Credits and Department. Our algorithm supports fuzzy queries for the first 3 filters. And we provide the drop down options for the Department filter with all department options from both Whiting School of Engineering and Krieger School of Arts and Science. Users could use any combination of the 4 filters to search. A list of courses will show in the table if they meet all the criteria.
+
+After clicking the desired course, it expands to show the Class Summary, Add a Review, and View All Reviews windows. Users are given a free-form text box to write a course review and rate the difficulty on a 1-5 sliding scale. After submission, users can view their review and all other reivews under the View All Reviews tab.
+
+
+
 
 ## Sentiment Analysis
 
@@ -91,9 +98,9 @@ First, download and/or clone the repo on to your local machine.
 Make sure you have node.js as well as the basic npm functions downloaded on your end.
 If this node module needs anything specific to run locally know that note that your computer will probably have to download it locally. The only plugins used are
 
-antd  
-react  
-http-proxy-middleware  
+antd
+react
+http-proxy-middleware
 axios
 
 
@@ -101,7 +108,7 @@ In the src/webpage/src directory
 do `npm install react-scripts`
 
 In the server src/server directory Run `npm start` to create an instance of a local host
-Make sure in the package.json the instance of "scripts": { "start": "react-scripts start", "build": "react-scripts build", "test": "react-scripts test", "eject": "react-scripts eject" },  
+Make sure in the package.json the instance of "scripts": { "start": "react-scripts start", "build": "react-scripts build", "test": "react-scripts test", "eject": "react-scripts eject" },
 Is there to make sure that npm start is converted into npm react-scripts start
 
 If not add it or run `npm react-scripts start`
@@ -116,7 +123,7 @@ You can view the tests for this branch of code here: https://colab.research.goog
 
 ## Running Website
 
-If you have it installed correctly, run the website through: 
+If you have it installed correctly, run the website through:
 npm react-script start
 
 <!-- CONTRIBUTING -->
@@ -173,4 +180,4 @@ sentienceteam@gmail.com
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
+[JQuery-url]: https://jquery.com
