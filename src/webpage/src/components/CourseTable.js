@@ -12,7 +12,6 @@ const CourseTable = (props) => {
     const [recordValue, setRecord] = useState([]);
     const [classInfo, setClassInfo]=useState([]);
 
-
     const columns=[
         {
           title: 'School Name',
@@ -46,8 +45,8 @@ const CourseTable = (props) => {
         },
         {
           title: 'Instructors',
-          dataIndex: 'Instructors',
-          key: 'Instructors',
+          dataIndex: 'InstructorsFullName',
+          key: 'InstructorsFullName',
         },
         {
           title: 'ID',
@@ -96,7 +95,9 @@ const CourseTable = (props) => {
         setActiveTabKey('ClassPrompt')
     }
 
+
     return (
+      <div class="coursetable">
         <Table
 
             dataSource={props.data}
@@ -121,7 +122,10 @@ const CourseTable = (props) => {
             }}
             expandedRowKeys={expandedRowKeys}
             onExpand={onTableRowExpand}
+
         />
+
+      </div>
     );
 
 }

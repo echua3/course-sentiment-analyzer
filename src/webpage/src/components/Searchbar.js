@@ -3,14 +3,17 @@ import { Form, Input, Button, Select } from "antd";
 import { useState } from "react";
 import axios from "axios";
 import CourseTable from "./CourseTable";
+import { Pagination, PaginationItem } from "@material-ui/lab";
 
 
 function SearchBar(props) {
   const [CourseTitle, setCourseTitle] = useState('');
   const [CourseNumber, setCourseNumber] = useState('');
   const [Credits, setCredits] = useState('');
+  // const [InstructorsFullName, setInstructorsFullName] = useState('');
   const [Department, setDepartment] = useState('');
-  const [datasource, setDatasource]=useState([]);
+  const [datasource, setDatasource] = useState([]);
+  const [pagination, setPagination] = useState({position: [0, 0],});
   const [pageNumber, setPageNumber] = useState(1);
   const [pageCount, setPageCount] = useState(5);
 
@@ -24,8 +27,6 @@ function SearchBar(props) {
 
     let url = '?page='+pageNumber
 
-    // console.log('CourseTitle')
-
     if(CourseTitle !=''){
       url += "&CourseTitle="+CourseTitle
     }
@@ -35,11 +36,12 @@ function SearchBar(props) {
     if(Credits !=''){
       url += "&Credits="+Credits
     }
+    // if(InstructorsFullName !=''){
+    //   url += "&InstructorsFullName="+InstructorsFullName
+    // }
     if(Department !=''){
       url += "&Department="+Department
     }
-
-    // console.log(url)
 
     axios.get("http://localhost:5000/api/courselist" + url)
       .then((res) => {
@@ -53,26 +55,15 @@ function SearchBar(props) {
         console.log("failed: ", err.message);
       });
 
-    // setCourseTitle('');
-    // setCourseNumber('');
-    // setCredits('');
-    // setDepartment('');
-    // setDatasource('');
   }
   const onChange = e => {
-    // console.log("hello")
-    // console.log(e)
-    // console.log(e.target)
-    // console.log(e.target.value)
-
     setDepartment(e)
-
   }
 
 
   return (
-
     <div>
+    <div class="searchbar">
     <Form onSubmit={onSubmit}>
       <Form.Item name="CourseTitle" label="Course Title">
         <Input
@@ -95,9 +86,19 @@ function SearchBar(props) {
           value={Credits}
         />
       </Form.Item>
+      {/* <Form.Item name="InstructorsFullName" label="Instructors">
+        <Input
+          placeholder="Instructors"
+          onChange={e => setInstructorsFullName(e.target.value)}
+          value={InstructorsFullName}
+        />
+      </Form.Item> */}
 
       <Form.Item name="Department" label="Department">
         <Select placeholder="Please Select" onChange={onChange} >
+          <Select.Option value="">
+            Please Selected
+          </Select.Option>
           <Select.Option value="EN Applied Mathematics & Statistics">
             EN Applied Mathematics & Statistics
           </Select.Option>
@@ -156,11 +157,10 @@ function SearchBar(props) {
         <Button type="primary" htmlType="submit" onClick={onSubmit}>Submit</Button>
       </Form.Item>
     </Form>
+    </div>
 
+    <CourseTable pagination={pagination} data={datasource}/>
 
-
-
-    <CourseTable data={datasource}/>
     </div>
   );
 }
