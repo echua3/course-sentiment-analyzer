@@ -30,7 +30,7 @@ function WriteReview({record}) {
           return { ...prev, sectionID: {record}.record}})
         const newReview = { ...form };
         
-        await fetch("http://localhost:5000/review/add", { 
+        await fetch("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/review/add", { 
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -43,7 +43,7 @@ function SearchBar(props) {
       url += "&Department="+Department
     }
 
-    axios.get("http://localhost:5000/api/courselist" + url)
+    axios.get("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/api/courselist" + url)
       .then((res) => {
         if (res.status === 200) {
           setDatasource('');
@@ -57,6 +57,7 @@ function SearchBar(props) {
 
   }
   const onChange = e => {
+    console.log(process.env.REACT_APP_SERVERPORT)
     setDepartment(e)
   }
 

@@ -6,7 +6,6 @@ import './CourseComponent.scss';
 import { Pagination, PaginationItem } from "@material-ui/lab";
 import { List, Comment } from "antd";
     
-
 function ReadReview({record}) {
 
     const [pageNumber, setPageNumber] = useState(1);
@@ -18,7 +17,7 @@ function ReadReview({record}) {
 
     useEffect( () => {
         async function getRecords() {
-            const response = await fetch("http://localhost:5000/review/sectionID/" + {record}.record.SSS_SectionsID + "/" + pageNumber)
+            const response = await fetch("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/review/sectionID/" + {record}.record.SSS_SectionsID + "/" + pageNumber)
             if(!response.ok) {
               const message = "An error occured"
               console.log("Error:" + response.statusText);
@@ -38,7 +37,7 @@ function ReadReview({record}) {
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         async function changeRecords() {
             setPageNumber(value)
-            const response = await fetch("http://localhost:5000/review/sectionID/" + {record}.record.SSS_SectionsID + "/" + value)
+            const response = await fetch("http://localhost:" + process.env.REACT_APP_SERVERPORT+ "/review/sectionID/" + {record}.record.SSS_SectionsID + "/" + value)
             if(!response.ok) {
               const message = "An error occured"
               console.log("Error:" + response.statusText);
