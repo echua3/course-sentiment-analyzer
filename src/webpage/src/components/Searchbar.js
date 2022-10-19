@@ -99,6 +99,147 @@ function SearchBar(props) {
           <Select.Option value="">
             Please Selected
           </Select.Option>
+          <Select.Option value="AS Agora Institute">
+            AS Agora Institute
+          </Select.Option>
+          <Select.Option value="AS Anthropology">
+            AS Anthropology
+          </Select.Option>
+          <Select.Option value="AS Archaeology">
+            AS Archaeology
+          </Select.Option>
+          <Select.Option value="AS Art">
+            AS Art
+          </Select.Option>
+          <Select.Option value="AS Behavioral Biology">
+            AS Behavioral Biology
+          </Select.Option>
+          <Select.Option value="AS Biology">
+            AS Biology
+          </Select.Option>
+          <Select.Option value="AS Biophysics">
+            AS Biophysics
+          </Select.Option>
+          <Select.Option value="AS Center for Africana Studies">
+            AS Center for Africana Studies
+          </Select.Option>
+          <Select.Option value="AS Center for Language Education">
+            AS Center for Language Education
+          </Select.Option>
+          <Select.Option value="AS Chemistry">
+            AS Chemistry
+          </Select.Option>
+          <Select.Option value="AS Classics">
+            AS Classics
+          </Select.Option>
+          <Select.Option value="AS Cognitive Science">
+            AS Cognitive Science
+          </Select.Option>
+          <Select.Option value="AS Comparative Thought and Literature">
+            AS Comparative Thought and Literature
+          </Select.Option>
+          <Select.Option value="AS Dean's Teaching Fellowship Courses">
+            AS Dean's Teaching Fellowship Courses
+          </Select.Option>
+          <Select.Option value="AS Earth & Planetary Sciences">
+            AS Earth & Planetary Sciences
+          </Select.Option>
+          <Select.Option value="AS East Asian Studies">
+            AS East Asian Studies
+          </Select.Option>
+          <Select.Option value="AS Economics">
+            AS Economics
+          </Select.Option>
+          <Select.Option value="AS English">
+            AS English
+          </Select.Option>
+          <Select.Option value="AS Film and Media Studies">
+            AS Film and Media Studies
+          </Select.Option>
+          <Select.Option value="AS First Year Seminars">
+            AS First Year Seminars
+          </Select.Option>
+          <Select.Option value="AS History">
+            AS History
+          </Select.Option>
+          <Select.Option value="AS History of Art">
+            AS History of Art
+          </Select.Option>
+          <Select.Option value="AS History of Science, Medicine, and Technology">
+            AS History of Science, Medicine, and Technology
+          </Select.Option>
+          <Select.Option value="AS Interdepartmental">
+            AS Interdepartmental
+          </Select.Option>
+          <Select.Option value="AS International Studies">
+            AS International Studies
+          </Select.Option>
+          <Select.Option value="AS Islamic Studies">
+            AS Islamic Studies
+          </Select.Option>
+          <Select.Option value="AS Jewish Studies Program">
+            AS Jewish Studies Program
+          </Select.Option>
+          <Select.Option value="AS Mathematics">
+            AS Mathematics
+          </Select.Option>
+          <Select.Option value="AS Medicine, Science and the Humanities">
+            AS Medicine, Science and the Humanities
+          </Select.Option>
+          <Select.Option value="AS Military Science">
+            AS Military Science
+          </Select.Option>
+          <Select.Option value="AS Modern Languages and Literatures">
+            AS Modern Languages and Literatures
+          </Select.Option>
+          <Select.Option value="AS Music">
+            AS Music
+          </Select.Option>
+          <Select.Option value="AS Near Eastern Studies">
+            AS Near Eastern Studies
+          </Select.Option>
+          <Select.Option value="AS Neuroscience">
+            AS Neuroscience
+          </Select.Option>
+          <Select.Option value="AS Philosophy">
+            AS Philosophy
+          </Select.Option>
+          <Select.Option value="AS Physics & Astronomy">
+            AS Physics & Astronomy
+          </Select.Option>
+          <Select.Option value="AS Political Science">
+            AS Political Science
+          </Select.Option>
+          <Select.Option value="AS Program in Latin American Studies">
+            AS Program in Latin American Studies
+          </Select.Option>
+          <Select.Option value="AS Program in Museums and Society">
+            AS Program in Museums and Society
+          </Select.Option>
+          <Select.Option value="AS Psychological & Brain Sciences">
+            AS Psychological & Brain Sciences
+          </Select.Option>
+          <Select.Option value="AS Public Health Studies">
+            AS Public Health Studies
+          </Select.Option>
+          <Select.Option value="AS Reserved Registrar">
+            AS Reserved Registrar
+          </Select.Option>
+          <Select.Option value="AS Sociology">
+            AS Sociology
+          </Select.Option>
+          <Select.Option value="AS Study of Women, Gender, & Sexuality">
+            AS Study of Women, Gender, & Sexuality
+          </Select.Option>
+          <Select.Option value="AS Theatre Arts & Studies">
+            AS Theatre Arts & Studies
+          </Select.Option>
+          <Select.Option value="AS Writing Program">
+            AS Writing Program
+          </Select.Option>
+          <Select.Option value="AS Writing Seminars">
+            AS Writing Seminars
+          </Select.Option>
           <Select.Option value="EN Applied Mathematics & Statistics">
             EN Applied Mathematics & Statistics
           </Select.Option>
@@ -129,6 +270,9 @@ function SearchBar(props) {
           <Select.Option value="EN Engineering Management">
             EN Engineering Management
           </Select.Option>
+          <Select.Option value="EN Environmental Health and Engineering">
+            EN Environmental Health and Engineering
+          </Select.Option>
           <Select.Option value="EN First Year Seminars">
             EN First Year Seminars
           </Select.Option>
@@ -140,6 +284,9 @@ function SearchBar(props) {
           </Select.Option>
           <Select.Option value="EN Institute for NanoBio Technology">
             EN Institute for NanoBio Technology
+          </Select.Option>
+          <Select.Option value="EN Materials Science & Engineering">
+            EN Materials Science & Engineering
           </Select.Option>
           <Select.Option value="EN Mechanical Engineering">
             EN Mechanical Engineering
