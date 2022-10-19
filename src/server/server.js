@@ -16,17 +16,11 @@ app.use('/api', routes_search)
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
-
-
-const dbo = require("./db/conn")
 const dbo_search = require("./db/conn_search")
 
 const sanitizeHTML = require('sanitize-html')
 
 app.listen(port, () => {
-    dbo.connectToServer(function (err) {
-        if (err) console.error(err);
-    })
 
     dbo_search.connectToServer(function (err) {
         if (err) console.error(err);
@@ -37,8 +31,8 @@ app.listen(port, () => {
 
 app.post("/write-review", cleanup, async (req, res) => {
     console.log(req.body);
-    const info = await db.collection("Reviews").insertOne(req.cleanData)
-    const newReview = await db.collection("Reviews").findOne({ _id: new ObjectId(info.insertedId) })
+    const info = await db.collection("reviews").insertOne(req.cleanData)
+    const newReview = await db.collection("reviews").findOne({ _id: new ObjectId(info.insertedId) })
     res.send(newReview)
 })
 
