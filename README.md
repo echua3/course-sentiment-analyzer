@@ -102,17 +102,41 @@ antd
 react
 http-proxy-middleware
 axios
-
+@material-ui/core --legacy or --force
+@material-ui/lab
 
 In the src/webpage/src directory
 do `npm install react-scripts`
+
+Create an file named .env in the local file directory for the webpage, putting it in the same layer as the pacakage.json files
+And in that file define a variable for the server port you wish to run the server in as such
+
+`REACT_APP_SERVERPORT={PORT}`
 
 In the server src/server directory Run `npm start` to create an instance of a local host
 Make sure in the package.json the instance of "scripts": { "start": "react-scripts start", "build": "react-scripts build", "test": "react-scripts test", "eject": "react-scripts eject" },
 Is there to make sure that npm start is converted into npm react-scripts start
 
-If not add it or run `npm react-scripts start`
+If not add it or run `npm react-scripts start` while in the src/webpage/src
 
+After that you should be able to run the actual server now either through our team database, or through one of your owns, 
+Firstly create another file named process.env underneath the server directory defining the terms as such
+
+`ATLAS_URI={MONGO_DB_KEY_W_USERNAME_AND_PASSWORD}`
+`PORT={PORT}`
+
+once done make sure you have all the dependencies download node module wise
+
+express
+mongoDB 
+
+Being the big two and while in the
+while in the src/server type in the command
+`node server.js`
+
+You should then see a successful connection message, follow the error prompt if one is listed to work out your issue.
+
+Your app should be capable of running locally now!
 
 <!-- USAGE EXAMPLES -->
 # Usage
