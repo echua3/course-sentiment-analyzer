@@ -24,6 +24,7 @@ searchRoutes.route("/courselist").get(function (req, res) {
     }
     if (req.query.Department) {
       Object.assign(myquery,{'Department':{$regex:req.query.Department,$options: 'i'}})
+      // Object.assign(myquery,{'Department':req.query.Department})
     }
 
 

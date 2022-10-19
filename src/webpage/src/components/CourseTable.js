@@ -20,14 +20,24 @@ const CourseTable = (props) => {
           key: 'SchoolName',
         },
         {
-          title: 'Offering Name',
+          title: 'Department',
+          dataIndex: 'Department',
+          key: 'Department',
+        },
+        {
+          title: 'Course Number',
           dataIndex: 'OfferingName',
           key: 'OfferingName',
         },
         {
-          title: 'Title',
+          title: 'Course Title',
           dataIndex: 'Title',
           key: 'Title',
+        },
+        {
+          title: 'Section',
+          dataIndex: 'SectionName',
+          key: 'SectionName',
         },
         {
           title: 'Credits',
@@ -38,7 +48,8 @@ const CourseTable = (props) => {
           title: 'Instructors',
           dataIndex: 'Instructors',
           key: 'Instructors',
-        }, {
+        },
+        {
           title: 'ID',
           dataIndex: 'SSS_SectionsID',
           key: 'SSS_SectionsID',

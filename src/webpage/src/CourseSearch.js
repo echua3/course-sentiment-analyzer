@@ -9,10 +9,6 @@ import React from "react";
 
 function CourseSearch() {
 
-
-
-
-
   return (
     <div className="App">
       <SearchBar />
