@@ -3,6 +3,7 @@ import { Form, Input, Button, Select } from "antd";
 import { useState } from "react";
 import axios from "axios";
 import CourseTable from "./CourseTable";
+import "./style/css/CourseComponent.scss"
 import { Pagination, PaginationItem } from "@material-ui/lab";
 
 

@@ -2,7 +2,7 @@ import { OmitProps } from "antd/lib/transfer/ListBody";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Axios from "axios";
-import './CourseComponent.scss';
+import './style/css/CourseComponent.scss';
 import { Pagination, PaginationItem } from "@material-ui/lab";
 import { List, Comment } from "antd";
     
