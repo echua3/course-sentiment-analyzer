@@ -18,6 +18,7 @@
 ## Challenges
 - Relearning a lot of concepts that have to do with MongoDB as the routes design kinda differs from what we knew 
 - Time crunch with the final touches of the project, have to get into contact with our mentor more often
+- Dealing with the route of multiple filter params.
 
 ## Reflection for Iteration 3
 - The project itself was more collaborative this time around of course with its faults but learning or strengths and weaknesses as a team all the same.
