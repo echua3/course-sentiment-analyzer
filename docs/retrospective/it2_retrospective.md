@@ -5,8 +5,11 @@
 ### Delivered
 - We used MongoDB Features, including skip and limiting to some of the platform, in order to connect the back end to the front end service
 - CR of CRUD feature completed, so individuals can now look up, and search up different courses as well as add their input to it using those different MongoDB features 
-- Search function optimized, values added to personal database, we are no longer using the SIS Api!!
+- Search function optimized, values added to personal database, we are no longer using the SIS Api
 - Created filters for search functions in order to make it more customizable for the user
+- Front-end made more pliable, files are sorted based on our reflections for Iteration 2
+- Connection of Node.js API to the Front-End
+- Basic CSS done for the project
 
 ### Not Delivered
 - Lack of MongoDB support in the backend via Models and Schemas to make our lives easier
@@ -14,6 +17,7 @@
 
 ## Challenges
 - Relearning a lot of concepts that have to do with MongoDB as the routes design kinda differs from what we knew 
+- Time crunch with the final touches of the project, have to get into contact with our mentor more often
 
 ## Reflection for Iteration 3
 - The project itself was more collaborative this time around of course with its faults but learning or strengths and weaknesses as a team all the same.
