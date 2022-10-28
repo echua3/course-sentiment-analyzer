@@ -8,6 +8,21 @@ import "./style/css/CourseComponent.scss"
 
 function SearchBar(props) {
 
+  const [loadings, setLoadings] = useState([]);
+  const enterLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[index] = false;
+        return newLoadings;
+      });
+    }, 6000);
+  };
 
   const onSubmit = async (e )=> {
     e.preventDefault();
@@ -16,6 +31,7 @@ function SearchBar(props) {
     await requestData(test)
     console.log("onsubmit")
     console.log(params)
+    // enterLoading(2)
   }
 
   const changePage = async (currentPage)=>{
@@ -36,7 +52,7 @@ function SearchBar(props) {
 
   // new onSubmit with mongodb
 
-
+  const [form] = Form.useForm();
   const [datasource, setDatasource] = useState([]);
   const [pagination, setPagination] = useState({onChange:changePage});
   const [params, setParams] = useState({
@@ -68,7 +84,36 @@ function SearchBar(props) {
     });
   }
 
+  const onReset = async () => {
+    params.CourseTitle = ''
+    params.CourseNumber = ''
+    params.Credits = ''
+    params.Department = ''
+    let test={...params}
+    setParams(test)
+    form.resetFields();
+    await requestData(params)
+  };
 
+
+  const onGenderChange = (value) => {
+    switch (value) {
+      case 'male':
+        form.setFieldsValue({
+          note: 'Hi, man!',
+        });
+        return;
+      case 'female':
+        form.setFieldsValue({
+          note: 'Hi, lady!',
+        });
+        return;
+      case 'other':
+        form.setFieldsValue({
+          note: 'Hi there!',
+        });
+    }
+  };
 
 
   return (
@@ -315,7 +360,10 @@ function SearchBar(props) {
 
       <Form.Item>
         <Button type="primary" htmlType="submit" onClick={onSubmit}>Submit</Button>
+        {/* <Button type="primary" htmlType="submit" onClick={onSubmit} loading={loadings[2]}>Submit</Button> */}
+        <Button htmlType="button" onClick={onReset}>Reset</Button>
       </Form.Item>
+
     </Form>
     </div>
     <CourseTable pagination={{...pagination,onChange:changePage}} data={datasource}/>
