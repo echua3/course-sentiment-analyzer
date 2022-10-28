@@ -119,7 +119,8 @@ In the server **src/server** directory:
 1. `npm install` to install dependencies
 
 2. Make sure the package.json the contains:
-         "scripts": { "start": "react-scripts start", "build": "react-scripts build", "test": "react-scripts test", "eject": "react-scripts eject" }
+
+         "scripts": { "start": "concurrently \"npm run server\" \"cd ../webpage && npm start\"", "server": "nodemon server.js", }
           
 3. Create `process.env` or `config.env` file and define the terms. 
 
