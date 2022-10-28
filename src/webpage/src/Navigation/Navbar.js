@@ -2,12 +2,13 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import "./output.css";
+import CourseSearch from "../CourseSearch";
+import HomePage from "../HomePage";
 
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "Homepage", href: "HomePage", current: false },
+  { name: "Courses", href: "Courses", current: true },
+  { name: "Recommendations", href: "Recommendations", current: false },
 ];
 
 function classNames(...classes) {
@@ -36,14 +37,17 @@ export default function Navbar() {
                 <div className="flex-shrink-0 flex items-center">
                   <img
                     className="block lg:hidden h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                    alt="Workflow"
+                    src="https://upload.wikimedia.org/wikipedia/en/9/90/Johns_Hopkins_Blue_Jays.svg"
+                    alt="HopCourses"
                   />
                   <img
                     className="hidden lg:block h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                    alt="Workflow"
+                    src="https://upload.wikimedia.org/wikipedia/en/9/90/Johns_Hopkins_Blue_Jays.svg"
+                    alt="HopCourses"
                   />
+                  <text className="text-white">
+                    HopCourses
+                  </text>
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
@@ -81,7 +85,7 @@ export default function Navbar() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
                         alt=""
                       />
                     </Menu.Button>
