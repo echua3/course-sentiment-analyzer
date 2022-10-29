@@ -105,34 +105,37 @@ If this node module needs anything specific to run locally know that note that y
 * @material-ui/core --legacy or --force
 * @material-ui/lab
 
-In the src/webpage/src directory
-do `npm install react-scripts`
+In the **src/webpage/src** directory:  
 
-Create an file named .env in the local file directory for the webpage, putting it in the same layer as the pacakage.json files
+1. `npm install react-scripts`
+
+2. Create `.env` file in the local file directory for the webpage, putting it in the same layer as the package.json files
 And in that file define a variable for the server port you wish to run the server in as such
 
-* `REACT_APP_SERVERPORT={PORT}`
+        REACT_APP_SERVERPORT={PORT}
 
-In the server src/server directory Run `npm start` to create an instance of a local host
-Make sure in the package.json the instance of "scripts": { "start": "react-scripts start", "build": "react-scripts build", "test": "react-scripts test", "eject": "react-scripts eject" },
-Is there to make sure that npm start is converted into npm react-scripts start
+In the server **src/server** directory:
 
-If not add it or run `npm react-scripts start` while in the src/webpage/src
+1. `npm install` to install dependencies
 
-After that you should be able to run the actual server now either through our team database, or through one of your owns, 
-Firstly create another file named process.env underneath the server directory defining the terms as such
+2. Make sure the package.json the contains:
 
-* `ATLAS_URI={MONGO_DB_KEY_W_USERNAME_AND_PASSWORD}`
-* `PORT={PORT}`
+         "scripts": { "start": "concurrently \"npm run server\" \"cd ../webpage && npm start\"", "server": "nodemon server.js", }
+          
+3. Create `process.env` or `config.env` file and define the terms. 
 
-Once done make sure you have all the dependencies download node module wise
+        ATLAS_URI={MONGO_DB_KEY_W_USERNAME_AND_PASSWORD}
+        PORT={PORT}
+        
+4. Make sure all dependency node-modules downloaded
 
 * express
 * mongoDB 
 
-Being the big two and while in the
-while in the src/server type in the command
-`node server.js`
+Run the program:
+
+While in the **src/server**
+`npm start`
 
 You should then see a successful connection message, follow the error prompt if one is listed to work out your issue.
 
@@ -148,7 +151,14 @@ You can view the tests for this branch of code here: https://colab.research.goog
 ## Running Website
 
 If you have it installed correctly, run the website through:
-npm react-script start
+
+if already connected to the server, in the **src/website/src** directory:
+
+`npm react-script start`
+
+or in **src/server**:
+
+`npm start`
 
 <!-- CONTRIBUTING -->
 # Contributing
