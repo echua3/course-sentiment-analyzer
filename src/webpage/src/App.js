@@ -1,25 +1,23 @@
 import React from "react";
 import Navbar from "./Navigation/Navbar.js";
-import HomePage from "./components/HomePage.js";
-import CourseSearch from "./components/CourseSearch.js";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
+import HomePage from "./Pages/HomePage.js";
+import CourseSearch from "./Pages/CourseSearch.js";
+import Recommendations from "./Pages/Recommendations.js";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-export default function App() {
+function App() {
   return (
     <Router>
+      <Navbar />
       <div className="app-container">
-        <Navbar />
         <Routes>
-          <Route path="/HomePage" component={<HomePage/>} />
-          <Route path="/Courses" component={<CourseSearch/>} />
-          <Route path="/Recommendations" />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/Courses" element={<CourseSearch />} />
+          <Route path="/Recommendations" element={<Recommendations />} />
         </Routes>
       </div>
     </Router>
   );
 }
+
+export default App

@@ -2,13 +2,12 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import "./output.css";
-import CourseSearch from "../CourseSearch";
-import HomePage from "../HomePage";
+import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
 const navigation = [
-  { name: "Homepage", href: "HomePage", current: false },
-  { name: "Courses", href: "Courses", current: true },
-  { name: "Recommendations", href: "Recommendations", current: false },
+  { name: "Homepage", href: "/", current: false },
+  { name: "Courses", href: "/Courses", current: false },
+  { name: "Recommendations", href: "/Recommendations", current: false },
 ];
 
 function classNames(...classes) {
@@ -161,7 +160,7 @@ export default function Navbar() {
                   )}
                   aria-current={item.current ? "page" : undefined}
                 >
-                  {item.name}
+                  <CustomLink to="/{item.name}">{item.name}</CustomLink>
                 </Disclosure.Button>
               ))}
             </div>
@@ -170,4 +169,17 @@ export default function Navbar() {
       )}
     </Disclosure>
   );
+}
+  
+function CustomLink({ to, children, ...props }) {
+    const resolvedPath = useResolvedPath(to)
+    const isActive = useMatch({ path: resolvedPath.pathname, end: true })
+  
+    return (
+      <li className={isActive ? "active" : ""}>
+        <Link to={to} {...props}>
+          {children}
+        </Link>
+      </li>
+    )
 }
