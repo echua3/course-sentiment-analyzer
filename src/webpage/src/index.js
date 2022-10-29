@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
-import CourseSearch from "./CourseSearch";
+import App from "./App";
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<CourseSearch />, rootElement);
+ReactDOM.render(<App />, rootElement);
