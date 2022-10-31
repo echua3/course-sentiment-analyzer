@@ -502,4 +502,29 @@
   }
 
     /*---------------------------------------------
-    [ coursetable ]*/
+    [ homepage ]*/
+
+    .homepage_img2 {
+      // width: 800px;
+      height: 500px;
+      opacity: 0.7;
+      margin-top: 100px;
+      // margin-left: 640px;
+    }
+
+    .HomePage {
+      background-color: #a7caed;
+      width: 1440px;
+      height: 757px;
+      display: flex;
+    }
+
+    .title {
+      // font-family: "Bebas Neue";
+      font-family: "Gill Sans";
+      font-size: 80px;
+      color: rgb(7, 60, 105);
+      margin-top: 50px;
+      margin-left: 150px;
+      width: 600px;
+    }
