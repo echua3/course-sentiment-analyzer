@@ -8,7 +8,7 @@ import "./style/css/CourseComponent.scss"
 
 function SearchBar(props) {
 
-  const [loadings, setLoadings] = useState([]);
+
   const enterLoading = (index) => {
     setLoadings((prevLoadings) => {
       const newLoadings = [...prevLoadings];
@@ -55,6 +55,7 @@ function SearchBar(props) {
   const [form] = Form.useForm();
   const [datasource, setDatasource] = useState([]);
   const [pagination, setPagination] = useState({onChange:changePage});
+  const [loadings, setLoadings] = useState([]);
   const [params, setParams] = useState({
     CourseTitle: '',
     CourseNumber: '',
@@ -74,9 +75,7 @@ function SearchBar(props) {
         pagination.total = res.data.numberTotal
         let test={...pagination}
         setPagination(test)
-        console.log("req")
-        console.log(pagination)
-        // message.success("Login succeed! ");
+        // message.success("Login succeed! ");]
       }
     })
     .catch((err) => {
@@ -84,15 +83,9 @@ function SearchBar(props) {
     });
   }
 
+
   const onReset = async () => {
-    params.CourseTitle = ''
-    params.CourseNumber = ''
-    params.Credits = ''
-    params.Department = ''
-    let test={...params}
-    setParams(test)
     form.resetFields();
-    await requestData(params)
   };
 
 
@@ -116,11 +109,13 @@ function SearchBar(props) {
   };
 
 
+
+
   return (
     <div>
     <div class="searchbar">
     {/* <Form onSubmit={onSubmit}> */}
-    <Form>
+    <Form form={form}>
       <Form.Item name="CourseTitle" label="Course Title">
         <Input
           placeholder="course title"
@@ -132,8 +127,9 @@ function SearchBar(props) {
         <Input
           placeholder="course number"
           onChange={e => {params.CourseNumber = e.target.value
-            console.log(e)
-            console.log(typeof e.target.value)}}
+            // console.log(e)
+            // console.log(typeof e.target.value)
+          }}
           value={params.CourseNumber}
         />
       </Form.Item>
@@ -358,10 +354,10 @@ function SearchBar(props) {
         </Select>
       </Form.Item>
 
-      <Form.Item>
-        <Button type="primary" htmlType="submit" onClick={onSubmit}>Submit</Button>
+      <Form.Item className='buttons'>
+        <Button className='submit' type="primary" htmlType="submit" onClick={onSubmit}>Submit</Button>
         {/* <Button type="primary" htmlType="submit" onClick={onSubmit} loading={loadings[2]}>Submit</Button> */}
-        <Button htmlType="button" onClick={onReset}>Reset</Button>
+        <Button className='Reset' htmlType="button" onClick={onReset}>Reset</Button>
       </Form.Item>
 
     </Form>
