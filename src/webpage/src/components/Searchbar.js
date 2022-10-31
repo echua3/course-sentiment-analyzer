@@ -104,6 +104,7 @@ function SearchBar(props) {
           placeholder="course title"
           onChange={e => {params.CourseTitle = e.target.value}}
           value={params.CourseTitle}
+          onPressEnter={onSubmit}
         />
       </Form.Item>
       <Form.Item name="CourseNumber" label="Course Number">
@@ -114,6 +115,7 @@ function SearchBar(props) {
             // console.log(typeof e.target.value)
           }}
           value={params.CourseNumber}
+          onPressEnter={onSubmit}
         />
       </Form.Item>
       <Form.Item name="Credits" label="Credits">
@@ -121,6 +123,7 @@ function SearchBar(props) {
           placeholder="credits"
           onChange={e => {params.Credits = e.target.value}}
           value={params.Credits}
+          onPressEnter={onSubmit}
         />
       </Form.Item>
       {/* <Form.Item name="InstructorsFullName" label="Instructors">
