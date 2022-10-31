@@ -1,91 +1,147 @@
 import React from "react";
-import { Form, Input, Button, Select } from "antd";
+import { Form, Input, Button, Select, InputNumber } from "antd";
 import { useState } from "react";
 import axios from "axios";
 import CourseTable from "./CourseTable";
 import "./style/css/CourseComponent.scss"
-import { Pagination, PaginationItem } from "@material-ui/lab";
 
 
 function SearchBar(props) {
-  const [CourseTitle, setCourseTitle] = useState('');
-  const [CourseNumber, setCourseNumber] = useState('');
-  const [Credits, setCredits] = useState('');
-  // const [InstructorsFullName, setInstructorsFullName] = useState('');
-  const [Department, setDepartment] = useState('');
-  const [datasource, setDatasource] = useState([]);
-  const [pagination, setPagination] = useState({position: [0, 0],});
-  const [pageNumber, setPageNumber] = useState(1);
-  const [pageCount, setPageCount] = useState(5);
+
+  const [loadings, setLoadings] = useState([]);
+  const enterLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[index] = false;
+        return newLoadings;
+      });
+    }, 6000);
+  };
+
+  const onSubmit = async (e )=> {
+    e.preventDefault();
+    let test={...params}
+    setParams(test)
+    await requestData(test)
+    console.log("onsubmit")
+    console.log(params)
+    // enterLoading(2)
+  }
+
+  const changePage = async (currentPage)=>{
+    console.log('before changepage')
+    console.log(currentPage)
+    console.log(params.Department)
+
+    params.currentPage = currentPage
+    let test={...params,currentPage}
+    setParams(test)
+    await requestData(params)
+
+    console.log('after changepage')
+    console.log(currentPage)
+    console.log(test)
+    console.log(params)
+  }
 
   // new onSubmit with mongodb
 
-  const onSubmit = async (e )=> {
+  const [form] = Form.useForm();
+  const [datasource, setDatasource] = useState([]);
+  const [pagination, setPagination] = useState({onChange:changePage});
+  const [params, setParams] = useState({
+    CourseTitle: '',
+    CourseNumber: '',
+    Credits:'',
+    Department:'',
+    currentPage:1,
+  })
 
-    // console.log(e)
 
-    e.preventDefault();
-
-    let url = '?page='+pageNumber
-
-    if(CourseTitle !=''){
-      url += "&CourseTitle="+CourseTitle
-    }
-    if(CourseNumber !=''){
-      url += "&CourseNumber="+CourseNumber
-    }
-    if(Credits !=''){
-      url += "&Credits="+Credits
-    }
-    // if(InstructorsFullName !=''){
-    //   url += "&InstructorsFullName="+InstructorsFullName
-    // }
-    if(Department !=''){
-      url += "&Department="+Department
-    }
-
-    axios.get("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/api/courselist" + url)
-      .then((res) => {
-        if (res.status === 200) {
-          setDatasource('');
-          setDatasource(res.data.data)
-          // message.success("Login succeed! ");
-        }
-      })
-      .catch((err) => {
-        console.log("failed: ", err.message);
-      });
-
+  const requestData= async (params)=>{
+    await axios.get("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/api/courselist", {params})
+    .then((res) => {
+      if (res.status === 200) {
+        setDatasource('')
+        setDatasource(res.data.data)
+        setPagination('')
+        pagination.total = res.data.numberTotal
+        let test={...pagination}
+        setPagination(test)
+        console.log("req")
+        console.log(pagination)
+        // message.success("Login succeed! ");
+      }
+    })
+    .catch((err) => {
+      console.log("failed: ", err.message);
+    });
   }
-  const onChange = e => {
-    console.log(process.env.REACT_APP_SERVERPORT)
-    setDepartment(e)
-  }
+
+  const onReset = async () => {
+    params.CourseTitle = ''
+    params.CourseNumber = ''
+    params.Credits = ''
+    params.Department = ''
+    let test={...params}
+    setParams(test)
+    form.resetFields();
+    await requestData(params)
+  };
+
+
+  const onGenderChange = (value) => {
+    switch (value) {
+      case 'male':
+        form.setFieldsValue({
+          note: 'Hi, man!',
+        });
+        return;
+      case 'female':
+        form.setFieldsValue({
+          note: 'Hi, lady!',
+        });
+        return;
+      case 'other':
+        form.setFieldsValue({
+          note: 'Hi there!',
+        });
+    }
+  };
 
 
   return (
     <div>
     <div class="searchbar">
-    <Form onSubmit={onSubmit}>
+    {/* <Form onSubmit={onSubmit}> */}
+    <Form>
       <Form.Item name="CourseTitle" label="Course Title">
         <Input
           placeholder="course title"
-          onChange={e => setCourseTitle(e.target.value)}
-          value={CourseTitle}
+          onChange={e => {params.CourseTitle = e.target.value}}
+          value={params.CourseTitle}
         />
       </Form.Item>
       <Form.Item name="CourseNumber" label="Course Number">
         <Input
           placeholder="course number"
-          onChange={e => setCourseNumber(e.target.value)}
-          value={CourseNumber}
+          onChange={e => {params.CourseNumber = e.target.value
+            console.log(e)
+            console.log(typeof e.target.value)}}
+          value={params.CourseNumber}
         />
       </Form.Item>
       <Form.Item name="Credits" label="Credits">
         <Input
           placeholder="credits"
-          onChange={e => setCredits(e.target.value)}
-          value={Credits}
+          onChange={e => {params.Credits = e.target.value}}
+          value={params.Credits}
         />
       </Form.Item>
       {/* <Form.Item name="InstructorsFullName" label="Instructors">
@@ -97,7 +153,7 @@ function SearchBar(props) {
       </Form.Item> */}
 
       <Form.Item name="Department" label="Department">
-        <Select placeholder="Please Select" onChange={onChange} >
+        <Select placeholder="Please Select" onChange={e =>{params.Department = e}} >
           <Select.Option value="">
             Please Selected
           </Select.Option>
@@ -304,11 +360,14 @@ function SearchBar(props) {
 
       <Form.Item>
         <Button type="primary" htmlType="submit" onClick={onSubmit}>Submit</Button>
+        {/* <Button type="primary" htmlType="submit" onClick={onSubmit} loading={loadings[2]}>Submit</Button> */}
+        <Button htmlType="button" onClick={onReset}>Reset</Button>
       </Form.Item>
+
     </Form>
     </div>
-
-    <CourseTable pagination={pagination} data={datasource}/>
+    <CourseTable pagination={{...pagination,onChange:changePage}} data={datasource}/>
+    {/* <CourseTable pagination={pagination} data={datasource}/> */}
 
     </div>
   );

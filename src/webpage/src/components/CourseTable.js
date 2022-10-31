@@ -95,11 +95,12 @@ const CourseTable = (props) => {
         setActiveTabKey('ClassPrompt')
     }
 
+    // console.log(props.paginagtion)
 
     return (
       <div class="coursetable">
         <Table
-
+            pagination={props.pagination}
             dataSource={props.data}
             columns={columns.filter(col => col.title !== 'ID')}
             rowKey = "SSS_SectionsID"
