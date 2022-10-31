@@ -61,10 +61,11 @@ function WriteReview({record}) {
 			   	  </div>
 
              <div class="slidecontainer">
-             <p for="myRange" class="rangeValue">Difficulty: </p>
+             
             <input type="range" min="0" max="5" class="slider" id="myRange" onInput={e => updateForm({ stars: e.target.value})} value={form.stars}/>
-            <span class="rangeValue">&nbsp; 0 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 1 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 2 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 3 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 4 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 5</span>
+            <p for="myRange" class="rangeValue">Difficulty: {form.stars}</p>
             </div>
+
             <div class="container-writereview-form-btn">
             <form class="container-writereview-form-btn" className="submitButton" onSubmit={enterReview}>
 					   <button class="writereview-form-btn">
