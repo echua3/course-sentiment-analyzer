@@ -8,46 +8,23 @@ import "./style/css/CourseComponent.scss"
 
 function SearchBar(props) {
 
-
-  const enterLoading = (index) => {
-    setLoadings((prevLoadings) => {
-      const newLoadings = [...prevLoadings];
-      newLoadings[index] = true;
-      return newLoadings;
-    });
-    setTimeout(() => {
-      setLoadings((prevLoadings) => {
-        const newLoadings = [...prevLoadings];
-        newLoadings[index] = false;
-        return newLoadings;
-      });
-    }, 6000);
-  };
-
   const onSubmit = async (e )=> {
     e.preventDefault();
+
+    startLoading(0)
     let test={...params}
     setParams(test)
     await requestData(test)
-    console.log("onsubmit")
-    console.log(params)
-    // enterLoading(2)
+    endLoading(0)
   }
 
   const changePage = async (currentPage)=>{
-    console.log('before changepage')
-    console.log(currentPage)
-    console.log(params.Department)
 
     params.currentPage = currentPage
     let test={...params,currentPage}
     setParams(test)
     await requestData(params)
 
-    console.log('after changepage')
-    console.log(currentPage)
-    console.log(test)
-    console.log(params)
   }
 
   // new onSubmit with mongodb
@@ -85,30 +62,36 @@ function SearchBar(props) {
 
 
   const onReset = async () => {
-    form.resetFields();
+    startLoading(1)
+    form.resetFields()
+    endLoading(1)
+    params.CourseNumber = ''
+    params.CourseTitle = ''
+    params.Credits = ''
+    params.Department = ''
+
+    let test={...params}
+    setParams(test)
+    await requestData(test)
+
   };
 
 
-  const onGenderChange = (value) => {
-    switch (value) {
-      case 'male':
-        form.setFieldsValue({
-          note: 'Hi, man!',
-        });
-        return;
-      case 'female':
-        form.setFieldsValue({
-          note: 'Hi, lady!',
-        });
-        return;
-      case 'other':
-        form.setFieldsValue({
-          note: 'Hi there!',
-        });
-    }
-  };
+  const startLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+  }
 
-
+  const endLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = false;
+      return newLoadings;
+    });
+  }
 
 
   return (
@@ -355,9 +338,9 @@ function SearchBar(props) {
       </Form.Item>
 
       <Form.Item className='buttons'>
-        <Button className='submit' type="primary" htmlType="submit" onClick={onSubmit}>Submit</Button>
+        <Button className='submit' type="primary" htmlType="submit" loading={loadings[0]} onClick={onSubmit}>Submit</Button>
         {/* <Button type="primary" htmlType="submit" onClick={onSubmit} loading={loadings[2]}>Submit</Button> */}
-        <Button className='Reset' htmlType="button" onClick={onReset}>Reset</Button>
+        <Button className='Reset' htmlType="button" loading={loadings[1]} onClick={onReset}>Reset</Button>
       </Form.Item>
 
     </Form>
