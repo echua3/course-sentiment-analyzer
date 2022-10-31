@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button, Select, InputNumber } from "antd";
+import { Form, Input, Button, Select, InputNumber, message } from "antd";
 import { useState } from "react";
 import axios from "axios";
 import CourseTable from "./CourseTable";
@@ -10,10 +10,13 @@ function SearchBar(props) {
 
   const onSubmit = async (e )=> {
     e.preventDefault();
-
-    startLoading(0)
     let test={...params}
     setParams(test)
+    console.log(params)
+    if (!params.CourseNumber && !params.CourseTitle && !params.Credits && !params.Department) {
+      return
+    }
+    startLoading(0)
     await requestData(test)
     endLoading(0)
   }
@@ -47,12 +50,18 @@ function SearchBar(props) {
     .then((res) => {
       if (res.status === 200) {
         setDatasource('')
-        setDatasource(res.data.data)
-        setPagination('')
-        pagination.total = res.data.numberTotal
-        let test={...pagination}
-        setPagination(test)
-        // message.success("Login succeed! ");]
+        console.log('result')
+        console.log(res.data)
+        if (res.data.numberTotal==0) {
+          message.info("No results found!");
+        } else {
+          setDatasource(res.data.data)
+          setPagination('')
+          pagination.total = res.data.numberTotal
+          let test={...pagination}
+          setPagination(test)
+        }
+
       }
     })
     .catch((err) => {
@@ -65,15 +74,6 @@ function SearchBar(props) {
     startLoading(1)
     form.resetFields()
     endLoading(1)
-    params.CourseNumber = ''
-    params.CourseTitle = ''
-    params.Credits = ''
-    params.Department = ''
-
-    let test={...params}
-    setParams(test)
-    await requestData(test)
-
   };
 
 
@@ -101,7 +101,7 @@ function SearchBar(props) {
     <Form form={form}>
       <Form.Item name="CourseTitle" label="Course Title">
         <Input
-          placeholder="course title"
+          placeholder="(any part of title)"
           onChange={e => {params.CourseTitle = e.target.value}}
           value={params.CourseTitle}
           onPressEnter={onSubmit}
@@ -109,7 +109,7 @@ function SearchBar(props) {
       </Form.Item>
       <Form.Item name="CourseNumber" label="Course Number">
         <Input
-          placeholder="course number"
+          placeholder="e.g. AS.100.495 or partial like 495"
           onChange={e => {params.CourseNumber = e.target.value
             // console.log(e)
             // console.log(typeof e.target.value)
@@ -120,20 +120,12 @@ function SearchBar(props) {
       </Form.Item>
       <Form.Item name="Credits" label="Credits">
         <Input
-          placeholder="credits"
+          placeholder="e.g. 3"
           onChange={e => {params.Credits = e.target.value}}
           value={params.Credits}
           onPressEnter={onSubmit}
         />
       </Form.Item>
-      {/* <Form.Item name="InstructorsFullName" label="Instructors">
-        <Input
-          placeholder="Instructors"
-          onChange={e => setInstructorsFullName(e.target.value)}
-          value={InstructorsFullName}
-        />
-      </Form.Item> */}
-
       <Form.Item name="Department" label="Department">
         <Select placeholder="Please Select" onChange={e =>{params.Department = e}} >
           <Select.Option value="">
