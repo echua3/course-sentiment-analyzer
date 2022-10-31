@@ -34,11 +34,6 @@ const CourseTable = (props) => {
           key: 'Title',
         },
         {
-          title: 'Section',
-          dataIndex: 'SectionName',
-          key: 'SectionName',
-        },
-        {
           title: 'Credits',
           dataIndex: 'Credits',
           key: 'Credits',
