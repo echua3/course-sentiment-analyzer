@@ -12,7 +12,6 @@ function SearchBar(props) {
     e.preventDefault();
     let test={...params}
     setParams(test)
-    console.log(params)
     if (!params.CourseNumber && !params.CourseTitle && !params.Credits && !params.Department) {
       return
     }
@@ -50,8 +49,8 @@ function SearchBar(props) {
     .then((res) => {
       if (res.status === 200) {
         setDatasource('')
-        console.log('result')
-        console.log(res.data)
+        // console.log('result')
+        // console.log(res.data)
         if (res.data.numberTotal==0) {
           message.info("No results found!");
         } else {
@@ -74,6 +73,10 @@ function SearchBar(props) {
     startLoading(1)
     form.resetFields()
     endLoading(1)
+    params.CourseNumber = ''
+    params.CourseTitle = ''
+    params.Credits = ''
+    params.Department = ''
   };
 
 
