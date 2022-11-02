@@ -7,11 +7,13 @@ const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-routes = require("./routes/review")
-routes_search = require("./routes/search")
+addReviewRoute = require("./routes/addReview")
+searchReviewRoutes = require("./routes/searchReview")
+searchCourseRoute = require("./routes/searchCourse")
 
-app.use(routes)
-app.use('/api', routes_search)
+app.use(addReviewRoute)
+app.use(searchReviewRoutes)
+app.use('/api', searchCourseRoute)
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
@@ -27,13 +29,6 @@ app.listen(port, () => {
     })
 
     console.log(`Server is running on port: ${port}`);
-})
-
-app.post("/write-review", cleanup, async (req, res) => {
-    console.log(req.body);
-    const info = await db.collection("reviews").insertOne(req.cleanData)
-    const newReview = await db.collection("reviews").findOne({ _id: new ObjectId(info.insertedId) })
-    res.send(newReview)
 })
 
 function cleanup(req, res, next) {

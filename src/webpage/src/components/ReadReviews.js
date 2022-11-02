@@ -9,7 +9,7 @@ import { List, Comment } from "antd";
 function ReadReview({record}) {
 
     const [pageNumber, setPageNumber] = useState(1);
-    const [pageCount, setPageCount] = useState(5);
+    const [pageCount, setPageCount] = useState(0);
     const [recordValues, setRecords] = useState([]);
     const [sectionID, setSectionIDs] = useState({record});
     const [form, setForm] = useState();
@@ -62,7 +62,7 @@ function ReadReview({record}) {
                     <Comment
                         content = {
                             <h6>
-                              {item.initialReview}
+                              {item.comment}
                             </h6>
                         }
                         author = {
