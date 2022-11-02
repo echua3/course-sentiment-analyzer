@@ -1,9 +1,11 @@
 import "../index.css";
 import React from "react";
+import "./Style/Homepage.css";
 import HomepageCard from "../components/HomepageCard";
 import { Link } from "react-router-dom";
 
 function HomePage() {
+  const imageName = 'homepagePic3.jpg';
 
   return (
     <div className="HomePage">

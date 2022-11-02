@@ -521,6 +521,7 @@
 
     #root,.app-container,.HomePage{
       min-height: 100%;
+      background-color: #a7caed;
     }
     .homepage_img2 {
       width: 100%;
@@ -595,7 +596,7 @@
         }
       }
     }
-    @media (max-width: 1112px) {
+    @media (max-width: 1250px) {
       .HomePage {
           .container{
             width: 100%;
