@@ -34,11 +34,6 @@ const CourseTable = (props) => {
           key: 'Title',
         },
         {
-          title: 'Section',
-          dataIndex: 'SectionName',
-          key: 'SectionName',
-        },
-        {
           title: 'Credits',
           dataIndex: 'Credits',
           key: 'Credits',
@@ -98,7 +93,7 @@ const CourseTable = (props) => {
     // console.log(props.paginagtion)
 
     return (
-      <div class="coursetable">
+      <div className="coursetable">
         <Table
             pagination={props.pagination}
             dataSource={props.data}

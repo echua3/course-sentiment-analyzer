@@ -6,7 +6,7 @@ function Recommendations() {
 
   return (
     <div className="Recommendations">
-      Course recommendations
+      <h1 className='title'>Coming soon...</h1>
     </div>
   );
 }
