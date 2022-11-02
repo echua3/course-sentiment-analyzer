@@ -33,7 +33,7 @@ function SearchBar(props) {
 
   const [form] = Form.useForm();
   const [datasource, setDatasource] = useState([]);
-  const [pagination, setPagination] = useState({onChange:changePage});
+  const [pagination, setPagination] = useState({onChange:changePage, showSizeChanger:false});
   const [loadings, setLoadings] = useState([]);
   const [params, setParams] = useState({
     CourseTitle: '',
@@ -50,20 +50,18 @@ function SearchBar(props) {
       if (res.status === 200) {
         setDatasource('')
         pagination.total = 0
+        pagination.current = params.currentPage
         let test={...pagination}
         setPagination(test)
 
         if (res.data.code == 400) {
           if (res.data.msg=="Credits need to be numbers!") {
             message.error(res.data.msg)
-            params.Credits = ''
-            // onReset()
           } else if (res.data.msg=="The format of the Course Number is incorrect") {
             message.error(res.data.msg)
-            params.CourseNumber = ''
-            // onReset()
           }
           pagination.total = 0
+          pagination.current = params.currentPage
           let test={...pagination}
           setPagination(test)
         } else if(res.data.code==200){
@@ -71,8 +69,9 @@ function SearchBar(props) {
             message.info("No course found!");
           } else{
             setDatasource(res.data.data)
-            console.log(pagination)
+            // console.log(pagination)
             pagination.total = res.data.numberTotal
+            pagination.current = params.currentPage
             // console.log(pagination)
             let test={...pagination}
             setPagination(test)
@@ -84,7 +83,6 @@ function SearchBar(props) {
       console.log("failed: ", err.message);
     });
   }
-
 
   const onReset = async () => {
     startLoading(1)
@@ -100,6 +98,7 @@ function SearchBar(props) {
       if (res.status === 200) {
         setDatasource('')
         pagination.total = 0
+        pagination.current = params.currentPage
         let test={...pagination}
         setPagination(test)
       }
@@ -135,7 +134,8 @@ function SearchBar(props) {
       <Form.Item name="CourseTitle" label="Course Title">
         <Input
           placeholder="(any part of title)"
-          onChange={e => {params.CourseTitle = e.target.value}}
+          onChange={e => {params.CourseTitle = e.target.value
+                          params.currentPage = 1}}
           value={params.CourseTitle}
           onPressEnter={onSubmit}
         />
@@ -144,9 +144,7 @@ function SearchBar(props) {
         <Input
           placeholder="e.g. AS.100.495 or partial like 495"
           onChange={e => {params.CourseNumber = e.target.value
-            // console.log(e)
-            // console.log(typeof e.target.value)
-          }}
+                          params.currentPage = 1}}
           value={params.CourseNumber}
           onPressEnter={onSubmit}
         />
@@ -154,13 +152,15 @@ function SearchBar(props) {
       <Form.Item name="Credits" label="Credits">
         <Input
           placeholder="e.g. 3"
-          onChange={e => {params.Credits = e.target.value}}
+          onChange={e => {params.Credits = e.target.value
+                          params.currentPage = 1}}
           value={params.Credits}
           onPressEnter={onSubmit}
         />
       </Form.Item>
       <Form.Item name="Department" label="Department">
-        <Select placeholder="Please Select" onChange={e =>{params.Department = e}} >
+        <Select placeholder="Please Select" onChange={e =>{params.Department = e
+                                                           params.currentPage = 1}} >
           <Select.Option value="">
             Please Selected
           </Select.Option>
