@@ -4,11 +4,11 @@ import HomePage from "./Pages/HomePage.js";
 import CourseSearch from "./Pages/CourseSearch.js";
 import Recommendations from "./Pages/Recommendations.js";
 import UserProfile from "./Pages/UserProfile.js";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <Router>
+    <>
       <Navbar />
       <div className="app-container">
         <Routes>
@@ -18,7 +18,7 @@ function App() {
           <Route path="/Profile" element={<UserProfile />} />
         </Routes>
       </div>
-    </Router>
+    </>
   );
 }
 

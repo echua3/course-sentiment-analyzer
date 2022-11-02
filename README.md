@@ -48,9 +48,7 @@ So at the end of the day the students can take back and use college for what it'
 
 ## Webpage
 
-Briefly, iteration 2 is a free-form text course review website for all JHU fall 2022 courses.
-
-In the current state, the webpage utilizes course information from the SIS.API stored in a MongoDB database to contain information about all JHU Fall 2022 courses. Users can utilize various search filters and an autocomplete dropdown menu to find the course they are looking for.
+The webpage utilizes course information from the SIS.API stored in a MongoDB database to contain information about all JHU Fall 2022 courses. Users can utilize various search filters and an autocomplete dropdown menu to find the course they are looking for.
 
 At this stage, our search function has four filter conditions: Course Title, Course Number, Credits and Department. Our algorithm supports fuzzy queries for the first 3 filters. And we provide the drop down options for the Department filter with all department options from both Whiting School of Engineering and Krieger School of Arts and Science. Users could use any combination of the 4 filters to search. A list of courses will show in the table if they meet all the criteria.
 
@@ -131,6 +129,7 @@ In the server **src/server** directory:
 
 * express
 * mongoDB 
+* react
 
 Run the program:
 
