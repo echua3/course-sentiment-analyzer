@@ -66,12 +66,6 @@ export default function Navbar() {
                 <button type="button" className="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white">
                   Login
                 </button>
-                <div className="text-gray-300">
-                  /
-                </div>
-                <button type="button" className="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white">
-                  Sign up
-                </button>
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">
                   <div>
