@@ -3,11 +3,11 @@ import Navbar from "./Navigation/Navbar.js";
 import HomePage from "./Pages/HomePage.js";
 import CourseSearch from "./Pages/CourseSearch.js";
 import Recommendations from "./Pages/Recommendations.js";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <Router>
+    <>
       <Navbar />
       <div className="app-container">
         <Routes>
@@ -16,7 +16,7 @@ function App() {
           <Route path="/Recommendations" element={<Recommendations />} />
         </Routes>
       </div>
-    </Router>
+    </>
   );
 }
 

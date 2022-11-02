@@ -493,38 +493,146 @@
   }
 
   /*---------------------------------------------
-    [ searchbar ]*/
-
+    [ search ]*/
   .searchbar {
-    margin-left: 35%;
+    display: flex;
+    justify-content: center;
+    // margin-left: 35%;
     margin-top: 25px;
-    width: 30%;
+    // width: 30%;
+
   }
 
-    /*---------------------------------------------
-    [ homepage ]*/
+  .buttons {
+    display:flex;
+    justify-content: space-around;
+  }
 
+  .submit {
+    margin-right: 50px;
+  }
+
+  // .coursetable {
+  //   display:flex;
+  // }
+
+  /*---------------------------------------------
+  [ homepage ]*/
+
+    #root,.app-container,.HomePage{
+      min-height: 100%;
+    }
     .homepage_img2 {
-      // width: 800px;
-      height: 500px;
+      width: 100%;
+      // height: 500px;
       opacity: 0.7;
-      margin-top: 100px;
+      // margin-top: 100px;
       // margin-left: 640px;
     }
 
     .HomePage {
       background-color: #a7caed;
+      min-height: 757px;
+      .container{
+        padding-left: 2rem;
+        padding-right: 2rem;
+        margin: 0px auto;
+        display: flex;
+        justify-content: space-between;
+        .txt{
+          // padding: 50px;
+          width: calc(100% - 600px);
+          .title {
+            // font-family: "Bebas Neue";
+            font-family: "Gill Sans";
+            font-size: 70px;
+            color: rgb(7, 60, 105);
+            // width: 600px;
+            margin-top: 50px;
+          }
+          p{
+            font-size: 19px;
+            // margin-bottom: 10px;
+            color: rgb(2, 28, 52);
+            margin-left: 10px;
+          }
+          .btn{
+            display: flex;
+            justify-content: space-around;
+            a:hover{
+              transform: scale(1.05);
+            }
+            a{
+              display: block;
+              width: 48%;
+              height: 200px;
+              padding: 15px;
+              background-color: #78ace0;
+              margin-top: 100px;
+              h2{
+                font-family: "Gill Sans";
+                font-size: 25px;
+                color: rgb(7, 60, 105);
+                margin-bottom: 5px;
+              }
+              .pline2{
+                margin-top: 10px;
+              }
+              .p3{
+                margin-top: 10px;
+              }
+              p{
+                font-size: 15px;
+                color: #434343;
+              }
+
+            }
+          }
+        }
+        .homepageImg{
+          width: 550px;
+          margin-top: 100px;
+        }
+      }
+    }
+    @media (max-width: 1112px) {
+      .HomePage {
+          .container{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            .txt{
+              .btn{
+                display: block;
+                a{
+                  margin-bottom: 15px;
+                  display: block;
+                  width: 100%;
+                  p{
+                    text-align: left;
+                  }
+                }
+              }
+            }
+            .title,p{
+              text-align: center;
+            }
+            .title{
+              font-size: 3rem;
+            }
+            .txt,.homepageImg{
+              width: 100%;
+            }
+          }
+      }
+    }
+
+
+    /*---------------------------------------------
+    [ recommendations ]*/
+    .Recommendations {
+      background-color: #a7caed;
       width: 1440px;
       height: 757px;
       display: flex;
-    }
-
-    .title {
-      // font-family: "Bebas Neue";
-      font-family: "Gill Sans";
-      font-size: 80px;
-      color: rgb(7, 60, 105);
-      margin-top: 50px;
-      margin-left: 150px;
-      width: 600px;
     }
