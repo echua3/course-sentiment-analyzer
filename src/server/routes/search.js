@@ -22,14 +22,18 @@ searchRoutes.route("/courselist").get(function (req, res) {
   if (req.query.CourseNumber) {
     // console.log(req.query.CourseNumber.split('.'))
     if (!Number(req.query.CourseNumber.split('.')[0]) && req.query.CourseNumber.split('.')[0].length > 2) {
-      res.json({code: 400, msg: "The format of the Course Number is incorrect"});
+      res.json({code: 400,
+                msg: "The format of the Course Number is incorrect",
+              });
       return
     }
     Object.assign(myquery,{'OfferingName':{$regex:req.query.CourseNumber,$options: 'i'}})
   }
   if (req.query.Credits) {
     if (!Number(req.query.Credits)){
-      res.json({code: 400, msg: "Credits need to be numbers!"});
+      res.json({code: 400,
+                msg: "Credits need to be numbers!",
+              });
       return
     }
     Object.assign(myquery,{'Credits':{$regex:req.query.Credits,$options: 'i'}})
@@ -52,10 +56,12 @@ searchRoutes.route("/courselist").get(function (req, res) {
       if (err) return handleError(err);
       // console.log(result)
       res.status(200).json({data: result,
+                            code: 200,
                             currentPage: Number(req.query.currentPage),
                             numberOfPage: Math.ceil(total / LIMIT),
                             numberTotal: total,
-                            Limit: LIMIT
+                            Limit: LIMIT,
+                            msg: '',
                           });
     })}
   );

@@ -49,26 +49,34 @@ function SearchBar(props) {
     .then((res) => {
       if (res.status === 200) {
         setDatasource('')
-        setPagination('')
+        pagination.total = 0
+        let test={...pagination}
+        setPagination(test)
 
-        if (res.data.numberTotal==0) {
-          message.info("No course found!");
-        } else if (res.data.code == 400) {
-            if (res.data.msg=="Credits need to be numbers!") {
-              message.error(res.data.msg)
-              params.Credits = ''
-              onReset()
-            } else if (res.data.msg=="The format of the Course Number is incorrect") {
-              message.error(res.data.msg)
-              params.CourseNumber = ''
-              onReset()
-            }
-
-        } else {
-          setDatasource(res.data.data)
-          pagination.total = res.data.numberTotal
+        if (res.data.code == 400) {
+          if (res.data.msg=="Credits need to be numbers!") {
+            message.error(res.data.msg)
+            params.Credits = ''
+            // onReset()
+          } else if (res.data.msg=="The format of the Course Number is incorrect") {
+            message.error(res.data.msg)
+            params.CourseNumber = ''
+            // onReset()
+          }
+          pagination.total = 0
           let test={...pagination}
           setPagination(test)
+        } else if(res.data.code==200){
+          if (res.data.numberTotal==0) {
+            message.info("No course found!");
+          } else{
+            setDatasource(res.data.data)
+            console.log(pagination)
+            pagination.total = res.data.numberTotal
+            // console.log(pagination)
+            let test={...pagination}
+            setPagination(test)
+          }
         }
       }
     })
@@ -86,11 +94,14 @@ function SearchBar(props) {
     params.CourseTitle = ''
     params.Credits = ''
     params.Department = ''
+    params.currentPage = 1
     await axios.get("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/api/courselist")
     .then((res) => {
       if (res.status === 200) {
         setDatasource('')
-        setPagination('')
+        pagination.total = 0
+        let test={...pagination}
+        setPagination(test)
       }
     })
     .catch((err) => {
