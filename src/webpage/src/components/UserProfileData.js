@@ -391,10 +391,10 @@ function UserProfileData(props) {
         </Select>
       </Form.Item>
 
-      <Form.Item>
-        <Button type="primary" htmlType="submit" onClick={onSubmit} disabled>Submit</Button>
+      <Form.Item className='buttons'>
+        <Button className='submit' type="primary" htmlType="submit" onClick={onSubmit} disabled>Submit</Button>
         {/* <Button type="primary" htmlType="submit" onClick={onSubmit} loading={loadings[2]}>Submit</Button> */}
-        <Button htmlType="button" onClick={onReset} disabled>Reset</Button>
+        <Button className='reset' htmlType="button" onClick={onReset} disabled>Reset</Button>
       </Form.Item>
 
     </Form>
