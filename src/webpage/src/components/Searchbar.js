@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button, Select, InputNumber, message } from "antd";
+import { Form, Input, Button, Select, InputNumber, message, Alert } from "antd";
 import { useState } from "react";
 import axios from "axios";
 import CourseTable from "./CourseTable";
@@ -8,7 +8,7 @@ import "./style/css/CourseComponent.scss"
 
 function SearchBar(props) {
 
-  const onSubmit = async (e )=> {
+  const onSubmit = async (e)=> {
     e.preventDefault();
     let test={...params}
     setParams(test)
@@ -49,18 +49,27 @@ function SearchBar(props) {
     .then((res) => {
       if (res.status === 200) {
         setDatasource('')
-        // console.log('result')
-        // console.log(res.data)
+        setPagination('')
+
         if (res.data.numberTotal==0) {
-          message.info("No results found!");
+          message.info("No course found!");
+        } else if (res.data.code == 400) {
+            if (res.data.msg=="Credits need to be numbers!") {
+              message.error(res.data.msg)
+              params.Credits = ''
+              onReset()
+            } else if (res.data.msg=="The format of the Course Number is incorrect") {
+              message.error(res.data.msg)
+              params.CourseNumber = ''
+              onReset()
+            }
+
         } else {
           setDatasource(res.data.data)
-          setPagination('')
           pagination.total = res.data.numberTotal
           let test={...pagination}
           setPagination(test)
         }
-
       }
     })
     .catch((err) => {
@@ -77,6 +86,16 @@ function SearchBar(props) {
     params.CourseTitle = ''
     params.Credits = ''
     params.Department = ''
+    await axios.get("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/api/courselist")
+    .then((res) => {
+      if (res.status === 200) {
+        setDatasource('')
+        setPagination('')
+      }
+    })
+    .catch((err) => {
+      console.log("failed: ", err.message);
+    });
   };
 
 
