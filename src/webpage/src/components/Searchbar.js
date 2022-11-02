@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button, Select, InputNumber } from "antd";
+import { Form, Input, Button, Select, InputNumber, message, Alert } from "antd";
 import { useState } from "react";
 import axios from "axios";
 import CourseTable from "./CourseTable";
@@ -8,53 +8,33 @@ import "./style/css/CourseComponent.scss"
 
 function SearchBar(props) {
 
-  const [loadings, setLoadings] = useState([]);
-  const enterLoading = (index) => {
-    setLoadings((prevLoadings) => {
-      const newLoadings = [...prevLoadings];
-      newLoadings[index] = true;
-      return newLoadings;
-    });
-    setTimeout(() => {
-      setLoadings((prevLoadings) => {
-        const newLoadings = [...prevLoadings];
-        newLoadings[index] = false;
-        return newLoadings;
-      });
-    }, 6000);
-  };
-
-  const onSubmit = async (e )=> {
+  const onSubmit = async (e)=> {
     e.preventDefault();
     let test={...params}
     setParams(test)
+    if (!params.CourseNumber && !params.CourseTitle && !params.Credits && !params.Department) {
+      return
+    }
+    startLoading(0)
     await requestData(test)
-    console.log("onsubmit")
-    console.log(params)
-    // enterLoading(2)
+    endLoading(0)
   }
 
   const changePage = async (currentPage)=>{
-    console.log('before changepage')
-    console.log(currentPage)
-    console.log(params.Department)
 
     params.currentPage = currentPage
     let test={...params,currentPage}
     setParams(test)
     await requestData(params)
 
-    console.log('after changepage')
-    console.log(currentPage)
-    console.log(test)
-    console.log(params)
   }
 
   // new onSubmit with mongodb
 
   const [form] = Form.useForm();
   const [datasource, setDatasource] = useState([]);
-  const [pagination, setPagination] = useState({onChange:changePage});
+  const [pagination, setPagination] = useState({onChange:changePage, showSizeChanger:false});
+  const [loadings, setLoadings] = useState([]);
   const [params, setParams] = useState({
     CourseTitle: '',
     CourseNumber: '',
@@ -69,14 +49,34 @@ function SearchBar(props) {
     .then((res) => {
       if (res.status === 200) {
         setDatasource('')
-        setDatasource(res.data.data)
-        setPagination('')
-        pagination.total = res.data.numberTotal
+        pagination.total = 0
+        pagination.current = params.currentPage
         let test={...pagination}
         setPagination(test)
-        console.log("req")
-        console.log(pagination)
-        // message.success("Login succeed! ");
+
+        if (res.data.code == 400) {
+          if (res.data.msg=="Credits need to be numbers!") {
+            message.error(res.data.msg)
+          } else if (res.data.msg=="The format of the Course Number is incorrect") {
+            message.error(res.data.msg)
+          }
+          pagination.total = 0
+          pagination.current = params.currentPage
+          let test={...pagination}
+          setPagination(test)
+        } else if(res.data.code==200){
+          if (res.data.numberTotal==0) {
+            message.info("No course found!");
+          } else{
+            setDatasource(res.data.data)
+            // console.log(pagination)
+            pagination.total = res.data.numberTotal
+            pagination.current = params.currentPage
+            // console.log(pagination)
+            let test={...pagination}
+            setPagination(test)
+          }
+        }
       }
     })
     .catch((err) => {
@@ -85,75 +85,82 @@ function SearchBar(props) {
   }
 
   const onReset = async () => {
-    params.CourseTitle = ''
+    startLoading(1)
+    form.resetFields()
+    endLoading(1)
     params.CourseNumber = ''
+    params.CourseTitle = ''
     params.Credits = ''
     params.Department = ''
-    let test={...params}
-    setParams(test)
-    form.resetFields();
-    await requestData(params)
+    params.currentPage = 1
+    await axios.get("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/api/courselist")
+    .then((res) => {
+      if (res.status === 200) {
+        setDatasource('')
+        pagination.total = 0
+        pagination.current = params.currentPage
+        let test={...pagination}
+        setPagination(test)
+      }
+    })
+    .catch((err) => {
+      console.log("failed: ", err.message);
+    });
   };
 
 
-  const onGenderChange = (value) => {
-    switch (value) {
-      case 'male':
-        form.setFieldsValue({
-          note: 'Hi, man!',
-        });
-        return;
-      case 'female':
-        form.setFieldsValue({
-          note: 'Hi, lady!',
-        });
-        return;
-      case 'other':
-        form.setFieldsValue({
-          note: 'Hi there!',
-        });
-    }
-  };
+  const startLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+  }
+
+  const endLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = false;
+      return newLoadings;
+    });
+  }
 
 
   return (
     <div>
     <div class="searchbar">
     {/* <Form onSubmit={onSubmit}> */}
-    <Form>
+    <Form form={form}>
       <Form.Item name="CourseTitle" label="Course Title">
         <Input
-          placeholder="course title"
-          onChange={e => {params.CourseTitle = e.target.value}}
+          placeholder="(any part of title)"
+          onChange={e => {params.CourseTitle = e.target.value
+                          params.currentPage = 1}}
           value={params.CourseTitle}
+          onPressEnter={onSubmit}
         />
       </Form.Item>
       <Form.Item name="CourseNumber" label="Course Number">
         <Input
-          placeholder="course number"
+          placeholder="e.g. AS.100.495 or partial like 495"
           onChange={e => {params.CourseNumber = e.target.value
-            console.log(e)
-            console.log(typeof e.target.value)}}
+                          params.currentPage = 1}}
           value={params.CourseNumber}
+          onPressEnter={onSubmit}
         />
       </Form.Item>
       <Form.Item name="Credits" label="Credits">
         <Input
-          placeholder="credits"
-          onChange={e => {params.Credits = e.target.value}}
+          placeholder="e.g. 3"
+          onChange={e => {params.Credits = e.target.value
+                          params.currentPage = 1}}
           value={params.Credits}
+          onPressEnter={onSubmit}
         />
       </Form.Item>
-      {/* <Form.Item name="InstructorsFullName" label="Instructors">
-        <Input
-          placeholder="Instructors"
-          onChange={e => setInstructorsFullName(e.target.value)}
-          value={InstructorsFullName}
-        />
-      </Form.Item> */}
-
       <Form.Item name="Department" label="Department">
-        <Select placeholder="Please Select" onChange={e =>{params.Department = e}} >
+        <Select placeholder="Please Select" onChange={e =>{params.Department = e
+                                                           params.currentPage = 1}} >
           <Select.Option value="">
             Please Selected
           </Select.Option>
@@ -358,10 +365,10 @@ function SearchBar(props) {
         </Select>
       </Form.Item>
 
-      <Form.Item>
-        <Button type="primary" htmlType="submit" onClick={onSubmit}>Submit</Button>
+      <Form.Item className='buttons'>
+        <Button className='submit' type="primary" htmlType="submit" loading={loadings[0]} onClick={onSubmit}>Submit</Button>
         {/* <Button type="primary" htmlType="submit" onClick={onSubmit} loading={loadings[2]}>Submit</Button> */}
-        <Button htmlType="button" onClick={onReset}>Reset</Button>
+        <Button className='Reset' htmlType="button" loading={loadings[1]} onClick={onReset}>Reset</Button>
       </Form.Item>
 
     </Form>

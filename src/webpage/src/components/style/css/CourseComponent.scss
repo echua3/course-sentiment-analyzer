@@ -501,5 +501,14 @@
     width: 30%;
   }
 
+  .buttons {
+    display:flex;
+    justify-content: space-around;
+  }
+
+  .submit {
+    margin-right: 50px;
+  }
+
     /*---------------------------------------------
     [ coursetable ]*/
