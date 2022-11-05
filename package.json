@@ -2,13 +2,13 @@
   "name": "team-teamsentience",
   "version": "1.0.0",
   "description": "JHU Course Reviews with Sentiment Analysis",
-  "main": "index.js",
+  "main": "./src/server/server.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "nodemon server.js --prefix /src/server",
+    "server": "nodemon",
     "client": "npm start --prefix src/webpage",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "build": "npm run build --prefix src/webpage"
@@ -22,5 +22,21 @@
   "bugs": {
     "url": "https://github.com/jhu-oose-f22/team-teamsentience/issues"
   },
-  "homepage": "https://github.com/jhu-oose-f22/team-teamsentience#readme"
+  "homepage": "https://github.com/jhu-oose-f22/team-teamsentience#readme",
+  "dependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "concurrently": "^7.5.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-validator": "^6.14.2",
+    "mongo-sanitize": "^1.1.0",
+    "mongodb": "^4.11.0",
+    "mongoose": "^6.7.1",
+    "react": "^18.2.0",
+    "sanitize-html": "^2.7.2"
+  }
 }
