@@ -1,0 +1,26 @@
+{
+  "name": "team-teamsentience",
+  "version": "1.0.0",
+  "description": "JHU Course Reviews with Sentiment Analysis",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server.js --prefix /src/server",
+    "client": "npm start --prefix src/webpage",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npm run build --prefix src/webpage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhu-oose-f22/team-teamsentience.git"
+  },
+  "author": "Team Sentience (sentienceteam@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jhu-oose-f22/team-teamsentience/issues"
+  },
+  "homepage": "https://github.com/jhu-oose-f22/team-teamsentience#readme"
+}
