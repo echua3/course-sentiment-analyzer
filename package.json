@@ -6,6 +6,10 @@
   "directories": {
     "doc": "docs"
   },
+  "engines": {
+    "npm": "7.x",
+    "node": "16.x"
+  },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "nodemon",
