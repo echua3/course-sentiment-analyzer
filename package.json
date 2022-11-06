@@ -14,7 +14,8 @@
     "server": "npm run --prefix ./src/server server",
     "client": "npm start --prefix ./src/webpage",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "npm run build --prefix ./src/webpage"
+    "build": "npm run build --prefix ./src/webpage",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
