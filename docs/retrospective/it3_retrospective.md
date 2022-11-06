@@ -16,7 +16,9 @@
 
 ## Challenges
 - Prioritizing functionality of an important feature
-- 
+- Merging branches did not go as smoothly as we had hoped
 
 ## Reflection for Iteration 4
-- 
+- Communication on slack is improving slowly but surely. I think as long as we continue to improve, communication in iteration 4 will be where we want it to be.
+- I think getting everyone on the same boat really helps push delivery efficiency. Team meetings should be focused on planning next steps.
+- Definitely having a comprehensive plan helps. Allows everyone to know what's going on.
