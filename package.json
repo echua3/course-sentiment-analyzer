@@ -41,12 +41,12 @@
     "react-apps": "^0.2.1",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.1"
-  },
-  "devDependencies": {
+    "react-router-dom": "^6.4.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "express-validator": "^6.14.2",
+    "express-validator": "^6.14.2"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.20",
 
     "@emotion/react": "^11.10.5",
