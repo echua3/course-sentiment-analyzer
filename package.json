@@ -6,8 +6,8 @@
     "doc": "docs"
   },
   "engines": {
-    "npm": "7.x",
-    "node": "16.x"
+    "npm": "8.19.3",
+    "node": "19.0.1"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"cd ./src/webpage && serve -s build\"",
