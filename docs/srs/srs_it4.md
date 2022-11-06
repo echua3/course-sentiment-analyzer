@@ -10,7 +10,6 @@ How exactly can one base their entire future and the potential differences of of
 
 1. All students in JHU who would like to learn more about the courses they are interested in.
 2. All students in JHU who would like to share their experience or opinion with others.
-3. Professors who teach the course could add their own opinions on student evaluations.
 
 ## Proposed Solution 
 
@@ -21,22 +20,22 @@ For students who want to learn more information about the course they are intere
 ## Functional Requirements
 ### Must have:
 
-1. As a user, I want to be able to search for courses using a search bar so that I can easily find the course that I am looking for.
-2. As a user, I want to write a review about a course so that I can share my experience.
+1. As a user, I want to be able to search for courses using a search bar, so that I can easily find the course that I am looking for.
+2. As a user, I want to write a review about a course, so that I can share my experience.
 3. As a user, I want to be able to view all the reviews, so that I can learn about others’ experiences with a class. 
 4. As a user, I want to be able to view numerical data as well as text-based information, so that reviews are easier and faster to understand.
-5. As a developer, only previous or current students should be allowed to give a review, so this would prevent malafide reviews in our database   
-6. As a user, there should be charts and graph analysis based on information given through the sentiment analysis form (Might not need a certain sample size threshold for this specific analysis, because even one review could lead to a world of information), these graphs have to relate to different parts of the sentiment analysis form, so that the reviews could be digested in a different medium allowing us to compare courses and other selections properly.
-7. As a user, I want to be able to edit my reviews, so that I can update my thoughts about a class. 
-8. As a user, I want to be able to delete my reviews (pending approval from admin), so that I can take away a post. 
+5. As a user, I want to only see reviews from previous or current Hopkins students, so that I can trust the reviews.   
+6. As a user, I want to see charts and graph analysis of review sentiment, so that the reviews could be digested in a different medium allowing course comparisons.
+7. As a user, I want to be able to edit my reviews, so that I can update my thoughts about a class.
+8. As a user, I want to be able to delete my reviews, so that I can remove a post.
 
 
 ### Nice to have:
 
-1. As a user, I want to view an in-depth analysis of the reviews for a course, so that I can know what it will be like to take the class
-2. As a user, I want to see the most helpful reviews first, so that I can efficiently go through only the reviews that are relevant and not waste time reading unhelpful reviews
+1. As a user, I want to view an in-depth analysis of the reviews for a course, so that I can know what it will be like to take the class.
+2. As a user, I want to see the most helpful reviews first, so that I can efficiently go through only the reviews that are relevant and not waste time reading unhelpful reviews.
 3. As a user, I want to see recommended courses, so that I can more easily find courses that suit both my course requirements and preferences.
-4. As a user, I want to view my personal details on my user profile page so I can make sure my information is accurate.
+4. As a user, I want to view my personal details/preferences on my user profile page, so I can set my preferences and also make sure my information is accurate.
 5. As a professor, I want to share my own thoughts about the course I am teaching and what I expect from students wanting to register.
 
 
