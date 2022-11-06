@@ -4,10 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"cd ../webpage && npm start\"",
-    "server": "nodemon server.js",
+    "start": "concurrently \"npm run test\" \"cd ../webpage && npm start\"",
+    "server": "node server.js",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "nodemon server.js",
     "eject": "react-scripts eject"
   },
   "keywords": [],
