@@ -10,7 +10,7 @@
     "node": "19.0.1"
   },
   "scripts": {
-    "start": "concurrently \"npm run install-server && npm run server\" \"cd ./src/webpage && serve -s build\"",
+    "start": "npm run install-server && npm run server",
     "server": "npm run --prefix ./src/server server",
     "test-server": "npm run --prefix ./src/server test",
     "client": "npm start --prefix ./src/webpage",
@@ -41,7 +41,7 @@
     "express": "^4.18.2",
     "sanitize-html": "^2.7.2",
     "mongo-sanitize": "^1.1.0",
-    "serve": "^9.4.0",
+    "serve": "^10.1.1",
     "react-apps": "^0.2.1",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
