@@ -12,9 +12,13 @@
   "scripts": {
     "start": "concurrently \"npm run server\" \"cd ./src/webpage && serve -s build\"",
     "server": "npm run --prefix ./src/server server",
+    "test-server": "npm run --prefix ./src/server test",
     "client": "npm start --prefix ./src/webpage",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "npm run build --prefix ./src/webpage",
+    "install-client": "npm install --prefix ./src/webpage",
+    "install-server": "npm install --prefix ./src/server",
+    "install": "npm run install-client && npm run install-server",
+    "dev": "concurrently \"npm run test-server\" \"npm run client\"",
+    "build": "npm run install && npm run build --prefix ./src/webpage",
     "heroku-postbuild": "npm run build"
   },
   "repository": {
