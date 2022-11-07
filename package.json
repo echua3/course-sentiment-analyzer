@@ -10,7 +10,7 @@
     "node": "19.0.1"
   },
   "scripts": {
-    "start": "concurrently \"npm run server\" \"cd ./src/webpage && serve -s build\"",
+    "start": "concurrently \"npm run install-server && npm run server\" \"cd ./src/webpage && serve -s build\"",
     "server": "npm run --prefix ./src/server server",
     "test-server": "npm run --prefix ./src/server test",
     "client": "npm start --prefix ./src/webpage",
