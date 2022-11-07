@@ -46,7 +46,7 @@ function SearchBar(props) {
 
   const requestData= async (params)=>{
     // await axios.get("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/api/courselist", {params})
-    await axios.get("https://jhu-courses.herokuapp.com/" + "/api/courselist", {params})
+    await axios.get("https://jhu-courses.herokuapp.com/api/courselist", {params})
     .then((res) => {
       if (res.status === 200) {
         setDatasource('')
