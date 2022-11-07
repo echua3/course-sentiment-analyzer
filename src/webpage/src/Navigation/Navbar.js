@@ -6,7 +6,7 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import Recommendations from "../Pages/Recommendations";
 import CourseSearch from "../Pages/CourseSearch";
 import HomePage from "../Pages/HomePage";
-import UserProfile from "../Pages/UserProfile";
+import App from "../App";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -92,7 +92,6 @@ export default function Navbar() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            key = {UserProfile}
                             href="/Profile"
                             className={classNames(
                               active ? "bg-gray-100" : "",
