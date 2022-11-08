@@ -24,3 +24,4 @@
 - Communication on slack is improving slowly but surely. I think as long as we continue to improve, communication in iteration 4 will be where we want it to be.
 - I think getting everyone on the same boat really helps push delivery efficiency. Team meetings should be focused on planning next steps.
 - Definitely having a comprehensive plan helps. Allows everyone to know what's going on.
+- We could assign tasks more clearly and ensure the independence of each task. Set earlier deadlines for each task.
