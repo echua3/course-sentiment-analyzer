@@ -7,9 +7,6 @@ const reviewRoutes = express.Router();
 const { reviewModel } = require("../schema/reviewSchema");
 const { body, validationResult } = require('express-validator');
 
-
-
-
 reviewRoutes.route("/review/add").post(body('initialReview').not().isEmpty().trim().escape(),
                                        body('author').not().isEmpty().trim().escape(), 
                                        function (req, res) {

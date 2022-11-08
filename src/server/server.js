@@ -10,9 +10,13 @@ app.use(express.json());
 addReviewRoute = require("./routes/addReview")
 searchReviewRoutes = require("./routes/searchReview")
 searchCourseRoute = require("./routes/searchCourse")
+addUserRoute = require("./routes/addUser")
+retrieveUserRoute = require("./routes/retrieveUser")
 
 app.use(addReviewRoute)
+app.use(addUserRoute)
 app.use(searchReviewRoutes)
+app.use(retrieveUserRoute)
 app.use('/api', searchCourseRoute)
 
 app.use(express.json())
@@ -20,7 +24,8 @@ app.use(express.urlencoded({extended: false}))
 
 const dbo_search = require("./db/conn_search")
 
-const sanitizeHTML = require('sanitize-html')
+const sanitizeHTML = require('sanitize-html');
+const addUserRoutes = require("./routes/addUser");
 
 app.listen(port, () => {
 

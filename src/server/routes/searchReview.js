@@ -17,8 +17,8 @@ searchReviewRoutes.route("/review/sectionID/:sectionID/:page").get(param('sectio
     console.log(total);
     reviewModel.find().limit(LIMIT).skip(startIndex).where("classID").equals(req.params.sectionID).exec(
         (err, result) => {
-            if (err) return handleError(err);
-            res.status(200).json({data: result, 
+            if (err) res.status(500).json({error: err})
+            else res.status(200).json({data: result, 
                 currentPage: Number(req.params.page),
                 numberOfPage: Math.ceil(total / LIMIT),
                 numberTotal: total}); 
