@@ -52,7 +52,7 @@ The webpage utilizes course information from the SIS.API stored in a MongoDB dat
 
 The search function has four filter conditions: Course Title, Course Number, Credits and Department. Our algorithm supports fuzzy queries for the first 3 filters. And we provide the drop down options for the Department filter with all department options from both Whiting School of Engineering and Krieger School of Arts and Science. Users could use any combination of the 4 filters to search. A list of courses will show in the table if they meet all the criteria.
 
-After clicking the desired course, it expands to show the Class Summary, Add a Review, and View All Reviews windows. Users are given a free-form text box to write a course review and rate the difficulty on a 1-5 sliding scale. After submission, users can view their review and all other reivews under the View All Reviews tab.
+After clicking the desired course, it expands to show the Class Summary, Add a Review, and View All Reviews windows. Users are given a free-form text box to write a course review and rate the difficulty on a 1-5 sliding scale. After submission, users can view their review and all other reviews under the View All Reviews tab.
 
 
 
@@ -60,9 +60,9 @@ After clicking the desired course, it expands to show the Class Summary, Add a R
 ## Sentiment Analysis
 
 The 'finetune_review_dataset.ipynb' finetunes the 'bert-base-cased' model on the 'coursera course review' dataset. The training of the model takes 4 hours to process.
-The 'course_review_analyser.ipynb' imports the finetuned model we created above and runs it on the review input by the user. To run this file in current state, you can used Google Colab.
-The output is a rating between 1 to 5 and the confidence of the model in that rating itself. This helps us understand the emotion of the reviewer and it can be analysed to give a final output on the website.
-In the next iterations, this code will be attached to the backend so that the reviews uploaded on the website will be reviewed by the analyser automatically.
+The 'course_review_analyser.ipynb' imports the finetuned model we created above and runs it on the review input by the user. To run this file in current state, you can use Google Colab.
+The output is a rating between 1 to 5 and the confidence of the model in that rating itself. This helps us understand the emotion of the reviewer and it can be analyzed to give a final output on the website.
+In the next iterations, this code will be attached to the backend so that the reviews uploaded on the website will be reviewed by the analyzer automatically.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -93,8 +93,8 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites and Installation
 First, download and/or clone the repo on to your local machine.
 
-Make sure you have node.js as well as the basic npm functions downloaded on your end.
-If this node module needs anything specific to run locally know that note that your computer will probably have to download it locally. The only plugins used are
+Make sure you have Node.js as well as the basic npm functions downloaded.
+If this node module needs anything specific to run locally note that your computer will probably have to download it locally. The plugins used are
 
 * antd
 * react
@@ -103,38 +103,39 @@ If this node module needs anything specific to run locally know that note that y
 * @material-ui/core --legacy or --force
 * @material-ui/lab
 
-In the **src/webpage/src** directory:  
+### 1. Create the .env files  
 
-1. `npm install react-scripts`
-
-2. Create `.env` file in the local file directory for the webpage, putting it in the same layer as the package.json files
-And in that file define a variable for the server port you wish to run the server in as such
-
-        REACT_APP_SERVERPORT={PORT}
-
-In the server **src/server** directory:
-
-1. `npm install` to install dependencies
-
-2. Make sure the package.json the contains:
-
-         "scripts": { "start": "concurrently \"npm run server\" \"cd ../webpage && npm start\"", "server": "nodemon server.js", }
-          
-3. Create `process.env` or `config.env` file and define the terms. 
+In the server **src/server** directory:  
+- Create `config.env` file and define the terms.   
 
         ATLAS_URI={MONGO_DB_KEY_W_USERNAME_AND_PASSWORD}
         PORT={PORT}
-        
-4. Make sure all dependency node-modules downloaded
 
-* express
-* mongoDB 
-* react
+In the **src/webpage** directory: 
+- Create `.env` file and define the same server port as in the previous step.
 
-Run the program:
+        REACT_APP_API_ENDPOINT=http://localhost:{PORT}
 
-While in the **src/server**
-`npm start`
+### 2. Install Dependencies and Build the Application  
+
+In the root directory:  `npm run build`
+- this command should install the node-module dependencies for both the client and the server
+
+### 3. Run the application
+Start the server: `npm run start`
+
+In the **src/webpage** directory: `serve -s build`
+
+## Development Instructions
+To run the server and client locally with nodemon and concurrently:
+
+1. follow step 1 above
+
+2. In the root directory,  
+install dependencies: `npm run install`  
+
+3. `npm run dev`
+
 
 You should then see a successful connection message, follow the error prompt if one is listed to work out your issue.
 
@@ -147,17 +148,9 @@ Your app should be capable of running locally now!
 
 You can view the tests for this branch of code here: https://colab.research.google.com/drive/1JEmG7M4BLVaegpEoqAs6XFxxKtGsbzmL?usp=sharing
 
-## Running Website
+## View Deployed Application
 
-If you have it installed correctly, run the website through:
-
-if already connected to the server, in the **src/website/src** directory:
-
-`npm react-script start`
-
-or in **src/server**:
-
-`npm start`
+https://jhu-courses.herokuapp.com/
 
 <!-- CONTRIBUTING -->
 # Contributing

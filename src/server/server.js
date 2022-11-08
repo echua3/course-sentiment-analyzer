@@ -4,19 +4,36 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config({ path: "./config.env"})
 const port = process.env.PORT || 3000;
+const path = require("path");
 
-app.use(cors());
-app.use(express.json());
 addReviewRoute = require("./routes/addReview")
 searchReviewRoutes = require("./routes/searchReview")
 searchCourseRoute = require("./routes/searchCourse")
 
+// allow cross-origin interaction:
+// app.use(cors({
+//     credentials: true,
+//     origin: [
+//         process.env.REACT_APP_API_ENDPOINT,
+//         'http://localhost:5000', 
+//         'http://jhu-courses.herokuapp.com',       
+//         'https://jhu-courses.herokuapp.com'         
+//     ],
+//   }));
+app.use(cors())
+app.use(express.json());
+
 app.use(addReviewRoute)
 app.use(searchReviewRoutes)
+
+// Middlewares
 app.use('/api', searchCourseRoute)
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+
+// Pick up React index.html file
+app.use(express.static(path.join(__dirname, "../webpage/build")))
 
 const dbo_search = require("./db/conn_search")
 
