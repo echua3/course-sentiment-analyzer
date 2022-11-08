@@ -94,7 +94,7 @@ To get a local copy up and running follow these simple example steps.
 First, download and/or clone the repo on to your local machine.
 
 Make sure you have node.js as well as the basic npm functions downloaded on your end.
-If this node module needs anything specific to run locally know that note that your computer will probably have to download it locally. The only plugins used are
+If this node module needs anything specific to run locally know that note that your computer will probably have to download it locally. The plugins used are
 
 * antd
 * react
@@ -102,6 +102,32 @@ If this node module needs anything specific to run locally know that note that y
 * axios
 * @material-ui/core --legacy or --force
 * @material-ui/lab
+
+### Create the .env files  
+
+In the server **src/server** directory:  
+- Create `config.env` file and define the terms.   
+
+        ATLAS_URI={MONGO_DB_KEY_W_USERNAME_AND_PASSWORD}
+        PORT={PORT}
+
+In the **src/webpage** directory: 
+- Create `.env` file in the local file directory for the webpage, putting it in the same layer as the package.json files
+And in that file define the same server port as in the previous step.
+
+        REACT_APP_API_ENDPOINT=http://localhost:{PORT}
+
+### Install Dependencies and Build the Application  
+
+In the root directory:  `npm run build`
+- this command should install the node-module dependencies for both the client and the server
+
+### Run the application
+Start the server: `npm run start`
+
+In the **src/webpage** directory: `serve -s build`
+
+
 
 In the **src/webpage/src** directory:  
 
