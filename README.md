@@ -93,8 +93,8 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites and Installation
 First, download and/or clone the repo on to your local machine.
 
-Make sure you have node.js as well as the basic npm functions downloaded on your end.
-If this node module needs anything specific to run locally know that note that your computer will probably have to download it locally. The plugins used are
+Make sure you have Node.js as well as the basic npm functions downloaded.
+If this node module needs anything specific to run locally note that your computer will probably have to download it locally. The plugins used are
 
 * antd
 * react
@@ -103,7 +103,7 @@ If this node module needs anything specific to run locally know that note that y
 * @material-ui/core --legacy or --force
 * @material-ui/lab
 
-### Create the .env files  
+### 1. Create the .env files  
 
 In the server **src/server** directory:  
 - Create `config.env` file and define the terms.   
@@ -117,50 +117,26 @@ And in that file define the same server port as in the previous step.
 
         REACT_APP_API_ENDPOINT=http://localhost:{PORT}
 
-### Install Dependencies and Build the Application  
+### 2. Install Dependencies and Build the Application  
 
 In the root directory:  `npm run build`
 - this command should install the node-module dependencies for both the client and the server
 
-### Run the application
+### 3. Run the application
 Start the server: `npm run start`
 
 In the **src/webpage** directory: `serve -s build`
 
+## Development Instructions
+To run the server and client locally with nodemon and concurrently:
 
+1. follow step 1 above
 
-In the **src/webpage/src** directory:  
+2. In the root directory,  
+install dependencies: `npm run install`  
 
-1. `npm install react-scripts`
+3. `npm run dev`
 
-2. Create `.env` file in the local file directory for the webpage, putting it in the same layer as the package.json files
-And in that file define a variable for the server port you wish to run the server in as such
-
-        REACT_APP_SERVERPORT={PORT}
-
-In the server **src/server** directory:
-
-1. `npm install` to install dependencies
-
-2. Make sure the package.json the contains:
-
-         "scripts": { "start": "concurrently \"npm run server\" \"cd ../webpage && npm start\"", "server": "nodemon server.js", }
-          
-3. Create `process.env` or `config.env` file and define the terms. 
-
-        ATLAS_URI={MONGO_DB_KEY_W_USERNAME_AND_PASSWORD}
-        PORT={PORT}
-        
-4. Make sure all dependency node-modules downloaded
-
-* express
-* mongoDB 
-* react
-
-Run the program:
-
-While in the **src/server**
-`npm start`
 
 You should then see a successful connection message, follow the error prompt if one is listed to work out your issue.
 
@@ -173,17 +149,9 @@ Your app should be capable of running locally now!
 
 You can view the tests for this branch of code here: https://colab.research.google.com/drive/1JEmG7M4BLVaegpEoqAs6XFxxKtGsbzmL?usp=sharing
 
-## Running Website
+## View Deployed Application
 
-If you have it installed correctly, run the website through:
-
-if already connected to the server, in the **src/website/src** directory:
-
-`npm react-script start`
-
-or in **src/server**:
-
-`npm start`
+https://jhu-courses.herokuapp.com/
 
 <!-- CONTRIBUTING -->
 # Contributing
