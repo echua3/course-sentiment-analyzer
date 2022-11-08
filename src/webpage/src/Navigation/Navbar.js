@@ -6,6 +6,7 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import Recommendations from "../Pages/Recommendations";
 import CourseSearch from "../Pages/CourseSearch";
 import HomePage from "../Pages/HomePage";
+import App from "../App";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
