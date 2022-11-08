@@ -44,9 +44,11 @@ function SearchBar(props) {
   })
 
 
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
   const requestData= async (params)=>{
-    // await axios.get("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/api/courselist", {params})
-    await axios.get("https://jhu-courses.herokuapp.com/api/courselist", {params})
+    // edited for development and deployment usage
+    await axios.get(process.env.REACT_APP_API_ENDPOINT + "/api/courselist", {params})
     .then((res) => {
       if (res.status === 200) {
         setDatasource('')
@@ -94,7 +96,10 @@ function SearchBar(props) {
     params.Credits = ''
     params.Department = ''
     params.currentPage = 1
-    await axios.get("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/api/courselist")
+
+    // edited for development and deployment usage
+    // await axios.get("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/api/courselist")
+    await axios.get(process.env.REACT_APP_API_ENDPOINT+ "/api/courselist")
     .then((res) => {
       if (res.status === 200) {
         setDatasource('')
