@@ -35,7 +35,13 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
 // Pick up React index.html file
-app.use(express.static(path.join(__dirname, "../webpage/build")))
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../webpage/build")))
+}
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../webpage/build/index.html'));
+});
 
 const dbo_search = require("./db/conn_search")
 
