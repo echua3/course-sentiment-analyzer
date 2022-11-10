@@ -54,14 +54,12 @@ function UserProfileData(props) {
   const [datasource, setDatasource] = useState([]);
   // const [pagination, setPagination] = useState({onChange:changePage});
   const [params, setParams] = useState({
-    Department:'',
-    UserID:  '', 
-    Email: '',
+    UserID: '', 
     FirstName: '',
     LastName: '',
-    UserType: '',
+    DegreeType: '',
     Interests: '',
-    CourseExpectation: '',
+    Department: '',
   })
 
 
@@ -86,13 +84,12 @@ function UserProfileData(props) {
   // }
 
   const onReset = async () => {
-    params.Department = ''
     params.UserID = ''
     params.FirstName = ''
     params.LastName = ''
-    params.UserType = ''
+    params.DegreeType = ''
     params.Interests = ''
-    params.CourseExpectation = ''
+    params.Department = ''
     let test={...params}
     setParams(test)
     form.resetFields();

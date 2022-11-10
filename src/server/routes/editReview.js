@@ -10,8 +10,7 @@ const { body, validationResult } = require('express-validator');
 
 
 
-reviewRoutes.route("/review/update/:id").post(body('initialReview').not().isEmpty().trim().escape(),
-                                       body('author').not().isEmpty().trim().escape(), 
+reviewRoutes.route("/review/update/:id").post(body('comment').not().isEmpty().trim().escape(),
                                        function (req, res) {
   const errors = validationResult(req);
   if(errors.errors.length > 0) {
@@ -23,10 +22,12 @@ reviewRoutes.route("/review/update/:id").post(body('initialReview').not().isEmpt
   let db_connect = dbo.getDb();
 
   let review = new reviewModel({
-     classID: sanitize(req.body.sectionID),
-     stars: sanitize(req.body.stars),
-     comment: sanitize(req.body.initialReview),
-     author: sanitize(req.body.author)
+    classID: sanitize(req.body.sectionID),
+    comment: sanitize(req.body.comment),
+    difficulty: sanitize(req.body.difficulty),
+    score: sanitize(req.body.score),
+    helpfulness: sanitize(req.body.helpfulness),
+    interests: sanitize(req.body.interests)
   })
   reviewModel.where("_id").equals(req.params.id).updateMany(
     {},

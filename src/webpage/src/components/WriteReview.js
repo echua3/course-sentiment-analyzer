@@ -9,16 +9,16 @@ import { Alert } from 'antd';
 function WriteReview({record}) {
 
     const [initialReview, setInitialReview] = useState("");
-    const [authorError, setAuthorError] = useState("");
     const [commentError, setCommentError] = useState("");
-    const [authorErrorBoolean, showAuthorError] = useState(false);
     const [commentErrorBoolean, showCommentError] = useState(false);
 
-    const [form, setForm] = useState({        
+    const [form, setForm] = useState({
         sectionID: {record}.record,
-        stars: "",
-        initialReview: "",
-        author: ""
+        comment: "",
+        difficulty: 0,
+        score: 0,
+        helpfulness: 0,
+        interests: [],
     });
     const [reviewSubmitted, setReview] = useState(false);
       
@@ -35,19 +35,18 @@ function WriteReview({record}) {
         const newReview = { ...form };
         
         hideErrors();
-        const spaceCheckComments = form.initialReview.replace(/\s/g, '');
-        if(spaceCheckComments.length < 1) {
-          showCommentError(true)
+        const spaceCheckComments = form.comment.replace(/\s/g, '');
+        console.log(spaceCheckComments);
+        if (spaceCheckComments.length < 1) {
           setCommentError("You need to add a review to you know your review!")   
+          showCommentError(true)
+        } else if (spaceCheckComments.length < 10) {
+          setCommentError("Please include at least 10 characters in your review!")
+          showCommentError(true)
         }
 
-        const spaceCheckAuthor = form.author.replace(/\s/g, '');
-        if(spaceCheckAuthor.length < 1) {
-          showAuthorError(true)
-          setAuthorError("You need to start by authoring this so people can refer to it!")   
-        } 
 
-        if(spaceCheckAuthor.length > 1 && spaceCheckComments.length > 1) {
+        if(spaceCheckComments.length >= 10) {
           const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/add", { 
             method: "POST",
             headers: {
@@ -83,10 +82,6 @@ function WriteReview({record}) {
 
     function showErrors(nameOfValue, message) {
       switch (nameOfValue) {
-        case "author":
-          showAuthorError(true)
-          setAuthorError(message)
-          break;
         case "comment":
           showCommentError(true)
           setCommentError(message)
@@ -97,7 +92,6 @@ function WriteReview({record}) {
     }
 
     function hideErrors() {
-      showAuthorError(false)
       showCommentError(false)
         
     }
@@ -108,21 +102,16 @@ function WriteReview({record}) {
             <span class="writereview-form-title">
                Write A Review
             </span>
-            {authorErrorBoolean && <Alert message={authorError} type="error" showIcon/>}
-            <div class="wrap-input1 validate-input">
-				     	<input class="input1" type="text" name="name" placeholder="Name" onChange={e => updateForm({ author: e.target.value })} value={form.author}/>
-					    <span class="shadow-input1"></span>
-			    	</div>
             {commentErrorBoolean && <Alert message={commentError} type="error" showIcon/>}
             <div class="wrap-input1 validate-input">
-					   <textarea class="input1" name="message" placeholder="Add the basis of your review here!" onChange={e => updateForm({ initialReview: e.target.value })} value={form.initialReview}></textarea>
+					   <textarea class="input1" name="message" placeholder="Add the basis of your review here!" onChange={e => updateForm({ comment: e.target.value })} value={form.comment}></textarea>
 					   <span class="shadow-input1"></span>
 			   	  </div>
 
              <div class="slidecontainer">
              
-            <input type="range" min="0" max="5" class="slider" id="myRange" onInput={e => updateForm({ stars: e.target.value})} value={form.stars}/>
-            <p for="myRange" class="rangeValue">Difficulty: {form.stars}</p>
+            <input type="range" min="0" max="5" class="slider" id="myRange" onInput={e => updateForm({ difficulty: e.target.value})} value={form.difficulty}/>
+            <p for="myRange" class="rangeValue">Difficulty: {form.difficulty}</p>
             </div>
 
             <div class="container-writereview-form-btn">
