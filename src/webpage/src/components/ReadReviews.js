@@ -67,7 +67,7 @@ function ReadReview({record}) {
                         }
                         author = {
                             <p>
-                               By - {item.author}
+                               By: Anonymous User
                             </p>    
                         }
                         

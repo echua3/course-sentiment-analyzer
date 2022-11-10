@@ -18,6 +18,9 @@ addUserRoute.route("/user/add").post( function (req, res) {
     lastName: sanitize(req.body.lastName),
     degreeType: sanitize(req.body.degreeType),
     interests: sanitize(req.body.interests),
+    reviewIDs: sanitize(req.body.reviewIDs),
+    reviewUpvotedIDs: sanitize(req.body.reviewUpvotedIDs),
+    reviewDownvotedIDs: sanitize(req.body.reviewDownvotedIDs),
     dept: sanitize(req.body.dept)
   })
   user.save().then(result => {
