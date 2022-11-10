@@ -55,7 +55,7 @@ export default function Navbar() {
                         "text-gray-300 hover:bg-gray-700 hover:text-white",
                         "px-3 py-2 rounded-md text-sm font-medium"
                       )} to="/Courses">Courses</CustomLink>
-                    <CustomLink key={Recommendations} href={"/Recomendations"} className={classNames(
+                    <CustomLink key={Recommendations} href={"/Recommendations"} className={classNames(
                         "text-gray-300 hover:bg-gray-700 hover:text-white",
                         "px-3 py-2 rounded-md text-sm font-medium"
                       )} to="/Recommendations">Recommendations</CustomLink>
@@ -91,7 +91,7 @@ export default function Navbar() {
                     "text-gray-300 hover:bg-gray-700 hover:text-white",
                     "px-3 py-2 rounded-md text-sm font-medium"
                   )} to="/Courses">Courses</CustomLink>
-                <CustomLink key={Recommendations} href={"/Recomendations"} className={classNames(
+                <CustomLink key={Recommendations} href={"/Recommendations"} className={classNames(
                     "text-gray-300 hover:bg-gray-700 hover:text-white",
                     "px-3 py-2 rounded-md text-sm font-medium"
                   )} to="/Recommendations">Recommendations</CustomLink>
