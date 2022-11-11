@@ -7,6 +7,7 @@ import axios from "axios";
 function UserProfileData(props) {
 
   const [loadings, setLoadings] = useState([]);
+  const [profileSubmitted, setProfile] = useState(false);
   const enterLoading = (index) => {
     setLoadings((prevLoadings) => {
       const newLoadings = [...prevLoadings];
@@ -26,69 +27,67 @@ function UserProfileData(props) {
     e.preventDefault();
     let test={...params}
     setParams(test)
-    // await requestData(test)
-    console.log("onsubmit")
-    console.log(params)
+    await requestData(test)
     // enterLoading(2)
   }
 
-  // const changePage = async (currentPage)=>{
-  //   console.log('before changepage')
-  //   console.log(currentPage)
-  //   console.log(params.Department)
 
-  //   params.currentPage = currentPage
-  //   let test={...params,currentPage}
-  //   setParams(test)
-  //   await requestData(params)
+  const requestData= async (params)=>{
+    // edited for development and deployment usage
 
-  //   console.log('after changepage')
-  //   console.log(currentPage)
-  //   console.log(test)
-  //   console.log(params)
-  // }
+    // const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/update/:userID", {
+    const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/update/af3", {
 
-  // new onSubmit with mongodb
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+       body: JSON.stringify(params),
+    })
+    .catch(error => {
+      window.alert(error);
+      return;
+    });
+    if(!response.ok) {
+      // const records = await response.json();
+      // console.log(records);
+      // const basicMessage = records.error.message.split(/:(.*)/s)
+      // const allErrors = basicMessage[1].split(",")
+      // console.log(allErrors)
+      // allErrors.forEach(runErrorMessaging);
+    } else {
+      setProfile(true)
+    }
+  }
+
 
   const [form] = Form.useForm();
   const [datasource, setDatasource] = useState([]);
   // const [pagination, setPagination] = useState({onChange:changePage});
   const [params, setParams] = useState({
-    UserID: '', 
+    // UserID: '',
+    UserID: 'af3',
     FirstName: '',
     LastName: '',
     DegreeType: '',
     Interests: '',
+    reviewIDs: '',
+    reviewUpvotedIDs: '',
+    reviewDownvotedIDs: '',
     Department: '',
   })
 
 
-  // const requestData= async (params)=>{
-  //   await axios.get(process.env.REACT_APP_API_ENDPOINT + "/api/courselist", {params})
-  //   .then((res) => {
-  //     if (res.status === 200) {
-  //       setDatasource('')
-  //       setDatasource(res.data.data)
-  //       setPagination('')
-  //       pagination.total = res.data.numberTotal
-  //       let test={...pagination}
-  //       setPagination(test)
-  //       console.log("req")
-  //       console.log(pagination)
-  //       // message.success("Login succeed! ");
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     console.log("failed: ", err.message);
-  //   });
-  // }
-
   const onReset = async () => {
-    params.UserID = ''
+    // params.UserID = ''
+    params.UserID = 'af3'
     params.FirstName = ''
     params.LastName = ''
     params.DegreeType = ''
     params.Interests = ''
+    params.reviewIDs = ''
+    params.reviewUpvotedIDs=''
+    params.reviewDownvotedIDs=''
     params.Department = ''
     let test={...params}
     setParams(test)
@@ -97,24 +96,6 @@ function UserProfileData(props) {
   };
 
 
-  // const onGenderChange = (value) => {
-  //   switch (value) {
-  //     case 'male':
-  //       form.setFieldsValue({
-  //         note: 'Hi, man!',
-  //       });
-  //       return;
-  //     case 'female':
-  //       form.setFieldsValue({
-  //         note: 'Hi, lady!',
-  //       });
-  //       return;
-  //     case 'other':
-  //       form.setFieldsValue({
-  //         note: 'Hi there!',
-  //       });
-  //   }
-  // };
 
 
   return (
@@ -133,21 +114,18 @@ function UserProfileData(props) {
       <Form.Item name="Last Name" label="Last Name">
         <Input
           placeholder="Your Surname"
-          onChange={e => {params.LastName = e.target.value
-            console.log(e)
-            console.log(typeof e.target.value)}}
+          onChange={e => {params.LastName = e.target.value}}
           value={params.LastName}
         />
       </Form.Item>
-      <Form.Item name="Email" label="Email">
+      {/* <Form.Item name="Email" label="Email">
         <Input
           placeholder="Your Email Id"
           // onChange={e => {params.Credits = e.target.value}}
           value={params.Email}
-          readOnly
         />
-      </Form.Item>
-      
+      </Form.Item> */}
+
       <Form.Item name="Student Degree" label="Student Degree">
         <Select placeholder="Please Select Your Degree" onChange={e => {params.Interests = e}} value={params.Interests}>
         <Select.Option value="">
@@ -164,7 +142,7 @@ function UserProfileData(props) {
           </Select.Option>
         </Select>
       </Form.Item>
-      
+
       <Form.Item name="Interests" label="Interests">
         <Select placeholder="Please Select Your Interests" onChange={e => {params.Interests = e}} value={params.Interests}>
         <Select.Option value="">
@@ -172,13 +150,13 @@ function UserProfileData(props) {
           </Select.Option>
         <Select.Option value="Development">
           Development
-          </Select.Option>
-          <Select.Option value="Research">
+        </Select.Option>
+        <Select.Option value="Research">
             Research
-          </Select.Option>
-          <Select.Option value="Applications">
+        </Select.Option>
+        <Select.Option value="Applications">
             Applications
-          </Select.Option>
+        </Select.Option>
         </Select>
       </Form.Item>
 
@@ -389,9 +367,8 @@ function UserProfileData(props) {
       </Form.Item>
 
       <Form.Item className='buttons'>
-        <Button className='submit' type="primary" htmlType="submit" onClick={onSubmit} disabled>Submit</Button>
-        {/* <Button type="primary" htmlType="submit" onClick={onSubmit} loading={loadings[2]}>Submit</Button> */}
-        <Button className='reset' htmlType="button" onClick={onReset} disabled>Reset</Button>
+        <Button className='submit' type="primary" htmlType="submit" onClick={onSubmit}>Submit</Button>
+        <Button className='reset' htmlType="button" onClick={onReset}>Reset</Button>
       </Form.Item>
 
     </Form>
