@@ -11,15 +11,16 @@ searchReviewRoutes = require("./routes/searchReview")
 searchCourseRoute = require("./routes/searchCourse")
 addUserRoute = require("./routes/addUser")
 retrieveUserRoute = require("./routes/retrieveUser")
+editUserRoute = require("./routes/editUser")
 
 // allow cross-origin interaction:
 // app.use(cors({
 //     credentials: true,
 //     origin: [
 //         process.env.REACT_APP_API_ENDPOINT,
-//         'http://localhost:5000', 
-//         'http://jhu-courses.herokuapp.com',       
-//         'https://jhu-courses.herokuapp.com'         
+//         'http://localhost:5000',
+//         'http://jhu-courses.herokuapp.com',
+//         'https://jhu-courses.herokuapp.com'
 //     ],
 //   }));
 app.use(cors())
@@ -29,6 +30,7 @@ app.use(addReviewRoute)
 app.use(addUserRoute)
 app.use(searchReviewRoutes)
 app.use(retrieveUserRoute)
+app.use(editUserRoute)
 app.use('/api', searchCourseRoute)
 
 app.use(express.json())

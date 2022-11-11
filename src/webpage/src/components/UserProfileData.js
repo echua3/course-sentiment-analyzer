@@ -36,7 +36,7 @@ function UserProfileData(props) {
     // edited for development and deployment usage
 
     // const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/update/:userID", {
-    const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/update/af3", {
+    const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/update/:userID", {
 
       method: "POST",
       headers: {
@@ -55,6 +55,7 @@ function UserProfileData(props) {
       // const allErrors = basicMessage[1].split(",")
       // console.log(allErrors)
       // allErrors.forEach(runErrorMessaging);
+      console.log('!ok')
     } else {
       setProfile(true)
     }
