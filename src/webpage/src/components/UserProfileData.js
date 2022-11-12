@@ -36,7 +36,7 @@ function UserProfileData(props) {
     // edited for development and deployment usage
 
     // const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/update/:userID", {
-    const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/update/:userID", {
+    const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/update/" + params.UserID, {
 
       method: "POST",
       headers: {
@@ -55,8 +55,9 @@ function UserProfileData(props) {
       // const allErrors = basicMessage[1].split(",")
       // console.log(allErrors)
       // allErrors.forEach(runErrorMessaging);
-      console.log('!ok')
+      console.log('!response.ok')
     } else {
+      console.log(response)
       setProfile(true)
     }
   }
@@ -67,29 +68,29 @@ function UserProfileData(props) {
   // const [pagination, setPagination] = useState({onChange:changePage});
   const [params, setParams] = useState({
     // UserID: '',
-    UserID: 'af3',
-    FirstName: '',
-    LastName: '',
-    DegreeType: '',
-    Interests: '',
+    userID: 'af3',
+    firstName: '',
+    lastName: '',
+    degreeType: '',
+    interests: '',
     reviewIDs: '',
     reviewUpvotedIDs: '',
     reviewDownvotedIDs: '',
-    Department: '',
+    dept: '',
   })
 
 
   const onReset = async () => {
     // params.UserID = ''
-    params.UserID = 'af3'
-    params.FirstName = ''
-    params.LastName = ''
-    params.DegreeType = ''
-    params.Interests = ''
+    params.userID = 'af3'
+    params.firstName = ''
+    params.lastName = ''
+    params.degreeType = ''
+    params.interests = ''
     params.reviewIDs = ''
-    params.reviewUpvotedIDs=''
-    params.reviewDownvotedIDs=''
-    params.Department = ''
+    params.reviewUpvotedIDs = ''
+    params.reviewDownvotedIDs = ''
+    params.dept = ''
     let test={...params}
     setParams(test)
     form.resetFields();
@@ -108,15 +109,15 @@ function UserProfileData(props) {
       <Form.Item name="First Name" label="First Name">
         <Input
           placeholder="Your Initial Name"
-          onChange={e => {params.FirstName = e.target.value}}
-          value={params.FirstName}
+          onChange={e => {params.firstName = e.target.value}}
+          value={params.firstName}
         />
       </Form.Item>
       <Form.Item name="Last Name" label="Last Name">
         <Input
           placeholder="Your Surname"
-          onChange={e => {params.LastName = e.target.value}}
-          value={params.LastName}
+          onChange={e => {params.lastName = e.target.value}}
+          value={params.lastName}
         />
       </Form.Item>
       {/* <Form.Item name="Email" label="Email">
@@ -128,7 +129,7 @@ function UserProfileData(props) {
       </Form.Item> */}
 
       <Form.Item name="Student Degree" label="Student Degree">
-        <Select placeholder="Please Select Your Degree" onChange={e => {params.Interests = e}} value={params.Interests}>
+        <Select placeholder="Please Select Your Degree" onChange={e => {params.degreeType = e}} value={params.degreeType}>
         <Select.Option value="">
             Please Select One Degree
           </Select.Option>
@@ -145,7 +146,7 @@ function UserProfileData(props) {
       </Form.Item>
 
       <Form.Item name="Interests" label="Interests">
-        <Select placeholder="Please Select Your Interests" onChange={e => {params.Interests = e}} value={params.Interests}>
+        <Select placeholder="Please Select Your Interests" onChange={e => {params.interests = e}} value={params.interests}>
         <Select.Option value="">
             Please Select One Interest
           </Select.Option>
@@ -162,7 +163,7 @@ function UserProfileData(props) {
       </Form.Item>
 
       <Form.Item name="Department" label="Department">
-        <Select placeholder="Please Select Your Department" onChange={e =>{params.Department = e}}>
+        <Select placeholder="Please Select Your Department" onChange={e =>{params.dept = e}}>
           <Select.Option value="">
             Please Select One Department
           </Select.Option>

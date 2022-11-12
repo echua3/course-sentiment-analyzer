@@ -23,6 +23,7 @@ editUserRoute = require("./routes/editUser")
 //         'https://jhu-courses.herokuapp.com'
 //     ],
 //   }));
+
 app.use(cors())
 app.use(express.json());
 
