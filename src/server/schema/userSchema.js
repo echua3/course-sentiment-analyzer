@@ -20,7 +20,9 @@ const userSchema = new Schema({
           type: String,
           default: 'No degree'
      },
-     interests: [String],
+     firstInterest: String,
+     secondInterest: String,
+     thirdInterest: String,
      reviewIDs: [String],
      reviewUpvotedIDs: [String],
      reviewDownvotedIDs: [String],

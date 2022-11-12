@@ -72,7 +72,9 @@ function UserProfileData(props) {
     firstName: '',
     lastName: '',
     degreeType: '',
-    interests: '',
+    firstInterest: '',
+    secondInterest: '',
+    thirdInterest: '',
     reviewIDs: '',
     reviewUpvotedIDs: '',
     reviewDownvotedIDs: '',
@@ -86,7 +88,9 @@ function UserProfileData(props) {
     params.firstName = ''
     params.lastName = ''
     params.degreeType = ''
-    params.interests = ''
+    params.firstInterest = ''
+    params.secondInterest = ''
+    params.thirdInterest = ''
     params.reviewIDs = ''
     params.reviewUpvotedIDs = ''
     params.reviewDownvotedIDs = ''
@@ -106,16 +110,16 @@ function UserProfileData(props) {
     <p class='userprofiletitle'>Your Profile</p>
     {/* <Form onSubmit={onSubmit}> */}
     <Form>
-      <Form.Item name="First Name" label="First Name">
+      <Form.Item name="First Name" label="Firstname">
         <Input
-          placeholder="Your Initial Name"
+          placeholder="Firstname"
           onChange={e => {params.firstName = e.target.value}}
           value={params.firstName}
         />
       </Form.Item>
-      <Form.Item name="Last Name" label="Last Name">
+      <Form.Item name="Last Name" label="Lastname">
         <Input
-          placeholder="Your Surname"
+          placeholder="Lastname"
           onChange={e => {params.lastName = e.target.value}}
           value={params.lastName}
         />
@@ -128,8 +132,8 @@ function UserProfileData(props) {
         />
       </Form.Item> */}
 
-      <Form.Item name="Student Degree" label="Student Degree">
-        <Select placeholder="Please Select Your Degree" onChange={e => {params.degreeType = e}} value={params.degreeType}>
+      <Form.Item name="Student Degree" label="Degree Type">
+        <Select placeholder="Please Select Your Degree Type" onChange={e => {params.degreeType = e}} value={params.degreeType}>
         <Select.Option value="">
             Please Select One Degree
           </Select.Option>
@@ -142,23 +146,6 @@ function UserProfileData(props) {
         <Select.Option value="Post Doc">
             Post Doc
           </Select.Option>
-        </Select>
-      </Form.Item>
-
-      <Form.Item name="Interests" label="Interests">
-        <Select placeholder="Please Select Your Interests" onChange={e => {params.interests = e}} value={params.interests}>
-        <Select.Option value="">
-            Please Select One Interest
-          </Select.Option>
-        <Select.Option value="Development">
-          Development
-        </Select.Option>
-        <Select.Option value="Research">
-            Research
-        </Select.Option>
-        <Select.Option value="Applications">
-            Applications
-        </Select.Option>
         </Select>
       </Form.Item>
 
@@ -367,10 +354,32 @@ function UserProfileData(props) {
           </Select.Option>
         </Select>
       </Form.Item>
+      <Form.Item name="text" label="What are you looking for in a course? (order by priority)"></Form.Item>
+      <Form.Item name="firstInterest" label="Interest 1">
+        <Input
+          placeholder="First Interest"
+          onChange={e => {params.firstInterest = e.target.value}}
+          value={params.firstInterest}
+        />
+      </Form.Item>
+      <Form.Item name="secondInterest" label="Interest 2">
+        <Input
+          placeholder="Second Interest"
+          onChange={e => {params.secondInterest = e.target.value}}
+          value={params.secondInterest}
+        />
+      </Form.Item>
+      <Form.Item name="thirdInterest" label="Interest 3">
+        <Input
+          placeholder="Third Interest"
+          onChange={e => {params.thirdInterest = e.target.value}}
+          value={params.thirdInterest}
+        />
+      </Form.Item>
 
       <Form.Item className='buttons'>
-        <Button className='submit' type="primary" htmlType="submit" onClick={onSubmit}>Submit</Button>
-        <Button className='reset' htmlType="button" onClick={onReset}>Reset</Button>
+        <Button className='submit' type="primary" htmlType="submit" onClick={onSubmit}>Save changes</Button>
+        <Button className='reset' htmlType="button" onClick={onReset}>Reset changes</Button>
       </Form.Item>
 
     </Form>
