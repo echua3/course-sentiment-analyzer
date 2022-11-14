@@ -7,6 +7,9 @@ import { Pagination, PaginationItem } from "@material-ui/lab";
 import { List, Comment } from "antd";
 import VoteBox from "./VoteBox";
 import Grid from '@mui/material/Grid';
+import { upvoteReview } from "../api/reviews";
+import Review from "./Review";
+
     
 function ReadReview({record}) {
 
@@ -60,34 +63,7 @@ function ReadReview({record}) {
               itemLayout ="horizontal"
               dataSource ={recordValues}
               renderItem = {item => (
-                <Grid
-                 container
-                 spacing={1}
-                 direction="row"
-                 alignItems="center"
-                 >
-                   <Grid item>
-                     <VoteBox votes={item.helpfulness}/>
-                   </Grid>
-                   <Grid item xs={10} md={9} >
-                     <Comment
-                       content = {
-                           <><h6>
-                           {item.comment}
-                         </h6><h7>
-                             Difficulty: {item.difficulty}/5
-                           </h7></>
-                       }
-                       author = {
-                           <p>
-                              {item.date && (new Date(item.date).toLocaleDateString())}
-                           </p>   
-                       }
-                      
-                     />                     
-                   </Grid>
- 
-                </Grid>
+                <Review review={item}/>
               )}/>
  
               <Pagination
