@@ -21,7 +21,7 @@ const reviewSchema = new Schema({
      helpfulness: {
           type: Number,
           default: 0
-     }
+     },
      date: Date
 });
 
