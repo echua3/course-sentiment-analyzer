@@ -27,7 +27,7 @@ reviewRoutes.route("/review/update/:id").post(body('comment').not().isEmpty().tr
     difficulty: sanitize(req.body.difficulty),
     score: sanitize(req.body.score),
     helpfulness: sanitize(req.body.helpfulness),
-    interests: sanitize(req.body.interests)
+    date: sanitize(req.body.date)
   })
   reviewModel.where("_id").equals(req.params.id).updateMany(
     {},

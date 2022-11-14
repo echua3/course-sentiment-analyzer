@@ -5,6 +5,8 @@ import Axios from "axios";
 import './style/css/CourseComponent.scss';
 import { Pagination, PaginationItem } from "@material-ui/lab";
 import { List, Comment } from "antd";
+import VoteBox from "./VoteBox";
+import Grid from '@mui/material/Grid';
     
 function ReadReview({record}) {
 
@@ -58,21 +60,34 @@ function ReadReview({record}) {
               itemLayout ="horizontal"
               dataSource ={recordValues}
               renderItem = {item => (
-                <li>
-                    <Comment
-                        content = {
-                            <h6>
-                              {item.comment}
-                            </h6>
-                        }
-                        author = {
-                            <p>
-                               By: Anonymous User
-                            </p>    
-                        }
-                        
-                        />
-                </li>
+                <Grid
+                 container
+                 spacing={1}
+                 direction="row"
+                 alignItems="center"
+                 >
+                   <Grid item>
+                     <VoteBox votes={item.helpfulness}/>
+                   </Grid>
+                   <Grid item xs={10} md={9} >
+                     <Comment
+                       content = {
+                           <><h6>
+                           {item.comment}
+                         </h6><h7>
+                             Difficulty: {item.difficulty}/5
+                           </h7></>
+                       }
+                       author = {
+                           <p>
+                              {item.date && (new Date(item.date).toLocaleDateString())}
+                           </p>   
+                       }
+                      
+                     />                     
+                   </Grid>
+ 
+                </Grid>
               )}/>
  
               <Pagination
