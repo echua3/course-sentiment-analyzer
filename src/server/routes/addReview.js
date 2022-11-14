@@ -24,6 +24,7 @@ reviewRoutes.route("/review/add").post(body('comment').not().isEmpty().trim().es
     difficulty: sanitize(req.body.difficulty),
     score: sanitize(req.body.score),
     helpfulness: sanitize(req.body.helpfulness),
+    date: sanitize(req.body.date)
   })
   review.save().then(result => {
     console.log(result);
