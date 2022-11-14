@@ -87,8 +87,8 @@ function UserReviews(props) {
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <a>Edit</a>
-          <a>Delete</a>
+          {/* <a>Edit</a> */}
+          <a onClick={(e) => { onDelete(record.key, e); }}>Delete</a>
         </Space>
       ),
     },
@@ -98,6 +98,52 @@ function UserReviews(props) {
       key: 'classID',
     },
   ];
+
+
+  const deleteRequest = async (param) => {
+    console.log('param')
+    console.log(param)
+    const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/review/delete/" + {userID}.userID + "/" + param, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .catch(error => {
+      window.alert(error);
+      return;
+    });
+    if(!response.ok) {
+      // const records = await response.json();
+      // console.log(records);
+      // const basicMessage = records.error.message.split(/:(.*)/s)
+      // const allErrors = basicMessage[1].split(",")
+      // console.log(allErrors)
+      // allErrors.forEach(runErrorMessaging);
+      console.log('!response.ok')
+    } else {
+      console.log(response)
+      // setProfile(true)
+    }
+  }
+
+
+
+  const onDelete = async (key, e) => {
+    console.log('key');
+    console.log(key);
+    console.log('e');
+    console.log(e);
+    e.preventDefault();
+
+    const deleteid = datasource.filter(item => item.key === key);
+    console.log('deleteid[0]');
+    console.log(deleteid[0]);
+    const param = deleteid[0].reviewID;
+    await deleteRequest(param);
+    const data = datasource.filter(item => item.key !== key);
+    setDatasource(data);
+  }
 
   return (
     <div>

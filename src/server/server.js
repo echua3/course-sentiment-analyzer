@@ -13,6 +13,7 @@ addUserRoute = require("./routes/addUser")
 retrieveUserRoute = require("./routes/retrieveUser")
 editUserRoute = require("./routes/editUser")
 userReviewRoutes = require("./routes/userReview")
+deleteUserRoutes = require("./routes/deleteUser")
 
 // allow cross-origin interaction:
 // app.use(cors({
@@ -34,6 +35,7 @@ app.use(searchReviewRoutes)
 app.use(userReviewRoutes)
 app.use(retrieveUserRoute)
 app.use(editUserRoute)
+app.use(deleteUserRoutes)
 app.use('/api', searchCourseRoute)
 
 app.use(express.json())

@@ -9,6 +9,7 @@ var sanitize = require("mongo-sanitize");
 
 const editUserRoutes = express.Router();
 const { userModel } = require("../schema/userSchema");
+const { reviewModel } = require("../schema/reviewSchema");
 const { body, validationResult } = require('express-validator');
 
 
@@ -27,7 +28,6 @@ editUserRoutes.route("/user/update/:userID").post(function (req, res) {
             user[key] = val
         }
     }
-
     userModel.updateMany(
         {userID: req.body.userID},
         user
