@@ -80,7 +80,7 @@ function ReadReview({record}) {
                        }
                        author = {
                            <p>
-                              By: Anonymous User
+                              {item.date && (new Date(item.date).toLocaleDateString())}
                            </p>   
                        }
                       
@@ -88,24 +88,6 @@ function ReadReview({record}) {
                    </Grid>
  
                 </Grid>
-
-
-
-                // <li>
-                //     <Comment
-                //         content = {
-                //             <h6>
-                //               {item.comment}
-                //             </h6>
-                //         }
-                //         author = {
-                //             <p>
-                //                By: Anonymous User
-                //             </p>    
-                //         }
-                        
-                //         />
-                // </li>
               )}/>
  
               <Pagination
