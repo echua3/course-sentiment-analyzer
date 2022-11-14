@@ -5,6 +5,25 @@ import Axios from "axios";
 import './style/css/CourseComponent.scss';
 import { Pagination, PaginationItem } from "@material-ui/lab";
 import { List, Comment } from "antd";
+function happyOrSad(par1)
+{
+
+  if(par1>0)
+  {
+    
+    
+   return 1;
+
+  }
+  else if(par1<0)
+  {
+    return -1;
+  }
+  else
+  {
+    return 0;
+  }
+}
     
 function ReadReview({record}) {
 
@@ -63,12 +82,14 @@ function ReadReview({record}) {
                         content = {
                             <h6>
                               {item.comment}
+                              {happyOrSad(item.score)}
                             </h6>
                         }
                         author = {
                             <p>
                                By: Anonymous User
                             </p>    
+                      
                         }
                         
                         />

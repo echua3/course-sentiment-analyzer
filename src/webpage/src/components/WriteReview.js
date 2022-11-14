@@ -4,19 +4,23 @@ import { useState } from "react";
 import Axios from "axios";
 import './style/css/CourseComponent.scss';
 import { Alert } from 'antd';
+var Sentiment = require('sentiment');
 
 
 function WriteReview({record}) {
+ 
+ 
 
     const [initialReview, setInitialReview] = useState("");
     const [commentError, setCommentError] = useState("");
     const [commentErrorBoolean, showCommentError] = useState(false);
+    var sentiment = new Sentiment();
 
     const [form, setForm] = useState({
         sectionID: {record}.record,
         comment: "",
-        difficulty: 0,
-        score: 0,
+        difficulty: 2,
+        score: 1,
         helpfulness: 0,
         interests: [],
     });
@@ -29,9 +33,15 @@ function WriteReview({record}) {
     }
 
     async function enterReview(e) {
-        e.preventDefault();
+      
+        
+        e.preventDefault(); 
+        var sentiment_score = sentiment.analyze(form.comment).score
+        console.log(sentiment_score)
+        // updateForm({ difficulty: 0})
+        
         setForm((prev) => {
-          return { ...prev, sectionID: {record}.record}})
+          return { ...prev, sectionID: {record}.record,}})
         const newReview = { ...form };
         
         hideErrors();
@@ -104,7 +114,7 @@ function WriteReview({record}) {
             </span>
             {commentErrorBoolean && <Alert message={commentError} type="error" showIcon/>}
             <div class="wrap-input1 validate-input">
-					   <textarea class="input1" name="message" placeholder="Add the basis of your review here!" onChange={e => updateForm({ comment: e.target.value })} value={form.comment}></textarea>
+					   <textarea class="input1" name="message" placeholder="Add the basis of your review here!" onChange={e => updateForm({ comment: e.target.value,score: sentiment.analyze(e.target.value).score })} value={form.comment}></textarea>
 					   <span class="shadow-input1"></span>
 			   	  </div>
 
