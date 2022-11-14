@@ -107,7 +107,7 @@ function UserProfileData(props) {
   return (
     <div>
     <div class="userprofile">
-    <p class='userprofiletitle'>Your Profile</p>
+    <p class='userprofiletitle'>My Profile</p>
     {/* <Form onSubmit={onSubmit}> */}
     <Form>
       <Form.Item name="First Name" label="Firstname">
