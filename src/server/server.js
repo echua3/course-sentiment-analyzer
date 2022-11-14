@@ -11,6 +11,7 @@ searchReviewRoutes = require("./routes/searchReview")
 searchCourseRoute = require("./routes/searchCourse")
 addUserRoute = require("./routes/addUser")
 retrieveUserRoute = require("./routes/retrieveUser")
+getRecsRoute = require("./routes/getRecs")
 
 // allow cross-origin interaction:
 // app.use(cors({
@@ -30,6 +31,7 @@ app.use(addUserRoute)
 app.use(searchReviewRoutes)
 app.use(retrieveUserRoute)
 app.use('/api', searchCourseRoute)
+app.use(getRecsRoute)
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))

@@ -45,7 +45,6 @@ function WriteReview({record}) {
           showCommentError(true)
         }
 
-
         if(spaceCheckComments.length >= 10) {
           const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/add", { 
             method: "POST",
