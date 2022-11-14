@@ -21,8 +21,7 @@ const reviewSchema = new Schema({
      helpfulness: {
           type: Number,
           default: 0
-     },
-     interests: [String]
+     }
 });
 
 const reviewModel = mongoose.model('Reviews', reviewSchema)

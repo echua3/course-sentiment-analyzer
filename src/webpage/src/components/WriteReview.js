@@ -17,8 +17,7 @@ function WriteReview({record}) {
         comment: "",
         difficulty: 0,
         score: 0,
-        helpfulness: 0,
-        interests: [],
+        helpfulness: 0
     });
     const [reviewSubmitted, setReview] = useState(false);
       
