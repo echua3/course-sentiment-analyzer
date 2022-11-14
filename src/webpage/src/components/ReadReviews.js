@@ -1,13 +1,9 @@
 import { OmitProps } from "antd/lib/transfer/ListBody";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Axios from "axios";
 import './style/css/CourseComponent.scss';
 import { Pagination, PaginationItem } from "@material-ui/lab";
-import { List, Comment } from "antd";
-import VoteBox from "./VoteBox";
-import Grid from '@mui/material/Grid';
-import { upvoteReview } from "../api/reviews";
+import { List } from "antd";
 import Review from "./Review";
 
     
