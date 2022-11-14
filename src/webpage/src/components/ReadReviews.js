@@ -20,7 +20,7 @@ function ReadReview({record}) {
         async function getRecords() {
             const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/sectionID/" + {record}.record.SSS_SectionsID + "/" + pageNumber)
             if(!response.ok) {
-              const message = "An error occured"
+              const message = "An error occurred"
               console.log("Error:" + response.statusText);
               return;
             }
@@ -40,7 +40,7 @@ function ReadReview({record}) {
             setPageNumber(value)
             const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/sectionID/" + {record}.record.SSS_SectionsID + "/" + value)
             if(!response.ok) {
-              const message = "An error occured"
+              const message = "An error occurred"
               console.log("Error:" + response.statusText);
               return;
             }
