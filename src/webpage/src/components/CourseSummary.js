@@ -16,7 +16,7 @@ export{sentiment_list};
 // }
 function getStars(par1)
 {
-   var star = "";
+   var star = "Difficulty: ";
    var stars = "⭐";
    var result;
    for(let i=0; i<Number(par1); i++)
@@ -102,7 +102,7 @@ function CourseSummary({record}) {
         <div>
             <Row>
     <Col span={16} push={8}>
-    <span class="courseSummary-form-title">
+    <span class="courseSummary-form-stars">
     {getStars(average_difficulty)}
          </span>
     </Col>
