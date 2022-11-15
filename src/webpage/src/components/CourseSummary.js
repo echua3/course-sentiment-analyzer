@@ -6,28 +6,26 @@ import './style/css/CourseComponent.scss';
 import { Row, Col } from "antd";
 import DifficultyPieChart from './DifficultyPieChart.js';
 import SentimentPieChart from './SentimentPieChart.js';
-
-
+var difficulty_list = new Array(5).fill(0);
+function returnDifficultList()
+{
+   return difficulty_list;
+}
 function getStars(par1)
 {
    var star = "";
-   var stars = "⭐";
+   var stars = ":star:";
    var result;
-
-
    for(let i=0; i<Number(par1); i++)
    {
       result = star.concat(stars);
-     
    }
    return result;
-
 }
 var sentiment_score = 0;
 var average_difficulty=0;
 var average_sentiment_score;
 function CourseSummary({record}) {
-
     const [Title, setTitle] = useState({record}.record.Title);
     const [Prereq, setPrereq] = useState({record}.record.SectionRegRestrictions);
     const instructorsFullName = {record}.record.InstructorsFullName
@@ -45,29 +43,43 @@ function CourseSummary({record}) {
             return;
           }
           const records = await response.json();
-          
           setRecords(records.data);
           sentiment_score = 0;
-          average_difficulty=0; 
+          average_difficulty=0;
+          difficulty_list.fill(0);
           for(let i=0; i<recordValues.length; i++)
           {
             sentiment_score = sentiment_score +recordValues[i].score;
             average_difficulty=average_difficulty+recordValues[i].difficulty;
-            
+            switch(recordValues[i].difficulty)
+            {
+               case 1:
+                  difficulty_list[0] = difficulty_list[0]+1;
+                  break;
+               case 2:
+                   difficulty_list[1] = difficulty_list[1]+1;
+                   break;
+               case 3:
+                  difficulty_list[2] = difficulty_list[2]+1;
+                  break;
+               case 4:
+                  difficulty_list[3] = difficulty_list[3]+1;
+                  break;
+               case 5:
+                  difficulty_list[4] = difficulty_list[4]+1;
+                  break;
+            }
           }
          average_sentiment_score = sentiment_score/recordValues.length;
          average_difficulty = average_difficulty/recordValues.length;
-
           console.log("Average is " + average_sentiment_score);
           console.log("Difficulty is " + average_difficulty);
-          
-          
+          console.log("Difficulty list"+difficulty_list);
          // console.log(recordValues[0].score);
          // console.log(recordValues[1].score);
          // console.log(recordValues[2].score);
-      }   
+      }
       getRecords();
-
       return;
   }, [recordValues.length]);
     return (
@@ -78,7 +90,6 @@ function CourseSummary({record}) {
     {getStars(average_difficulty)}
          </span>
     </Col>
-
     <Col span={8} pull={16}>
     <span class="writereview-form-title">
          {Title}
@@ -86,7 +97,6 @@ function CourseSummary({record}) {
     <p>
       Average Sentiment
       {average_sentiment_score}
-      
     </p>
     </Col>
   </Row>
@@ -96,8 +106,7 @@ function CourseSummary({record}) {
      <p>
         Add desc. manually or bypass (no description data from API)
      </p>
-
-     <Row> 
+     <Row>
       <Col span={18} push={12}>
          <SentimentPieChart/>
        Review Sentiment
@@ -106,10 +115,8 @@ function CourseSummary({record}) {
       <DifficultyPieChart/>
          Difficulty
          </Col>
-       
      </Row>
    </div>
-
     );
 }
 export default CourseSummary;
