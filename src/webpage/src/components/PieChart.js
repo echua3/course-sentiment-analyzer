@@ -1,34 +1,29 @@
-import React from 'react'
-import {Pie} from 'react-chartjs-3/auto'
+import React, { Component } from 'react'
+import Chart from 'react-apexcharts'
 
-function PieChart(){
-      
-    // const data = {
-    //     labels: [
-    //         'Red',
-    //         'Green',
-    //         'Yellow'
-    //     ],
-    //     datasets: [{
-    //         data: [300, 50, 100],
-    //         backgroundColor: [
-    //         '#FF6384',
-    //         '#36A2EB',
-    //         '#FFCE56'
-    //         ],
-    //         hoverBackgroundColor: [
-    //         '#FF6384',
-    //         '#36A2EB',
-    //         '#FFCE56'
-    //         ]
-    //     }]
-    // };
+class PieChart extends Component {
+    constructor(props) {
+      super(props);
+  
+      this.state = {
+        options: {
+          chart: {
+            id: 'apexchart-example',
+            type: 'donut'
+          },
+        },
+        // series: [{
+        //   name: 'series-1',
+        //   data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
+        // }]
+        series: [30, 40, 35]
+      }
+    }
+    render() {
+      return (
+        <Chart options={this.state.options} series={this.state.series} type='donut' width={400} height={220} />
+      )
+    }
+}
 
-    return (
-        <div>
-          <h2>Pie Example</h2>
-        </div>
-      );
-} 
-    
 export default PieChart;
