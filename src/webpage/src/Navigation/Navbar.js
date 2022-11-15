@@ -3,9 +3,11 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import "./output.css";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import Recommendations from "../Pages/Recommendations";
+import Login from "../Pages/LoginPage";
 import CourseSearch from "../Pages/CourseSearch";
 import HomePage from "../Pages/HomePage";
-import UserProfile from "../Pages/UserProfile"
+import UserProfile from "../Pages/UserProfile";
+import LogoutPage from "../Pages/LogoutPage";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -59,6 +61,10 @@ export default function Navbar() {
                         "text-gray-300 hover:bg-gray-700 hover:text-white",
                         "px-3 py-2 rounded-md text-sm font-medium"
                       )} to="/Recommendations">Recommendations</CustomLink>
+                    <CustomLink key={Login} href={"/Login"} className={classNames(
+                    "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "px-3 py-2 rounded-md text-sm font-medium"
+                     )} to="/Login">Login</CustomLink>
                   </div>
                 </div>
               </div>
@@ -73,9 +79,7 @@ export default function Navbar() {
                         alt=""
                       />
                 </CustomLink>
-                <button type="button" className="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white">
-                  Logout
-                </button>
+                <CustomLink key={LogoutPage} href={"/logout"} className="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white" to="/logout">Logout</CustomLink>
               </div>
             </div>
           </div>
@@ -95,6 +99,10 @@ export default function Navbar() {
                     "text-gray-300 hover:bg-gray-700 hover:text-white",
                     "px-3 py-2 rounded-md text-sm font-medium"
                   )} to="/Recommendations">Recommendations</CustomLink>
+                  <CustomLink key={Login} href={"/Login"} className={classNames(
+                    "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "px-3 py-2 rounded-md text-sm font-medium"
+                  )} to="/Login">Login</CustomLink>
               </div>
             </div>
           </Disclosure.Panel>

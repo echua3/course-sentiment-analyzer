@@ -1,0 +1,38 @@
+const express = require("express");
+const dbo = require("../db/conn_search");
+const ObjectId = require("mongodb").ObjectId;
+const cookieSession = require('cookie-session')
+const jwt = require('jsonwebtoken');
+const cookies = require('js-cookie')
+
+const loginRoute = express.Router();
+const { userModel } = require("../schema/userSchema");
+const { param, validationResult } = require('express-validator');
+
+
+var sanitize = require("mongo-sanitize");
+
+loginRoute.route("/login/:userID").get(param('userID').trim().not().isEmpty(),                                                                   function (req, res) {
+  let db_connect = dbo.getDb();
+  
+  userModel.find().where("userID").equals(sanitize(req.params.userID)).exec(
+        (err, result) => {
+            if (Object.keys(result).length === 0) {
+                res.status(500).json({error: "login failed, something went wrong"});
+            }
+            else {
+                const token = jwt.sign(
+                    {userId: req.params.userID},
+                    "i_really_hate_express_like_so_much_like_how_does_it_mess_up_this_badly",
+                     { expiresIn: "1h"});
+
+                res.cookie("jwt", token, {maxAge: 3600 * 1000, httpOnly: true})
+                console.log("AM I GETTING HERE?")
+                res.send({message: "ok"})
+                res.end()
+            }
+         }
+  );
+});
+
+ module.exports = loginRoute;
