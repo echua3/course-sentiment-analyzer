@@ -8,6 +8,7 @@ const path = require("path");
 
 addReviewRoute = require("./routes/addReview")
 searchReviewRoutes = require("./routes/searchReview")
+searchAllReviewsRoutes = require("./routes/searchAllReviews")
 searchCourseRoute = require("./routes/searchCourse")
 addUserRoute = require("./routes/addUser")
 retrieveUserRoute = require("./routes/retrieveUser")
@@ -30,6 +31,8 @@ app.use(addReviewRoute)
 app.use(addUserRoute)
 app.use(searchReviewRoutes)
 app.use(retrieveUserRoute)
+app.use(searchAllReviewsRoutes)
+
 app.use('/api', searchCourseRoute)
 app.use(getRecsRoute)
 

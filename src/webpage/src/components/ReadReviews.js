@@ -4,9 +4,27 @@ import { useState } from "react";
 import Axios from "axios";
 import './style/css/CourseComponent.scss';
 import { Pagination, PaginationItem } from "@material-ui/lab";
-import { List, Comment } from "antd";
 import VoteBox from "./VoteBox";
 import Grid from '@mui/material/Grid';
+import { List, Comment } from "antd";
+
+function happyOrSad(par1)
+{
+
+  if(par1>0)
+  {
+   return 1;
+  }
+  else if(par1<0)
+  {
+    return -1;
+  }
+  else
+  {
+    return 0;
+  }
+}
+
     
 function ReadReview({record}) {
 
@@ -19,14 +37,14 @@ function ReadReview({record}) {
 
     useEffect( () => {
         async function getRecords() {
-            const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/sectionID/" + {record}.record.SSS_SectionsID + "/" + pageNumber)
+            const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/sectionID/" + {record}.record.SSS_SectionsID+ "/" + pageNumber)
             if(!response.ok) {
               const message = "An error occured"
               console.log("Error:" + response.statusText);
               return;
             }
             const records = await response.json();
-            // console.log(records.data);
+            console.log(records.data);
             console.log(pageNumber);
             setRecords(records.data);
             setPageCount(records.numberOfPage);
@@ -60,6 +78,7 @@ function ReadReview({record}) {
               itemLayout ="horizontal"
               dataSource ={recordValues}
               renderItem = {item => (
+
                 <Grid
                  container
                  spacing={1}
@@ -86,7 +105,6 @@ function ReadReview({record}) {
                       
                      />                     
                    </Grid>
- 
                 </Grid>
               )}/>
  
