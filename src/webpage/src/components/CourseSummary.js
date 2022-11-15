@@ -4,11 +4,16 @@ import { useState,useEffect} from "react";
 import Axios from "axios";
 import './style/css/CourseComponent.scss';
 import { Row, Col } from "antd";
+import DifficultyPieChart from './DifficultyPieChart.js';
+import SentimentPieChart from './SentimentPieChart.js';
+
+
 function getStars(par1)
 {
    var star = "";
    var stars = "⭐";
    var result;
+
 
    for(let i=0; i<Number(par1); i++)
    {
@@ -68,16 +73,15 @@ function CourseSummary({record}) {
     return (
         <div>
             <Row>
-    <Col span={18} push={6}>
+    <Col span={16} push={8}>
     <span class="courseSummary-form-title">
-               {Title}
+    {getStars(average_difficulty)}
          </span>
     </Col>
 
-    <Col span={6} pull={18}>
+    <Col span={8} pull={16}>
     <span class="writereview-form-title">
-         
-      {}  {getStars(average_difficulty)}
+         {Title}
     </span>
     <p>
       Average Sentiment
@@ -93,7 +97,19 @@ function CourseSummary({record}) {
         Add desc. manually or bypass (no description data from API)
      </p>
 
-       </div>
+     <Row> 
+      <Col span={18} push={12}>
+         <SentimentPieChart/>
+       Review Sentiment
+      </Col>
+      <Col span={6} pull={12}>
+      <DifficultyPieChart/>
+         Difficulty
+         </Col>
+       
+     </Row>
+   </div>
+
     );
 }
 export default CourseSummary;

@@ -3,10 +3,8 @@ import CourseSummary from "./CourseSummary";
 import ReadReview from "./ReadReviews";
 import { useState } from "react";
 import { Table, Card } from "antd";
-import { OmitProps } from "antd/lib/transfer/ListBody";
 
 const CourseTable = (props) => {
-    const [keys,expandedKeys]=useState([]);
     const [activeTabKey, setActiveTabKey] = useState('ClassPrompt');
     const [expandedRowKeys, setExpandedRowKeys] = useState([]);
     const [recordValue, setRecord] = useState([]);

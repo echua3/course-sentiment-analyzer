@@ -22,7 +22,7 @@ const reviewSchema = new Schema({
           type: Number,
           default: 0
      },
-     interests: [String]
+     date: Date
 });
 
 const reviewModel = mongoose.model('Reviews', reviewSchema)

@@ -22,7 +22,7 @@ function WriteReview({record}) {
         difficulty: 2,
         score: 1,
         helpfulness: 0,
-        interests: [],
+        date: new Date()
     });
     const [reviewSubmitted, setReview] = useState(false);
       
@@ -54,7 +54,6 @@ function WriteReview({record}) {
           setCommentError("Please include at least 10 characters in your review!")
           showCommentError(true)
         }
-
 
         if(spaceCheckComments.length >= 10) {
           const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/add", { 

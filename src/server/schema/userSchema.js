@@ -24,7 +24,7 @@ const userSchema = new Schema({
      reviewIDs: [String],
      reviewUpvotedIDs: [String],
      reviewDownvotedIDs: [String],
-     dept: [String] 
+     department: String
   });
 
 userSchema.plugin(uniqueValidator, {message: 'UserID is already taken.'});
