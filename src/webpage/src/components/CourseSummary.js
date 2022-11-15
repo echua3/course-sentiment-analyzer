@@ -7,14 +7,17 @@ import { Row, Col } from "antd";
 import DifficultyPieChart from './DifficultyPieChart.js';
 import SentimentPieChart from './SentimentPieChart.js';
 var difficulty_list = new Array(5).fill(0);
-function returnDifficultList()
-{
-   return difficulty_list;
-}
+var sentiment_list = new Array(3).fill(0);
+export{difficulty_list};
+export{sentiment_list};
+// function returnDifficultList()
+// {
+//    return difficulty_list;
+// }
 function getStars(par1)
 {
    var star = "";
-   var stars = ":star:";
+   var stars = "⭐";
    var result;
    for(let i=0; i<Number(par1); i++)
    {
@@ -23,7 +26,7 @@ function getStars(par1)
    return result;
 }
 var sentiment_score = 0;
-var average_difficulty=0;
+var average_difficulty = 0;
 var average_sentiment_score;
 function CourseSummary({record}) {
     const [Title, setTitle] = useState({record}.record.Title);
@@ -47,6 +50,7 @@ function CourseSummary({record}) {
           sentiment_score = 0;
           average_difficulty=0;
           difficulty_list.fill(0);
+          sentiment_list.fill(0);
           for(let i=0; i<recordValues.length; i++)
           {
             sentiment_score = sentiment_score +recordValues[i].score;
@@ -67,6 +71,18 @@ function CourseSummary({record}) {
                   break;
                case 5:
                   difficulty_list[4] = difficulty_list[4]+1;
+                  break;
+            }
+            switch(recordValues[i].score)
+            {
+               case -1:
+                  sentiment_list[0] = sentiment_list[0]+1;
+                  break;
+               case 0:
+                  sentiment_list[1] = sentiment_list[1]+1;
+                   break;
+               case 1:
+                  sentiment_list[2] = sentiment_list[2]+1;
                   break;
             }
           }
@@ -108,7 +124,7 @@ function CourseSummary({record}) {
      </p>
      <Row>
       <Col span={18} push={12}>
-         <SentimentPieChart/>
+      <SentimentPieChart/>
        Review Sentiment
       </Col>
       <Col span={6} pull={12}>

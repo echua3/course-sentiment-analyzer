@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
+import {sentiment_list} from './CourseSummary'
 
+console.log('In sentichart' + sentiment_list);
 class SentimentPieChart extends Component {
     constructor(props) {
       super(props);
   
       this.state = {
-        series: [30, 40, 35],
+        series: sentiment_list,
         options: {
           chart: {
             id: 'apexchart-example',
