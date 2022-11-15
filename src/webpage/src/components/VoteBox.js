@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
@@ -33,10 +33,17 @@ const useStyles = makeStyles((theme) => ({
 const VoteBox = ({ review, votes, handleUpvote, handleDownvote }) => {
     const classes = useStyles()
 
-    const [clickedUp, setClickedUp] = useState();
-    const [clickedDown, setClickedDown] = useState();
+    const [clickedUp, setClickedUp] = useState(0);
+    // need to check if already upvoted/downvoted
+    const [clickedDown, setClickedDown] = useState(0);
     let startingVotes = review.helpfulness;
-    const [currentVotes, setVotes] = useState(review.helpfulness);
+    console.log("Starting Votes: ", startingVotes);
+    const [currentVotes, setVotes] = useState(startingVotes);
+    console.log("currentVotes after useState:", currentVotes);
+    const stateRef = useRef();
+    stateRef.current = currentVotes;
+    stateRef.currentClickedUp = clickedUp;
+    stateRef.currentClickedDown = clickedDown;
 
     if (!handleUpvote) {
         handleUpvote = () => { 
@@ -88,13 +95,14 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote }) => {
      data-testid="voteBox-container"
    >
      <IconButton onClick={handleUpvote} size="small" data-testid="upvote-button">
-        {clickedUp ? <ArrowDropUp className={classes.voteBox} style={{fill: "blue"}}/> : <ArrowDropUp className={classes.voteBox}/>}
+        {stateRef.currentClickedUp ? <ArrowDropUp className={classes.voteBox} style={{fill: "blue"}}/> : <ArrowDropUp className={classes.voteBox}/>}
      </IconButton>
      <Typography className={classes.votes} data-testid="voteBox-votes">
-        {clickedUp || clickedDown ? currentVotes : review.helpfulness}
+        {console.log("Inside return, currentvotes: ", currentVotes)}
+        {stateRef.currentClickedUp || stateRef.currentClickedDown ? stateRef.current : startingVotes}
     </Typography>
      <IconButton onClick={handleDownvote} size="small" data-testid="downvote-button">
-     {clickedDown ? <ArrowDropDown className={classes.voteBox} style={{fill: "red"}}/> : <ArrowDropDown className={classes.voteBox}/>}
+     {stateRef.currentClickedDown ? <ArrowDropDown className={classes.voteBox} style={{fill: "red"}}/> : <ArrowDropDown className={classes.voteBox}/>}
      </IconButton>
    </Grid>
  )
