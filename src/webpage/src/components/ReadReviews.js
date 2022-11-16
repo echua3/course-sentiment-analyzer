@@ -100,6 +100,27 @@ function ReadReview({record}) {
             setRecords(records.data);
         }   
         changeRecords();
+
+        async function updateUser() {
+          const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + userId)
+            if(!response.ok) {
+              const message = "An error occurred"
+              console.log("Error:" + response.statusText);
+              return;
+            }
+            const records = await response.json();
+            console.log("USER:", records);
+            // setUserUps(records.data[0].reviewUpvoteIDs);
+            let upvoteIDs = records.data[0].reviewUpvoteIDs;
+            setUserUps(upvoteIDs);
+
+            console.log(records.data[0].reviewUpvoteIDs);
+            console.log("UserUpvoteIDs:", userUps);
+    
+            setUserDowns(records.data[0].reviewDownvoteIDs);
+            console.log("UserDownvoteIDS:", userDowns);
+        }
+        updateUser();
         console.log("HANDLED CHANGE:", recordValues);
 
     };
