@@ -5,7 +5,7 @@ import { Comment } from "antd";
 import { useState } from "react";
 import './style/css/CourseComponent.scss';
 
-const Review = ({review, handleUpvote, handleDownVote, userUps, userDowns}) => {
+const Review = ({review, handleUpvote, handleDownVote, userUps, userDowns, userID}) => {
 
     return (
         <Grid
@@ -21,7 +21,8 @@ const Review = ({review, handleUpvote, handleDownVote, userUps, userDowns}) => {
             handleDownvote={handleDownVote} 
             votes={review.helpfulness}
             userUps={userUps}
-            userDowns={userDowns}/>
+            userDowns={userDowns}
+            userID={userID}/>
           </Grid>
           <Grid item xs={10} md={9} >
             <Comment

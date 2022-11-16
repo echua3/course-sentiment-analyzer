@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 
  
-const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDowns }) => {
+const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDowns, userID }) => {
     const classes = useStyles()
     console.log("Current Review: ", review);
     const reviewID = review._id;
@@ -72,7 +72,7 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 let result = [...userUpvotes, reviewID];
                 setUserUpvotes(result); 
                 console.log("about to upvote review._id", reviewID);
-                Upvote({reviewID});
+                Upvote(reviewID, userID);
                 console.log("JUST UPVOTED, helpfulness = ", review.helpfulness);   
             }
         };

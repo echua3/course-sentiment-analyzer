@@ -110,7 +110,7 @@ function ReadReview({record}) {
               itemLayout ="horizontal"
               dataSource ={recordValues}
               renderItem = {item => (
-                <Review key={item._id} review={item} userUps={userUps} userDowns={userDowns}/>
+                <Review key={item._id} review={item} userUps={userUps} userDowns={userDowns} userID={userId}/>
               )}/>
  
               <Pagination
