@@ -12,7 +12,7 @@ searchReviewRoutes.route("/review/sectionID/:sectionID/:page").get(param('sectio
   const LIMIT = 3
   const startIndex = (Number(req.params.page) - 1) * LIMIT;
 
-  reviewModel.count().where("classID").equals(req.param.sectionID).exec(function (err, total) {
+  reviewModel.countDocuments().where("classID").equals(req.params.sectionID).exec(function (err, total) {
     console.log(total);
     reviewModel.find().limit(LIMIT).skip(startIndex).where("classID").equals(req.params.sectionID).sort({helpfulness: -1}).exec(
         (err, result) => {
