@@ -9,6 +9,8 @@ import LoginPage from "./Pages/LoginPage.js";
 import LogoutPage from "./Pages/LogoutPage.js";
 
 function App() {
+  window.userID = "";
+
   return (
     <>
       <Navbar />

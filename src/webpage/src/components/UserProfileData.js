@@ -116,7 +116,7 @@ function UserProfileData(props) {
   //   }
   // };
 
-
+  if (window.userID != "") {
   return (
     <div>
     <div class="userprofile">
@@ -398,6 +398,15 @@ function UserProfileData(props) {
     </div>
     </div>
   );
+  } else {
+    return (
+      <div className="Profile">
+        <span class="writereview-form-title">
+          Please login to view your profile.
+        </span>
+      </div>
+    );
+  }
 }
 
 

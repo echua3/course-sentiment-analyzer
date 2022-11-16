@@ -17,7 +17,7 @@ function RecommendationsTable(props) {
     async function getRecords() {
         startLoading(0);
         setLoading(true);
-        await fetch(API_ENDPOINT + "/user/" + "af3").then(async(response) => {
+        await fetch(API_ENDPOINT + "/user/" + window.userID).then(async(response) => {
         if (!response.ok) {
             const message = "An error occured"
             console.log("Error:" + response.statusText);
@@ -83,10 +83,10 @@ function RecommendationsTable(props) {
   } else {
     return (
         <div class='recommendationsPage'>
-            <text>
-                Your course recommendations are listed below! Please make sure to keep your interests up to date in your profile for accurate recommendations!
-            </text>
-            <CourseTable data={datasource}/>  
+          <span class="writereview-form-title">
+            Your course recommendations are listed below! Please make sure to keep your interests up to date in your profile for accurate recommendations!
+          </span>
+          <CourseTable data={datasource}/>  
         </div>
       );
   }
