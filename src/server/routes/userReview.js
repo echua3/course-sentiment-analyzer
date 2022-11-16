@@ -25,8 +25,13 @@ userReviewRoutes.route("/user/review/:userID/:page").get(param('page').trim().no
                 for (let i = 0; i < allreviews.length; i++) {
                     let newobject = {};
                     newobject['reviewID'] = allreviews[i];
+                    console.log('allreviews[i]')
+                    console.log(allreviews[i])
+                    console.log('newobject')
+                    console.log(newobject)
                     let onereview = await reviewModel.find({_id: ObjectId(allreviews[i])}).exec();
-                    // const onereview = await reviewModel.find({classID:729491}).exec();
+                    console.log('onereview')
+                    console.log(onereview)
                     newobject['comment'] = onereview[0]['comment'];
                     newobject['difficulty'] = onereview[0]['difficulty'];
                     newobject['score'] = onereview[0]['score'];

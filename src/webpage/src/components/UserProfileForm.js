@@ -73,14 +73,14 @@ function UserProfileForm(props) {
   // const [pagination, setPagination] = useState({onChange:changePage});
   const [params, setParams] = useState({
     // Using the sample user in database
-    userID: 'af3',
+    userID: window.userID,
     firstName: '',
     lastName: '',
     degreeType: '',
     firstInterest: '',
     secondInterest: '',
     thirdInterest: '',
-    reviewIDs: ['6374a31d5c0d13397e30d548','6374a3225c0d13397e30d550','6374a3265c0d13397e30d558','6374a2b25c0d13397e30d536'],
+    reviewIDs:'',
     reviewUpvotedIDs: '',
     reviewDownvotedIDs: '',
     dept: '',
@@ -89,7 +89,7 @@ function UserProfileForm(props) {
 
   const onReset = async () => {
     // Using the sample user in database
-    params.userID = 'af3'
+    params.userID = window.userID
     params.firstName = ''
     params.lastName = ''
     params.degreeType = ''

@@ -46,7 +46,7 @@ function UserReviews(props) {
   const [pageCount, setPageCount] = useState(0);
   const [recordValues, setRecords] = useState([]);
   const [currentPage, setCurrentPage] = useState(1)
-  const [userID, setUserID] = useState('af3');
+  const [userID, setUserID] = useState(window.userID);
   const [datasource, setDatasource] = useState([]);
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState('');
@@ -78,7 +78,38 @@ function UserReviews(props) {
       });
       setDatasource(newData);
       setEditingKey('');
+      // console.log('row')
+      // console.log(row)
+      // console.log('index')
+      // console.log(index)
+      // console.log('newdata')
+      // console.log(newData)
+      // console.log('item')
+      // console.log(item)
+      // const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/update/" + params.UserID, {
 
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //    body: JSON.stringify(params),
+      // })
+      // .catch(error => {
+      //   window.alert(error);
+      //   return;
+      // });
+      // if(!response.ok) {
+      //   // const records = await response.json();
+      //   // console.log(records);
+      //   // const basicMessage = records.error.message.split(/:(.*)/s)
+      //   // const allErrors = basicMessage[1].split(",")
+      //   // console.log(allErrors)
+      //   // allErrors.forEach(runErrorMessaging);
+      //   console.log('!response.ok')
+      // } else {
+      //   console.log(response)
+      //   setProfile(true)
+      // }
 
 
 
@@ -100,7 +131,7 @@ function UserReviews(props) {
 
   useEffect( () => {
     async function getRecords() {
-      const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/review/" + {userID}.userID + "/" + pageNumber)
+      const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/review/" + window.userID + "/" + pageNumber)
       if(!response.ok) {
         const message = "An error occured"
         console.log('here')
@@ -109,6 +140,7 @@ function UserReviews(props) {
       }
       const res = await response.json();
       // console.log(records.data);
+
       setDatasource('')
       pagination.total = res.data.numberTotal
       pagination.current = {currentPage}
@@ -119,7 +151,7 @@ function UserReviews(props) {
     getRecords();
 
     return;
-  }, [{userID}.userID]);
+  }, [window.userID]);
 
 
   const columns = [
@@ -222,7 +254,7 @@ function UserReviews(props) {
 
 
   const deleteRequest = async (param) => {
-    const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/review/delete/" + {userID}.userID + "/" + param, {
+    const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/review/delete/" + window.userID + "/" + param, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

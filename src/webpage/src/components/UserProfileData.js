@@ -6,11 +6,13 @@ import { Link } from "react-router-dom";
 
 function UserProfileData(props) {
     const [datasource, setDatasource] = useState([])
-    const [userID, setUserID] = useState('af3')
+    const [userID, setUserID] = useState(window.userID)
 
+    console.log('window.id test')
+    console.log(window.userID)
     useEffect( () => {
         async function getRecords() {
-          const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + {userID}.userID)
+          const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + window.userID)
           if(!response.ok) {
             const message = "An error occured"
             console.log("Error:" + response.statusText);
@@ -24,10 +26,9 @@ function UserProfileData(props) {
         getRecords();
 
         return;
-    }, [{userID}.userID]);
+    }, [window.userID]);
 
-    console.log('datasource')
-    console.log({datasource})
+
     const firstName = datasource.firstName
     const lastName = datasource.lastName
     const degreeType = datasource.degreeType
