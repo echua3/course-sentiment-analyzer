@@ -3,16 +3,13 @@ const dbo = require("../db/conn_search");
 const ObjectId = require("mongodb").ObjectId;
 var sanitize = require("mongo-sanitize");
 
-const deleteUserRoutes = express.Router();
+const deleteReviewRoutes = express.Router();
 const { reviewModel } = require("../schema/reviewSchema");
 const { userModel } = require("../schema/userSchema");
 
 const { body, validationResult } = require('express-validator');
 
-
-
-
-deleteUserRoutes.route("/user/review/delete/:userID/:reviewID").delete(async function (req, res) {
+deleteReviewRoutes.route("/user/review/delete/:userID/:reviewID").delete(async function (req, res) {
   const errors = validationResult(req);
   if(errors.errors.length > 0) {
     res.status(500).json({
@@ -24,6 +21,7 @@ deleteUserRoutes.route("/user/review/delete/:userID/:reviewID").delete(async fun
                     // const onereview = await reviewModel.find({classID:729491}).exec();
 
   const reviewUpdate = finduser[0]['reviewIDs'].remove(req.params.reviewID);
+
   await reviewModel.findOneAndDelete({_id: ObjectId(req.params.reviewID)})
   userModel.findOneAndUpdate(
     {userID: req.params.userID },
@@ -46,4 +44,4 @@ deleteUserRoutes.route("/user/review/delete/:userID/:reviewID").delete(async fun
 
  });
 
- module.exports = deleteUserRoutes;
+ module.exports = deleteReviewRoutes;

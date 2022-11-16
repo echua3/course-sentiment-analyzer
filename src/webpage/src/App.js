@@ -4,6 +4,7 @@ import HomePage from "./Pages/HomePage.js";
 import CourseSearch from "./Pages/CourseSearch.js";
 import Recommendations from "./Pages/Recommendations.js";
 import UserProfile from "./Pages/UserProfile.js";
+import UserProfileForm from "./components/UserProfileForm.js";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/Courses" element={<CourseSearch />} />
           <Route path="/Recommendations" element={<Recommendations />} />
           <Route path="/Profile" element={<UserProfile />} />
+          <Route path="/ProfileEdit" element={<UserProfileForm />} />
         </Routes>
       </div>
     </>

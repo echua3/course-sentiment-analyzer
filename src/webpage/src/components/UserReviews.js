@@ -1,7 +1,42 @@
 import React from "react";
-import { Form, Input, Table, Tag, Space, Pagination } from "antd";
+import { Form, Input, Table, Pagination, Typography, Popconfirm } from "antd";
 import { useState, useEffect } from "react";
 import axios from "axios";
+
+const EditableCell = ({
+  editing,
+  dataIndex,
+  title,
+  inputType,
+  record,
+  index,
+  children,
+  ...restProps
+}) => {
+  const inputNode = <Input />;
+  return (
+    <td {...restProps}>
+      {editing ? (
+        <Form.Item
+          name={dataIndex}
+          style={{
+            margin: 0,
+          }}
+          rules={[
+            {
+              required: true,
+              message: `Please Input ${title}!`,
+            },
+          ]}
+        >
+          {inputNode}
+        </Form.Item>
+      ) : (
+        children
+      )}
+    </td>
+  );
+};
 
 
 function UserReviews(props) {
@@ -13,6 +48,45 @@ function UserReviews(props) {
   const [currentPage, setCurrentPage] = useState(1)
   const [userID, setUserID] = useState('af3');
   const [datasource, setDatasource] = useState([]);
+  const [form] = Form.useForm();
+  const [editingKey, setEditingKey] = useState('');
+  const isEditing = (record) => record.reviewID === editingKey;
+
+  const edit = (record) => {
+    form.setFieldsValue({
+      comment: '',
+      ...record,
+    });
+    setEditingKey(record.reviewID);
+    // setEditingKey(record.key);
+
+  };
+
+  const cancel = () => {
+    setEditingKey('');
+  };
+
+  const save = async (key) => {
+    try {
+      const row = await form.validateFields();
+      const newData = [...datasource];
+      const index = newData.findIndex((item) => key === item.reviewID);
+      const item = newData[index];
+      newData.splice(index, 1, {
+        ...item,
+        ...row,
+      });
+      setDatasource(newData);
+      setEditingKey('');
+
+
+
+
+    } catch (errInfo) {
+      console.log('Validate Failed:', errInfo);
+    }
+  };
+
 
 
   const changePage = async (CurrentPage)=>{
@@ -23,7 +97,7 @@ function UserReviews(props) {
   }
   const [pagination, setPagination] = useState({onChange:changePage});
 
-  // console.log({userID}.userID);
+
   useEffect( () => {
     async function getRecords() {
       const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/review/" + {userID}.userID + "/" + pageNumber)
@@ -40,8 +114,6 @@ function UserReviews(props) {
       pagination.current = {currentPage}
       let test={...pagination}
       setPagination(test)
-      console.log('res.data');
-      console.log(res.data);
       setDatasource(res.data);
     }
     getRecords();
@@ -55,7 +127,6 @@ function UserReviews(props) {
       title: 'Course Number',
       dataIndex: 'OfferingName',
       key: 'OfferingName',
-      // render: (text) => <a>{text}</a>,
     },
     {
       title: 'Course Title',
@@ -71,6 +142,12 @@ function UserReviews(props) {
       title: 'Review',
       dataIndex: 'comment',
       key: 'comment',
+      editable: true,
+    },
+    {
+      title: 'Difficulty',
+      dataIndex: 'difficulty',
+      key: 'difficulty'
     },
     {
       title: 'Score',
@@ -83,13 +160,38 @@ function UserReviews(props) {
       key: 'helpfulness',
     },
     {
-      title: 'Action',
-      key: 'action',
+      title: 'Edit',
+      dataIndex: 'edit',
+      render: (_, record) => {
+        const editable = isEditing(record);
+        return editable ? (
+          <span>
+            <Typography.Link
+              onClick={() => save(record.reviewID)}
+              style={{
+                marginRight: 8,
+              }}
+            >
+              Save
+            </Typography.Link>
+            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+              <a>Cancel</a>
+            </Popconfirm>
+          </span>
+        ) : (
+          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
+          {/* <Typography.Link onClick={() => edit(record)}> */}
+
+            Edit
+          </Typography.Link>
+        );
+      },
+    },
+    {
+      title: 'Delete',
+      key: 'delete',
       render: (_, record) => (
-        <Space size="middle">
-          {/* <a>Edit</a> */}
-          <a onClick={(e) => { onDelete(record.key, e); }}>Delete</a>
-        </Space>
+          <a onClick={(e) => { onDelete(record, e); }}>Delete</a>
       ),
     },
     {
@@ -99,10 +201,27 @@ function UserReviews(props) {
     },
   ];
 
+  // setEditingKey('')
+  const mergedColumns = columns.map((col) => {
+    if (!col.editable) {
+      return col;
+    }
+    return {
+      ...col,
+      onCell: (record) => ({
+        record,
+        inputType: 'text',
+        dataIndex: col.dataIndex,
+        title: col.title,
+        editing: isEditing(record),
+      }),
+    };
+  });
+
+
+
 
   const deleteRequest = async (param) => {
-    console.log('param')
-    console.log(param)
     const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/review/delete/" + {userID}.userID + "/" + param, {
       method: "DELETE",
       headers: {
@@ -114,12 +233,6 @@ function UserReviews(props) {
       return;
     });
     if(!response.ok) {
-      // const records = await response.json();
-      // console.log(records);
-      // const basicMessage = records.error.message.split(/:(.*)/s)
-      // const allErrors = basicMessage[1].split(",")
-      // console.log(allErrors)
-      // allErrors.forEach(runErrorMessaging);
       console.log('!response.ok')
     } else {
       console.log(response)
@@ -127,36 +240,39 @@ function UserReviews(props) {
     }
   }
 
-
-
-  const onDelete = async (key, e) => {
-    console.log('key');
-    console.log(key);
-    console.log('e');
-    console.log(e);
+  const onDelete = async (record, e) => {
     e.preventDefault();
-
-    const deleteid = datasource.filter(item => item.key === key);
-    console.log('deleteid[0]');
-    console.log(deleteid[0]);
-    const param = deleteid[0].reviewID;
+    const deleteid = record.reviewID;
+    const param = deleteid;
     await deleteRequest(param);
-    const data = datasource.filter(item => item.key !== key);
+    const data = datasource.filter(item => item.reviewID !== record.reviewID);
     setDatasource(data);
   }
+
+
 
   return (
     <div>
     <div class="userreviews">
     <p class='userreviewstitle'>My Reviews</p>
     {/* <Form onSubmit={onSubmit}> */}
+    <Form form={form} component={false}>
     <Table className="userreviewstable"
-      // pagination={{...pagination,onChange:changePage}}
+      components={{
+        body: {
+          cell: EditableCell,
+        },
+      }}
+      bordered
+      rowClassName="editable-row"
       dataSource={datasource}
-      columns={columns.filter(col => col.title !== 'ID')}
-      rowKey = "classID"
+      columns={mergedColumns.filter(col => col.title !== 'ID')}
+      rowKey = "reviewID"
+      // pagination={{
+      //   onChange: cancel,
+      // }}
     />
-
+    </Form>
     </div>
     </div>
   );
