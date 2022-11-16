@@ -1,8 +1,9 @@
 import React from "react";
-import { Form, Input, Button, Select, InputNumber, message, Alert } from "antd";
+import { Form, Input, Button, Select, Table, message, Alert } from "antd";
 import { useState } from "react";
 import axios from "axios";
 import CourseTable from "./CourseTable";
+import NoResult from "./NoResult";
 import "./style/css/CourseComponent.scss"
 import { data } from "jquery";
 
@@ -34,6 +35,7 @@ function SearchBar(props) {
   const [datasource, setDatasource] = useState([]);
   const [pagination, setPagination] = useState({onChange:changePage, showSizeChanger:false});
   const [loadings, setLoadings] = useState([]);
+  const [result, setResult] = useState(Table);
   const [params, setParams] = useState({
     CourseTitle: '',
     CourseNumber: '',
@@ -69,19 +71,22 @@ function SearchBar(props) {
         } else if(res.data.code==200){
           if (res.data.numberTotal==0) {
             message.info("No course found!");
-          } else{
-            // console.log('coursetable data')
-            // console.log(typeof res.data.data)
-            // console.log(res.data.data)
+            // setResult(<NoResult />)
+          }
+          else{
             setDatasource(res.data.data)
             console.log(res.data.data);
-            // console.log(pagination)
             pagination.total = res.data.numberTotal
             pagination.current = params.currentPage
-            // console.log(pagination)
             let test={...pagination}
             setPagination(test)
           }
+          // setDatasource(res.data.data)
+          // console.log(res.data.data);
+          // pagination.total = res.data.numberTotal
+          // pagination.current = params.currentPage
+          // let test={...pagination}
+          // setPagination(test)
         }
       }
     })
@@ -147,6 +152,7 @@ function SearchBar(props) {
                               params.currentPage = 1}}
               value={params.CourseTitle}
               onPressEnter={onSubmit}
+              maxLength={100}
             />
           </Form.Item>
           <Form.Item name="CourseNumber" label="Course Number">
@@ -156,6 +162,7 @@ function SearchBar(props) {
                               params.currentPage = 1}}
               value={params.CourseNumber}
               onPressEnter={onSubmit}
+              maxLength={15}
             />
           </Form.Item>
           <Form.Item name="Credits" label="Credits">
@@ -165,6 +172,7 @@ function SearchBar(props) {
                               params.currentPage = 1}}
               value={params.Credits}
               onPressEnter={onSubmit}
+              maxLength={2}
             />
           </Form.Item>
           <Form.Item name="Department" label="Department">
@@ -382,6 +390,7 @@ function SearchBar(props) {
 
         </Form>
       </div>
+
       <CourseTable pagination={{...pagination,onChange:changePage}} data={datasource}/>
     {/* <CourseTable pagination={pagination} data={datasource}/> */}
 
