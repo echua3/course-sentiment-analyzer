@@ -23,7 +23,7 @@ addUserRoute.route("/user/add").post( function (req, res) {
     reviewIDs: sanitize(req.body.reviewIDs),
     reviewUpvotedIDs: sanitize(req.body.reviewUpvotedIDs),
     reviewDownvotedIDs: sanitize(req.body.reviewDownvotedIDs),
-    dept: sanitize(req.body.dept)
+    department: sanitize(req.body.dept)
   })
   user.save().then(result => {
     console.log(result);

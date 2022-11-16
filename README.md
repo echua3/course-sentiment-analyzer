@@ -52,9 +52,11 @@ The webpage utilizes course information from the SIS.API stored in a MongoDB dat
 
 The search function has four filter conditions: Course Title, Course Number, Credits and Department. Our algorithm supports fuzzy queries for the first 3 filters. And we provide the drop down options for the Department filter with all department options from both Whiting School of Engineering and Krieger School of Arts and Science. Users could use any combination of the 4 filters to search. A list of courses will show in the table if they meet all the criteria.
 
-After clicking the desired course, it expands to show the Class Summary, Add a Review, and View All Reviews windows. Users are given a free-form text box to write a course review and rate the difficulty on a 1-5 sliding scale. After submission, users can view their review and all other reviews under the View All Reviews tab.
+After clicking the desired course, it expands to show the Class Summary, Add a Review, and View All Reviews windows. In the Class Summary, the average sentiment and average difficulty is displayed along with charts depicting the data. In Add a Review, Users are given a free-form text box to write a course review and rate the difficulty on a 1-5 sliding scale. After submission, users can view their review and all other reviews under the View All Reviews tab.
 
+The Reccommendations tab lists course recoomendations for the current user based on interests indicated in the profile.
 
+In the profile page, users can update their profile info and set their interests.
 
 
 ## Sentiment Analysis
@@ -106,7 +108,7 @@ If this node module needs anything specific to run locally note that your comput
 ### 1. Create the .env files  
 
 In the server **src/server** directory:  
-- Create `config.env` file and define the terms.   
+- Create `config.env` file and define the terms. (don't forget to remove the brackets)  
 
         ATLAS_URI={MONGO_DB_KEY_W_USERNAME_AND_PASSWORD}
         PORT={PORT}
@@ -119,7 +121,7 @@ In the **src/webpage** directory:
 ### 2. Install Dependencies and Build the Application  
 
 In the root directory:  `npm run build`
-- this command should install the node-module dependencies for both the client and the server
+- this command should install the node-module dependencies for the client, server, and sentiment analyzer
 
 ### 3. Run the application
 Start the server: `npm run start`

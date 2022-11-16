@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import CourseTable from "./CourseTable";
 import "./style/css/CourseComponent.scss"
+import { data } from "jquery";
 
 
 function SearchBar(props) {
@@ -73,6 +74,7 @@ function SearchBar(props) {
             // console.log(typeof res.data.data)
             // console.log(res.data.data)
             setDatasource(res.data.data)
+            console.log(res.data.data);
             // console.log(pagination)
             pagination.total = res.data.numberTotal
             pagination.current = params.currentPage

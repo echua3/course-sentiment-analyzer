@@ -1,13 +1,19 @@
 const { ObjectId } = require("mongodb")
 const express = require("express");
 const app = express();
+const proxy = require('express-http-proxy');
 const cors = require("cors");
 require("dotenv").config({ path: "./config.env"})
 const port = process.env.PORT || 3000;
 const path = require("path");
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+var MongoDBStore = require('connect-mongodb-session')(session);
+var bodyParser = require('body-parser')
 
 addReviewRoute = require("./routes/addReview")
 searchReviewRoutes = require("./routes/searchReview")
+searchAllReviewsRoutes = require("./routes/searchAllReviews")
 searchCourseRoute = require("./routes/searchCourse")
 addUserRoute = require("./routes/addUser")
 retrieveUserRoute = require("./routes/retrieveUser")
@@ -16,6 +22,10 @@ userReviewRoutes = require("./routes/userReview")
 deleteReviewRoutes = require("./routes/deleteReviewProfile")
 showProfileRoutes = require("./routes/showProfile")
 
+currentUserRoute = require("./routes/getCurrentUser")
+login = require("./routes/login")
+logout = require("./routes/logout")
+getRecsRoute = require("./routes/getRecs")
 
 // allow cross-origin interaction:
 // app.use(cors({
@@ -28,8 +38,13 @@ showProfileRoutes = require("./routes/showProfile")
 //     ],
 //   }));
 
-app.use(cors())
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true
+}))
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+app.use(cookieParser());
 
 app.use(addReviewRoute)
 app.use(addUserRoute)
@@ -39,10 +54,14 @@ app.use(retrieveUserRoute)
 app.use(editUserRoute)
 app.use(deleteReviewRoutes)
 app.use(showProfileRoutes)
-app.use('/api', searchCourseRoute)
+app.use(searchAllReviewsRoutes)
 
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use('/api', searchCourseRoute)
+app.use(login)
+app.use(logout)
+app.use(currentUserRoute)
+app.use(getRecsRoute)
+
 
 // Pick up React index.html file
 if (process.env.NODE_ENV === "production") {
@@ -57,6 +76,15 @@ const dbo_search = require("./db/conn_search")
 
 const sanitizeHTML = require('sanitize-html');
 const addUserRoutes = require("./routes/addUser");
+const upvoteReviewRoute = require("./routes/upvoteReview");
+const downvoteReviewRoute = require("./routes/downvoteReview");
+const undoUpvoteReviewRoute = require("./routes/undoUpvoteReview");
+const undoDownvoteReviewRoute = require("./routes/undoDownvoteReview");
+
+app.use(upvoteReviewRoute)
+app.use(downvoteReviewRoute)
+app.use(undoUpvoteReviewRoute)
+app.use(undoDownvoteReviewRoute)
 
 app.listen(port, () => {
 
