@@ -44,8 +44,8 @@ function ReadReview({record}) {
               return;
             }
             const records = await response.json();
-            console.log(records.data);
-            console.log(pageNumber);
+            // console.log(records.data);
+            // console.log(pageNumber);
             setRecords(records.data);
             setPageCount(records.numberOfPage);
         }   

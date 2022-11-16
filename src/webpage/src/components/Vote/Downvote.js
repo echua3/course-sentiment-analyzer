@@ -4,7 +4,7 @@
 */
 function Downvote(reviewID) {
 
-    console.log("URL: ", process.env.REACT_APP_API_ENDPOINT + "/review/downvote/" + reviewID + "/" +  window.userID);
+    // console.log("DOWNVOTE URL: ", process.env.REACT_APP_API_ENDPOINT + "/review/downvote/" + reviewID + "/" +  window.userID);
 
     const requestData = async () =>{
         const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/downvote/" + reviewID + "/" + window.userID, {

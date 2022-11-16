@@ -4,7 +4,7 @@
 */
 function Upvote(reviewID) {
 
-    console.log("URL: ", process.env.REACT_APP_API_ENDPOINT + "/review/upvote/" + reviewID + "/" +  window.userID);
+    // console.log("UPVOTE URL: ", process.env.REACT_APP_API_ENDPOINT + "/review/upvote/" + reviewID + "/" +  window.userID);
 
     const requestData = async () =>{
         const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/upvote/" + reviewID + "/" + window.userID, {

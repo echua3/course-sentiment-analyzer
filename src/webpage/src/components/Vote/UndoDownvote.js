@@ -4,7 +4,7 @@
 */
 function UndoDownvote(reviewID) {
 
-    console.log("UNDO DOWNVOTE URL: ", process.env.REACT_APP_API_ENDPOINT + "/review/undoDownvote/" + reviewID + "/" +  window.userID);
+    // console.log("UNDO DOWNVOTE URL: ", process.env.REACT_APP_API_ENDPOINT + "/review/undoDownvote/" + reviewID + "/" +  window.userID);
 
     const requestData = async () =>{
         const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/undoDownvote/" + reviewID + "/" + window.userID, {
