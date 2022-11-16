@@ -1,10 +1,15 @@
 const { ObjectId } = require("mongodb")
 const express = require("express");
 const app = express();
+const proxy = require('express-http-proxy');
 const cors = require("cors");
 require("dotenv").config({ path: "./config.env"})
 const port = process.env.PORT || 3000;
 const path = require("path");
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+var MongoDBStore = require('connect-mongodb-session')(session);
+var bodyParser = require('body-parser')
 
 addReviewRoute = require("./routes/addReview")
 searchReviewRoutes = require("./routes/searchReview")
@@ -12,9 +17,10 @@ searchAllReviewsRoutes = require("./routes/searchAllReviews")
 searchCourseRoute = require("./routes/searchCourse")
 addUserRoute = require("./routes/addUser")
 retrieveUserRoute = require("./routes/retrieveUser")
-
+currentUserRoute = require("./routes/getCurrentUser")
+login = require("./routes/login")
+logout = require("./routes/logout")
 getRecsRoute = require("./routes/getRecs")
-
 
 // allow cross-origin interaction:
 // app.use(cors({
@@ -26,8 +32,14 @@ getRecsRoute = require("./routes/getRecs")
 //         'https://jhu-courses.herokuapp.com'         
 //     ],
 //   }));
-app.use(cors())
+
+app.use(cors({ 
+    origin: "http://localhost:3000",
+    credentials: true
+}))
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+app.use(cookieParser());
 
 app.use(addReviewRoute)
 app.use(addUserRoute)
@@ -36,10 +48,11 @@ app.use(retrieveUserRoute)
 app.use(searchAllReviewsRoutes)
 
 app.use('/api', searchCourseRoute)
+app.use(login)
+app.use(logout)
+app.use(currentUserRoute)
 app.use(getRecsRoute)
 
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
 
 // Pick up React index.html file
 if (process.env.NODE_ENV === "production") {
