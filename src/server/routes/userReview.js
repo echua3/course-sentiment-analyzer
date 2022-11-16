@@ -12,7 +12,6 @@ userReviewRoutes.route("/user/review/:userID/:page").get(param('page').trim().no
   const LIMIT = 5
   const startIndex = (Number(req.params.page) - 1) * LIMIT;
   let db_connect = dbo.getDb("Classes");
-  let classes = db_connect.collection("classes");
   //users: reviewsID => reviews: classID => classes: SSS_SectionsID
 
   userModel.count("reviewIDs").where("userID").equals(req.params.userID).exec(function (err, total) {
@@ -25,13 +24,9 @@ userReviewRoutes.route("/user/review/:userID/:page").get(param('page').trim().no
                 for (let i = 0; i < allreviews.length; i++) {
                     let newobject = {};
                     newobject['reviewID'] = allreviews[i];
-                    // console.log('allreviews[i]')
-                    // console.log(allreviews[i])
-                    // console.log('newobject')
-                    // console.log(newobject)
+
                     let onereview = await reviewModel.find({_id: ObjectId(allreviews[i])}).exec();
-                    // console.log('onereview')
-                    // console.log(onereview)
+
                     newobject['comment'] = onereview[0]['comment'];
                     newobject['difficulty'] = onereview[0]['difficulty'];
                     newobject['score'] = onereview[0]['score'];

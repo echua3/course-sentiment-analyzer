@@ -121,8 +121,6 @@ function UserProfileForm(props) {
   }, [window.userID]);
 
 
-  // console.log('firstname')
-  // console.log(firstname)
 
   return (
     <div>
@@ -144,13 +142,6 @@ function UserProfileForm(props) {
           value={params.lastName}
         />
       </Form.Item>
-      {/* <Form.Item name="Email" label="Email">
-        <Input
-          placeholder="Your Email Id"
-          // onChange={e => {params.Credits = e.target.value}}
-          value={params.Email}
-        />
-      </Form.Item> */}
 
       <Form.Item name="StudentDegree" label="Degree Type">
         <Select placeholder="Please Select Your Degree Type" onChange={e => {params.degreeType = e}} value={params.degreeType}>

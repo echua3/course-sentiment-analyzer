@@ -15,9 +15,19 @@ function RecommendationsTable(props) {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
   useEffect( () => {
     async function getRecords() {
+        const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
+            if(!responseValue.ok) {
+                    const message = "An error occured"
+                    console.log("Error:" + responseValue.statusText);
+                    window.userID = "";
+                    return;
+        }
+        const records2 = await responseValue.json();
+        console.log(records2.data.userId);
+        window.userID = records2.data.userId
         startLoading(0);
         setLoading(true);
-        await fetch(API_ENDPOINT + "/user/" + window.userID).then(async(response) => {
+        await fetch(API_ENDPOINT + "/user/" + records2.data.userId).then(async(response) => {
         if (!response.ok) {
             const message = "An error occured"
             console.log("Error:" + response.statusText);
@@ -74,23 +84,19 @@ function RecommendationsTable(props) {
     });
   }
 
-  if(isLoading) {
-    return (
+
+    return isLoading ? (
     <div class='recommendationsPage'>
         <Button class='writereview-form-btn' type="primary" htmlType="submit" loading={loadings[0]}></Button>
     </div>
-  );
-  } else {
-    return (
+    ) : (
         <div class='recommendationsPage'>
           <span class="writereview-form-title">
             Your course recommendations are listed below! Please make sure to keep your interests up to date in your profile for accurate recommendations!
           </span>
           <CourseTable data={datasource}/>  
         </div>
-      );
-  }
-  
+      );  
 }
 
 
