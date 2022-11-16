@@ -84,10 +84,12 @@ function CourseSummary({record}) {
          {Title}
     </span>
     <p>
-      Average Sentiment
-      {average_sentiment_score}
-      
+      Average Sentiment: {average_sentiment_score != null ? average_sentiment_score : 'N/A'}
     </p>
+    <p> 
+      Average Difficulty: {average_difficulty != null ? average_difficulty.toLocaleString(undefined, {maximumFractionDigits:2}) : 'N/A'}
+    </p>
+      
     </Col>
   </Row>
      <h6>
