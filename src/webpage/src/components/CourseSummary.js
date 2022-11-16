@@ -58,8 +58,8 @@ function CourseSummary({record}) {
          average_sentiment_score = sentiment_score/recordValues.length;
          average_difficulty = average_difficulty/recordValues.length;
 
-          console.log("Average is " + average_sentiment_score);
-          console.log("Difficulty is " + average_difficulty);
+         //  console.log("Average is " + average_sentiment_score);
+         //  console.log("Difficulty is " + average_difficulty);
           
           
          // console.log(recordValues[0].score);

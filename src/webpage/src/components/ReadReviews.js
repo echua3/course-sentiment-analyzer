@@ -32,8 +32,7 @@ function ReadReview({record}) {
     const [form, setForm] = useState();
     const [userUps, setUserUps] = useState([]);
     const [userDowns, setUserDowns] = useState([]);
-    // hard code user 
-    const userId = 'af3';
+    const userId = window.userID;
 
 
     useEffect( () => {
@@ -45,8 +44,8 @@ function ReadReview({record}) {
               return;
             }
             const records = await response.json();
-            console.log(records.data);
-            console.log(pageNumber);
+            // console.log(records.data);
+            // console.log(pageNumber);
             setRecords(records.data);
             setPageCount(records.numberOfPage);
         }   
@@ -60,19 +59,19 @@ function ReadReview({record}) {
               return;
             }
             const records = await response.json();
-            console.log("USER:", records);
+            // console.log("USER:", records);
             // setUserUps(records.data[0].reviewUpvoteIDs);
             let upvoteIDs = records.data[0].reviewUpvoteIDs;
             setUserUps(upvoteIDs);
 
-            console.log(records.data[0].reviewUpvoteIDs);
-            console.log("UserUpvoteIDs:", userUps);
+            // console.log(records.data[0].reviewUpvoteIDs);
+            // console.log("UserUpvoteIDs:", userUps);
     
             setUserDowns(records.data[0].reviewDownvoteIDs);
-            console.log("UserDownvoteIDS:", userDowns);
+            // console.log("UserDownvoteIDS:", userDowns);
         }
         getUser();
-        console.log("recordValues.length: ", recordValues.length);
+        // console.log("recordValues.length: ", recordValues.length);
 
         return;
     }, [recordValues.length]);
@@ -125,19 +124,19 @@ function ReadReview({record}) {
               return;
             }
             const records = await response.json();
-            console.log("USER:", records);
+            // console.log("USER:", records);
             // setUserUps(records.data[0].reviewUpvoteIDs);
             let upvoteIDs = records.data[0].reviewUpvoteIDs;
             setUserUps(upvoteIDs);
 
-            console.log(records.data[0].reviewUpvoteIDs);
-            console.log("UserUpvoteIDs:", userUps);
+            // console.log(records.data[0].reviewUpvoteIDs);
+            // console.log("UserUpvoteIDs:", userUps);
     
             setUserDowns(records.data[0].reviewDownvoteIDs);
-            console.log("UserDownvoteIDS:", userDowns);
+            // console.log("UserDownvoteIDS:", userDowns);
         }
         updateUser();
-        console.log("HANDLED CHANGE:", recordValues);
+        // console.log("HANDLED CHANGE:", recordValues);
 
     };
 
@@ -147,7 +146,7 @@ function ReadReview({record}) {
               itemLayout ="horizontal"
               dataSource ={recordValues}
               renderItem = {item => (
-                <Review key={item._id} review={item} userUps={userUps} userDowns={userDowns} userID={userId}/>
+                <Review key={item._id} review={item} userUps={userUps} userDowns={userDowns}/>
               )}/>
  
               <Pagination

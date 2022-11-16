@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 
  
-const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDowns, userID }) => {
+const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDowns }) => {
     const classes = useStyles()
     // console.log("Current Review: ", review);
     const reviewID = review._id;
@@ -60,14 +60,14 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 // remove id from upvote list
                 let result = userUpvotes.filter(item => item !== reviewID);
                 setUserUpvotes(result);
-                UndoUpvote(reviewID ,userID);
+                UndoUpvote(reviewID);
             } else if (clickedDown) {
                 setVotes(currentVotes + 1); 
                 setClickedDown(false);
                 // remove id from downvote list
                 let result = userDownvotes.filter(item => item !== reviewID);
                 setUserDownvotes(result);
-                UndoDownvote(reviewID, userID);
+                UndoDownvote(reviewID);
             }
             else{
                 // upvote
@@ -77,7 +77,7 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 let result = [...userUpvotes, reviewID];
                 setUserUpvotes(result); 
                 // console.log("about to upvote review._id", reviewID);
-                Upvote(reviewID, userID); 
+                Upvote(reviewID); 
             }
         };
     }
@@ -91,7 +91,7 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 // remove id from downvote list
                 let result = userDownvotes.filter(item => item !== reviewID);
                 setUserDownvotes(result);
-                UndoDownvote(reviewID, userID);
+                UndoDownvote(reviewID);
             } else if (clickedUp) {
                 // already upvoted, undo upvote
                 setVotes(currentVotes - 1);
@@ -99,7 +99,7 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 // remove id from upvote list
                 let result = userUpvotes.filter(item => item !== reviewID);
                 setUserUpvotes(result);
-                UndoUpvote(reviewID ,userID);
+                UndoUpvote(reviewID);
             }
             else{
                 // downvote
@@ -108,7 +108,7 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 // add id to downvote list
                 let result = [...userDownvotes, reviewID];
                 setUserDownvotes(result); 
-                Downvote(reviewID, userID);
+                Downvote(reviewID);
             }
         };
     }
