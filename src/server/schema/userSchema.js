@@ -22,8 +22,8 @@ const userSchema = new Schema({
      },
      interests: [String],
      reviewIDs: [String],
-     reviewUpvotedIDs: [String],
-     reviewDownvotedIDs: [String],
+     reviewUpvoteIDs: [String],
+     reviewDownvoteIDs: [String],
      dept: [String] 
   });
 
