@@ -12,12 +12,14 @@
   "scripts": {
     "start": "npm run install-server && npm run server",
     "server": "npm run --prefix ./src/server server",
+    "sentiment": "npm run --prefix ./src/sentiment dev",
     "test-server": "npm run --prefix ./src/server test",
     "client": "npm start --prefix ./src/webpage",
     "install-client": "npm install --prefix ./src/webpage",
     "install-server": "npm install --prefix ./src/server",
-    "install": "npm run install-client && npm run install-server",
-    "dev": "concurrently \"npm run test-server\" \"npm run client\"",
+    "install-sentiment": "npm install --prefix ./src/sentiment",
+    "install": "npm run install-client && npm run install-server && npm run install-sentiment",
+    "dev": "concurrently \"npm run test-server\" \"npm run client\" \"npm run sentiment\"",
     "build": "npm run install && npm run build --prefix ./src/webpage",
     "heroku-postbuild": "npm run build"
   },

@@ -1,12 +1,12 @@
 import "../index.css";
-
 import React from "react";
+import RecommendationsTable from "../components/RecommendationsTable";
 
 function Recommendations() {
 
   return (
     <div className="Recommendations">
-      <h1 className='title'>Coming soon...</h1>
+      <RecommendationsTable />
     </div>
   );
 }

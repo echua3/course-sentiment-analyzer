@@ -13,12 +13,15 @@ var bodyParser = require('body-parser')
 
 addReviewRoute = require("./routes/addReview")
 searchReviewRoutes = require("./routes/searchReview")
+searchAllReviewsRoutes = require("./routes/searchAllReviews")
 searchCourseRoute = require("./routes/searchCourse")
 addUserRoute = require("./routes/addUser")
 retrieveUserRoute = require("./routes/retrieveUser")
 currentUserRoute = require("./routes/getCurrentUser")
 login = require("./routes/login")
 logout = require("./routes/logout")
+getRecsRoute = require("./routes/getRecs")
+
 // allow cross-origin interaction:
 // app.use(cors({
 //     credentials: true,
@@ -42,14 +45,13 @@ app.use(addReviewRoute)
 app.use(addUserRoute)
 app.use(searchReviewRoutes)
 app.use(retrieveUserRoute)
+app.use(searchAllReviewsRoutes)
+
 app.use('/api', searchCourseRoute)
 app.use(login)
 app.use(logout)
 app.use(currentUserRoute)
-
-
-
-
+app.use(getRecsRoute)
 
 
 // Pick up React index.html file
@@ -65,6 +67,15 @@ const dbo_search = require("./db/conn_search")
 
 const sanitizeHTML = require('sanitize-html');
 const addUserRoutes = require("./routes/addUser");
+const upvoteReviewRoute = require("./routes/upvoteReview");
+const downvoteReviewRoute = require("./routes/downvoteReview");
+const undoUpvoteReviewRoute = require("./routes/undoUpvoteReview");
+const undoDownvoteReviewRoute = require("./routes/undoDownvoteReview");
+
+app.use(upvoteReviewRoute)
+app.use(downvoteReviewRoute)
+app.use(undoUpvoteReviewRoute)
+app.use(undoDownvoteReviewRoute)
 
 app.listen(port, () => {
 

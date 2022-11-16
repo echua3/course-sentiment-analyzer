@@ -60,7 +60,7 @@
   }
 
   /*---------------------------------------------*/
-  h1,h2,h3,h4 {
+  h1,h2,h3 {
       margin: 0px;
   }
 
@@ -79,6 +79,16 @@
       color: #4f97de;
       margin: 0px;
   }
+
+  h4 {
+    font-family: Montserrat-Regular;
+     font-size: 14px;
+     line-height: 1.7;
+     color: #3f6d9b;
+     margin: 0px;
+  }
+ 
+
   p {
       font-family: Montserrat-Regular;
       font-size: 14px;
@@ -856,8 +866,67 @@
     /*---------------------------------------------
     [ recommendations ]*/
     .Recommendations {
-      background-color: #a7caed;
-      width: 1440px;
-      height: 757px;
-      display: flex;
+      .ant-table {
+        display: block;
+      
+        // turn table rows into blocks
+        @media screen and (max-width: 600px) {
+          &-thead {
+            display: none;
+          }
+      
+          &-thead>tr,
+          &-tbody>tr {
+      
+            th,
+            td {
+              &:first-of-type {
+                padding-top: 1rem;
+              }
+      
+              &:last-of-type {
+                padding-bottom: 1rem;
+              }
+            }
+      
+            >th,
+            >td {
+              display: block;
+              width: auto !important;
+              border: none;
+              padding: 0 1rem;
+              font-size: 1rem;
+              text-align: left;
+    
+              &:nth-child(2) {
+                font-size: 0.8rem
+              }
+    
+              &:nth-child(3) {
+                font-size: 0.8rem
+              }
+    
+              &:nth-child(4) {
+                font-size: 0.8rem
+              }
+    
+              &:nth-child(5) {
+                font-weight: bold;
+              }
+    
+              &:nth-child(6) {
+                font-size: 0.7rem
+              }
+    
+              &:nth-child(7) {
+                font-size: 0.7rem
+              }
+              
+              &:last-child {
+                border-bottom: 1px solid #eee;
+              }
+            }
+          }
+        }
+      }
     }
