@@ -5,6 +5,7 @@ import IconButton from '@material-ui/core/IconButton'
 import { makeStyles } from '@material-ui/core/styles'
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUp from '@material-ui/icons/ArrowDropUp'
+import Upvote from './Upvote'
  
  
 const useStyles = makeStyles((theme) => ({
@@ -33,9 +34,10 @@ const useStyles = makeStyles((theme) => ({
 const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDowns }) => {
     const classes = useStyles()
     console.log("Current Review: ", review);
+    const reviewID = review._id;
 
-    const [clickedUp, setClickedUp] = useState(userUps && userUps.includes(review._id) ? true: false);
-    const [clickedDown, setClickedDown] = useState(userDowns && userDowns.includes(review._id) ? true : false);
+    const [clickedUp, setClickedUp] = useState(userUps && userUps.includes(reviewID) ? true: false);
+    const [clickedDown, setClickedDown] = useState(userDowns && userDowns.includes(reviewID) ? true : false);
 
     const startingVotes = votes;
     console.log("Starting Votes: ", startingVotes);
@@ -53,13 +55,13 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 setVotes(currentVotes - 1); 
                 setClickedUp(false);
                 // remove id from upvote list
-                let result = userUpvotes.filter(item => item !== review._id);
+                let result = userUpvotes.filter(item => item !== reviewID);
                 setUserUpvotes(result);
             } else if (clickedDown) {
                 setVotes(currentVotes + 1); 
                 setClickedDown(false);
                 // remove id from downvote list
-                let result = userDownvotes.filter(item => item !== review._id);
+                let result = userDownvotes.filter(item => item !== reviewID);
                 setUserDownvotes(result);
             }
             else{
@@ -67,8 +69,11 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 setVotes(currentVotes + 1);
                 setClickedUp(true);
                 // add id to upvote list
-                let result = [...userUpvotes, review._id];
-                setUserUpvotes(result);          
+                let result = [...userUpvotes, reviewID];
+                setUserUpvotes(result); 
+                console.log("about to upvote review._id", reviewID);
+                Upvote({reviewID});
+                console.log("JUST UPVOTED, helpfulness = ", review.helpfulness);   
             }
         };
     }
@@ -80,14 +85,14 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 setVotes(currentVotes + 1); 
                 setClickedDown(false);
                 // remove id from downvote list
-                let result = userDownvotes.filter(item => item !== review._id);
+                let result = userDownvotes.filter(item => item !== reviewID);
                 setUserDownvotes(result);
             } else if (clickedUp) {
                 // already upvoted, undo upvote
                 setVotes(currentVotes - 1);
                 setClickedUp(false);
                 // remove id from upvote list
-                let result = userUpvotes.filter(item => item !== review._id);
+                let result = userUpvotes.filter(item => item !== reviewID);
                 setUserUpvotes(result);
             }
             else{
@@ -95,7 +100,7 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 setVotes(currentVotes - 1);
                 setClickedDown(true);
                 // add id to downvote list
-                let result = [...userDownvotes, review._id];
+                let result = [...userDownvotes, reviewID];
                 setUserDownvotes(result); 
             }
         };

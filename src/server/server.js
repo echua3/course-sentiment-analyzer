@@ -49,9 +49,9 @@ const dbo_search = require("./db/conn_search")
 
 const sanitizeHTML = require('sanitize-html');
 const addUserRoutes = require("./routes/addUser");
-// const upvoteReviewRoute = require("./routes/upvoteReview");
+const upvoteReviewRoute = require("./routes/upvoteReview");
 
-// app.use(upvoteReviewRoute)
+app.use(upvoteReviewRoute)
 
 app.listen(port, () => {
 
