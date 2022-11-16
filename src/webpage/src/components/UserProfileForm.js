@@ -80,7 +80,7 @@ function UserProfileForm(props) {
     firstInterest: '',
     secondInterest: '',
     thirdInterest: '',
-    reviewIDs: ['6374a31d5c0d13397e30d548','6374a3225c0d13397e30d550','6374a3265c0d13397e30d558','6374a2b25c0d13397e30d536'],
+    reviewIDs: '',
     reviewUpvotedIDs: '',
     reviewDownvotedIDs: '',
     dept: '',
