@@ -18,7 +18,7 @@ function Upvote(reviewID) {
             return;
         });
 
-        console.log("response: ", response);
+        // console.log("response: ", response);
 
         if(!response.ok) {
             console.log('!response.ok')
