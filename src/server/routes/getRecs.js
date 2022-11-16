@@ -15,35 +15,35 @@ recRoutes.route("/recs").get(function (req, res) {
               "should": [
                 {
                     "text": {
-                        "query": firstInterest, //replace with user.firstInterest
+                        "query": firstInterest,
                         "path": ["Other Buzzwords", "Description"],
                         score: { boost: { value: 4 }}
                     }
                 },
                 {
                     "text": {
-                        "query": secondInterest, //replace with user.secondInterest
+                        "query": secondInterest,
                         "path": ["Other Buzzwords", "Description"],
                         score: { boost: { value: 3 }}
                     }
                 },
                 {
                     "text": {
-                        "query": thirdInterest, //replace with user.thirdInterest
+                        "query": thirdInterest,
                         "path": ["Other Buzzwords", "Description"],
                         score: { boost: { value: 2 }}
                     }
                 },
                 {
                     "text": {
-                        "query": department, //replace with user.dept[0]
+                        "query": department,
                         "path": "AllDepartments",
                         score: { boost: { value: 2 }}
                     }
                 },
                 {
                     "text": {
-                        "query": degreeType, //replace with user.dept[0]
+                        "query": degreeType,
                         "path": "Level",
                         score: { boost: { value: 3 }}
                     }
@@ -59,8 +59,7 @@ recRoutes.route("/recs").get(function (req, res) {
           $project: {
             "_id": 1,
             "Description": 1,
-            //"averageScore": 1, //this would be the average sentiment score that was calculated and stored for each course
-            "score": { "$meta": "searchScore" }, //multiply "averageScore" with "score" and then sort by
+            "score": { "$meta": "searchScore" },
             "Department" : 1,
             "SchoolName" : 1,
             "OfferingName" : 1,
