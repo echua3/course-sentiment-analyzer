@@ -14,7 +14,11 @@ function ReadReview({record}) {
     const [recordValues, setRecords] = useState([]);
     const [sectionID, setSectionIDs] = useState({record});
     const [form, setForm] = useState();
-   
+    const [userUps, setUserUps] = useState([]);
+    const [userDowns, setUserDowns] = useState([]);
+    // hard code user 
+    const userId = 'af3';
+
 
     useEffect( () => {
         async function getRecords() {
@@ -32,8 +36,55 @@ function ReadReview({record}) {
         }   
         getRecords();
 
+        async function getUser() {
+          const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + userId)
+            if(!response.ok) {
+              const message = "An error occurred"
+              console.log("Error:" + response.statusText);
+              return;
+            }
+            const records = await response.json();
+            console.log("USER:", records);
+            // setUserUps(records.data[0].reviewUpvoteIDs);
+            let upvoteIDs = records.data[0].reviewUpvoteIDs;
+            setUserUps(upvoteIDs);
+
+            console.log(records.data[0].reviewUpvoteIDs);
+            console.log("UserUpvoteIDs:", userUps);
+    
+            setUserDowns(records.data[0].reviewDownvoteIDs);
+            console.log("UserDownvoteIDS:", userDowns);
+        }
+        getUser();
+        console.log("recordValues.length: ", recordValues.length);
+
         return;
     }, [recordValues.length]);
+
+    // get user data
+    // async function getUser() {
+    //   const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + userId)
+    //     if(!response.ok) {
+    //       const message = "An error occurred"
+    //       console.log("Error:" + response.statusText);
+    //       return;
+    //     }
+    //     const records = await response.json();
+    //     console.log("USER:", records);
+    //     // setUserUps(records.data[0].reviewUpvoteIDs);
+    //     let upvoteIDs = records.data[0].reviewUpvoteIDs;
+    //     setUserUps(upvoteIDs);
+    //     console.log(records.data[0].reviewUpvoteIDs);
+    //     console.log("UserUpvoteIDs:", userUps);
+
+    //     setUserDowns(records.data[0].reviewDownvoteIDs);
+    //     console.log("UserDownvoteIDS:", userDowns);
+    // }
+    // if (!userQuery) {
+    //   getUser();
+    //   userQuery = true;
+    // }
+
     
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         async function changeRecords() {
@@ -49,7 +100,7 @@ function ReadReview({record}) {
             setRecords(records.data);
         }   
         changeRecords();
-        console.log(recordValues);
+        console.log("HANDLED CHANGE:", recordValues);
 
     };
 
@@ -59,7 +110,7 @@ function ReadReview({record}) {
               itemLayout ="horizontal"
               dataSource ={recordValues}
               renderItem = {item => (
-                <Review review={item}/>
+                <Review key={item._id} review={item} userUps={userUps} userDowns={userDowns}/>
               )}/>
  
               <Pagination
@@ -68,7 +119,7 @@ function ReadReview({record}) {
                   variant = "outlined"
                   color = "primary"
                   onChange={handleChange}
-                  />
+              />
         </div>
     );
 
