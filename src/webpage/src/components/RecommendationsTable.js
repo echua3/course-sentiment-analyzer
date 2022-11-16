@@ -40,7 +40,7 @@ function RecommendationsTable(props) {
             third = records.data[0].thirdInterest;
           }
 
-          const interests = await fetch(API_ENDPOINT + "/recs/" + "?firstInterest=" + first + "&secondInterest=" + second + "&thirdInterest=" + third + "&department=" + records.data[0].department);
+          const interests = await fetch(API_ENDPOINT + "/recs/" + "?firstInterest=" + first + "&secondInterest=" + second + "&thirdInterest=" + third + "&department=" + records.data[0].department + "&degreeType=" + records.data[0].degreeType);
           if(!interests.ok) {
               const message = "An error occured"
               console.log("Error:" + interests.statusText);
