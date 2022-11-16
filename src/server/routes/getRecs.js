@@ -6,7 +6,7 @@ const recRoutes = express.Router();
 recRoutes.route("/recs").get(function (req, res) {
     let db_connect = dbo.getDb("classes");
 
-    const { firstInterest, secondInterest, thirdInterest, department } = req.query;
+    const { firstInterest, secondInterest, thirdInterest, department, degreeType } = req.query;
 
     return db_connect.collection("testClasses").aggregate(
         [{
@@ -41,6 +41,13 @@ recRoutes.route("/recs").get(function (req, res) {
                         score: { boost: { value: 2 }}
                     }
                 },
+                {
+                    "text": {
+                        "query": degreeType, //replace with user.dept[0]
+                        "path": "Level",
+                        score: { boost: { value: 3 }}
+                    }
+                },
               ]
             }
           }
@@ -63,6 +70,7 @@ recRoutes.route("/recs").get(function (req, res) {
             "Instructors" : 1,
             "InstructorsFullName" : 1,
             "SSS_SectionsID" : 1,
+            "Level" : 1,
           }
         }
         ]).toArray(function (err, result) {
