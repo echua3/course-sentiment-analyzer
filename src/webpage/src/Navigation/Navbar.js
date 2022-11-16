@@ -3,7 +3,7 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import "./output.css";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import Recommendations from "../Pages/Recommendations";
-import Login from "../Pages/LoginPage";
+import LoginPage from "../Pages/LoginPage";
 import CourseSearch from "../Pages/CourseSearch";
 import HomePage from "../Pages/HomePage";
 import UserProfile from "../Pages/UserProfile";
@@ -61,26 +61,25 @@ export default function Navbar() {
                         "text-gray-300 hover:bg-gray-700 hover:text-white",
                         "px-3 py-2 rounded-md text-sm font-medium"
                       )} to="/Recommendations">Recommendations</CustomLink>
-                    <CustomLink key={Login} href={"/Login"} className={classNames(
-                    "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "px-3 py-2 rounded-md text-sm font-medium"
-                     )} to="/Login">Login</CustomLink>
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-4">
-                <CustomLink key={UserProfile} href={"/Profile"} className={classNames(
-                        "bg-gray-800 flex text-sm rounded-full",
-                        "block px-4 py-2 text-sm text-gray-700"
-                )} to="/Profile">
-                  <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
-                        alt=""
-                      />
-                </CustomLink>
-                <CustomLink key={LogoutPage} href={"/logout"} className="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white" to="/logout">Logout</CustomLink>
-              </div>
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-4">
+                    <CustomLink key={UserProfile} href={"/Profile"} className={classNames(
+                            "bg-gray-800 flex text-sm rounded-full",
+                            "block px-4 py-2 text-sm text-gray-700"
+                    )} to="/Profile">
+                      <img
+                            className="h-8 w-8 rounded-full"
+                            src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
+                            alt=""
+                          />
+                    </CustomLink>
+                    <CustomLink key={LogoutPage} href={"/Logout"} className="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white" to="/Logout">Logout</CustomLink>
+                </div>
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-4">
+                    <CustomLink key={LoginPage} href={"/Login"} className="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white" to="/Login">Login</CustomLink>
+                </div>
             </div>
           </div>
 
@@ -99,10 +98,6 @@ export default function Navbar() {
                     "text-gray-300 hover:bg-gray-700 hover:text-white",
                     "px-3 py-2 rounded-md text-sm font-medium"
                   )} to="/Recommendations">Recommendations</CustomLink>
-                  <CustomLink key={Login} href={"/Login"} className={classNames(
-                    "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "px-3 py-2 rounded-md text-sm font-medium"
-                  )} to="/Login">Login</CustomLink>
               </div>
             </div>
           </Disclosure.Panel>

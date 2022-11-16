@@ -17,11 +17,13 @@ function LoginCard() {
       if(!responseValue.ok) {
             const message = "An error occured"
             console.log("Error:" + responseValue.statusText);
+            window.userID = "";
             return;
       }
-      const records2 = await responseValue.json()
-      console.log(records2.data.userId)
+      const records2 = await responseValue.json();
+      console.log(records2.data.userId);
       setActualID(records2.data.userId);
+      window.userID = actualID;
     }
     fetchData().catch(console.error);
   })
@@ -49,11 +51,13 @@ function LoginCard() {
     if(!responseValue.ok) {
           const message = "An error occured"
           console.log("Error:" + responseValue.statusText);
+          window.userID = "";
           return;
     }
     const records2 = await responseValue.json()
     console.log(records2.data)
     setActualID(records2.data.userId);
+    window.userID = actualID;
   }
 
   if(actualID == "" || actualID == null) {
