@@ -22,7 +22,7 @@ function happyOrSad(par1) {
   }
 }
 
-
+    
 function ReadReview({record}) {
 
     const [pageNumber, setPageNumber] = useState(1);
@@ -68,7 +68,7 @@ function ReadReview({record}) {
 
             // console.log(records.data[0].reviewUpvoteIDs);
             // console.log("UserUpvoteIDs:", userUps);
-
+    
             setUserDowns(records.data[0].reviewDownvoteIDs);
             // console.log("UserDownvoteIDS:", userDowns);
         }
@@ -102,7 +102,7 @@ function ReadReview({record}) {
     //   userQuery = true;
     // }
 
-
+    
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPageNumber(value);
         async function changeRecords() {
@@ -135,7 +135,7 @@ function ReadReview({record}) {
 
             // console.log(records.data[0].reviewUpvoteIDs);
             // console.log("UserUpvoteIDs:", userUps);
-
+    
             setUserDowns(records.data[0].reviewDownvoteIDs);
             // console.log("UserDownvoteIDS:", userDowns);
         }
@@ -143,20 +143,16 @@ function ReadReview({record}) {
         // console.log("HANDLED CHANGE:", recordValues);
 
     };
-    console.log('pageCount')
-    console.log(pageCount)
-    console.log('pageNumber')
-    console.log(pageNumber)
 
     return (
         <div>
-           <List className ="comment-list"
+           <List className ="comment-list" 
               itemLayout ="horizontal"
               dataSource ={recordValues}
               renderItem = {item => (
                 <Review key={item._id} review={item} userUps={userUps} userDowns={userDowns}/>
               )}/>
-
+ 
               <Pagination
                   count = {pageCount}
                   page = {pageNumber}
@@ -170,5 +166,5 @@ function ReadReview({record}) {
 
   }
 
-
+  
   export default ReadReview;
