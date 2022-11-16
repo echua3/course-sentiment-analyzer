@@ -86,6 +86,9 @@ function SearchBar(props) {
             setRessub('Please enter the correct information')
           }
           else{
+            setResstatus('success');
+            setRestitle('Success');
+            setRessub('Above is the course list')
             setDatasource(res.data.data)
             // console.log(res.data.data);
             pagination.total = res.data.numberTotal
