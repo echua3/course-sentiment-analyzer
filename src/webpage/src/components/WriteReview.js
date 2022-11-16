@@ -105,7 +105,7 @@ function WriteReview({record}) {
         
     }
 
-    if (!reviewSubmitted) {
+    if (!reviewSubmitted && window.userID != "") {
     return (
         <div>
             <span class="writereview-form-title">
@@ -137,11 +137,19 @@ function WriteReview({record}) {
 
       
     );
-    } else {
+    } else if (window.userID != "") {
       return (
         <div>
             <span class="writereview-form-title">
                Thank you for adding your review!
+            </span>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+            <span class="writereview-form-title">
+            Please login to write reviews.
             </span>
         </div>
       );

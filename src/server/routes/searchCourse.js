@@ -5,8 +5,6 @@ const ObjectId = require("mongodb").ObjectId;
 
 const searchRoutes = express.Router();
 searchRoutes.route("/courselist").get(function (req, res) {
-
-
   const LIMIT = 10;
   const startIndex = (Number(req.query.currentPage) - 1) * LIMIT;
   let db_connect = dbo.getDb("Classes");
@@ -15,7 +13,8 @@ searchRoutes.route("/courselist").get(function (req, res) {
 
   // if (!req.query.CourseTitle && !req.query.CourseNumber && !req.query.Credits && !req.query.Department){
   //   Object.assign(myquery,{'Title': 'false'})
-  // } else {}
+  // } else {
+  // }
   if (req.query.CourseTitle) {
     Object.assign(myquery,{'Title':{$regex:req.query.CourseTitle,$options: 'i'}})
   }
@@ -54,7 +53,9 @@ searchRoutes.route("/courselist").get(function (req, res) {
     .find({$and:[myquery]}).limit(LIMIT).skip(startIndex).toArray(function (err, result) {
       // if (err) throw err;
       if (err) return handleError(err);
-      // console.log(result)
+      // console.log('result');
+      // console.log(typeof result);
+      // console.log(result);
       res.status(200).json({data: result,
                             code: 200,
                             currentPage: Number(req.query.currentPage),

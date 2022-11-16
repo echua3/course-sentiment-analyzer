@@ -1,15 +1,12 @@
 import { OmitProps } from "antd/lib/transfer/ListBody";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Axios from "axios";
 import './style/css/CourseComponent.scss';
 import { Pagination, PaginationItem } from "@material-ui/lab";
-import VoteBox from "./VoteBox";
-import Grid from '@mui/material/Grid';
-import { List, Comment } from "antd";
+import { List } from "antd";
+import Review from "./Review";
 
-function happyOrSad(par1)
-{
+function happyOrSad(par1) {
 
   if(par1>0)
   {
@@ -33,33 +30,83 @@ function ReadReview({record}) {
     const [recordValues, setRecords] = useState([]);
     const [sectionID, setSectionIDs] = useState({record});
     const [form, setForm] = useState();
-   
+    const [userUps, setUserUps] = useState([]);
+    const [userDowns, setUserDowns] = useState([]);
+    const userId = window.userID;
+
 
     useEffect( () => {
         async function getRecords() {
             const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/sectionID/" + {record}.record.SSS_SectionsID+ "/" + pageNumber)
             if(!response.ok) {
-              const message = "An error occured"
+              const message = "An error occurred"
               console.log("Error:" + response.statusText);
               return;
             }
             const records = await response.json();
-            console.log(records.data);
-            console.log(pageNumber);
+            // console.log(records.data);
+            // console.log(pageNumber);
             setRecords(records.data);
             setPageCount(records.numberOfPage);
         }   
         getRecords();
 
+        async function getUser() {
+          const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + userId)
+            if(!response.ok) {
+              const message = "An error occurred"
+              console.log("Error:" + response.statusText);
+              return;
+            }
+            const records = await response.json();
+            // console.log("USER:", records);
+            // setUserUps(records.data[0].reviewUpvoteIDs);
+            let upvoteIDs = records.data[0].reviewUpvoteIDs;
+            setUserUps(upvoteIDs);
+
+            // console.log(records.data[0].reviewUpvoteIDs);
+            // console.log("UserUpvoteIDs:", userUps);
+    
+            setUserDowns(records.data[0].reviewDownvoteIDs);
+            // console.log("UserDownvoteIDS:", userDowns);
+        }
+        getUser();
+        // console.log("recordValues.length: ", recordValues.length);
+
         return;
     }, [recordValues.length]);
+
+    // get user data
+    // async function getUser() {
+    //   const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + userId)
+    //     if(!response.ok) {
+    //       const message = "An error occurred"
+    //       console.log("Error:" + response.statusText);
+    //       return;
+    //     }
+    //     const records = await response.json();
+    //     console.log("USER:", records);
+    //     // setUserUps(records.data[0].reviewUpvoteIDs);
+    //     let upvoteIDs = records.data[0].reviewUpvoteIDs;
+    //     setUserUps(upvoteIDs);
+    //     console.log(records.data[0].reviewUpvoteIDs);
+    //     console.log("UserUpvoteIDs:", userUps);
+
+    //     setUserDowns(records.data[0].reviewDownvoteIDs);
+    //     console.log("UserDownvoteIDS:", userDowns);
+    // }
+    // if (!userQuery) {
+    //   getUser();
+    //   userQuery = true;
+    // }
+
     
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         async function changeRecords() {
             setPageNumber(value)
             const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/sectionID/" + {record}.record.SSS_SectionsID + "/" + value)
             if(!response.ok) {
-              const message = "An error occured"
+              const message = "An error occurred"
               console.log("Error:" + response.statusText);
               return;
             }
@@ -68,7 +115,28 @@ function ReadReview({record}) {
             setRecords(records.data);
         }   
         changeRecords();
-        console.log(recordValues);
+
+        async function updateUser() {
+          const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + userId)
+            if(!response.ok) {
+              const message = "An error occurred"
+              console.log("Error:" + response.statusText);
+              return;
+            }
+            const records = await response.json();
+            // console.log("USER:", records);
+            // setUserUps(records.data[0].reviewUpvoteIDs);
+            let upvoteIDs = records.data[0].reviewUpvoteIDs;
+            setUserUps(upvoteIDs);
+
+            // console.log(records.data[0].reviewUpvoteIDs);
+            // console.log("UserUpvoteIDs:", userUps);
+    
+            setUserDowns(records.data[0].reviewDownvoteIDs);
+            // console.log("UserDownvoteIDS:", userDowns);
+        }
+        updateUser();
+        // console.log("HANDLED CHANGE:", recordValues);
 
     };
 
@@ -78,34 +146,7 @@ function ReadReview({record}) {
               itemLayout ="horizontal"
               dataSource ={recordValues}
               renderItem = {item => (
-
-                <Grid
-                 container
-                 spacing={1}
-                 direction="row"
-                 alignItems="center"
-                 >
-                   <Grid item>
-                     <VoteBox votes={item.helpfulness}/>
-                   </Grid>
-                   <Grid item xs={10} md={9} >
-                     <Comment
-                       content = {
-                           <><h6>
-                           {item.comment}
-                         </h6><h7>
-                             Difficulty: {item.difficulty}/5
-                           </h7></>
-                       }
-                       author = {
-                           <p>
-                              {item.date && (new Date(item.date).toLocaleDateString())}
-                           </p>   
-                       }
-                      
-                     />                     
-                   </Grid>
-                </Grid>
+                <Review key={item._id} review={item} userUps={userUps} userDowns={userDowns}/>
               )}/>
  
               <Pagination
@@ -114,7 +155,7 @@ function ReadReview({record}) {
                   variant = "outlined"
                   color = "primary"
                   onChange={handleChange}
-                  />
+              />
         </div>
     );
 

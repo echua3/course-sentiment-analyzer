@@ -91,6 +91,8 @@ function CourseSummary({record}) {
           console.log("Average is " + average_sentiment_score);
           console.log("Difficulty is " + average_difficulty);
           console.log("Difficulty list"+difficulty_list);
+         //  console.log("Average is " + average_sentiment_score);
+         //  console.log("Difficulty is " + average_difficulty);
          // console.log(recordValues[0].score);
          // console.log(recordValues[1].score);
          // console.log(recordValues[2].score);
@@ -114,6 +116,7 @@ function CourseSummary({record}) {
       Average Sentiment
       {average_sentiment_score}
     </p>
+      
     </Col>
   </Row>
      <h6>
