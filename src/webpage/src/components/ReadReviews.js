@@ -6,8 +6,7 @@ import { Pagination, PaginationItem } from "@material-ui/lab";
 import { List } from "antd";
 import Review from "./Review";
 
-function happyOrSad(par1)
-{
+function happyOrSad(par1) {
 
   if(par1>0)
   {
