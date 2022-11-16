@@ -1,13 +1,13 @@
 /* 
  Handles undo upvote request
- Requires reviewID and userID
+ Requires reviewID
 */
-function UndoUpvote(reviewID, userID) {
+function UndoUpvote(reviewID) {
 
-    console.log("UNDO UPVOTE URL: ", process.env.REACT_APP_API_ENDPOINT + "/review/undoUpvote/" + reviewID + "/" +  userID);
+    console.log("UNDO UPVOTE URL: ", process.env.REACT_APP_API_ENDPOINT + "/review/undoUpvote/" + reviewID + "/" +  window.userID);
 
     const requestData = async () =>{
-        const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/undoUpvote/" + reviewID + "/" + userID, {
+        const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/undoUpvote/" + reviewID + "/" + window.userID, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

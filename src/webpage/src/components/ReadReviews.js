@@ -32,8 +32,7 @@ function ReadReview({record}) {
     const [form, setForm] = useState();
     const [userUps, setUserUps] = useState([]);
     const [userDowns, setUserDowns] = useState([]);
-    // hard code user 
-    const userId = 'af3';
+    const userId = window.userID;
 
 
     useEffect( () => {
@@ -147,7 +146,7 @@ function ReadReview({record}) {
               itemLayout ="horizontal"
               dataSource ={recordValues}
               renderItem = {item => (
-                <Review key={item._id} review={item} userUps={userUps} userDowns={userDowns} userID={userId}/>
+                <Review key={item._id} review={item} userUps={userUps} userDowns={userDowns}/>
               )}/>
  
               <Pagination
