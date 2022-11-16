@@ -50,11 +50,16 @@ function UserReviews(props) {
   const [datasource, setDatasource] = useState([]);
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState('');
+  const [params, setParams] = useState({
+    comment: '',
+    userID: window.userID
+  });
+
   const isEditing = (record) => record.reviewID === editingKey;
 
   const edit = (record) => {
     form.setFieldsValue({
-      comment: '',
+      newreview: '',
       ...record,
     });
     setEditingKey(record.reviewID);
@@ -78,38 +83,42 @@ function UserReviews(props) {
       });
       setDatasource(newData);
       setEditingKey('');
-      // console.log('row')
-      // console.log(row)
+      // console.log('row.comment')
+      // console.log(row.comment)
       // console.log('index')
       // console.log(index)
       // console.log('newdata')
       // console.log(newData)
-      // console.log('item')
-      // console.log(item)
-      // const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/update/" + params.UserID, {
+      // console.log('item.reviewID')
+      // console.log(item.reviewID)
 
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //    body: JSON.stringify(params),
-      // })
-      // .catch(error => {
-      //   window.alert(error);
-      //   return;
-      // });
-      // if(!response.ok) {
-      //   // const records = await response.json();
-      //   // console.log(records);
-      //   // const basicMessage = records.error.message.split(/:(.*)/s)
-      //   // const allErrors = basicMessage[1].split(",")
-      //   // console.log(allErrors)
-      //   // allErrors.forEach(runErrorMessaging);
-      //   console.log('!response.ok')
-      // } else {
-      //   console.log(response)
-      //   setProfile(true)
-      // }
+      params.newreview = row.comment
+      let test={...params}
+      setParams(test)
+
+      const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/update/" + item.reviewID, {
+
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+         body: JSON.stringify(params),
+      })
+      .catch(error => {
+        window.alert(error);
+        return;
+      });
+      if(!response.ok) {
+        // const records = await response.json();
+        // console.log(records);
+        // const basicMessage = records.error.message.split(/:(.*)/s)
+        // const allErrors = basicMessage[1].split(",")
+        // console.log(allErrors)
+        // allErrors.forEach(runErrorMessaging);
+        console.log('!response.ok')
+      } else {
+        console.log(response)
+      }
 
 
 
@@ -181,16 +190,16 @@ function UserReviews(props) {
       dataIndex: 'difficulty',
       key: 'difficulty'
     },
-    {
-      title: 'Score',
-      dataIndex: 'score',
-      key: 'score',
-    },
-    {
-      title: 'Helpfulness',
-      dataIndex: 'helpfulness',
-      key: 'helpfulness',
-    },
+    // {
+    //   title: 'Score',
+    //   dataIndex: 'score',
+    //   key: 'score',
+    // },
+    // {
+    //   title: 'Helpfulness',
+    //   dataIndex: 'helpfulness',
+    //   key: 'helpfulness',
+    // },
     {
       title: 'Edit',
       dataIndex: 'edit',

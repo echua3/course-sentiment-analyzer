@@ -88,22 +88,7 @@ function UserProfileForm(props) {
 
 
   const onReset = async () => {
-    // Using the sample user in database
-    params.userID = window.userID
-    params.firstName = ''
-    params.lastName = ''
-    params.degreeType = ''
-    params.firstInterest = ''
-    params.secondInterest = ''
-    params.thirdInterest = ''
-    params.reviewIDs = ''
-    params.reviewUpvotedIDs = ''
-    params.reviewDownvotedIDs = ''
-    params.dept = ''
-    let test={...params}
-    setParams(test)
-    form.resetFields();
-    // await requestData(params)
+    navigate('/Profile')
   };
 
 
@@ -362,21 +347,21 @@ function UserProfileForm(props) {
       <Form.Item name="text" label="What are you looking for in a course? (order by priority)"></Form.Item>
       <Form.Item name="firstInterest" label="Interest 1">
         <Input
-          placeholder="First Interest"
+          placeholder="Research, Team Projects, etc."
           onChange={e => {params.firstInterest = e.target.value}}
           value={params.firstInterest}
         />
       </Form.Item>
       <Form.Item name="secondInterest" label="Interest 2">
         <Input
-          placeholder="Second Interest"
+          placeholder="Research, Team Projects, etc."
           onChange={e => {params.secondInterest = e.target.value}}
           value={params.secondInterest}
         />
       </Form.Item>
       <Form.Item name="thirdInterest" label="Interest 3">
         <Input
-          placeholder="Third Interest"
+          placeholder="Research, Team Projects, etc."
           onChange={e => {params.thirdInterest = e.target.value}}
           value={params.thirdInterest}
         />
@@ -386,7 +371,7 @@ function UserProfileForm(props) {
         {/* <Link to='/Profile'> */}
         <Button className='submit' type="primary" htmlType="submit" onClick={onSubmit}>Save changes</Button>
         {/* </Link> */}
-        <Button className='reset' htmlType="button" onClick={onReset}>Reset changes</Button>
+        <Button className='reset' htmlType="button" onClick={onReset}>Cancel</Button>
       </Form.Item>
 
     </Form>

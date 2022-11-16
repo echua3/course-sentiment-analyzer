@@ -8,8 +8,6 @@ function UserProfileData(props) {
     const [datasource, setDatasource] = useState([])
     const [userID, setUserID] = useState(window.userID)
 
-    console.log('window.id test')
-    console.log(window.userID)
     useEffect( () => {
         async function getRecords() {
           const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + window.userID)
@@ -51,7 +49,7 @@ function UserProfileData(props) {
                 </Link>
             }
             >
-            <Descriptions.Item label="Fisrt Name">{firstName}</Descriptions.Item>
+            <Descriptions.Item label="First Name">{firstName}</Descriptions.Item>
             <Descriptions.Item label="Last Name">{lastName}</Descriptions.Item>
             <br />
             <Descriptions.Item label="Degree Type">{degreeType}</Descriptions.Item>

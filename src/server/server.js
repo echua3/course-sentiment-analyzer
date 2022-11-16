@@ -21,6 +21,8 @@ editUserRoute = require("./routes/editUser")
 userReviewRoutes = require("./routes/userReview")
 deleteReviewRoutes = require("./routes/deleteReviewProfile")
 showProfileRoutes = require("./routes/showProfile")
+editreviewRoutes = require("./routes/editReview")
+
 
 currentUserRoute = require("./routes/getCurrentUser")
 login = require("./routes/login")
@@ -61,6 +63,7 @@ app.use(login)
 app.use(logout)
 app.use(currentUserRoute)
 app.use(getRecsRoute)
+app.use(editreviewRoutes)
 
 
 // Pick up React index.html file
