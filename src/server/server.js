@@ -52,10 +52,12 @@ const addUserRoutes = require("./routes/addUser");
 const upvoteReviewRoute = require("./routes/upvoteReview");
 const downvoteReviewRoute = require("./routes/downvoteReview");
 const undoUpvoteReviewRoute = require("./routes/undoUpvoteReview");
+const undoDownvoteReviewRoute = require("./routes/undoDownvoteReview");
 
 app.use(upvoteReviewRoute)
 app.use(downvoteReviewRoute)
 app.use(undoUpvoteReviewRoute)
+app.use(undoDownvoteReviewRoute)
 
 app.listen(port, () => {
 

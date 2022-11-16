@@ -8,6 +8,7 @@ import ArrowDropUp from '@material-ui/icons/ArrowDropUp'
 import Upvote from './Vote/Upvote'
 import Downvote from './Vote/Downvote'
 import UndoUpvote from './Vote/UndoUpvote'
+import UndoDownvote from './Vote/UndoDownvote'
  
  
 const useStyles = makeStyles((theme) => ({
@@ -59,12 +60,14 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 // remove id from upvote list
                 let result = userUpvotes.filter(item => item !== reviewID);
                 setUserUpvotes(result);
+                UndoUpvote(reviewID ,userID);
             } else if (clickedDown) {
                 setVotes(currentVotes + 1); 
                 setClickedDown(false);
                 // remove id from downvote list
                 let result = userDownvotes.filter(item => item !== reviewID);
                 setUserDownvotes(result);
+                UndoDownvote(reviewID, userID);
             }
             else{
                 // upvote
@@ -88,6 +91,7 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 // remove id from downvote list
                 let result = userDownvotes.filter(item => item !== reviewID);
                 setUserDownvotes(result);
+                UndoDownvote(reviewID, userID);
             } else if (clickedUp) {
                 // already upvoted, undo upvote
                 setVotes(currentVotes - 1);
