@@ -36,22 +36,20 @@ function ReadReview({record}) {
 
 
     useEffect( () => {
-        async function getRecords() {
-            const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/sectionID/" + {record}.record.SSS_SectionsID + "/" + pageNumber)
-            if(!response.ok) {
-              const message = "An error occurred"
-              console.log("Error:" + response.statusText);
-              return;
-            }
-            const records = await response.json();
-            // console.log(records.data);
-            // console.log(pageNumber);
-            setRecords(records.data);
-            setPageCount(records.numberOfPage);
-            console.log(pageCount);
-            console.log({record}.record.SSS_SectionsID);
+      async function getRecords() {
+        const response = await fetch("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/review/sectionID/" + {record}.record.SSS_SectionsID + "/" + pageNumber)
+        if(!response.ok) {
+          const message = "An error occured"
+          console.log("Error:" + response.statusText);
+          return;
         }
-        getRecords();
+        const records = await response.json();
+        // console.log(records.data);
+        console.log(pageNumber);
+        setRecords(records.data);
+        setPageCount(records.numberOfPage);
+    }   
+    getRecords();
 
         async function getUser() {
           const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + userId)
@@ -104,21 +102,20 @@ function ReadReview({record}) {
 
     
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        setPageNumber(value);
-        async function changeRecords() {
-          const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/sectionID/" + {record}.record.SSS_SectionsID+ "/" + value)
-          if(!response.ok) {
-            const message = "An error occurred"
-            console.log("Error:" + response.statusText);
-            return;
-          }
-          const records = await response.json();
-          // console.log(records.data);
-          // console.log(pageNumber);
-          setRecords(records.data);
-          console.log(pageCount);
+      async function changeRecords() {
+        setPageNumber(value)
+        const response = await fetch("http://localhost:" + process.env.REACT_APP_SERVERPORT+ "/review/sectionID/" + {record}.record.SSS_SectionsID + "/" + value)
+        if(!response.ok) {
+          const message = "An error occured"
+          console.log("Error:" + response.statusText);
+          return;
         }
-        changeRecords();
+        const records = await response.json();
+        // console.log(records.data);
+        setRecords(records.data);
+       }   
+      changeRecords();
+       console.log(recordValues);
 
         async function updateUser() {
           const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + userId)
