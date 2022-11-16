@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Button, Select, InputNumber } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 
@@ -9,6 +9,8 @@ function UserProfileForm(props) {
 
   const [loadings, setLoadings] = useState([]);
   const [profileSubmitted, setProfile] = useState(false);
+  const [form_1] = Form.useForm();
+
   const navigate = useNavigate()
 
   const enterLoading = (index) => {
@@ -92,22 +94,50 @@ function UserProfileForm(props) {
   };
 
 
+  useEffect( () => {
+    async function getRecords() {
+      const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/info/" + window.userID)
+      if(!response.ok) {
+        const message = "An error occured"
+        console.log('here')
+        console.log("Error:" + response.statusText);
+        return;
+      }
+      const res = await response.json();
+      // console.log(records.data);
+      form_1.setFieldsValue({
+        FirstName: res.data[0].firstName,
+        LastName: res.data[0].lastName,
+        StudentDegree: res.data[0].degreeType,
+        Department: res.data[0].dept,
+        firstInterest: res.data[0].firstInterest,
+        secondInterest: res.data[0].secondInterest,
+        thirdInterest: res.data[0].thirdInterest
+      });
+    }
+    getRecords();
 
+    return;
+  }, [window.userID]);
+
+
+  // console.log('firstname')
+  // console.log(firstname)
 
   return (
     <div>
     <div class="userprofile">
     <p class='userprofiletitle'>My Profile</p>
     {/* <Form onSubmit={onSubmit}> */}
-    <Form>
-      <Form.Item name="First Name" label="Firstname">
+    <Form form={form_1}>
+      <Form.Item name="FirstName" label="First Name" >
         <Input
           placeholder="Firstname"
           onChange={e => {params.firstName = e.target.value}}
           value={params.firstName}
         />
       </Form.Item>
-      <Form.Item name="Last Name" label="Lastname">
+      <Form.Item name="LastName" label="Last Name">
         <Input
           placeholder="Lastname"
           onChange={e => {params.lastName = e.target.value}}
@@ -122,7 +152,7 @@ function UserProfileForm(props) {
         />
       </Form.Item> */}
 
-      <Form.Item name="Student Degree" label="Degree Type">
+      <Form.Item name="StudentDegree" label="Degree Type">
         <Select placeholder="Please Select Your Degree Type" onChange={e => {params.degreeType = e}} value={params.degreeType}>
         <Select.Option value="">
             Please Select One Degree
