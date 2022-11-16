@@ -5,8 +5,9 @@ import IconButton from '@material-ui/core/IconButton'
 import { makeStyles } from '@material-ui/core/styles'
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUp from '@material-ui/icons/ArrowDropUp'
-import Upvote from './Upvote'
-import Downvote from './Downvote'
+import Upvote from './Vote/Upvote'
+import Downvote from './Vote/Downvote'
+import UndoUpvote from './Vote/UndoUpvote'
  
  
 const useStyles = makeStyles((theme) => ({
@@ -94,6 +95,7 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 // remove id from upvote list
                 let result = userUpvotes.filter(item => item !== reviewID);
                 setUserUpvotes(result);
+                UndoUpvote(reviewID ,userID);
             }
             else{
                 // downvote
@@ -108,12 +110,12 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
     }
 
     // console logs to check values
-    // console.log("userUps: ", userUps);
-    // console.log("userUpvotes: ", userUpvotes);
+    console.log("userUps: ", userUps);
+    console.log("userUpvotes: ", userUpvotes);
     // console.log("votes: ", votes);
-    // console.log("clickedUp: ", clickedUp);
-    // console.log("userDowns: ", userDowns);
-    // console.log("userDownvotes: ", userDownvotes);
+    console.log("clickedUp: ", clickedUp);
+    console.log("userDowns: ", userDowns);
+    console.log("userDownvotes: ", userDownvotes);
     // console.log("clickedDown: ", clickedDown);
 
  return (
