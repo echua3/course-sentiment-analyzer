@@ -11,7 +11,6 @@ searchReviewRoutes.route("/review/sectionID/:sectionID/:page").get(param('sectio
                                                                    function (req, res) {
   const LIMIT = 3
   const startIndex = (Number(req.params.page) - 1) * LIMIT;
-  let db_connect = dbo.getDb();
 
   reviewModel.count().where("classID").equals(req.param.sectionID).exec(function (err, total) {
     console.log(total);

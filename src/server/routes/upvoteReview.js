@@ -1,4 +1,4 @@
-/* 
+/*
  routes for upvoting a review
  must have reviewID and userID
 */
@@ -17,13 +17,10 @@ const { param, validationResult } = require('express-validator');
 upvoteReviewRoute.route("/review/upvote/:reviewID/:userID").post(param('reviewID').trim().not().isEmpty(),
 param('userID').trim().not().isEmpty(),
     function (req, res) {
-
-    let db_connect = dbo.getDb();
-
     async.parallel([
 
         function(callback) {
-            reviewModel.findByIdAndUpdate(req.params.reviewID, 
+            reviewModel.findByIdAndUpdate(req.params.reviewID,
                 {$inc: {'helpfulness': 1}}
             , function(err, results) {
                 if(err) return callback(err);
@@ -51,13 +48,13 @@ param('userID').trim().not().isEmpty(),
             res.status(200).json({
                 message: "Review and User reviewUpvoteIDs updated!",
                 results: results,
-            });            
+            });
         }
         console.log("RESULTS:", results);
     });
 
     // // increment the helpfulness count in reviews
-    // reviewModel.findByIdAndUpdate(req.params.reviewID, 
+    // reviewModel.findByIdAndUpdate(req.params.reviewID,
     //     {$inc: {'helpfulness': 1}}
     // ).then(result => {
     //     res.status(200).json({
@@ -91,7 +88,7 @@ param('userID').trim().not().isEmpty(),
     //     });
     //     return;
     // });
-    
+
 });
 
     module.exports = upvoteReviewRoute;
