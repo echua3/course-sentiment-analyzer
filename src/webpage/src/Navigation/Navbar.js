@@ -8,12 +8,29 @@ import CourseSearch from "../Pages/CourseSearch";
 import HomePage from "../Pages/HomePage";
 import UserProfile from "../Pages/UserProfile";
 import LogoutPage from "../Pages/LogoutPage";
+import { useEffect, useState } from "react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
+  useEffect(() => {
+    const fetchData = async () => {
+      const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
+      if(!responseValue.ok) {
+            const message = "An error occured"
+            console.log("Error:" + responseValue.statusText);
+            window.userID = "";
+            return;
+      }
+      const records2 = await responseValue.json();
+      console.log(records2.data.userId);
+      window.userID = records2.data.userId;
+    }
+    fetchData().catch(console.error);
+  })
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (

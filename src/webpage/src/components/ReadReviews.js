@@ -37,7 +37,7 @@ function ReadReview({record}) {
 
     useEffect( () => {
         async function getRecords() {
-            const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/sectionID/" + {record}.record.SSS_SectionsID+ "/" + pageNumber)
+            const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/sectionID/" + {record}.record.SSS_SectionsID + "/" + pageNumber)
             if(!response.ok) {
               const message = "An error occurred"
               console.log("Error:" + response.statusText);
@@ -48,6 +48,8 @@ function ReadReview({record}) {
             // console.log(pageNumber);
             setRecords(records.data);
             setPageCount(records.numberOfPage);
+            console.log(pageCount);
+            console.log({record}.record.SSS_SectionsID);
         }
         getRecords();
 
@@ -102,18 +104,19 @@ function ReadReview({record}) {
 
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setPageNumber(value);
         async function changeRecords() {
-            setPageNumber(value)
-            const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/sectionID/" + {record}.record.SSS_SectionsID + "/" + value)
-            if(!response.ok) {
-              const message = "An error occurred"
-              console.log("Error:" + response.statusText);
-              return;
-            }
-            const records = await response.json();
-            console.log('record.data')
-            console.log(records.data);
-            setRecords(records.data);
+          const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/sectionID/" + {record}.record.SSS_SectionsID+ "/" + value)
+          if(!response.ok) {
+            const message = "An error occurred"
+            console.log("Error:" + response.statusText);
+            return;
+          }
+          const records = await response.json();
+          // console.log(records.data);
+          // console.log(pageNumber);
+          setRecords(records.data);
+          console.log(pageCount);
         }
         changeRecords();
 
