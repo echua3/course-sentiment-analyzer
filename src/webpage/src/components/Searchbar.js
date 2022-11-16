@@ -119,6 +119,9 @@ function SearchBar(props) {
     params.Credits = ''
     params.Department = ''
     params.currentPage = 1
+    setResstatus('info');
+    setRestitle('No data received');
+    setRessub('Please enter the data')
 
     // edited for development and deployment usage
     // await axios.get("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/api/courselist")
