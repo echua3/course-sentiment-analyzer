@@ -25,7 +25,7 @@ function LogoutCard() {
   }
 
   return (
-    <Navigate to='/Login' />
+    <Navigate to='/' />
   );
 }
 

@@ -33,9 +33,10 @@ function CourseSummary({record}) {
     const [Prereq, setPrereq] = useState({record}.record.SectionRegRestrictions);
     const instructorsFullName = {record}.record.InstructorsFullName
     const [recordValues, setRecords] = useState([]);
-    const offeringName = {record}.record.OfferingName
-    const sectionName = {record}.record.SectionName
-    const term = {record}.record.Term
+    const offeringName = {record}.record.OfferingName;
+    const courseDescription = {record}.record.Description;
+    const sectionName = {record}.record.SectionName;
+    const term = {record}.record.Term;
     // const description = {record}.record.SectionDetails.Description
     useEffect( () => {
       async function getRecords() {
@@ -123,7 +124,7 @@ function CourseSummary({record}) {
         {offeringName} ({sectionName}) taught by {instructorsFullName} in {term}
      </h6>
      <p>
-        Add desc. manually or bypass (no description data from API)
+        {courseDescription}
      </p>
      <Row>
       <Col span={18} push={12}>
