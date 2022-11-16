@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
+import {difficulty_list} from './CourseSummary'
 
+console.log('In Piechart' + difficulty_list);
 class DifficultyPieChart extends Component {
     constructor(props) {
       super(props);
   
       this.state = {
-        series: [30, 40, 35, 45, 89],
+        series: difficulty_list,
         
         options: {
           chart: {
