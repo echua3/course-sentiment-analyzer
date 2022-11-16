@@ -14,7 +14,7 @@ searchReviewRoutes.route("/review/sectionID/:sectionID/:page").get(param('sectio
 
   reviewModel.countDocuments().where("classID").equals(req.params.sectionID).exec(function (err, total) {
     console.log(total);
-    reviewModel.find().limit(LIMIT).skip(startIndex).where("classID").equals(req.params.sectionID).sort({helpfulness: -1}).exec(
+    reviewModel.find().where("classID").equals(req.params.sectionID).sort({helpfulness: -1, _id: -1}).limit(LIMIT).skip(startIndex).exec(
         (err, result) => {
             if (err) res.status(500).json({error: err})
             else res.status(200).json({data: result,
