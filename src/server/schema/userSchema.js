@@ -22,9 +22,9 @@ const userSchema = new Schema({
      },
      interests: [String],
      reviewIDs: [String],
-     reviewUpvotedIDs: [String],
-     reviewDownvotedIDs: [String],
-     department: String
+     reviewUpvoteIDs: [String],
+     reviewDownvoteIDs: [String],
+     dept: [String] 
   });
 
 userSchema.plugin(uniqueValidator, {message: 'UserID is already taken.'});

@@ -12,7 +12,9 @@ searchAllReviewsRoutes = require("./routes/searchAllReviews")
 searchCourseRoute = require("./routes/searchCourse")
 addUserRoute = require("./routes/addUser")
 retrieveUserRoute = require("./routes/retrieveUser")
+
 getRecsRoute = require("./routes/getRecs")
+
 
 // allow cross-origin interaction:
 // app.use(cors({
@@ -52,6 +54,15 @@ const dbo_search = require("./db/conn_search")
 
 const sanitizeHTML = require('sanitize-html');
 const addUserRoutes = require("./routes/addUser");
+const upvoteReviewRoute = require("./routes/upvoteReview");
+const downvoteReviewRoute = require("./routes/downvoteReview");
+const undoUpvoteReviewRoute = require("./routes/undoUpvoteReview");
+const undoDownvoteReviewRoute = require("./routes/undoDownvoteReview");
+
+app.use(upvoteReviewRoute)
+app.use(downvoteReviewRoute)
+app.use(undoUpvoteReviewRoute)
+app.use(undoDownvoteReviewRoute)
 
 app.listen(port, () => {
 
