@@ -13,7 +13,7 @@ searchReviewRoutes.route("/review/sectionID/:sectionID/:page").get(param('sectio
   const startIndex = (Number(req.params.page) - 1) * LIMIT;
   let db_connect = dbo.getDb();
 
-  reviewModel.count().where("classID").equals(req.param.sectionID).exec(function (err, total) {
+  reviewModel.count().where("classID").equals(req.params.sectionID).exec(function (err, total) {
     console.log(total);
     reviewModel.find().limit(LIMIT).skip(startIndex).where("classID").equals(req.params.sectionID).sort({helpfulness: -1}).exec(
         (err, result) => {
