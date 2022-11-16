@@ -59,19 +59,19 @@ function ReadReview({record}) {
               return;
             }
             const records = await response.json();
-            console.log("USER:", records);
+            // console.log("USER:", records);
             // setUserUps(records.data[0].reviewUpvoteIDs);
             let upvoteIDs = records.data[0].reviewUpvoteIDs;
             setUserUps(upvoteIDs);
 
-            console.log(records.data[0].reviewUpvoteIDs);
-            console.log("UserUpvoteIDs:", userUps);
+            // console.log(records.data[0].reviewUpvoteIDs);
+            // console.log("UserUpvoteIDs:", userUps);
     
             setUserDowns(records.data[0].reviewDownvoteIDs);
-            console.log("UserDownvoteIDS:", userDowns);
+            // console.log("UserDownvoteIDS:", userDowns);
         }
         getUser();
-        console.log("recordValues.length: ", recordValues.length);
+        // console.log("recordValues.length: ", recordValues.length);
 
         return;
     }, [recordValues.length]);
@@ -124,19 +124,19 @@ function ReadReview({record}) {
               return;
             }
             const records = await response.json();
-            console.log("USER:", records);
+            // console.log("USER:", records);
             // setUserUps(records.data[0].reviewUpvoteIDs);
             let upvoteIDs = records.data[0].reviewUpvoteIDs;
             setUserUps(upvoteIDs);
 
-            console.log(records.data[0].reviewUpvoteIDs);
-            console.log("UserUpvoteIDs:", userUps);
+            // console.log(records.data[0].reviewUpvoteIDs);
+            // console.log("UserUpvoteIDs:", userUps);
     
             setUserDowns(records.data[0].reviewDownvoteIDs);
-            console.log("UserDownvoteIDS:", userDowns);
+            // console.log("UserDownvoteIDS:", userDowns);
         }
         updateUser();
-        console.log("HANDLED CHANGE:", recordValues);
+        // console.log("HANDLED CHANGE:", recordValues);
 
     };
 
