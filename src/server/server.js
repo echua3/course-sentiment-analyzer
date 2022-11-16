@@ -50,8 +50,12 @@ const dbo_search = require("./db/conn_search")
 const sanitizeHTML = require('sanitize-html');
 const addUserRoutes = require("./routes/addUser");
 const upvoteReviewRoute = require("./routes/upvoteReview");
+const downvoteReviewRoute = require("./routes/downvoteReview");
+const undoUpvoteReviewRoute = require("./routes/undoUpvoteReview");
 
 app.use(upvoteReviewRoute)
+app.use(downvoteReviewRoute)
+app.use(undoUpvoteReviewRoute)
 
 app.listen(port, () => {
 
