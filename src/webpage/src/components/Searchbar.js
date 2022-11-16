@@ -35,7 +35,11 @@ function SearchBar(props) {
   const [datasource, setDatasource] = useState([]);
   const [pagination, setPagination] = useState({onChange:changePage, showSizeChanger:false});
   const [loadings, setLoadings] = useState([]);
-  const [result, setResult] = useState(Table);
+  const [resstatus, setResstatus] = useState('info')
+  const [restitle, setRestitle] = useState('No data received')
+  const [ressub, setRessub] = useState('Please enter data')
+  const [form_1] = Form.useForm();
+
   const [params, setParams] = useState({
     CourseTitle: '',
     CourseNumber: '',
@@ -61,8 +65,14 @@ function SearchBar(props) {
         if (res.data.code == 400) {
           if (res.data.msg=="Credits need to be numbers!") {
             message.error(res.data.msg)
+            setResstatus('error');
+            setRestitle('Data type error');
+            setRessub('Credits need to be numbers!')
           } else if (res.data.msg=="The format of the Course Number is incorrect") {
             message.error(res.data.msg)
+            setResstatus('error');
+            setRestitle('Data format error!');
+            setRessub('The format of the Course Number is incorrect')
           }
           pagination.total = 0
           pagination.current = params.currentPage
@@ -71,11 +81,13 @@ function SearchBar(props) {
         } else if(res.data.code==200){
           if (res.data.numberTotal==0) {
             message.info("No course found!");
-            // setResult(<NoResult />)
+            setResstatus('info');
+            setRestitle('No course found!');
+            setRessub('Please enter the correct information')
           }
           else{
             setDatasource(res.data.data)
-            console.log(res.data.data);
+            // console.log(res.data.data);
             pagination.total = res.data.numberTotal
             pagination.current = params.currentPage
             let test={...pagination}
@@ -393,7 +405,10 @@ function SearchBar(props) {
 
       <CourseTable pagination={{...pagination,onChange:changePage}} data={datasource}/>
     {/* <CourseTable pagination={pagination} data={datasource}/> */}
-
+      <Form form={form_1}>
+      <NoResult status={resstatus} title={restitle} subTitle={ressub}/>
+      {/* <NoResult status={resstatus} /> */}
+      </Form>
     </div>
   );
 }

@@ -3,6 +3,8 @@ import CourseSummary from "./CourseSummary";
 import ReadReview from "./ReadReviews";
 import { useState } from "react";
 import { Table, Card } from "antd";
+import NoResult from "./NoResult";
+
 
 const CourseTable = (props) => {
     const [activeTabKey, setActiveTabKey] = useState('ClassPrompt');
@@ -92,6 +94,7 @@ const CourseTable = (props) => {
 
     return (
       <div className="coursetable">
+
         <Table
             pagination={props.pagination}
             dataSource={props.data}
@@ -118,6 +121,9 @@ const CourseTable = (props) => {
             onExpand={onTableRowExpand}
 
         />
+
+
+
 
       </div>
     );

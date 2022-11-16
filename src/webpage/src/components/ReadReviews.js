@@ -22,7 +22,7 @@ function happyOrSad(par1) {
   }
 }
 
-    
+
 function ReadReview({record}) {
 
     const [pageNumber, setPageNumber] = useState(1);
@@ -48,7 +48,7 @@ function ReadReview({record}) {
             // console.log(pageNumber);
             setRecords(records.data);
             setPageCount(records.numberOfPage);
-        }   
+        }
         getRecords();
 
         async function getUser() {
@@ -66,7 +66,7 @@ function ReadReview({record}) {
 
             // console.log(records.data[0].reviewUpvoteIDs);
             // console.log("UserUpvoteIDs:", userUps);
-    
+
             setUserDowns(records.data[0].reviewDownvoteIDs);
             // console.log("UserDownvoteIDS:", userDowns);
         }
@@ -100,7 +100,7 @@ function ReadReview({record}) {
     //   userQuery = true;
     // }
 
-    
+
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         async function changeRecords() {
             setPageNumber(value)
@@ -111,9 +111,10 @@ function ReadReview({record}) {
               return;
             }
             const records = await response.json();
-            // console.log(records.data);
+            console.log('record.data')
+            console.log(records.data);
             setRecords(records.data);
-        }   
+        }
         changeRecords();
 
         async function updateUser() {
@@ -131,7 +132,7 @@ function ReadReview({record}) {
 
             // console.log(records.data[0].reviewUpvoteIDs);
             // console.log("UserUpvoteIDs:", userUps);
-    
+
             setUserDowns(records.data[0].reviewDownvoteIDs);
             // console.log("UserDownvoteIDS:", userDowns);
         }
@@ -139,16 +140,20 @@ function ReadReview({record}) {
         // console.log("HANDLED CHANGE:", recordValues);
 
     };
+    console.log('pageCount')
+    console.log(pageCount)
+    console.log('pageNumber')
+    console.log(pageNumber)
 
     return (
         <div>
-           <List className ="comment-list" 
+           <List className ="comment-list"
               itemLayout ="horizontal"
               dataSource ={recordValues}
               renderItem = {item => (
                 <Review key={item._id} review={item} userUps={userUps} userDowns={userDowns}/>
               )}/>
- 
+
               <Pagination
                   count = {pageCount}
                   page = {pageNumber}
@@ -162,5 +167,5 @@ function ReadReview({record}) {
 
   }
 
-  
+
   export default ReadReview;

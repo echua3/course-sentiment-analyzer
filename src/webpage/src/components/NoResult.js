@@ -2,15 +2,20 @@
 // const {  Button, Result  } = antd;
 import { Result } from "antd";
 
-const NoResult = () => (
+const NoResult = (props) => {
 //   <Result
 //     title="No course found!"
 //   />
-    <Result
-        status="error"
-        title="Submission Failed"
-        subTitle="Please check and modify the following information before resubmitting."
+    console.log('props')
+    console.log(props)
+    return (
+        <Result
+        status={props.status}
+        title={props.title}
+        subTitle={props.subTitle}
     />
 );
+}
+
 
 export default NoResult;
