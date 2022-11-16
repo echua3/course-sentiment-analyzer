@@ -53,7 +53,9 @@ searchRoutes.route("/courselist").get(function (req, res) {
     .find({$and:[myquery]}).limit(LIMIT).skip(startIndex).toArray(function (err, result) {
       // if (err) throw err;
       if (err) return handleError(err);
-      // console.log(result)
+      // console.log('result');
+      // console.log(typeof result);
+      // console.log(result);
       res.status(200).json({data: result,
                             code: 200,
                             currentPage: Number(req.query.currentPage),

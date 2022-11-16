@@ -3,14 +3,14 @@ const dbo = require("../db/conn_search");
 const ObjectId = require("mongodb").ObjectId;
 var sanitize = require("mongo-sanitize");
 
-const reviewRoutes = express.Router();
+const editreviewRoutes = express.Router();
 const { reviewModel } = require("../schema/reviewSchema");
 const { body, validationResult } = require('express-validator');
 
 
 
 
-reviewRoutes.route("/review/update/:id").post(body('comment').not().isEmpty().trim().escape(),
+editreviewRoutes.route("/review/update/:id").post(body('newreview').not().isEmpty().trim().escape(),
                                        function (req, res) {
   const errors = validationResult(req);
   if(errors.errors.length > 0) {
@@ -19,22 +19,28 @@ reviewRoutes.route("/review/update/:id").post(body('comment').not().isEmpty().tr
     });
     return;
   }
-  let db_connect = dbo.getDb();
 
-  let review = new reviewModel({
-    classID: sanitize(req.body.sectionID),
-    comment: sanitize(req.body.comment),
-    difficulty: sanitize(req.body.difficulty),
-    score: sanitize(req.body.score),
-    helpfulness: sanitize(req.body.helpfulness),
-    date: sanitize(req.body.date)
+
+  reviewModel.updateOne(
+    {_id: ObjectId(req.params.id)},
+    {comment: sanitize(req.body.newreview)}
+  ).then(result => {
+    console.log('result')
+    console.log(result);
+    res.status(200).json({
+    message: "Review updated!",
+    results: result,
+  });
   })
-  reviewModel.where("_id").equals(req.params.id).updateMany(
-    {},
-    { $set: {
-        review
-    }}
-  )
+  .catch(err => {
+    // console.log(err);
+    console.log('there is an error')
+    res.status(500).json({
+      error: err
+    });
+    return;
+  });
+
  });
 
- module.exports = reviewRoutes;
+ module.exports = editreviewRoutes;

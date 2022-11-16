@@ -664,27 +664,27 @@
   .coursetable {
     .ant-table {
       display: block;
-    
+
       // turn table rows into blocks
       @media screen and (max-width: 600px) {
         &-thead {
           display: none;
         }
-    
+
         &-thead>tr,
         &-tbody>tr {
-    
+
           th,
           td {
             &:first-of-type {
               padding-top: 1rem;
             }
-    
+
             &:last-of-type {
               padding-bottom: 1rem;
             }
           }
-    
+
           >th,
           >td {
             display: block;
@@ -693,31 +693,31 @@
             padding: 0 1rem;
             font-size: 1rem;
             text-align: left;
-  
+
             &:nth-child(2) {
               font-size: 0.8rem
             }
-  
+
             &:nth-child(3) {
               font-size: 0.8rem
             }
-  
+
             &:nth-child(4) {
               font-size: 0.8rem
             }
-  
+
             &:nth-child(5) {
               font-weight: bold;
             }
-  
+
             &:nth-child(6) {
               font-size: 0.7rem
             }
-  
+
             &:nth-child(7) {
               font-size: 0.7rem
             }
-            
+
             &:last-child {
               border-bottom: 1px solid #eee;
             }
@@ -846,7 +846,7 @@
 
     /*---------------------------------------------
     [ coursetable ]*/
-    
+
     /*---------------------------------------------
     [ user profile ]*/
     .userprofiletitle{
@@ -862,7 +862,11 @@
       margin-top: 25px;
       width: 30%;
     }
-    
+    .userprofileForm {
+      margin-left: 100px;
+      margin-right: 100px;
+    }
+
     /*---------------------------------------------
     [ recommendations ]*/
     .Recommendations {
@@ -929,4 +933,22 @@
           }
         }
       }
+    }
+
+    /*---------------------------------------------
+    [ user reviews ]*/
+    .userreviewstitle{
+      // padding: 5%;
+      align-items: center;
+      text-align: center;
+      font-weight: bolder;
+      font-size: large;
+      margin-top: 80px;
+    }
+    .userreviewstable {
+      display: flex;
+      justify-content: center;
+      padding-bottom: 30px;
+      margin-top: 50px;
+
     }

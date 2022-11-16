@@ -22,12 +22,10 @@ function SearchBar(props) {
   }
 
   const changePage = async (currentPage)=>{
-
     params.currentPage = currentPage
     let test={...params,currentPage}
     setParams(test)
     await requestData(params)
-
   }
 
   // new onSubmit with mongodb
@@ -72,6 +70,9 @@ function SearchBar(props) {
           if (res.data.numberTotal==0) {
             message.info("No course found!");
           } else{
+            // console.log('coursetable data')
+            // console.log(typeof res.data.data)
+            // console.log(res.data.data)
             setDatasource(res.data.data)
             console.log(res.data.data);
             // console.log(pagination)
