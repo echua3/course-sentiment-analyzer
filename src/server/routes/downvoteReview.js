@@ -1,20 +1,19 @@
 /* 
- routes for upvoting a review
+ routes for downvoting a review
  must have reviewID and userID
 */
 
 const express = require("express");
 const dbo = require("../db/conn_search");
-const ObjectId = require("mongodb").ObjectId;
 const async = require('async');
 
-const upvoteReviewRoute = express.Router();
+const downvoteReviewRoute = express.Router();
 const { reviewModel } = require("../schema/reviewSchema");
 const { userModel } = require("../schema/userSchema");
 const { param, validationResult } = require('express-validator');
 
 
-upvoteReviewRoute.route("/review/upvote/:reviewID/:userID").post(param('reviewID').trim().not().isEmpty(),
+downvoteReviewRoute.route("/review/downvote/:reviewID/:userID").post(param('reviewID').trim().not().isEmpty(),
 param('userID').trim().not().isEmpty(),
     function (req, res) {
 
@@ -24,7 +23,7 @@ param('userID').trim().not().isEmpty(),
 
         function(callback) {
             reviewModel.findByIdAndUpdate(req.params.reviewID, 
-                {$inc: {'helpfulness': 1}}
+                {$inc: {'helpfulness': -1}}
             , function(err, results) {
                 if(err) return callback(err);
                 callback(null, results);
@@ -33,7 +32,7 @@ param('userID').trim().not().isEmpty(),
         function(callback) {
             userModel.updateOne({'userID': req.params.userID}, {
                 $addToSet: {
-                    ['reviewUpvoteIDs']: req.params.reviewID
+                    ['reviewDownvoteIDs']: req.params.reviewID
                 }
             }, function(err, results) {
                 if(err) return callback(err);
@@ -49,16 +48,16 @@ param('userID').trim().not().isEmpty(),
             });
         } else {
             res.status(200).json({
-                message: "Review and User reviewUpvoteIDs updated!",
+                message: "Review and User reviewDownvoteIDs updated!",
                 results: results,
             });            
         }
         console.log("RESULTS:", results);
     });
 
-    // // increment the helpfulness count in reviews
+    // // decrement the helpfulness count in reviews
     // reviewModel.findByIdAndUpdate(req.params.reviewID, 
-    //     {$inc: {'helpfulness': 1}}
+    //     {$inc: {'helpfulness': -1}}
     // ).then(result => {
     //     res.status(200).json({
     //     message: "Review updated!",
@@ -73,15 +72,15 @@ param('userID').trim().not().isEmpty(),
     //     return;
     // });
 
-    // // add review id to user's reviewUpvoteIDs
+    // // add review id to user's reviewDownvoteIDs
     // userModel.updateOne({'userID': req.params.userID}, {
     //         $addToSet: {
-    //             ['reviewUpvoteIDs']: req.params.reviewID
+    //             ['reviewDownvoteIDs']: req.params.reviewID
     //         }
     //     }
     // ).then(result => {
     //     res.status(200).json({
-    //     message: "User reviewUpvoteIDs updated!",
+    //     message: "User reviewDownvoteIDs updated!",
     //     results: result,
     //     });
     // })
@@ -94,4 +93,4 @@ param('userID').trim().not().isEmpty(),
     
 });
 
-    module.exports = upvoteReviewRoute;
+module.exports = downvoteReviewRoute;

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUp from '@material-ui/icons/ArrowDropUp'
 import Upvote from './Upvote'
+import Downvote from './Downvote'
  
  
 const useStyles = makeStyles((theme) => ({
@@ -72,8 +73,7 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 let result = [...userUpvotes, reviewID];
                 setUserUpvotes(result); 
                 console.log("about to upvote review._id", reviewID);
-                Upvote(reviewID, userID);
-                console.log("JUST UPVOTED, helpfulness = ", review.helpfulness);   
+                Upvote(reviewID, userID); 
             }
         };
     }
@@ -102,6 +102,7 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
                 // add id to downvote list
                 let result = [...userDownvotes, reviewID];
                 setUserDownvotes(result); 
+                Downvote(reviewID, userID);
             }
         };
     }
