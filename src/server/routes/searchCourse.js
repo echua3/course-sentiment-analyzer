@@ -46,9 +46,8 @@ searchRoutes.route("/courselist").get(function (req, res) {
   // console.log(myquery)
 
 
-  db_connect.collection("classes").countDocuments(myquery).then((total) =>{
-    db_connect
-    .collection("classes")
+  db_connect.collection("testClasses").countDocuments(myquery).then((total) =>{
+    db_connect.collection("testClasses")
     // .find({$and:[myquery]}).limit(LIMIT).skip(startIndex).toArray(function (err, result) {
     .find({$and:[myquery]}).limit(LIMIT).skip(startIndex).toArray(function (err, result) {
       // if (err) throw err;
