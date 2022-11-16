@@ -8,10 +8,12 @@ const path = require("path");
 
 addReviewRoute = require("./routes/addReview")
 searchReviewRoutes = require("./routes/searchReview")
+searchAllReviewsRoutes = require("./routes/searchAllReviews")
 searchCourseRoute = require("./routes/searchCourse")
 addUserRoute = require("./routes/addUser")
 retrieveUserRoute = require("./routes/retrieveUser")
-// reviewRouter = require("./controllers/reviewControllers")
+
+getRecsRoute = require("./routes/getRecs")
 
 
 // allow cross-origin interaction:
@@ -31,7 +33,10 @@ app.use(addReviewRoute)
 app.use(addUserRoute)
 app.use(searchReviewRoutes)
 app.use(retrieveUserRoute)
+app.use(searchAllReviewsRoutes)
+
 app.use('/api', searchCourseRoute)
+app.use(getRecsRoute)
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))

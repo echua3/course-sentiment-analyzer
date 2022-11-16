@@ -6,6 +6,23 @@ import { Pagination, PaginationItem } from "@material-ui/lab";
 import { List } from "antd";
 import Review from "./Review";
 
+function happyOrSad(par1)
+{
+
+  if(par1>0)
+  {
+   return 1;
+  }
+  else if(par1<0)
+  {
+    return -1;
+  }
+  else
+  {
+    return 0;
+  }
+}
+
     
 function ReadReview({record}) {
 
@@ -22,14 +39,14 @@ function ReadReview({record}) {
 
     useEffect( () => {
         async function getRecords() {
-            const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/sectionID/" + {record}.record.SSS_SectionsID + "/" + pageNumber)
+            const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/sectionID/" + {record}.record.SSS_SectionsID+ "/" + pageNumber)
             if(!response.ok) {
               const message = "An error occurred"
               console.log("Error:" + response.statusText);
               return;
             }
             const records = await response.json();
-            // console.log(records.data);
+            console.log(records.data);
             console.log(pageNumber);
             setRecords(records.data);
             setPageCount(records.numberOfPage);
