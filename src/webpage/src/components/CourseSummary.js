@@ -16,13 +16,16 @@ export{sentiment_list};
 // }
 function getStars(par1)
 {
-   var star = "Difficulty: ";
+   var star = "Difficulty : ";
    var stars = "⭐";
-   var result;
-   for(let i=0; i<Number(par1); i++)
+   var result="";
+   for(let i=0; i<Math.round(par1); i++)
    {
-      result = star.concat(stars);
-   }
+      console.log('Value of i is:'+i)
+      result = result.concat(stars);
+      console.log('Stars is'+result)
+   }  
+   result = star.concat(result)
    return result;
 }
 var sentiment_score = 0;
