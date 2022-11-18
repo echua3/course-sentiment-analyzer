@@ -117,8 +117,7 @@ function CourseSummary({record}) {
          {Title}
     </span>
     <p>
-      Average Sentiment
-      {average_sentiment_score}
+      Average Sentiment: {average_sentiment_score}
     </p>
       
     </Col>
