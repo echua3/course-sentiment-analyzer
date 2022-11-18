@@ -117,7 +117,7 @@ function CourseSummary({record}) {
          {Title}
     </span>
     <p>
-      Average Sentiment: {average_sentiment_score}
+      Average Sentiment: {!isNaN(average_sentiment_score) ? average_sentiment_score : 'N/A'}
     </p>
       
     </Col>
