@@ -21,7 +21,9 @@
 - The use of setting functions causing rerendering loops when working on the voting feature.
 - the useState() function returning previous values when using pagination, so the votes did not correspond to the correct reviews. Had to make sure the components were unique using keys to give the elements a stable identity.
 - The MongoDB site was not working (collections were unavailable) for hours the day before the deadline. So we could not check our database during that time.
+-Collecting data from different collection in mongodb. Since it's not a relational database, it takes some time to figure out how to collect data we need in 3 colletions.
 
 ## Reflection for Iteration 5
 - We could have better utilized soft deadlines for major features to ensure that we leave more time for integrating features together
 - Overall throughput for the last iteration improved significantly, just need to continue doing this for iteration 5
+- We need not only implement the new features but also pay attention to the feedback of the last iteration.
