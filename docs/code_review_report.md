@@ -15,7 +15,7 @@
 # Comments:
 - Could utilize more comments to clarify what important parts of the code are doing
 - A few occurrences of commented unused code
-- Reduce unnecsarry console.log statements
+- Reduce unnecessary console.log statements
 
 # Style:
 - A few occurences where async await would make the code more readable
