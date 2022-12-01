@@ -2,31 +2,14 @@ import React from "react";
 import { Form, Input, Button, Select, InputNumber } from "antd";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
-import axios from "axios";
 
 
 function UserProfileForm(props) {
 
-  const [loadings, setLoadings] = useState([]);
   const [profileSubmitted, setProfile] = useState(false);
   const [form_1] = Form.useForm();
 
   const navigate = useNavigate()
-
-  const enterLoading = (index) => {
-    setLoadings((prevLoadings) => {
-      const newLoadings = [...prevLoadings];
-      newLoadings[index] = true;
-      return newLoadings;
-    });
-    setTimeout(() => {
-      setLoadings((prevLoadings) => {
-        const newLoadings = [...prevLoadings];
-        newLoadings[index] = false;
-        return newLoadings;
-      });
-    }, 6000);
-  };
 
   const onSubmit = async (e )=> {
     e.preventDefault();
@@ -34,15 +17,11 @@ function UserProfileForm(props) {
     let test={...params}
     setParams(test)
     await requestData(test)
-    // enterLoading(2)
     navigate('/Profile')
   }
 
-
   const requestData= async (params)=>{
     // edited for development and deployment usage
-
-    // const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/update/:userID", {
     const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/update/" + params.UserID, {
 
       method: "POST",
@@ -56,12 +35,6 @@ function UserProfileForm(props) {
       return;
     });
     if(!response.ok) {
-      // const records = await response.json();
-      // console.log(records);
-      // const basicMessage = records.error.message.split(/:(.*)/s)
-      // const allErrors = basicMessage[1].split(",")
-      // console.log(allErrors)
-      // allErrors.forEach(runErrorMessaging);
       console.log('!response.ok')
     } else {
       console.log(response)
@@ -69,12 +42,7 @@ function UserProfileForm(props) {
     }
   }
 
-
-  const [form] = Form.useForm();
-  const [datasource, setDatasource] = useState([]);
-  // const [pagination, setPagination] = useState({onChange:changePage});
   const [params, setParams] = useState({
-    // Using the sample user in database
     userID: window.userID,
     firstName: '',
     lastName: '',
@@ -98,13 +66,11 @@ function UserProfileForm(props) {
     async function getRecords() {
       const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/info/" + window.userID)
       if(!response.ok) {
-        const message = "An error occured"
         console.log('here')
         console.log("Error:" + response.statusText);
         return;
       }
       const res = await response.json();
-      // console.log(records.data);
       form_1.setFieldsValue({
         FirstName: res.data[0].firstName,
         LastName: res.data[0].lastName,
@@ -119,8 +85,6 @@ function UserProfileForm(props) {
 
     return;
   }, [window.userID]);
-
-
 
   return (
     <div>

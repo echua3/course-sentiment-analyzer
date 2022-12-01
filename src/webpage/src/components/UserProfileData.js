@@ -3,7 +3,6 @@ import { Button, Descriptions } from "antd";
 import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 
-
 function UserProfileData(props) {
     const [datasource, setDatasource] = useState([])
     const [userID, setUserID] = useState(window.userID)
@@ -12,20 +11,17 @@ function UserProfileData(props) {
         async function getRecords() {
           const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + window.userID)
           if(!response.ok) {
-            const message = "An error occured"
             console.log("Error:" + response.statusText);
             return;
           }
           const res = await response.json();
-          // console.log(records.data);
           setDatasource('')
           setDatasource(res.data[0]);
         }
         getRecords();
 
         return;
-    }, [window.userID]);
-
+    }, [userID]);
 
     const firstName = datasource.firstName
     const lastName = datasource.lastName
@@ -35,14 +31,11 @@ function UserProfileData(props) {
     const interest_2 = datasource.secondInterest
     const interest_3 = datasource.thirdInterest
 
-
-
     return (
         <div className="userprofileForm">
             <p class='userprofiletitle'>My Profile</p>
             <Descriptions
                 bordered
-                // title="Custom Size"
                 extra={
                 <Link to='/ProfileEdit'>
                 <Button type="primary" >Edit</Button>

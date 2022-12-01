@@ -4,8 +4,6 @@
 */
 
 const express = require("express");
-const dbo = require("../db/conn_search");
-const ObjectId = require("mongodb").ObjectId;
 const async = require('async');
 
 const upvoteReviewRoute = express.Router();
@@ -52,42 +50,6 @@ param('userID').trim().not().isEmpty(),
         }
         console.log("RESULTS:", results);
     });
-
-    // // increment the helpfulness count in reviews
-    // reviewModel.findByIdAndUpdate(req.params.reviewID,
-    //     {$inc: {'helpfulness': 1}}
-    // ).then(result => {
-    //     res.status(200).json({
-    //     message: "Review updated!",
-    //     results: result,
-    //     });
-    // })
-    // .catch(err => {
-    //     // console.log(err);
-    //     res.status(500).json({
-    //         error: err
-    //     });
-    //     return;
-    // });
-
-    // // add review id to user's reviewUpvoteIDs
-    // userModel.updateOne({'userID': req.params.userID}, {
-    //         $addToSet: {
-    //             ['reviewUpvoteIDs']: req.params.reviewID
-    //         }
-    //     }
-    // ).then(result => {
-    //     res.status(200).json({
-    //     message: "User reviewUpvoteIDs updated!",
-    //     results: result,
-    //     });
-    // })
-    // .catch(err => {
-    //     res.status(500).json({
-    //         error: err
-    //     });
-    //     return;
-    // });
 
 });
 

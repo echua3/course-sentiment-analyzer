@@ -2,7 +2,6 @@ import React from 'react';
 import VoteBox from "./VoteBox";
 import Grid from '@mui/material/Grid';
 import { Comment } from "antd";
-import { useState } from "react";
 import './style/css/CourseComponent.scss';
 
 const Review = ({review, handleUpvote, handleDownVote, userUps, userDowns}) => {

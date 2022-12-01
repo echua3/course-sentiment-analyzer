@@ -1,6 +1,4 @@
 const express = require("express");
-const dbo = require("../db/conn_search");
-const ObjectId = require("mongodb").ObjectId;
 
 const searchReviewRoutes = express.Router();
 const { reviewModel } = require("../schema/reviewSchema");
@@ -13,7 +11,6 @@ searchReviewRoutes.route("/review/sectionID/:sectionID/:page").get(param('sectio
   const startIndex = (Number(req.params.page) - 1) * LIMIT;
 
   reviewModel.countDocuments().where("classID").equals(req.params.sectionID).exec(function (err, total) {
-    console.log(total);
     reviewModel.find().where("classID").equals(req.params.sectionID).sort({helpfulness: -1, _id: -1}).limit(LIMIT).skip(startIndex).exec(
         (err, result) => {
             if (err) res.status(500).json({error: err})

@@ -4,7 +4,6 @@ import "../components/WriteReview";
 import "../components/CourseTable";
 import SearchBar from "../components/Searchbar";
 
-
 import React from "react";
 
 function CourseSearch() {

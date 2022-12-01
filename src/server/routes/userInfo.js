@@ -1,10 +1,7 @@
 const express = require("express");
-const dbo = require("../db/conn_search");
-const ObjectId = require("mongodb").ObjectId;
 
 const userInfoRoutes = express.Router();
 const { userModel } = require("../schema/userSchema");
-const { param, validationResult } = require('express-validator');
 
 userInfoRoutes.route("/user/info/:userID").get(function (req, res) {
     userModel.find().where("userID").equals(req.params.userID).exec(
@@ -15,8 +12,8 @@ userInfoRoutes.route("/user/info/:userID").get(function (req, res) {
                 console.log(result)
                 res.status(200).json({data: result});
             }
-})
-}
+        })
+    }
 );
 
 module.exports = userInfoRoutes;

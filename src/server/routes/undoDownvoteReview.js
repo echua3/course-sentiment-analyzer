@@ -4,7 +4,6 @@
 */
 
 const express = require("express");
-const dbo = require("../db/conn_search");
 const ObjectId = require("mongodb").ObjectId;
 const async = require('async');
 
@@ -17,8 +16,6 @@ const { param, validationResult } = require('express-validator');
 undoDownvoteReviewRoute.route("/review/undoDownvote/:reviewID/:userID").post(param('reviewID').trim().not().isEmpty(),
 param('userID').trim().not().isEmpty(),
     function (req, res) {
-
-    let db_connect = dbo.getDb();
 
     async.parallel([
 

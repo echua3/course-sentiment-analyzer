@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Select, InputNumber, message, Alert } from "antd";
-import axios from "axios";
+import { Button } from "antd";
 import CourseTable from "./CourseTable";
 import "./style/css/CourseComponent.scss"
 
@@ -17,7 +16,6 @@ function RecommendationsTable(props) {
     async function getRecords() {
         const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
             if(!responseValue.ok) {
-                    const message = "An error occured"
                     console.log("Error:" + responseValue.statusText);
                     window.userID = "";
                     return;
@@ -29,7 +27,6 @@ function RecommendationsTable(props) {
         setLoading(true);
         await fetch(API_ENDPOINT + "/user/" + records2.data.userId).then(async(response) => {
         if (!response.ok) {
-            const message = "An error occured"
             console.log("Error:" + response.statusText);
             return;
           }
@@ -52,7 +49,6 @@ function RecommendationsTable(props) {
 
           const interests = await fetch(API_ENDPOINT + "/recs/" + "?firstInterest=" + first + "&secondInterest=" + second + "&thirdInterest=" + third + "&department=" + records.data[0].department + "&degreeType=" + records.data[0].degreeType);
           if(!interests.ok) {
-              const message = "An error occured"
               console.log("Error:" + interests.statusText);
               return;
           }
