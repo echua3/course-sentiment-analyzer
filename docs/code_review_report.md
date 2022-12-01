@@ -1,5 +1,5 @@
 # Design:
-- Backend code can be improved so that each segment only contains one routes and each route only contains a single connection to the database
+- Backend code can be improved so that each segment only contains one route and each route only contains a single connection to the database
 - Sentiment analyzer class could utilize an interface (dependency inversion principle)
 - A few methods are long and need refactoring
 
