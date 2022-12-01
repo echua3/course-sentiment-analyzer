@@ -18,7 +18,7 @@
 - Reduce unnecsarry console.log statements
 
 # Style:
-- A few occurences of ".method().method().method()" in the backend routes
+- A few occurences where async await would make the code more readable
 - Unused classes/folders: sentiment folder, original CourseSearch.js file
 - Multiple unused imports, methods, and variables
 - Inconsistent indentation, could make code more readable
