@@ -7,6 +7,12 @@ const { userModel } = require("../schema/userSchema");
 const { param, validationResult } = require('express-validator');
 const cookieSession = require('cookie-session')
 
+// Use this route to destroy the cookies of the current user, therefore removing
+// login permanence
+
+// Returns, resource with a success msg, if it ends up working, if the token/cookie 
+//          isn't there it won't return anything 
+
 var sanitize = require("mongo-sanitize");
 
 logoutRoute.route("/logout").get(function (req, res) {

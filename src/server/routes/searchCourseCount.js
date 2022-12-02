@@ -1,6 +1,12 @@
 const express = require("express");
 const dbo = require("../db/conn_search");
 
+//Use this method, in tandem to read values from the classes collection in
+//the database
+
+// Params, courseTitle, courseNumber, credits, department, currentPage, total (total amount of pages)
+// Returns, resource with the corresponding classes (with course data) from the specified page given
+
 const searchCountRoutes = express.Router();
 
 searchCountRoutes.route("/totalclasscount").get(function (req, res) {
