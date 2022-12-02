@@ -20,13 +20,15 @@
 - Could utilize more comments to clarify what important parts of the code are doing (Everyone)
 - A few occurrences of commented unused code (Everyone)
 - Reduce unnecessary console.log statements (Everyone)
+- Removed unused comments of code, and added small little changes to the comment structure here and there mostly to the backend, as well as removing pesky console.log values
 
 ## Style:
 - Unused classes/folders: sentiment folder, original CourseSearch.js file, original HomePage.js file (Everyone)
 - Multiple unused imports, methods, and variables (Everyone)
 - Inconsistent indentation, could make code more readable  (Everyone)
 - Cleaned up the code and removed redundant files  (Everyone)
+- Removed unused directories, imports, lines, files, anything that wasn't actively being under use, in the corresponding program, also cleaned up indentation, schema, brackets, and overall stylistic choices
 
 ## Documentation:
-- Documentation is satisfactory
+- Documentation is satisfactory and doesn't need any specified changes to it from our current iteration
 
