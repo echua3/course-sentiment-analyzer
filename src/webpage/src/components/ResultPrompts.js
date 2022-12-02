@@ -1,11 +1,6 @@
-// const { createRoot } = ReactDOM;
-// const {  Button, Result  } = antd;
 import { Result } from "antd";
 
-const NoResult = (props) => {
-//   <Result
-//     title="No course found!"
-//   />
+const ResultPrompts = (props) => {
     console.log('props')
     console.log(props)
     return (
@@ -17,5 +12,4 @@ const NoResult = (props) => {
 );
 }
 
-
-export default NoResult;
+export default ResultPrompts;

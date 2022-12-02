@@ -4,7 +4,6 @@
 */
 
 const express = require("express");
-const dbo = require("../db/conn_search");
 const async = require('async');
 
 const downvoteReviewRoute = express.Router();
@@ -54,7 +53,7 @@ param('userID').trim().not().isEmpty(),
         results: [downvoteResult, userDownvoteResult],
     });
     res.end();
-    
+  
 });
 
 module.exports = downvoteReviewRoute;

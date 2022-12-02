@@ -15,7 +15,6 @@ function LoginCard() {
     const fetchData = async () => {
       const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
       if(!responseValue.ok) {
-            const message = "An error occured"
             console.log("Error:" + responseValue.statusText);
             window.userID = "";
             return;
@@ -37,7 +36,6 @@ function LoginCard() {
     e.preventDefault();
     const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/login/" + userID, { credentials: 'include'})
     if(!response.ok) {
-          const message = "An error occured"
           if(response.statusText == "Internal Server Error") {
             setUserErrorBoolean(true);
           }
@@ -49,7 +47,6 @@ function LoginCard() {
 
     const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
     if(!responseValue.ok) {
-          const message = "An error occured"
           console.log("Error:" + responseValue.statusText);
           window.userID = "";
           return;
@@ -85,7 +82,6 @@ function LoginCard() {
       </div>
     </div>
     
-    
       <div class="right">
       <span class="writereview-form-title">
                Login
@@ -100,9 +96,6 @@ function LoginCard() {
             
       </div>
       {userErrorBoolean && <Alert message="Invalid userID, if you are stuck log into mongodb and find a valid userID or make one!" type="error" showIcon /> }
-        
-  
-      
         
         <br/>
         <button class="image-center" onClick={onSubmit}>Login</button>
@@ -136,12 +129,8 @@ function LoginCard() {
         </div>
       </div>      
     </div>
-  
-      )
-    
+    )
   }
   };
-
-
 
 export default LoginCard;

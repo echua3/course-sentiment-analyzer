@@ -1,16 +1,10 @@
 const express = require("express");
-const dbo = require("../db/conn_search");
-const ObjectId = require("mongodb").ObjectId;
 var sanitize = require("mongo-sanitize");
 
 const addUserRoute = express.Router();
 const { userModel } = require("../schema/reviewSchema");
-const { body, validationResult } = require('express-validator');
-
-
 
 addUserRoute.route("/user/add").post( function (req, res) {
-  let db_connect = dbo.getDb();
 
   let user = new userModel({
     userID: sanitize(req.body.userID),

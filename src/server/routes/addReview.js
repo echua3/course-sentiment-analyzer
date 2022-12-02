@@ -1,6 +1,4 @@
 const express = require("express");
-const dbo = require("../db/conn_search");
-const ObjectId = require("mongodb").ObjectId;
 var sanitize = require("mongo-sanitize");
 
 const reviewRoutes = express.Router();
@@ -16,7 +14,6 @@ reviewRoutes.route("/review/add").post(body('comment').not().isEmpty().trim().es
     });
     return;
   }
-  let db_connect = dbo.getDb();
 
   let review = new reviewModel({
     classID: sanitize(req.body.sectionID),

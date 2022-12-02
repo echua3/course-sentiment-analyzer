@@ -36,17 +36,12 @@ const useStyles = makeStyles((theme) => ({
  
 const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDowns }) => {
     const classes = useStyles()
-    // console.log("Current Review: ", review);
     const reviewID = review._id;
 
     const [clickedUp, setClickedUp] = useState(userUps && userUps.includes(reviewID) ? true: false);
     const [clickedDown, setClickedDown] = useState(userDowns && userDowns.includes(reviewID) ? true : false);
 
-    const startingVotes = votes;
-    // console.log("Starting Votes: ", startingVotes);
-
     const [currentVotes, setVotes] = useState(votes);
-    // console.log("currentVotes after useState:", currentVotes);
 
     const [userUpvotes, setUserUpvotes] = useState(userUps ? userUps : []);
     const [userDownvotes, setUserDownvotes] = useState(userDowns ? userDowns : []);
@@ -112,15 +107,6 @@ const VoteBox = ({ review, votes, handleUpvote, handleDownvote, userUps, userDow
             }
         };
     }
-
-    // console logs to check values
-    // console.log("userUps: ", userUps);
-    // console.log("userUpvotes: ", userUpvotes);
-    // console.log("votes: ", votes);
-    // console.log("clickedUp: ", clickedUp);
-    // console.log("userDowns: ", userDowns);
-    // console.log("userDownvotes: ", userDownvotes);
-    // console.log("clickedDown: ", clickedDown);
 
  return (
    <Grid

@@ -4,8 +4,6 @@
 */
 
 const express = require("express");
-const dbo = require("../db/conn_search");
-const ObjectId = require("mongodb").ObjectId;
 const async = require('async');
 
 const upvoteReviewRoute = express.Router();
@@ -47,6 +45,7 @@ param('userID').trim().not().isEmpty(),
             });
         }
 
+        // results
         res.status(200).json({
             message: "Review and User reviewUpvoteIDs updated!",
             results: [upvoteResult, userUpvoteResult],

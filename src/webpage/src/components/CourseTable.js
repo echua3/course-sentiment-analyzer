@@ -3,8 +3,6 @@ import CourseSummary from "./CourseSummary";
 import ReadReview from "./ReadReviews";
 import { useState } from "react";
 import { Table, Card } from "antd";
-import NoResult from "./NoResult";
-
 
 const CourseTable = (props) => {
     const [activeTabKey, setActiveTabKey] = useState('ClassPrompt');
@@ -80,7 +78,8 @@ const CourseTable = (props) => {
     const onTableRowExpand = (expanded, record) => {
         const keys = [];
         if(expanded){
-            keys.push(record.SSS_SectionsID); // I have set my record.id as row key. Check the documentation for more details.
+            keys.push(record.SSS_SectionsID);
+            // I have set my record.id as row key. Check the documentation for more details.
         }
 
 
@@ -89,8 +88,6 @@ const CourseTable = (props) => {
         setExpandedRowKeys(keys);
         setActiveTabKey('ClassPrompt')
     }
-
-    // console.log(props.paginagtion)
 
     return (
       <div className="coursetable">
@@ -121,10 +118,6 @@ const CourseTable = (props) => {
             onExpand={onTableRowExpand}
 
         />
-
-
-
-
       </div>
     );
 

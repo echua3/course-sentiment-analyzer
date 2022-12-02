@@ -43,9 +43,9 @@ userReviewRoutes.route("/user/review/:userID/:page").get(param('page').trim().no
                     numberOfPage: Math.ceil(total / LIMIT),
                     numberTotal: total});
 
-  }
-})
-}
+            }
+        })
+    }
 )});
 
 module.exports = userReviewRoutes;
