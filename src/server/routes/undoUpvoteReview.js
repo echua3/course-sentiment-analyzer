@@ -16,46 +16,46 @@ const { param, validationResult } = require('express-validator');
 
 undoUpvoteReviewRoute.route("/review/undoUpvote/:reviewID/:userID").post(param('reviewID').trim().not().isEmpty(),
 param('userID').trim().not().isEmpty(),
-    function (req, res) {
+    async function (req, res) {
 
     let db_connect = dbo.getDb();
 
-    async.parallel([
+    var undoUpvoteResult;
+    var userUndoUpvoteResult;
 
-        function(callback) {
-            reviewModel.findByIdAndUpdate(req.params.reviewID, 
-                {$inc: {'helpfulness': -1}}
-            , function(err, results) {
-                if(err) return callback(err);
-                callback(null, results);
-            })
-        },
-        function(callback) {
-            userModel.updateOne({'userID': req.params.userID}, {
-                $pull: {
-                    'reviewUpvoteIDs': ObjectId(req.params.reviewID)
-                }
-            }, function(err, results) {
-                if(err) return callback(err);
-                callback(null, results);
-            })
-        }
+    // edit helpfulness in review model
+    try {
+        undoUpvoteResult = await reviewModel.findByIdAndUpdate(req.params.reviewID,
+            {$inc: {'helpfulness': -1}})
+        // console.log("undoUpvoteResult: ", undoUpvoteResult);
+    } catch (err) {
+        return res.status(500).json({
+            message: "Error while undoing upvote.",
+            error: err,
+        });
+    }
 
-    ], function(err, results) {
-        console.log("ERR: ", err);
-        if(err) {
-            res.status(500).json({
-                error: err
-            });
-        } else {
-            res.status(200).json({
-                message: "Review and User reviewUpvoteIDs updated!",
-                results: results,
-            });            
-        }
-        console.log("RESULTS:", results);
+    // edit reviewUpvoteIDs in user model
+    try {
+        userUndoUpvoteResult = await userModel.updateOne({'userID': req.params.userID}, {
+            $pull: {
+                'reviewUpvoteIDs': ObjectId(req.params.reviewID)
+            }
+        }) 
+        // console.log("userUndoUpvoteResult: ", userUndoUpvoteResult);
+    } catch (err) {
+        return res.status(500).json({
+            message: "Error while userUndoUpvoteResult and editing user upvoteIDs.",
+            error: err,
+        });
+    }
+
+    // results 
+    res.status(200).json({
+        message: "Review and User reviewUpvoteIDs updated!",
+        results: [undoUpvoteResult, userUndoUpvoteResult],
     });
-    
+    res.end();
 });
 
 module.exports = undoUpvoteReviewRoute;
