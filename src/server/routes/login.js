@@ -9,6 +9,11 @@ const loginRoute = express.Router();
 const { userModel } = require("../schema/userSchema");
 const { param, validationResult } = require('express-validator');
 
+// Use this variable to decipher logins using the user model, defined in the user schema,
+// and create a cookie once an individual logs in
+
+// Params, userID
+// Returns, resource with the corresponding error or success msg
 
 var sanitize = require("mongo-sanitize");
 

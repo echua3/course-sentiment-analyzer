@@ -49,7 +49,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser());
 
-app.use(searchCountRoutes)
+
 app.use(addReviewRoute)
 app.use(addUserRoute)
 app.use(searchReviewRoutes)

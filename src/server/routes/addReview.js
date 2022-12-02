@@ -5,6 +5,12 @@ const reviewRoutes = express.Router();
 const { reviewModel } = require("../schema/reviewSchema");
 const { body, validationResult } = require('express-validator');
 
+// Use this variable to add a review value to the corresponding user and class
+
+// Params, classID (ID of the corresponding course the review belongs to), comment (the contents of the review), difficulty (difficulty score of the review),
+//         score (sentiment analysis score of the review), helpfulness (upvote score of the review which should default to 0), date
+// Returns, resource with the corresponding error or success msg as well as the created review if the value passes
+
 reviewRoutes.route("/review/add").post(body('comment').not().isEmpty().trim().escape(), 
                                        async function (req, res) {
   const errors = validationResult(req);

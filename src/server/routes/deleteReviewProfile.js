@@ -7,6 +7,11 @@ const { userModel } = require("../schema/userSchema");
 
 const { body, validationResult } = require('express-validator');
 
+// Use this route to delete a corresponding review value from the user
+
+// Params, userID, reviewID
+// Returns, resource with the corresponding error or success msg as well as the result (which in this case is the user information)
+
 deleteReviewRoutes.route("/user/review/delete/:userID/:reviewID").delete(async function (req, res) {
   const errors = validationResult(req);
   if(errors.errors.length > 0) {

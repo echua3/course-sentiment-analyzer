@@ -11,6 +11,10 @@ const { reviewModel } = require("../schema/reviewSchema");
 const { userModel } = require("../schema/userSchema");
 const { param, validationResult } = require('express-validator');
 
+// Use this to downvote a specific review, by bumping the helpfulness score by -1, and adding the downvoted review id to the user reference collection
+
+// Params, userID, reviewID
+// Returns, resource with the corresponding success msg as well as the result (which in this case is the user information)
 
 downvoteReviewRoute.route("/review/downvote/:reviewID/:userID").post(param('reviewID').trim().not().isEmpty(),
 param('userID').trim().not().isEmpty(),

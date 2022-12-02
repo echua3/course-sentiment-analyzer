@@ -11,6 +11,10 @@ const { reviewModel } = require("../schema/reviewSchema");
 const { userModel } = require("../schema/userSchema");
 const { param, validationResult } = require('express-validator');
 
+// Use this to upvote a specific review, by bumping the helpfulness score by 1, and adding the upvoted review id to the user reference collection
+
+// Params, userID, reviewID
+// Returns, resource with the update message and result (value of the user who undoed the update)
 
 upvoteReviewRoute.route("/review/upvote/:reviewID/:userID").post(param('reviewID').trim().not().isEmpty(),
 param('userID').trim().not().isEmpty(),

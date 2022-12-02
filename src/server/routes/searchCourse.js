@@ -1,6 +1,11 @@
 const express = require("express");
 const dbo = require("../db/conn_search");
 
+// Use this method to get the total amount of classes, in the retrieval of the class
+// collection
+
+// Returns, resource with the corresponding amount of classes
+
 const searchRoutes = express.Router();
 searchRoutes.route("/courselist").get(function (req, res) {
   const LIMIT = 10;  

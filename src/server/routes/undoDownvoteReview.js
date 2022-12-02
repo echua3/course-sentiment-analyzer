@@ -12,6 +12,10 @@ const { reviewModel } = require("../schema/reviewSchema");
 const { userModel } = require("../schema/userSchema");
 const { param, validationResult } = require('express-validator');
 
+// Use this to undo the changes made with downvoting a specific post
+
+// Params, userID, reviewID
+// Returns, resource with the update message and result (value of the user who undoed the update)
 
 undoDownvoteReviewRoute.route("/review/undoDownvote/:reviewID/:userID").post(param('reviewID').trim().not().isEmpty(),
 param('userID').trim().not().isEmpty(),
