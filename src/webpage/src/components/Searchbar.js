@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Button, Select, message } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import CourseTable from "./CourseTable";
 import NoResult from "./NoResult";
@@ -42,6 +42,24 @@ function SearchBar(props) {
     Credits:'',
     Department:'',
     currentPage:1,
+    total:1 
+  })
+
+  useEffect(() => {      
+    const fetchData = async () => {      
+      const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/totalclasscount")      
+      if(!responseValue.ok) {          
+        const message = "An error occured"          
+        console.log("Error:" + responseValue.statusText);          
+        window.userID = "";          
+        return;      
+      }      
+      const records = await responseValue.json();      
+      params.total = records.total;     
+      let test = params;      
+      setParams(test);    
+    }   
+     fetchData().catch(console.error);   
   })
 
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
@@ -85,7 +103,8 @@ function SearchBar(props) {
             setRestitle('Success');
             setRessub('Above is the course list')
             setDatasource(res.data.data)
-            pagination.total = res.data.numberTotal
+            console.log(res.data)
+            pagination.total = res.data.total
             pagination.current = params.currentPage
             let test={...pagination}
             setPagination(test)
