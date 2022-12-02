@@ -15,6 +15,7 @@ addReviewRoute = require("./routes/addReview")
 searchReviewRoutes = require("./routes/searchReview")
 searchAllReviewsRoutes = require("./routes/searchAllReviews")
 searchCourseRoute = require("./routes/searchCourse")
+searchCountRoutes = require("./routes/searchCourseCount")
 addUserRoute = require("./routes/addUser")
 retrieveUserRoute = require("./routes/retrieveUser")
 editUserRoute = require("./routes/editUser")
@@ -48,6 +49,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser());
 
+app.use(searchCountRoutes)
 app.use(addReviewRoute)
 app.use(addUserRoute)
 app.use(searchReviewRoutes)

@@ -31,25 +31,6 @@ editreviewRoutes.route("/review/update/:id").post(body('newreview').not().isEmpt
     });
     return;
   }
-
-  // reviewModel.updateOne(
-  //   {_id: ObjectId(req.params.id)},
-  //   {comment: sanitize(req.body.newreview)}
-  // ).then(result => {
-  //   console.log(result);
-  //   res.status(200).json({
-  //   message: "Review updated!",
-  //   results: result,
-  // });
-  // })
-  // .catch(err => {
-  //   console.log('there is an error')
-  //   res.status(500).json({
-  //     error: err
-  //   });
-  //   return;
-  // });
-
- });
+});
 
  module.exports = editreviewRoutes;
