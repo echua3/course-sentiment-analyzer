@@ -8,12 +8,13 @@
 ## Complexity:
 - A few occurences where async await would make the code more readable
 - Refactored the voting routes to use async await and try catch instead of the parallel async (Epiphany)
+- Changed the complexity from the common try statements we used back during the inital tests with the backend, to awaits to lower down the complexity and allow more verstalitiy when it comes to making changes to the database, this was handled majorly by Epiphany, James, and Xiao, minorly by Elmi
 
 ## Tests:
-- The code needs more automated tests (Elmi)
+- Established a bench marker to test concurrency of the database, from now on, allowing us to debug the issues that came up with the concurrency of the async parallel statements, this was handled majorly by Elmi
 
 ## Naming:
-- Naming is satisfactory
+- Naming doesn't need any specific changes, everything is as descriptive as it can be, along with routes, and resulting values
 
 ## Comments:
 - Could utilize more comments to clarify what important parts of the code are doing (Everyone)
