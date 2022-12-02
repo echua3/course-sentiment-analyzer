@@ -4,7 +4,7 @@ var sanitize = require("mongo-sanitize");
 const addUserRoute = express.Router();
 const { userModel } = require("../schema/reviewSchema");
 
-addUserRoute.route("/user/add").post( function (req, res) {
+addUserRoute.route("/user/add").post( async function (req, res) {
 
   let user = new userModel({
     userID: sanitize(req.body.userID),
@@ -19,20 +19,19 @@ addUserRoute.route("/user/add").post( function (req, res) {
     reviewDownvotedIDs: sanitize(req.body.reviewDownvotedIDs),
     department: sanitize(req.body.dept)
   })
-  user.save().then(result => {
-    console.log(result);
+
+  try {
+    const result = await review.save();
     res.status(201).json({
       message: "Handling POST requests to reviews",
       createdReview: result
     });
-  })
-  .catch(err => {
-    console.log(err);
+  } catch (err) {
     res.status(500).json({
       error: err
     });
     return;
-  });
- });
+  }
+});
 
  module.exports = addUserRoute;

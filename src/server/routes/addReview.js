@@ -6,7 +6,7 @@ const { reviewModel } = require("../schema/reviewSchema");
 const { body, validationResult } = require('express-validator');
 
 reviewRoutes.route("/review/add").post(body('comment').not().isEmpty().trim().escape(), 
-                                       function (req, res) {
+                                       async function (req, res) {
   const errors = validationResult(req);
   if(errors.errors.length > 0) {
     res.status(500).json({
@@ -23,20 +23,19 @@ reviewRoutes.route("/review/add").post(body('comment').not().isEmpty().trim().es
     helpfulness: sanitize(req.body.helpfulness),
     date: sanitize(req.body.date)
   })
-  review.save().then(result => {
-    console.log(result);
+
+  try {
+    const result = await review.save();
     res.status(201).json({
       message: "Handling POST requests to reviews",
       createdReview: result
     });
-  })
-  .catch(err => {
-    console.log(err);
+  } catch (err) {
     res.status(500).json({
       error: err
     });
     return;
-  });
+  }
  });
 
  module.exports = reviewRoutes;
