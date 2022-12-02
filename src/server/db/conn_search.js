@@ -5,6 +5,10 @@ const client = new MongoClient(Db, {
   useUnifiedTopology: true,
 });
 
+MongoBench.mongo(mongo, { 
+  'logsCollection': 'mongologs',
+  calculateQueryFingeprint: false
+});
 var _db;
 
 module.exports = {
