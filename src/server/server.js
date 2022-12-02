@@ -62,6 +62,7 @@ app.use(showProfileRoutes)
 app.use(searchAllReviewsRoutes)
 
 app.use('/api', searchCourseRoute)
+app.use(searchCountRoutes)
 app.use(login)
 app.use(logout)
 app.use(currentUserRoute)
