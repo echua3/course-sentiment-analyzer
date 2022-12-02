@@ -1,7 +1,7 @@
 # Code Review - Iteration 5
 
 ## Design:
-- Backend code can be improved so that each segment only contains one route and each route only contains a single connection to the database (Elmi, James)
+- - Backend code can be improved so that each segment only contains one route and each route only contains a single connection to the database and a few methods we're long they were taken care of by mostly Epiphany, James, and Xiao, making the messy backend we had before much simpler to read and decipher for others
 - Sentiment analyzer class could utilize an interface (dependency inversion principle)
 - A few methods are long and need refactoring
 
