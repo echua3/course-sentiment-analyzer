@@ -14,43 +14,46 @@ const { param, validationResult } = require('express-validator');
 
 downvoteReviewRoute.route("/review/downvote/:reviewID/:userID").post(param('reviewID').trim().not().isEmpty(),
 param('userID').trim().not().isEmpty(),
-    function (req, res) {
+    async function (req, res) {
 
-    async.parallel([
+    let db_connect = dbo.getDb();
 
-        function(callback) {
-            reviewModel.findByIdAndUpdate(req.params.reviewID, 
-                {$inc: {'helpfulness': -1}}
-            , function(err, results) {
-                if(err) return callback(err);
-                callback(null, results);
-            })
-        },
-        function(callback) {
-            userModel.updateOne({'userID': req.params.userID}, {
-                $addToSet: {
-                    ['reviewDownvoteIDs']: req.params.reviewID
-                }
-            }, function(err, results) {
-                if(err) return callback(err);
-                callback(null, results);
-            })
-        }
+    var downvoteResult;
+    var userDownvoteResult;
 
-    ], function(err, results) {
-        console.log("ERR: ", err);
-        if(err) {
-            res.status(500).json({
-                error: err
-            });
-        } else {
-            res.status(200).json({
-                message: "Review and User reviewDownvoteIDs updated!",
-                results: results,
-            });            
-        }
-        console.log("RESULTS:", results);
+    // edit helpfulness in review model
+    try {
+        downvoteResult = await reviewModel.findByIdAndUpdate(req.params.reviewID,
+            {$inc: {'helpfulness': -1}})
+        // console.log("downvoteResult: ", downvoteResult);
+    } catch (err) {
+        return res.status(500).json({
+            message: "Error while downvoting.",
+            error: err,
+        });
+    }
+
+    // edit reviewDownvoteIDs in user model
+    try {
+        userDownvoteResult = await userModel.updateOne({'userID': req.params.userID}, {
+            $addToSet: {
+                ['reviewDownvoteIDs']: req.params.reviewID
+            }
+        }) 
+        // console.log("userDownvoteResult: ", userDownvoteResult);
+    } catch (err) {
+        return res.status(500).json({
+            message: "Error while downvoting and editing user downvoteIDs.",
+            error: err,
+        });
+    }
+
+    res.status(200).json({
+        message: "Review and User reviewDownvoteIDs updated!",
+        results: [downvoteResult, userDownvoteResult],
     });
+    res.end();
+  
 });
 
 module.exports = downvoteReviewRoute;

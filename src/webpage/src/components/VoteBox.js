@@ -5,10 +5,10 @@ import IconButton from '@material-ui/core/IconButton'
 import { makeStyles } from '@material-ui/core/styles'
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUp from '@material-ui/icons/ArrowDropUp'
-import Upvote from './Vote/Upvote'
-import Downvote from './Vote/Downvote'
-import UndoUpvote from './Vote/UndoUpvote'
-import UndoDownvote from './Vote/UndoDownvote'
+import Upvote from './vote/Upvote'
+import Downvote from './vote/Downvote'
+import UndoUpvote from './vote/UndoUpvote'
+import UndoDownvote from './vote/UndoDownvote'
  
  
 const useStyles = makeStyles((theme) => ({

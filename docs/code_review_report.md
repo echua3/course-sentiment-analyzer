@@ -1,7 +1,10 @@
+# Code Review - Iteration 5
+
 # Design:
 - Backend code can be improved so that each segment only contains one route and each route only contains a single connection to the database
 - Sentiment analyzer class could utilize an interface (dependency inversion principle)
 - A few methods are long and need refactoring
+- Refactored the voting routes to use async await and try catch instead of the parallel async
 
 # Complexity:
 - 
@@ -22,6 +25,8 @@
 - Unused classes/folders: sentiment folder, original CourseSearch.js file
 - Multiple unused imports, methods, and variables
 - Inconsistent indentation, could make code more readable
+- Cleaned up the code and removed redundant files 
 
 # Documentation:
 - Documentation is satisfactory
+
