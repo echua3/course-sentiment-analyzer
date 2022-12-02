@@ -3,7 +3,7 @@ import { Form, Input, Button, Select, message } from "antd";
 import { useState } from "react";
 import axios from "axios";
 import CourseTable from "./CourseTable";
-import NoResult from "./NoResult";
+import ResultPrompts from "./ResultPrompts";
 import "./style/css/CourseComponent.scss"
 
 function SearchBar(props) {
@@ -397,10 +397,8 @@ function SearchBar(props) {
       </div>
 
       <CourseTable pagination={{...pagination,onChange:changePage}} data={datasource}/>
-    {/* <CourseTable pagination={pagination} data={datasource}/> */}
       <Form form={form_1}>
-      <NoResult status={resstatus} title={restitle} subTitle={ressub}/>
-      {/* <NoResult status={resstatus} /> */}
+      <ResultPrompts status={resstatus} title={restitle} subTitle={ressub}/>
       </Form>
     </div>
   );
