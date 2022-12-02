@@ -1,12 +1,10 @@
 import React from "react";
-import { Form, Input, Button, Select, Table, message, Alert } from "antd";
+import { Form, Input, Button, Select, message } from "antd";
 import { useState } from "react";
 import axios from "axios";
 import CourseTable from "./CourseTable";
 import NoResult from "./NoResult";
 import "./style/css/CourseComponent.scss"
-import { data } from "jquery";
-
 
 function SearchBar(props) {
 
@@ -29,8 +27,6 @@ function SearchBar(props) {
     await requestData(params)
   }
 
-  // new onSubmit with mongodb
-
   const [form] = Form.useForm();
   const [datasource, setDatasource] = useState([]);
   const [pagination, setPagination] = useState({onChange:changePage, showSizeChanger:false});
@@ -48,12 +44,11 @@ function SearchBar(props) {
     currentPage:1,
   })
 
-
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
   const requestData= async (params)=>{
     // edited for development and deployment usage
-    await axios.get(process.env.REACT_APP_API_ENDPOINT + "/api/courselist", {params})
+    await axios.get(API_ENDPOINT + "/api/courselist", {params})
     .then((res) => {
       if (res.status === 200) {
         setDatasource('')
@@ -90,18 +85,11 @@ function SearchBar(props) {
             setRestitle('Success');
             setRessub('Above is the course list')
             setDatasource(res.data.data)
-            // console.log(res.data.data);
             pagination.total = res.data.numberTotal
             pagination.current = params.currentPage
             let test={...pagination}
             setPagination(test)
           }
-          // setDatasource(res.data.data)
-          // console.log(res.data.data);
-          // pagination.total = res.data.numberTotal
-          // pagination.current = params.currentPage
-          // let test={...pagination}
-          // setPagination(test)
         }
       }
     })
@@ -124,7 +112,6 @@ function SearchBar(props) {
     setRessub('Please enter the data')
 
     // edited for development and deployment usage
-    // await axios.get("http://localhost:" + process.env.REACT_APP_SERVERPORT + "/api/courselist")
     await axios.get(process.env.REACT_APP_API_ENDPOINT+ "/api/courselist")
     .then((res) => {
       if (res.status === 200) {
@@ -418,6 +405,5 @@ function SearchBar(props) {
     </div>
   );
 }
-
 
 export default SearchBar;

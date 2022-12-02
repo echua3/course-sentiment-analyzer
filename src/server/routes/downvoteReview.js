@@ -4,7 +4,6 @@
 */
 
 const express = require("express");
-const dbo = require("../db/conn_search");
 const async = require('async');
 
 const downvoteReviewRoute = express.Router();
@@ -16,8 +15,6 @@ const { param, validationResult } = require('express-validator');
 downvoteReviewRoute.route("/review/downvote/:reviewID/:userID").post(param('reviewID').trim().not().isEmpty(),
 param('userID').trim().not().isEmpty(),
     function (req, res) {
-
-    let db_connect = dbo.getDb();
 
     async.parallel([
 
@@ -54,43 +51,6 @@ param('userID').trim().not().isEmpty(),
         }
         console.log("RESULTS:", results);
     });
-
-    // // decrement the helpfulness count in reviews
-    // reviewModel.findByIdAndUpdate(req.params.reviewID, 
-    //     {$inc: {'helpfulness': -1}}
-    // ).then(result => {
-    //     res.status(200).json({
-    //     message: "Review updated!",
-    //     results: result,
-    //     });
-    // })
-    // .catch(err => {
-    //     // console.log(err);
-    //     res.status(500).json({
-    //         error: err
-    //     });
-    //     return;
-    // });
-
-    // // add review id to user's reviewDownvoteIDs
-    // userModel.updateOne({'userID': req.params.userID}, {
-    //         $addToSet: {
-    //             ['reviewDownvoteIDs']: req.params.reviewID
-    //         }
-    //     }
-    // ).then(result => {
-    //     res.status(200).json({
-    //     message: "User reviewDownvoteIDs updated!",
-    //     results: result,
-    //     });
-    // })
-    // .catch(err => {
-    //     res.status(500).json({
-    //         error: err
-    //     });
-    //     return;
-    // });
-    
 });
 
 module.exports = downvoteReviewRoute;

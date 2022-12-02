@@ -8,7 +8,7 @@ import UserProfileForm from "./components/UserProfileForm.js";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage.js";
 import LogoutPage from "./Pages/LogoutPage.js";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function App() {
   window.userID = "";
@@ -17,7 +17,6 @@ function App() {
     const fetchData = async () => {
       const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
       if(!responseValue.ok) {
-            const message = "An error occured"
             console.log("Error:" + responseValue.statusText);
             window.userID = "";
             return;

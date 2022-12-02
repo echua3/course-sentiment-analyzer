@@ -1,7 +1,5 @@
 const express = require("express");
-const dbo = require("../db/conn_search");
 const ObjectId = require("mongodb").ObjectId;
-var sanitize = require("mongo-sanitize");
 
 const deleteReviewRoutes = express.Router();
 const { reviewModel } = require("../schema/reviewSchema");
@@ -27,15 +25,12 @@ deleteReviewRoutes.route("/user/review/delete/:userID/:reviewID").delete(async f
     {userID: req.params.userID },
     {reviewIDs: reviewUpdate}
     ).then(result => {
-    // console.log('result')
-    // console.log(result);
     res.status(200).json({
     message: "Profile updated!",
     results: result,
     });
     })
     .catch(err => {
-    // console.log(err);
     res.status(500).json({
       error: err
     });

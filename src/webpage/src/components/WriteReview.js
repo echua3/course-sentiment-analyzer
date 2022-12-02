@@ -1,17 +1,12 @@
-import { OmitProps } from "antd/lib/transfer/ListBody";
 import React from "react";
 import { useState } from "react";
-import Axios from "axios";
 import './style/css/CourseComponent.scss';
 import { Alert } from 'antd';
 var Sentiment = require('sentiment');
 
 
 function WriteReview({record}) {
- 
- 
-
-    const [initialReview, setInitialReview] = useState("");
+  
     const [commentError, setCommentError] = useState("");
     const [commentErrorBoolean, showCommentError] = useState(false);
     var sentiment = new Sentiment();
@@ -33,12 +28,10 @@ function WriteReview({record}) {
     }
 
     async function enterReview(e) {
-      
         
         e.preventDefault(); 
         var sentiment_score = sentiment.analyze(form.comment).score
         console.log(sentiment_score)
-        // updateForm({ difficulty: 0})
         
         setForm((prev) => {
           return { ...prev, sectionID: {record}.record,}})
@@ -134,7 +127,6 @@ function WriteReview({record}) {
             </form>
 				   </div>
       </div>
-
       
     );
     } else if (window.userID != "") {
@@ -154,8 +146,6 @@ function WriteReview({record}) {
         </div>
       );
     }
-
   }
-
   
   export default WriteReview;

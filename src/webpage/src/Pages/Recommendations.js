@@ -2,7 +2,6 @@ import "../index.css";
 import RecommendationsTable from "../components/RecommendationsTable";
 import React, { useEffect, useState } from "react";
 
-
 function Recommendations() {
   const [actualID, setActualID] = useState("");
   useEffect(() => {
