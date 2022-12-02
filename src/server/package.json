@@ -26,6 +26,7 @@
     "express-validator": "^6.14.2",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
+    "mongo-bench": "^0.4.1",
     "mongo-sanitize": "^1.1.0",
     "mongodb": "^4.11.0",
     "mongoose": "^6.7.1",
