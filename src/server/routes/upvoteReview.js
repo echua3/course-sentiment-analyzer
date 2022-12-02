@@ -19,106 +19,39 @@ param('userID').trim().not().isEmpty(),
     async function (req, res) {
         var upvoteResult;
         var userUpvoteResult;
+
+        // edit helpfulness in review model
         try {
             upvoteResult = await reviewModel.findByIdAndUpdate(req.params.reviewID,
                 {$inc: {'helpfulness': 1}})
-            console.log("upvoteResult: ", upvoteResult);
+            // console.log("upvoteResult: ", upvoteResult);
         } catch (err) {
             return res.status(500).json({
                 message: "Error while upvoting.",
                 error: err,
             });
         }
+
+        // edit reviewUpvoteIDs in user model
         try {
             userUpvoteResult = await userModel.updateOne({'userID': req.params.userID}, {
                 $addToSet: {
                     ['reviewUpvoteIDs']: req.params.reviewID
                 }
             }) 
-            console.log("userUpvoteResult: ", userUpvoteResult);
+            // console.log("userUpvoteResult: ", userUpvoteResult);
         } catch (err) {
             return res.status(500).json({
-                message: "'Error while upvoting and editing user upvoteIDs.",
+                message: "Error while upvoting and editing user upvoteIDs.",
                 error: err,
             });
         }
+
         res.status(200).json({
             message: "Review and User reviewUpvoteIDs updated!",
             results: [upvoteResult, userUpvoteResult],
         });
         res.end();
-    // async.parallel([
-
-    //     function(callback) {
-    //         reviewModel.findByIdAndUpdate(req.params.reviewID,
-    //             {$inc: {'helpfulness': 1}}
-    //         , function(err, results) {
-    //             if(err) return callback(err);
-    //             callback(null, results);
-    //         })
-    //     },
-    //     function(callback) {
-    //         userModel.updateOne({'userID': req.params.userID}, {
-    //             $addToSet: {
-    //                 ['reviewUpvoteIDs']: req.params.reviewID
-    //             }
-    //         }, function(err, results) {
-    //             if(err) return callback(err);
-    //             callback(null, results);
-    //         })
-    //     }
-
-    // ], function(err, results) {
-    //     console.log("ERR: ", err);
-    //     if(err) {
-    //         res.status(500).json({
-    //             error: err
-    //         });
-    //     } else {
-    //         res.status(200).json({
-    //             message: "Review and User reviewUpvoteIDs updated!",
-    //             results: results,
-    //         });
-    //     }
-    //     console.log("RESULTS:", results);
-    // });
-
-    // // increment the helpfulness count in reviews
-    // reviewModel.findByIdAndUpdate(req.params.reviewID,
-    //     {$inc: {'helpfulness': 1}}
-    // ).then(result => {
-    //     res.status(200).json({
-    //     message: "Review updated!",
-    //     results: result,
-    //     });
-    // })
-    // .catch(err => {
-    //     // console.log(err);
-    //     res.status(500).json({
-    //         error: err
-    //     });
-    //     return;
-    // });
-
-    // // add review id to user's reviewUpvoteIDs
-    // userModel.updateOne({'userID': req.params.userID}, {
-    //         $addToSet: {
-    //             ['reviewUpvoteIDs']: req.params.reviewID
-    //         }
-    //     }
-    // ).then(result => {
-    //     res.status(200).json({
-    //     message: "User reviewUpvoteIDs updated!",
-    //     results: result,
-    //     });
-    // })
-    // .catch(err => {
-    //     res.status(500).json({
-    //         error: err
-    //     });
-    //     return;
-    // });
-
 });
 
     module.exports = upvoteReviewRoute;
