@@ -21,8 +21,6 @@ undoDownvoteReviewRoute.route("/review/undoDownvote/:reviewID/:userID").post(par
 param('userID').trim().not().isEmpty(),
     async function (req, res) {
 
-    let db_connect = dbo.getDb();
-
     var undoDownvoteResult;
     var userUndoDownvoteResult;
 
