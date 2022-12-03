@@ -43,7 +43,7 @@ async function (req, res) {
             results: [upvoteResult, userUpvoteResult],
         });
         res.end();
-        
+
     } catch (err) {
         return res.status(500).json({
             message: "Error while upvoting.",
@@ -52,4 +52,4 @@ async function (req, res) {
     }
 });
 
-    module.exports = upvoteReviewRoute;
+module.exports = upvoteReviewRoute;

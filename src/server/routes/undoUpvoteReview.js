@@ -19,7 +19,7 @@ const { param, validationResult } = require('express-validator');
 
 undoUpvoteReviewRoute.route("/review/undoUpvote/:reviewID/:userID").post(param('reviewID').trim().not().isEmpty(),
 param('userID').trim().not().isEmpty(),
-    async function (req, res) {
+async function (req, res) {
 
     try {
         var undoUpvoteResult;
