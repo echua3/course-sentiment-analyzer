@@ -18,44 +18,38 @@ const { param, validationResult } = require('express-validator');
 
 downvoteReviewRoute.route("/review/downvote/:reviewID/:userID").post(param('reviewID').trim().not().isEmpty(),
 param('userID').trim().not().isEmpty(),
-    async function (req, res) {
+async function (req, res) {
 
-    var downvoteResult;
-    var userDownvoteResult;
-
-    // edit helpfulness in review model
     try {
+        var downvoteResult;
+        var userDownvoteResult;
+
+        // edit helpfulness in review model
         downvoteResult = await reviewModel.findByIdAndUpdate(req.params.reviewID,
             {$inc: {'helpfulness': -1}})
         // console.log("downvoteResult: ", downvoteResult);
-    } catch (err) {
-        return res.status(500).json({
-            message: "Error while downvoting.",
-            error: err,
-        });
-    }
 
-    // edit reviewDownvoteIDs in user model
-    try {
+        // edit reviewDownvoteIDs in user model
         userDownvoteResult = await userModel.updateOne({'userID': req.params.userID}, {
             $addToSet: {
                 ['reviewDownvoteIDs']: req.params.reviewID
             }
         }) 
         // console.log("userDownvoteResult: ", userDownvoteResult);
+
+        // results
+        res.status(200).json({
+            message: "Review and User reviewDownvoteIDs updated!",
+            results: [downvoteResult, userDownvoteResult],
+        });
+        res.end();
+
     } catch (err) {
         return res.status(500).json({
-            message: "Error while downvoting and editing user downvoteIDs.",
+            message: "Error while downvoting.",
             error: err,
         });
-    }
-
-    res.status(200).json({
-        message: "Review and User reviewDownvoteIDs updated!",
-        results: [downvoteResult, userDownvoteResult],
-    });
-    res.end();
-  
+    }  
 });
 
 module.exports = downvoteReviewRoute;
