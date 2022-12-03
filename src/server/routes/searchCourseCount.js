@@ -35,13 +35,22 @@ searchCountRoutes.route("/totalclasscount").get(function (req, res) {
     Object.assign(myquery,{'Department':{$regex:req.query.Department,$options: 'i'}})  
   }
 
-  db_connect.collection("testClasses").countDocuments(myquery).then((total) =>{
-    if(!response.ok) {
-      console.log("Error:" + response.statusText);
-      return;
+  db_connect.collection("testClasses").countDocuments(myquery, function (err, count) {
+    if (err){
+      console.log(err)
+    }else{
+      res.status(200).json({Count: count});
     }
-    response.status(200).json({total: total});
+  })
 
-})});
+  // db_connect.collection("testClasses").countDocuments(myquery).then((total) =>{
+  //   if(!response.ok) {
+  //     console.log("Error:" + response.statusText);
+  //     return;
+  //   }
+  //   response.status(200).json({total: total});
+  // })
+
+});
 
 module.exports = searchCountRoutes;

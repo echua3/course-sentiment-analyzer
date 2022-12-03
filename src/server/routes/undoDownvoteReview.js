@@ -19,46 +19,38 @@ const { param, validationResult } = require('express-validator');
 
 undoDownvoteReviewRoute.route("/review/undoDownvote/:reviewID/:userID").post(param('reviewID').trim().not().isEmpty(),
 param('userID').trim().not().isEmpty(),
-    async function (req, res) {
+async function (req, res) {
 
-    let db_connect = dbo.getDb();
-
-    var undoDownvoteResult;
-    var userUndoDownvoteResult;
-
-    // edit helpfulness in review model
     try {
+        var undoDownvoteResult;
+        var userUndoDownvoteResult;
+    
+        // edit helpfulness in review model
         undoDownvoteResult = await reviewModel.findByIdAndUpdate(req.params.reviewID,
             {$inc: {'helpfulness': 1}})
         // console.log("undoDownvoteResult: ", undoDownvoteResult);
-    } catch (err) {
-        return res.status(500).json({
-            message: "Error while undoing downvote.",
-            error: err,
-        });
-    }
 
-    // edit reviewDownvoteIDs in user model
-    try {
+        // edit reviewDownvoteIDs in user model
         userUndoDownvoteResult = await userModel.updateOne({'userID': req.params.userID}, {
             $pull: {
                 'reviewDownvoteIDs': ObjectId(req.params.reviewID)
             }
         }) 
         // console.log("userUndoDownvoteResult: ", userUndoDownvoteResult);
+
+        // results 
+        res.status(200).json({
+            message: "Review and User reviewDownvoteIDs updated!",
+            results: [undoDownvoteResult, userUndoDownvoteResult],
+        });
+        res.end();
+
     } catch (err) {
         return res.status(500).json({
-            message: "Error while userUndoDownvoteResult and editing user downvoteIDs.",
+            message: "Error while undoing downvote.",
             error: err,
         });
     }
-
-    // results 
-    res.status(200).json({
-        message: "Review and User reviewDownvoteIDs updated!",
-        results: [undoDownvoteResult, userUndoDownvoteResult],
-    });
-    res.end();
     
 });
 
