@@ -20,8 +20,6 @@ downvoteReviewRoute.route("/review/downvote/:reviewID/:userID").post(param('revi
 param('userID').trim().not().isEmpty(),
     async function (req, res) {
 
-    let db_connect = dbo.getDb();
-
     var downvoteResult;
     var userDownvoteResult;
 
