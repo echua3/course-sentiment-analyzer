@@ -2,25 +2,35 @@ import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
 import {difficulty_list} from './CourseSummary'
 
-console.log('In Piechart' + difficulty_list);
+console.log('UNDEFINED????:' + difficulty_list);
 class DifficultyPieChart extends Component {
     constructor(props) {
       super(props);
-  
+      // if(!difficulty_list){ difficulty_list = null } 
+      console.log('In Piechart2' + difficulty_list);
       this.state = {
         series: difficulty_list,
-        
         options: {
           chart: {
             id: 'apexchart-example',
-            type: 'donut'
+            type: 'donut',
+            animations: {
+              enabled: false,
+            },
           },
           labels:['Very Easy','Easy','Normal','Hard','Very Hard'],
           dataLabels: {
             enabled: false
           },
+          noData:{
+            text: undefined,
+            align: 'center',
+            verticalAlign: 'middle',
+            offsetX: 0,
+            offsetY: 0
+          },
           responsive: [{
-            breakpoint: 780,
+            breakpoint: 880,
             options: {
               chart: {
                 height: 200,
@@ -31,19 +41,49 @@ class DifficultyPieChart extends Component {
               }
             }
           }],
+          stroke: {
+              width: 2,
+              curve: 'straight'
+            },
           legend: {
-            position: 'right',
+            position: 'left',
             offsetY: 0,
-            height: 230,
+            height: 130,
             show: true
-          }  
+          },
+          title:{
+            text: 'Difficulty',
+            align: 'center',
+            margin: 10,
+            floating: false,
+            style: {
+              fontWeight: 'bold',
+              fontSize: '14px',
+              fontFamily: 'Montserrat-Regular',
+            }
+          },  
         }
       }
     }
     render() {
-      return (
-        <Chart options={this.state.options} series={this.state.series} type='donut' width={400} height={220} />
-      )
+      var temp_sum=0
+      for(let index=0; index<difficulty_list.length; index++)
+      {
+        temp_sum +=difficulty_list[index];
+      }
+      if(temp_sum==0)
+      {
+        return (
+          <h3>No Reviews to Perform Difficulty Analysis</h3>
+        )
+      }
+      else
+      {
+        return (
+          <Chart options={this.state.options} series={this.state.series} type='donut' width={400} height={220} />
+        )
+      }
+     
     }
 }
 
