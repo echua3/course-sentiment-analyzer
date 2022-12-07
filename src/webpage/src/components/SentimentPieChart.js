@@ -1,3 +1,4 @@
+import { CenterFocusStrong } from '@mui/icons-material';
 import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
 import {sentiment_list} from './CourseSummary'
@@ -12,14 +13,24 @@ class SentimentPieChart extends Component {
         options: {
           chart: {
             id: 'apexchart-example',
-            type: 'donut'
+            type: 'donut',
+            animations: {
+              enabled: false,
+            },
           },
           labels:['Negative','Neutral','Positive'],
           dataLabels: {
-            enabled: false
+            enabled: false,
+          },
+          noData:{
+            text: "There's no data",
+            align: 'center',
+            verticalAlign: 'middle',
+            offsetX: 0,
+            offsetY: 0
           },
           responsive: [{
-            breakpoint: 780,
+            breakpoint: 880,
             options: {
               chart: {
                 height: 200,
@@ -33,10 +44,21 @@ class SentimentPieChart extends Component {
           legend: {
             position: 'right',
             offsetY: 0,
-            height: 230,
+            height: 130,
             show: true
-          }  
-        }
+          },
+          title:{
+            text: 'Course Sentiment',
+            align: 'center',
+            margin: 10,
+            floating: false,
+            style: {
+              fontWeight: 'bold',
+              fontSize: '14px',
+              fontFamily: 'Montserrat-Regular',
+            }
+          }, 
+        } 
       }
     }
     render() {

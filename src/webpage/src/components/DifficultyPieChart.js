@@ -9,18 +9,27 @@ class DifficultyPieChart extends Component {
   
       this.state = {
         series: difficulty_list,
-        
         options: {
           chart: {
             id: 'apexchart-example',
-            type: 'donut'
+            type: 'donut',
+            animations: {
+              enabled: false,
+            },
           },
           labels:['Very Easy','Easy','Normal','Hard','Very Hard'],
           dataLabels: {
             enabled: false
           },
+          noData:{
+            text: "There's no data",
+            align: 'center',
+            verticalAlign: 'middle',
+            offsetX: 0,
+            offsetY: 0
+          },
           responsive: [{
-            breakpoint: 780,
+            breakpoint: 880,
             options: {
               chart: {
                 height: 200,
@@ -31,12 +40,27 @@ class DifficultyPieChart extends Component {
               }
             }
           }],
+          stroke: {
+              width: 2,
+              curve: 'straight'
+            },
           legend: {
-            position: 'right',
+            position: 'left',
             offsetY: 0,
-            height: 230,
+            height: 130,
             show: true
-          }  
+          },
+          title:{
+            text: 'Difficulty',
+            align: 'center',
+            margin: 10,
+            floating: false,
+            style: {
+              fontWeight: 'bold',
+              fontSize: '14px',
+              fontFamily: 'Montserrat-Regular',
+            }
+          },  
         }
       }
     }
