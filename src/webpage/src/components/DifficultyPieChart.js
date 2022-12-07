@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
 import {difficulty_list} from './CourseSummary'
 
-console.log('In Piechart' + difficulty_list);
+console.log('UNDEFINED????:' + difficulty_list);
 class DifficultyPieChart extends Component {
     constructor(props) {
       super(props);
-  
+      // if(!difficulty_list){ difficulty_list = null } 
+      console.log('In Piechart2' + difficulty_list);
       this.state = {
         series: difficulty_list,
         options: {
@@ -22,7 +23,7 @@ class DifficultyPieChart extends Component {
             enabled: false
           },
           noData:{
-            text: "There's no data",
+            text: undefined,
             align: 'center',
             verticalAlign: 'middle',
             offsetX: 0,
@@ -65,9 +66,24 @@ class DifficultyPieChart extends Component {
       }
     }
     render() {
-      return (
-        <Chart options={this.state.options} series={this.state.series} type='donut' width={400} height={220} />
-      )
+      var temp_sum=0
+      for(let index=0; index<difficulty_list.length; index++)
+      {
+        temp_sum +=difficulty_list[index];
+      }
+      if(temp_sum==0)
+      {
+        return (
+          <h3>No Reviews to Perform Difficulty Analysis</h3>
+        )
+      }
+      else
+      {
+        return (
+          <Chart options={this.state.options} series={this.state.series} type='donut' width={400} height={220} />
+        )
+      }
+     
     }
 }
 

@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
 import {sentiment_list} from './CourseSummary'
 
-console.log('In sentichart' + sentiment_list);
 class SentimentPieChart extends Component {
     constructor(props) {
       super(props);
@@ -62,10 +61,24 @@ class SentimentPieChart extends Component {
       }
     }
     render() {
-      return (
-        <Chart options={this.state.options} series={this.state.series} type='donut' width={400} height={220} />
-      )
-    }
+      var temp_sum=0
+        for(let index=0; index<sentiment_list.length; index++)
+        {
+          temp_sum +=sentiment_list[index];
+        }
+        if(temp_sum==0)
+        {
+          return (
+            <h3>No Reviews to Perform Sentiment Analysis</h3>
+          )
+        }
+        else
+        {
+          return (
+            <Chart options={this.state.options} series={this.state.series} type='donut' width={400} height={220} />
+          )
+        }
+  }
 }
 
 export default SentimentPieChart;

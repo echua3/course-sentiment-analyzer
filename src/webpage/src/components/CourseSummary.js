@@ -27,6 +27,26 @@ function getStars(par1) {
    result = star.concat(result)
    return result;
 }
+
+function getEmoji(par2){
+   var happy = "😁";
+   var sad = "😭";
+   var neutral = "😐";
+   var nodata = "N/A";
+   if (par2<0){
+      return happy;  
+   }
+   else if (par2>0){
+      return sad;
+   }
+   else if (par2==0){
+      return neutral;
+   }
+   else {
+      return nodata;
+   }
+
+}
 var sentiment_score = 0;
 var average_difficulty = 0;
 var average_sentiment_score;
@@ -100,7 +120,8 @@ function CourseSummary({record}) {
                   <span class="courseSummary-form-stars">
                      {getStars(average_difficulty)}
                   </span>
-                  <p class="courseSummary-form-sentiment"> Average Sentiment: {!isNaN(average_sentiment_score) ? average_sentiment_score : 'N/A'} </p>
+                  {/* <p class="courseSummary-form-sentiment"> Average Sentiment: {!isNaN(average_sentiment_score) ? average_sentiment_score : 'N/A'} </p> */}
+                  <p class="courseSummary-form-sentiment"> Average Sentiment: {getEmoji(average_sentiment_score)} </p>
                </Col>
                <Col span={8} pull={16}>
                   <span class="writereview-form-title">
