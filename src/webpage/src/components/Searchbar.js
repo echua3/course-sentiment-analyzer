@@ -45,76 +45,96 @@ function SearchBar(props) {
     total:1 
   })
 
-  useEffect(() => {      
-    const fetchData = async () => {      
-      const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/totalclasscount")      
-      if(!responseValue.ok) {          
-        const message = "An error occured"          
-        console.log("Error:" + responseValue.statusText);          
-        window.userID = "";          
-        return;      
-      }      
-      const records = await responseValue.json();      
-      params.total = records.total;     
-      let test = params;      
-      setParams(test);    
-    }   
-     fetchData().catch(console.error);   
-  })
-
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
   const requestData= async (params)=>{
-    // edited for development and deployment usage
-    await axios.get(API_ENDPOINT + "/api/courselist", {params})
-    .then((res) => {
-      if (res.status === 200) {
-        setDatasource('')
-        pagination.total = 0
-        pagination.current = params.currentPage
-        let test={...pagination}
-        setPagination(test)
-
-        if (res.data.code == 400) {
-          if (res.data.msg=="Credits need to be numbers!") {
-            message.error(res.data.msg)
-            setResstatus('error');
-            setRestitle('Data type error');
-            setRessub('Credits need to be numbers!')
-          } else if (res.data.msg=="The format of the Course Number is incorrect") {
-            message.error(res.data.msg)
-            setResstatus('error');
-            setRestitle('Data format error!');
-            setRessub('The format of the Course Number is incorrect')
-          }
-          pagination.total = 0
-          pagination.current = params.currentPage
-          let test={...pagination}
-          setPagination(test)
-        } else if(res.data.code==200){
-          if (res.data.numberTotal==0) {
-            message.info("No course found!");
-            setResstatus('info');
-            setRestitle('No course found!');
-            setRessub('Please enter the correct information')
-          }
-          else{
-            setResstatus('success');
-            setRestitle('Success');
-            setRessub('Above is the course list')
-            setDatasource(res.data.data)
-            console.log(res.data)
-            pagination.total = res.data.total
-            pagination.current = params.currentPage
-            let test={...pagination}
-            setPagination(test)
-          }
+    // edited for development and deployment usage    
+      async function fetchData() {  
+        let url = process.env.REACT_APP_API_ENDPOINT + "/totalclasscount"
+        if(params.CourseTitle) {
+          url += "?CourseTitle=" + params.CourseTitle
+        } 
+        if(params.Department) {
+          url += "?Department=" + params.Department
+        } 
+        if(params.CourseNumber) {
+          url += "?CourseNumber=" + params.CourseNumber
+        } 
+        if(params.Credits) {
+          url += "?Credits=" + params.Credits
+        } 
+        const responseValue = await fetch(url)      
+        if(!responseValue.ok) {          
+          const message = "An error occured"          
+          console.log("Error:" + responseValue.statusText);          
+          window.userID = "";          
+          return;      
+        } else {
+          const records = await responseValue.json();      
+          params.total = records.Count; 
+          console.log("total", params.total)    
+          let test = params;      
+          setParams(test); 
+          if(records) {
+            console.log("Gets here?")
+            await axios.get(API_ENDPOINT + "/api/courselist", {params})
+            .then((res) => {
+              if (res.status === 200) {
+                setDatasource('')
+                pagination.total = 0
+                pagination.current = params.currentPage
+                let test={...pagination}
+                setPagination(test)
+        
+                if (res.data.code == 400) {
+                  if (res.data.msg=="Credits need to be numbers!") {
+                    message.error(res.data.msg)
+                    setResstatus('error');
+                    setRestitle('Data type error');
+                    setRessub('Credits need to be numbers!')
+                  } else if (res.data.msg=="The format of the Course Number is incorrect") {
+                    message.error(res.data.msg)
+                    setResstatus('error');
+                    setRestitle('Data format error!');
+                    setRessub('The format of the Course Number is incorrect')
+                  }
+                  pagination.total = 0
+                  pagination.current = params.currentPage
+                  let test={...pagination}
+                  setPagination(test)
+                } else if(res.data.code==200){
+                  if (res.data.numberTotal==0) {
+                    message.info("No course found!");
+                    setResstatus('info');
+                    setRestitle('No course found!');
+                    setRessub('Please enter the correct information')
+                  }
+                  else{
+                    setResstatus('success');
+                    setRestitle('Success');
+                    setRessub('Above is the course list')
+                    setDatasource(res.data.data)
+                    console.log(res.data)
+                    pagination.total = res.data.numberTotal
+                    pagination.current = params.currentPage
+                    let test={...pagination}
+                    setPagination(test)
+                  }
+                }
+              }
+            })
+            .catch((err) => {
+              console.log("failed: ", err.message);
+            });
+          }   
         }
-      }
-    })
-    .catch((err) => {
-      console.log("failed: ", err.message);
-    });
+        
+      }   
+     
+    
+    await fetchData().catch(console.error);   
+     
+   
   }
 
   const onReset = async () => {

@@ -40,7 +40,8 @@ searchRoutes.route("/courselist").get(function (req, res) {
       currentPage: Number(req.query.currentPage),
       numberOfPage: Math.ceil(req.query.total / LIMIT), 
       numberTotal: req.query.total,
-      Limit: LIMIT, msg: '', 
+      Limit: LIMIT,
+      msg: '', 
     });    
   });
 });

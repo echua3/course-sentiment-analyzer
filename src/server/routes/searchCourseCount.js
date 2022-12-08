@@ -1,3 +1,4 @@
+const { query } = require("express");
 const express = require("express");
 const dbo = require("../db/conn_search");
 
@@ -10,8 +11,6 @@ const dbo = require("../db/conn_search");
 const searchCountRoutes = express.Router();
 
 searchCountRoutes.route("/totalclasscount").get(function (req, res) {
-  const LIMIT = 10;  
-  const startIndex = (Number(req.query.currentPage) - 1) * LIMIT;  
   let db_connect = dbo.getDb("Classes");
   let myquery = {};
   if (req.query.CourseTitle) {    
@@ -35,7 +34,8 @@ searchCountRoutes.route("/totalclasscount").get(function (req, res) {
     Object.assign(myquery,{'Department':{$regex:req.query.Department,$options: 'i'}})  
   }
 
-  db_connect.collection("testClasses").countDocuments(myquery, function (err, count) {
+  console.log(req)
+  db_connect.collection("testClasses").countDocuments({$and:[myquery]}, function (err, count) {
     if (err){
       console.log(err)
     }else{
@@ -43,13 +43,7 @@ searchCountRoutes.route("/totalclasscount").get(function (req, res) {
     }
   })
 
-  // db_connect.collection("testClasses").countDocuments(myquery).then((total) =>{
-  //   if(!response.ok) {
-  //     console.log("Error:" + response.statusText);
-  //     return;
-  //   }
-  //   response.status(200).json({total: total});
-  // })
+
 
 });
 
