@@ -82,11 +82,14 @@ function RecommendationsTable(props) {
 
 
     return isLoading ? (
-    <div class='recommendationsPage'>
-        <Button class='writereview-form-btn' type="primary" htmlType="submit" loading={loadings[0]}></Button>
+    <div class='recommendations-form-title'>
+        <span class="writereview-form-title">
+          Your course recommendations are listed below! Please make sure to keep your interests up to date in your profile for accurate recommendations!
+        </span>
+        <Button style={{ backgroundColor: "#a7caed", borderColor: "#a7caed" }} loading={loadings[0]}></Button>
     </div>
     ) : (
-        <div class='recommendationsPage'>
+        <div class='recommendations-form-title'>
           <span class="writereview-form-title">
             Your course recommendations are listed below! Please make sure to keep your interests up to date in your profile for accurate recommendations!
           </span>
