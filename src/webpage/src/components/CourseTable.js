@@ -153,10 +153,6 @@ const CourseTable = (props) => {
 
     return (
       <div className="coursetable">
-        <div>
-          width: {width} ~ height: {height}
-        </div>
-
         <Table
             pagination={props.pagination}
             dataSource={props.data}
