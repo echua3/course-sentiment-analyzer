@@ -3,6 +3,7 @@ import CourseSummary from "./CourseSummary";
 import ReadReview from "./ReadReviews";
 import { useState, useEffect } from "react";
 import { Table, Card } from "antd";
+import useWindowDimensions from "./hooks/useWindowDimensions";
 
 const CourseTable = (props) => {
     const [activeTabKey, setActiveTabKey] = useState('ClassPrompt');
@@ -10,6 +11,7 @@ const CourseTable = (props) => {
     const [recordValue, setRecord] = useState([]);
     const [classInfo, setClassInfo]=useState([]);
     const [actualID, setActualID] = useState("");
+    const { height, width } = useWindowDimensions();
 
     const [datasource, setDatasource] = useState([])
     useEffect(() => {
@@ -86,20 +88,43 @@ const CourseTable = (props) => {
         }
       ]
 
-      const tabListSkeleton = [
-        {
-          key: 'ClassPrompt',
-          tab: 'Class Summary',
-        },
-        {
-          key: 'AddAReview',
-          tab: 'Add A Review',
-        },
-        {
-          key: 'ViewAllReviews',
-          tab: 'View All Reviews',
-        },
-      ];
+      // media responsiveness
+      var tabListSkeleton;
+      var tabSize = 'middle';
+      if (width > 580) {
+        tabListSkeleton = [
+          {
+            key: 'ClassPrompt',
+            tab: 'Class Summary',
+          },
+          {
+            key: 'AddAReview',
+            tab: 'Add A Review',
+          },
+          {
+            key: 'ViewAllReviews',
+            tab: 'View All Reviews',
+          },
+        ];
+        tabSize = 'large'
+      } else {
+        tabListSkeleton = [
+          {
+            key: 'ClassPrompt',
+            tab: 'Summary',
+          },
+          {
+            key: 'AddAReview',
+            tab: 'Add Review',
+          },
+          {
+            key: 'ViewAllReviews',
+            tab: 'All Reviews',
+          },
+        ];
+        tabSize = 'small'
+      }
+
 
     const contentList = {
         ClassPrompt: <CourseSummary record = {classInfo}/>,
@@ -128,36 +153,37 @@ const CourseTable = (props) => {
 
     return (
       <div className="coursetable">
-
         <Table
             pagination={props.pagination}
             dataSource={props.data}
             columns={columns.filter(col => col.title !== 'ID')}
             rowKey = "SSS_SectionsID"
             expandable={{
-            expandedRowRender: record => <Card
-            style={{ width: '100%' }}
-            tabList={tabListSkeleton}
-            activeTabKey={activeTabKey}
+              
+            expandedRowRender: record => 
+              <Card
+                style={{ width: '100%' }}
+                tabList={tabListSkeleton}
+                tabProps={{size: {tabSize}}}
+                activeTabKey={activeTabKey}
 
-            onTabChange={key => {
-                onTab2Change(key);
-                setRecord(record.SSS_SectionsID);
-                setClassInfo(record);
-            }}
-            >
-
-            {contentList[activeTabKey]}
-            </Card>,
-            rowExpandable: record => record.OfferingName + record.SchoolName + record.Title + record.Instructors !== 'Not Expandable',
+                onTabChange={key => {
+                    onTab2Change(key);
+                    setRecord(record.SSS_SectionsID);
+                    setClassInfo(record);
+                }}
+              >
+                {contentList[activeTabKey]}
+              </Card>,
+              rowExpandable: record => record.OfferingName + record.SchoolName + record.Title + record.Instructors !== 'Not Expandable',
             }}
             expandedRowKeys={expandedRowKeys}
             onExpand={onTableRowExpand}
-
+            expandRowByClick={true}
         />
-      </div>
-    );
 
+    </div>
+  )
 }
 
 export default CourseTable;
