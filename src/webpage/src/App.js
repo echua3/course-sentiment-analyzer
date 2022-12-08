@@ -21,7 +21,7 @@ function App() {
           <Route path="/Courses" element={<CourseSearch />} />
           <Route path="/Recommendations" element={<Recommendations />} />
           <Route path="/Login" element={<LoginPage />} />
-          <Route path="/Profile" element={<UserProfile actualID = {actualID}/>} />
+          <Route path="/Profile" element={<UserProfile />} />
           <Route path="/ProfileEdit" element={<UserProfileForm />} />
           <Route path="/Logout" element={<LogoutPage />} />
         </Routes>
