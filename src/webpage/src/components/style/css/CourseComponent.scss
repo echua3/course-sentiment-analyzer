@@ -751,6 +751,27 @@
   //   display:flex;
   // }
 
+  // view all reviews review spacing
+  .ant-comment-inner {
+    padding-top: 1.5rem;
+    padding-bottom: 0;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .MuiPagination-root {
+    padding-top: 2rem;
+  }
+
+  .helpfulness-question {
+    padding-left: 2rem;
+  }
+
+  // .ant-pagination {
+  //   padding-top: 2rem;
+  // }
+
+
   /*---------------------------------------------
   [ homepage ]*/
 
@@ -972,3 +993,4 @@
       margin-top: 50px;
 
     }
+
