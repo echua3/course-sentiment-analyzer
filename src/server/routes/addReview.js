@@ -3,6 +3,7 @@ var sanitize = require("mongo-sanitize");
 
 const reviewRoutes = express.Router();
 const { reviewModel } = require("../schema/reviewSchema");
+const { userModel } = require("../schema/userSchema");
 const { body, validationResult } = require('express-validator');
 
 // Use this variable to add a review value to the corresponding user and class
@@ -29,6 +30,8 @@ reviewRoutes.route("/review/add").post(body('comment').not().isEmpty().trim().es
     helpfulness: sanitize(req.body.helpfulness),
     date: sanitize(req.body.date)
   })
+
+  let doc = await userModel.findOneAndUpdate({userID: req.body.userID}, {$addToSet: {['courseIDs']: req.body.sectionID}});
 
   try {
     const result = await review.save();

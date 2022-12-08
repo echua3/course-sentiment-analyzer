@@ -1,14 +1,15 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './style/css/CourseComponent.scss';
 import { Alert } from 'antd';
 var Sentiment = require('sentiment');
 
 
-function WriteReview({record}) {
+function WriteReview({actualID, record}) {
   
     const [commentError, setCommentError] = useState("");
     const [commentErrorBoolean, showCommentError] = useState(false);
+
     var sentiment = new Sentiment();
 
     const [form, setForm] = useState({
@@ -17,10 +18,11 @@ function WriteReview({record}) {
         difficulty: 2,
         score: 1,
         helpfulness: 0,
-        date: new Date()
+        date: new Date(),
+        userID: actualID
     });
     const [reviewSubmitted, setReview] = useState(false);
-      
+
     function updateForm(value) {
         return setForm((prev) => {
           return { ...prev, ...value };
@@ -98,7 +100,8 @@ function WriteReview({record}) {
         
     }
 
-    if (!reviewSubmitted && window.userID != "") {
+    if (!reviewSubmitted && actualID != "") {
+      console.log(actualID)
     return (
         <div>
             <span class="writereview-form-title">
@@ -129,7 +132,7 @@ function WriteReview({record}) {
       </div>
       
     );
-    } else if (window.userID != "") {
+    } else if (actualID != "") {
       return (
         <div>
             <span class="writereview-form-title">

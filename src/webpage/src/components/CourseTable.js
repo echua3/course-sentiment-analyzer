@@ -1,7 +1,7 @@
 import WriteReview from "./WriteReview";
 import CourseSummary from "./CourseSummary";
 import ReadReview from "./ReadReviews";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Table, Card } from "antd";
 
 const CourseTable = (props) => {
@@ -9,6 +9,23 @@ const CourseTable = (props) => {
     const [expandedRowKeys, setExpandedRowKeys] = useState([]);
     const [recordValue, setRecord] = useState([]);
     const [classInfo, setClassInfo]=useState([]);
+    const [actualID, setActualID] = useState("");
+
+    useEffect(() => {
+      const fetchData = async () => {
+        const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
+        if(!responseValue.ok) {
+              console.log("Error:" + responseValue.statusText);
+              window.userID = "";
+              return;
+        }
+        const records2 = await responseValue.json();
+        console.log(records2.data.userId);
+        setActualID(records2.data.userId);
+        window.userID = actualID;
+      }
+      fetchData().catch(console.error);
+    }, [])
 
     const columns=[
         {
@@ -66,7 +83,7 @@ const CourseTable = (props) => {
 
     const contentList = {
         ClassPrompt: <CourseSummary record = {classInfo}/>,
-        AddAReview: <WriteReview record = {recordValue}/>,
+        AddAReview: <WriteReview record = {recordValue} actualID = {actualID}/>,
         ViewAllReviews: <ReadReview record = {classInfo}/>
     };
 
