@@ -74,7 +74,8 @@ function ReadReview({record}) {
 
     return (
         <div>
-           <List className ="comment-list" 
+           <List 
+              className ="comment-list"
               itemLayout ="horizontal"
               dataSource ={recordValues}
               renderItem = {item => (

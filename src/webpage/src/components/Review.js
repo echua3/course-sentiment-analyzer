@@ -1,7 +1,8 @@
 import React from 'react';
-import VoteBox from "./VoteBox";
+import Helpfulness from './Helpfulness';
 import Grid from '@mui/material/Grid';
-import { Comment } from "antd";
+import { UserOutlined } from '@ant-design/icons';
+import { Avatar, Comment, Space } from "antd";
 import './style/css/CourseComponent.scss';
 
 const Review = ({review, handleUpvote, handleDownVote, userUps, userDowns}) => {
@@ -9,19 +10,10 @@ const Review = ({review, handleUpvote, handleDownVote, userUps, userDowns}) => {
     return (
         <Grid
         container
-        spacing={1}
-        direction="row"
-        alignItems="center"
+        rowSpacing={0}
+        direction="column"
+        alignItems="left"
         >
-          <Grid item >
-            <VoteBox 
-            review={review} 
-            handleUpvote={handleUpvote} 
-            handleDownvote={handleDownVote} 
-            votes={review.helpfulness}
-            userUps={userUps}
-            userDowns={userDowns}/>
-          </Grid>
           <Grid item xs={10} md={9} >
             <Comment
               content = {
@@ -36,8 +28,19 @@ const Review = ({review, handleUpvote, handleDownVote, userUps, userDowns}) => {
                      {review.date && (new Date(review.date).toLocaleDateString())}
                   </p>   
               }
-             
-            />                     
+              avatar = {
+                <Avatar size="small" icon={<UserOutlined />} />
+              }
+            /> 
+          </Grid>
+          <Grid item >
+            <Helpfulness 
+            review={review} 
+            handleUpvote={handleUpvote} 
+            handleDownvote={handleDownVote} 
+            votes={review.helpfulness}
+            userUps={userUps}
+            userDowns={userDowns}/>
           </Grid>
 
        </Grid>
