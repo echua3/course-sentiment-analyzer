@@ -33,6 +33,7 @@ const userSchema = new Schema({
         default: ''
      },
      reviewIDs: [String],
+     courseIDs: [String],
      reviewUpvoteIDs: [String],
      reviewDownvoteIDs: [String],
      dept: String
