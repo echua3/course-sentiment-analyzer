@@ -109,26 +109,17 @@ function UserProfileForm(props) {
 
       <Form.Item name="StudentDegree" label="Degree Type">
         <Select placeholder="Please Select Your Degree Type" onChange={e => {params.degreeType = e}} value={params.degreeType}>
-        <Select.Option value="">
-            Please Select One Degree
-          </Select.Option>
         <Select.Option value="Undergraduate">
             Undergraduate
           </Select.Option>
         <Select.Option value="Graduate">
             Graduate
           </Select.Option>
-        <Select.Option value="Post Doc">
-            Post Doc
-          </Select.Option>
         </Select>
       </Form.Item>
 
       <Form.Item name="Department" label="Department">
         <Select placeholder="Please Select Your Department" onChange={e =>{params.dept = e}}>
-          <Select.Option value="">
-            Please Select One Department
-          </Select.Option>
           <Select.Option value="AS Agora Institute">
             AS Agora Institute
           </Select.Option>
