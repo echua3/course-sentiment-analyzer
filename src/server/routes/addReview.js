@@ -31,10 +31,10 @@ reviewRoutes.route("/review/add").post(body('comment').not().isEmpty().trim().es
     date: sanitize(req.body.date)
   })
 
-  let doc = await userModel.findOneAndUpdate({userID: req.body.userID}, {$addToSet: {['courseIDs']: req.body.sectionID}});
-
+  let addedCourse = await userModel.findOneAndUpdate({userID: req.body.userID}, {$addToSet: {['courseIDs']: req.body.sectionID}});
   try {
     const result = await review.save();
+    let addedReview = await userModel.findOneAndUpdate({userID: req.body.userID}, {$addToSet: {['reviewIDs']: result._id.toHexString()}});
     res.status(201).json({
       message: "Handling POST requests to reviews",
       createdReview: result

@@ -38,7 +38,7 @@ const EditableCell = ({
 };
 
 
-function UserReviews(props) {
+function UserReviews({actualID}) {
 
 
   const [pageNumber, setPageNumber] = useState(1);
@@ -48,7 +48,7 @@ function UserReviews(props) {
   const [editingKey, setEditingKey] = useState('');
   const [params, setParams] = useState({
     comment: '',
-    userID: window.userID
+    userID: actualID
   });
 
   const isEditing = (record) => record.reviewID === editingKey;
@@ -82,7 +82,7 @@ function UserReviews(props) {
       let test={...params}
       setParams(test)
 
-      const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/update/" + item.reviewID, {
+      const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/update/" + actualID, {
 
         method: "POST",
         headers: {
@@ -117,7 +117,7 @@ function UserReviews(props) {
 
   useEffect( () => {
     async function getRecords() {
-      const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/review/" + window.userID + "/" + pageNumber)
+      const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/review/" + actualID+ "/" + pageNumber)
       if(!response.ok) {
         console.log('here')
         console.log("Error:" + response.statusText);
@@ -224,7 +224,7 @@ function UserReviews(props) {
   });
 
   const deleteRequest = async (param) => {
-    const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/review/delete/" + window.userID + "/" + param, {
+    const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/review/delete/" + actualID + "/" + param, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

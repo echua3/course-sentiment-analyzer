@@ -3,13 +3,13 @@ import { Button, Descriptions } from "antd";
 import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function UserProfileData(props) {
+function UserProfileData({actualID}) {
     const [datasource, setDatasource] = useState([])
     const [userID, setUserID] = useState(window.userID)
 
     useEffect( () => {
         async function getRecords() {
-          const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + window.userID)
+          const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + actualID)
           if(!response.ok) {
             console.log("Error:" + response.statusText);
             return;

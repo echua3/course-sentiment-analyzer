@@ -3,13 +3,13 @@ import UserProfileData from "../components/UserProfileData";
 import UserReviews from "../components/UserReviews";
 import React from "react";
 
-function UserProfile() {
+function UserProfile({actualID}) {
 
-  if (window.userID != "") {
+  if (actualID != "") {
     return (
       <div className="UserProfile">
-        <UserProfileData />
-        <UserReviews />
+        <UserProfileData actualID = {actualID}/>
+        <UserReviews actualID = {actualID}/>
       </div>
     );
   } else {
