@@ -11,6 +11,7 @@ const CourseTable = (props) => {
     const [classInfo, setClassInfo]=useState([]);
     const [actualID, setActualID] = useState("");
 
+    const [datasource, setDatasource] = useState([])
     useEffect(() => {
       const fetchData = async () => {
         const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
@@ -20,12 +21,31 @@ const CourseTable = (props) => {
               return;
         }
         const records2 = await responseValue.json();
-        console.log(records2.data.userId);
         setActualID(records2.data.userId);
         window.userID = actualID;
+
+        async function getRecords() {
+          const responseValues2 = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + records2.data.userId, { credentials: 'include'})
+          if(!responseValues2.ok) {
+            console.log("Error:" + responseValues2.statusText);
+            return;
+          }
+          console.log(responseValues2)
+          await responseValues2.json().then((res) => {
+            setDatasource(res.data[0]);
+          });
+  
+        }
+
+        getRecords();
+
+
       }
       fetchData().catch(console.error);
-    }, [])
+
+      
+
+    })
 
     const columns=[
         {
@@ -83,7 +103,7 @@ const CourseTable = (props) => {
 
     const contentList = {
         ClassPrompt: <CourseSummary record = {classInfo}/>,
-        AddAReview: <WriteReview record = {recordValue} actualID = {actualID}/>,
+        AddAReview: <WriteReview record = {recordValue} actualID = {actualID} datasource = {datasource}/>,
         ViewAllReviews: <ReadReview record = {classInfo}/>
     };
 

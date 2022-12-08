@@ -5,7 +5,7 @@ import { Alert } from 'antd';
 var Sentiment = require('sentiment');
 
 
-function WriteReview({actualID, record}) {
+function WriteReview({actualID, record, datasource}) {
   
     const [commentError, setCommentError] = useState("");
     const [commentErrorBoolean, showCommentError] = useState(false);
@@ -100,8 +100,7 @@ function WriteReview({actualID, record}) {
         
     }
 
-    if (!reviewSubmitted && actualID != "") {
-      console.log(actualID)
+    if (!reviewSubmitted && actualID != "" && !datasource.courseIDs.includes({record}.record)) {
     return (
         <div>
             <span class="writereview-form-title">
@@ -132,7 +131,7 @@ function WriteReview({actualID, record}) {
       </div>
       
     );
-    } else if (actualID != "") {
+    } else if (actualID != "" || datasource.courseIDs.includes({record}.record)) {
       return (
         <div>
             <span class="writereview-form-title">

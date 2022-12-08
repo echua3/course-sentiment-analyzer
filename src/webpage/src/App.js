@@ -11,8 +11,6 @@ import LogoutPage from "./Pages/LogoutPage.js";
 import { useEffect, useState } from "react";
 
 function App() {
-  window.userID = "";
-
   const [actualID, setActualID] = useState("");
 
     useEffect(() => {
@@ -29,7 +27,7 @@ function App() {
         window.userID = actualID;
       }
       fetchData().catch(console.error);
-    }, [])
+    })
 
   return (
     <>
