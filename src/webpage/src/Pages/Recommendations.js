@@ -16,7 +16,8 @@ function Recommendations() {
       const records2 = await responseValue.json();
       console.log(records2.data.userId);
       window.userID = records2.data.userId;
-      setActualID(records2.data.userId)
+      console.log(records2.data.userId);
+      setActualID(records2.data.userId);
     }
     fetchData().catch(console.error);
   })

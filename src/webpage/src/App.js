@@ -8,25 +8,26 @@ import UserProfileForm from "./components/UserProfileForm.js";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage.js";
 import LogoutPage from "./Pages/LogoutPage.js";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  window.userID = "";
+  const [actualID, setActualID] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
-      if(!responseValue.ok) {
-            console.log("Error:" + responseValue.statusText);
-            window.userID = "";
-            return;
+    useEffect(() => {
+      const fetchData = async () => {
+        const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
+        if(!responseValue.ok) {
+              console.log("Error:" + responseValue.statusText);
+              window.userID = "";
+              return;
+        }
+        const records2 = await responseValue.json();
+        console.log(records2.data.userId);
+        setActualID(records2.data.userId);
+        window.userID = actualID;
       }
-      const records2 = await responseValue.json();
-      console.log(records2.data.userId);
-      window.userID = records2.data.userId;
-    }
-    fetchData().catch(console.error);
-  })
+      fetchData().catch(console.error);
+    })
 
   return (
     <>
@@ -37,7 +38,7 @@ function App() {
           <Route path="/Courses" element={<CourseSearch />} />
           <Route path="/Recommendations" element={<Recommendations />} />
           <Route path="/Login" element={<LoginPage />} />
-          <Route path="/Profile" element={<UserProfile />} />
+          <Route path="/Profile" element={<UserProfile actualID = {actualID}/>} />
           <Route path="/ProfileEdit" element={<UserProfileForm />} />
           <Route path="/Logout" element={<LogoutPage />} />
         </Routes>

@@ -45,7 +45,7 @@ recRoutes.route("/recs").get(function (req, res) {
                     "text": {
                         "query": degreeType,
                         "path": "Level",
-                        score: { boost: { value: 3 }}
+                        score: { boost: { value: 25 }}
                     }
                 },
               ]
