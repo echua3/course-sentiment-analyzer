@@ -73,8 +73,8 @@ In the next iterations, this code will be attached to the backend so that the re
 ## Built With
 
 MERN stack, Python
-
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+<!-- 
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples. -->
 
 * Ant Design (AntD)
 * React
