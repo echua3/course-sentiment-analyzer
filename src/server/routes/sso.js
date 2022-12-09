@@ -62,11 +62,6 @@ ssoRoute.use(
 ssoRoute.use(passport.initialize({}));
 ssoRoute.use(passport.session({}));
 
-// Set up homepage route
-ssoRoute.get("/", (req, res) => {
-    res.redirect("https://jhu-courses.herokuapp.com");
-});
-
 // login route
 ssoRoute.get(
     "/SSOLogin",
