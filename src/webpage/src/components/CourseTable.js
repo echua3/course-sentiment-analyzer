@@ -1,6 +1,7 @@
 import WriteReview from "./WriteReview";
 import CourseSummary from "./CourseSummary";
 import ReadReview from "./ReadReviews";
+import ChartAnalysis from "./ChartAnalysis"
 import { useState, useEffect } from "react";
 import { Table, Card } from "antd";
 import useWindowDimensions from "./hooks/useWindowDimensions";
@@ -105,6 +106,10 @@ const CourseTable = (props) => {
             key: 'ViewAllReviews',
             tab: 'View All Reviews',
           },
+          {
+            key: 'ChartAnalysis',
+            tab: 'Course Analysis',
+          }
         ];
         tabSize = 'large'
       } else {
@@ -121,6 +126,10 @@ const CourseTable = (props) => {
             key: 'ViewAllReviews',
             tab: 'All Reviews',
           },
+          {
+            key: 'ChartAnalysis',
+            tab: 'Course Analysis',
+          }
         ];
         tabSize = 'small'
       }
@@ -129,7 +138,9 @@ const CourseTable = (props) => {
     const contentList = {
         ClassPrompt: <CourseSummary record = {classInfo}/>,
         AddAReview: <WriteReview record = {recordValue} actualID = {actualID} datasource = {datasource}/>,
-        ViewAllReviews: <ReadReview record = {classInfo}/>
+        ViewAllReviews: <ReadReview record = {classInfo}/>,
+        ChartAnalysis: <ChartAnalysis record = {classInfo}/>
+
     };
 
 
