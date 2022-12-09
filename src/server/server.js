@@ -84,7 +84,7 @@ app.post(
       console.log(req);
       next();
     },
-    passport.authenticate("samlStrategy")//,
+    passport.authenticate("samlStrategy"),
     (req, res) => {
       // the user data is in req.user
       console.log(req.user);
