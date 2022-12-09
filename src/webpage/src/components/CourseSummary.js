@@ -116,26 +116,30 @@ function CourseSummary({record}) {
       return (
         <div>
             <Row>
-               <Col span={16} push={8}>
+               <Col xs={24} xl={8} >
+                  <span class="writereview-form-title">
+                     {Title}
+                  </span>
+               </Col>
+               <Col xs={24} xl={8} >
                   <span class="courseSummary-form-stars">
                      {getStars(average_difficulty)}
                   </span>
                   {/* <p class="courseSummary-form-sentiment"> Average Sentiment: {!isNaN(average_sentiment_score) ? average_sentiment_score : 'N/A'} </p> */}
                   <p class="courseSummary-form-sentiment"> Average Sentiment: {getEmoji(average_sentiment_score)} </p>
                </Col>
-               <Col span={8} pull={16}>
-                  <span class="writereview-form-title">
-                     {Title}
-                  </span>
+            </Row>
+            <Row>
+               <Col >
+               <h6> {offeringName} ({sectionName}) taught by {instructorsFullName} in {term} </h6>
+               <p> {courseDescription} </p>
                </Col>
             </Row>
-            <h6> {offeringName} ({sectionName}) taught by {instructorsFullName} in {term} </h6>
-            <p> {courseDescription} </p>
             <Row>
-               <Col span={18} push={12}>
+               <Col xs={24} sm={11} lg={8}>
                   <SentimentPieChart/>
                </Col>
-               <Col span={6} pull={12}>
+               <Col xs={24} sm={11} lg={8}>
                   <DifficultyPieChart/>
                </Col>
             </Row>
