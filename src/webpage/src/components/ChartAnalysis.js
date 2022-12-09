@@ -165,7 +165,6 @@ function ChartAnalysis({record}) {
                {/* <p class="courseSummary-form-sentiment"> Average Sentiment: {!isNaN(average_sentiment_score) ? average_sentiment_score : 'N/A'} </p> */}
                <p class="courseSummary-form-sentiment"> Average Sentiment: {getEmoji(average_sentiment_score)} </p>
             </Col>
-            
          </Row>
        
          <Row justify="center">
