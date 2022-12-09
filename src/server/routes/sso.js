@@ -6,15 +6,15 @@ const bodyParser = require("body-parser");
 const fs = require("fs");
 const userModel = require("../schema/userSchema.js");
 
-const PbK = process.env.PbK;
-const PvK = process.env.PvK;
+//const PbK = process.env.PbK;
+//const PvK = process.env.PvK;
 
 const email = "email";
 const first = "urn:oid:2.5.4.42";
 const last = "urn:oid:2.5.4.4";
 
-//const PbK = fs.readFileSync(__dirname + "/../certs/cert.pem", "utf8");
-//const PvK = fs.readFileSync(__dirname + "/../certs/key.pem", "utf8");
+const PbK = fs.readFileSync(__dirname + "/../certs/cert.pem", "utf8");
+const PvK = fs.readFileSync(__dirname + "/../certs/key.pem", "utf8");
 
 const JHU_SSO_URL = "https://idp.jh.edu/idp/profile/SAML2/Redirect/SSO";
 const SP_NAME = "https://jhu-courses.herokuapp.com/idp";
@@ -26,7 +26,7 @@ const samlStrategy = new saml.Strategy(
     // config options here
     entryPoint: JHU_SSO_URL,
     issuer: SP_NAME,
-    callbackUrl: `${BASE_URL}/SSOLogin/callback`,
+    callbackUrl: `${BASE_URL}/Login/callback`,
     decryptionPvk: PvK,
     privateCert: PvK,
     cert: PbK
@@ -64,7 +64,7 @@ ssoRoute.use(passport.session({}));
 
 // login route
 ssoRoute.get(
-    "/SSOLogin",
+    "/Login",
     (req, res, next) => {
       next();
     },
@@ -73,7 +73,7 @@ ssoRoute.get(
 
 // callback route
 ssoRoute.post(
-    "/SSOLogin/callback",
+    "/Login/callback",
     (req, res, next) => {
       next();
     },
