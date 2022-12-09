@@ -75,11 +75,11 @@ app.post(
     (req, res, next) => {
       next();
     },
-    passport.authenticate("samlStrategy"),
-    (req, res) => {
+    passport.authenticate("samlStrategy")//,
+    //(req, res) => {
       // the user data is in req.user
-      res.send(`welcome`);
-    }
+      //res.send(`welcome`);
+    //}
 );
 
 // route to metadata
