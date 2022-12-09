@@ -120,6 +120,7 @@ function CourseSummary({record}) {
             </span>
             <h6> {offeringName} ({sectionName}) taught by {instructorsFullName} in {term} </h6>
             <p> {courseDescription} </p>
+
          </div>
       );
 }

@@ -78,7 +78,7 @@ app.post(
     passport.authenticate("samlStrategy"),
     (req, res) => {
       // the user data is in req.user
-      res.send(`welcome ${req.user.first_name}`);
+      res.send(`welcome`);
     }
 );
 

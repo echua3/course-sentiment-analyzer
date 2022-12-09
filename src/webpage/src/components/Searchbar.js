@@ -436,11 +436,12 @@ function SearchBar(props) {
         </Form>
       </div>
 
-      {/* <CourseTable pagination={{...pagination,onChange:changePage}} data={datasource}/> */}
       <Form form={form_1}>
       <CompoSelection status={resstatus} title={restitle} subTitle={ressub} pagination={{...pagination,onChange:changePage}} data={datasource}/>
       {/* <ResultPrompts status={resstatus} title={restitle} subTitle={ressub}/> */}
       </Form>
+      <CourseTable pagination={{...pagination,onChange:changePage}} data={datasource}/>
+
     </div>
   );
 }
