@@ -152,7 +152,7 @@ function ChartAnalysis({record}) {
 
          <Row>
             {/* <Col span={16} push={8}> */}
-            <Col xs={24} sm={11} lg={8}>
+            <Col xs={24} xl={8}>
                <span class="courseSummary-form-stars">
                   {getStars(average_difficulty)}
                </span>
@@ -160,7 +160,7 @@ function ChartAnalysis({record}) {
                <p class="courseSummary-form-sentiment"> Average Sentiment: {getEmoji(average_sentiment_score)} </p>
             </Col>
             {/* <Col span={8} pull={16}> */}
-            <Col xs={24} sm={11} lg={8}>
+            <Col xs={24} xl={8}>
             <span class ="writereview-form-title">
             {Title}
          </span>
