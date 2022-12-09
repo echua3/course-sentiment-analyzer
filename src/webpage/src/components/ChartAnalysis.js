@@ -34,10 +34,10 @@ function getEmoji(par2){
    var sad = "😭";
    var neutral = "😐";
    var nodata = "N/A";
-   if (par2<0){
+   if (par2>0){
       return happy;  
    }
-   else if (par2>0){
+   else if (par2<0){
       return sad;
    }
    else if (par2==0){
@@ -98,22 +98,19 @@ function ChartAnalysis({record}) {
                   break;
             }
             console.log('diffilist ',difficulty_list)
-            switch(recordValues[i].score)
-            {
-               case -1:
-                  sentiment_list[0] = sentiment_list[0]+1;
-                  break;
-               case 0:
-                  sentiment_list[1] = sentiment_list[1]+1;
-                   break;
-               case 1:
-                  sentiment_list[2] = sentiment_list[2]+1;
-                  break;
+            if(recordValues[i].score<=-1){
+               sentiment_list[0] = sentiment_list[0]+1;
+            }
+            else if(recordValues[i].score==0){
+               sentiment_list[1] = sentiment_list[1]+1;
+            }
+            else{
+               sentiment_list[2] = sentiment_list[2]+1;
             }
             console.log('sentilist ',sentiment_list)
           }
-         average_sentiment_score = sentiment_score/recordValues.length;
-         average_sentiment_score = average_sentiment_score.toFixed(2);
+         average_sentiment_score = (sentiment_list[0]*(-1)+sentiment_list[2]);
+         console.log('avg senti score ',average_sentiment_score)
          average_difficulty = average_difficulty/recordValues.length;
          // await delay(500);
          endLoading(0);

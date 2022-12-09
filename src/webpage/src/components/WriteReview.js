@@ -15,7 +15,7 @@ function WriteReview({actualID, record, datasource}) {
     const [form, setForm] = useState({
         sectionID: {record}.record,
         comment: "",
-        difficulty: 2,
+        difficulty: 0,
         score: 1,
         helpfulness: 0,
         date: new Date(),
