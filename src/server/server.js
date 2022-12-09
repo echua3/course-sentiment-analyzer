@@ -27,7 +27,6 @@ const samlStrategy = new saml.Strategy(
     callbackUrl: `${BASE_URL}/jhu/login/callback`,
     decryptionPvk: PvK,
     privateCert: PvK,
-    cert: metadata,  //needed to prevent "cert is required" error
   },
   (profile, done) => {
     console.log(profile)
