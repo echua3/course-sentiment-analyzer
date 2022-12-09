@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import CourseTable from "./CourseTable";
 import ResultPrompts from "./ResultPrompts";
+import CompoSelection from "./CompoSelection";
 import "./style/css/CourseComponent.scss"
 
 function SearchBar(props) {
@@ -42,39 +43,39 @@ function SearchBar(props) {
     Credits:'',
     Department:'',
     currentPage:1,
-    total:1 
+    total:1
   })
 
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
   const requestData= async (params)=>{
-    // edited for development and deployment usage    
-      async function fetchData() {  
+    // edited for development and deployment usage
+      async function fetchData() {
         let url = process.env.REACT_APP_API_ENDPOINT + "/totalclasscount"
         if(params.CourseTitle) {
           url += "?CourseTitle=" + params.CourseTitle
-        } 
+        }
         if(params.Department) {
           url += "?Department=" + params.Department
-        } 
+        }
         if(params.CourseNumber) {
           url += "?CourseNumber=" + params.CourseNumber
-        } 
+        }
         if(params.Credits) {
           url += "?Credits=" + params.Credits
-        } 
-        const responseValue = await fetch(url)      
-        if(!responseValue.ok) {          
-          const message = "An error occured"          
-          console.log("Error:" + responseValue.statusText);          
-          window.userID = "";          
-          return;      
+        }
+        const responseValue = await fetch(url)
+        if(!responseValue.ok) {
+          const message = "An error occured"
+          console.log("Error:" + responseValue.statusText);
+          window.userID = "";
+          return;
         } else {
-          const records = await responseValue.json();      
-          params.total = records.Count; 
-          console.log("total", params.total)    
-          let test = params;      
-          setParams(test); 
+          const records = await responseValue.json();
+          params.total = records.Count;
+          console.log("total", params.total)
+          let test = params;
+          setParams(test);
           if(records) {
             console.log("Gets here?")
             await axios.get(API_ENDPOINT + "/api/courselist", {params})
@@ -85,15 +86,15 @@ function SearchBar(props) {
                 pagination.current = params.currentPage
                 let test={...pagination}
                 setPagination(test)
-        
+
                 if (res.data.code == 400) {
                   if (res.data.msg=="Credits need to be numbers!") {
-                    message.error(res.data.msg)
+                    // message.error(res.data.msg)
                     setResstatus('error');
                     setRestitle('Data type error');
                     setRessub('Credits need to be numbers!')
                   } else if (res.data.msg=="The format of the Course Number is incorrect") {
-                    message.error(res.data.msg)
+                    // message.error(res.data.msg)
                     setResstatus('error');
                     setRestitle('Data format error!');
                     setRessub('The format of the Course Number is incorrect')
@@ -104,7 +105,7 @@ function SearchBar(props) {
                   setPagination(test)
                 } else if(res.data.code==200){
                   if (res.data.numberTotal==0) {
-                    message.info("No course found!");
+                    // message.info("No course found!");
                     setResstatus('info');
                     setRestitle('No course found!');
                     setRessub('Please enter the correct information')
@@ -126,15 +127,15 @@ function SearchBar(props) {
             .catch((err) => {
               console.log("failed: ", err.message);
             });
-          }   
+          }
         }
-        
-      }   
-     
-    
-    await fetchData().catch(console.error);   
-     
-   
+
+      }
+
+
+    await fetchData().catch(console.error);
+
+
   }
 
   const onReset = async () => {
@@ -435,9 +436,10 @@ function SearchBar(props) {
         </Form>
       </div>
 
-      <CourseTable pagination={{...pagination,onChange:changePage}} data={datasource}/>
+      {/* <CourseTable pagination={{...pagination,onChange:changePage}} data={datasource}/> */}
       <Form form={form_1}>
-      <ResultPrompts status={resstatus} title={restitle} subTitle={ressub}/>
+      <CompoSelection status={resstatus} title={restitle} subTitle={ressub} pagination={{...pagination,onChange:changePage}} data={datasource}/>
+      {/* <ResultPrompts status={resstatus} title={restitle} subTitle={ressub}/> */}
       </Form>
     </div>
   );
