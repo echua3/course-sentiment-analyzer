@@ -8,7 +8,6 @@ const port = process.env.PORT || 4000;
 
 const PbK = process.env.PbK.split(String.raw`\n`).join('\n');
 const PvK = process.env.PvK.split(String.raw`\n`).join('\n');
-//const metadata = process.env.metadata;
 
 //const PbK = fs.readFileSync(__dirname + "/certs/cert.pem", "utf8");
 //const PvK = fs.readFileSync(__dirname + "/certs/key.pem", "utf8");
@@ -39,12 +38,12 @@ passport.use("samlStrategy", samlStrategy);
 
 // Serialize and deserialize user for paqssport
 passport.serializeUser(function (user, done) {
-  console.log(user);
+    console.log(user);
     done(null, user);
 });
 
 passport.deserializeUser(function (user, done) {
-  console.log(user);
+    console.log(user);
     done(null, user);
 });
 
@@ -98,22 +97,21 @@ app.get("/jhu/metadata", (req, res) => {
     res.send(samlStrategy.generateServiceProviderMetadata(PbK, PbK));
 });
 
+// Start the server.
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 })
 
 
-// Start the server.
+// function cleanup(req, res, next) {
+//     if (typeof req.body.initialReview != "string") req.body.initialReview = ""
 
-function cleanup(req, res, next) {
-    if (typeof req.body.initialReview != "string") req.body.initialReview = ""
+//     req.cleanData = {
+//       initialReview: sanitizeHTML(req.body.initialReview.trim(), { allowedTags: [], allowedAttributes: {} })
+//     }
 
-    req.cleanData = {
-      initialReview: sanitizeHTML(req.body.initialReview.trim(), { allowedTags: [], allowedAttributes: {} })
-    }
-
-    next()
-}
+//     next()
+// }
 // const { ObjectId } = require("mongodb")
 // const express = require("express");
 // const app = express();
