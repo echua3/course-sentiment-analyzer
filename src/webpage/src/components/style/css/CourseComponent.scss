@@ -229,8 +229,9 @@
     font-size: 24px;
     color: #333333;
     line-height: 1.2;
-    text-align: right;
-    padding-bottom: 44px;
+    text-align: left;
+    padding-bottom: 34px;
+    margin-left: 44px;
   }
 
   .courseSummary-form-stars {
@@ -392,6 +393,19 @@
     padding-bottom: 20px;
     padding-top: 10px;
     background-color: #a7caed;
+  }
+
+  .charts-loading {
+    display: block;
+    font-family: Montserrat-ExtraBold;
+    font-size: 24px;
+    color: #333333;
+    line-height: 1.2;
+    text-align: center;
+    align-items: center;
+    padding-bottom: 20px;
+    padding-top: 10px;
+    background-color: #ffffff;
   }
 
   /* CSS FOR SLIDER IN REVIEW*/

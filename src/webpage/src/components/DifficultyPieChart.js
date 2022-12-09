@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
-import {difficulty_list} from './ChartAnalysis'
+// import {difficulty_list} from './ChartAnalysis'
 
 class DifficultyPieChart extends Component {
     constructor(props) {
@@ -50,7 +50,7 @@ class DifficultyPieChart extends Component {
                 width: 250
               },
               legend: {
-                position: 'right',
+                position: 'left',
                 offsetY: 0,
                 height: 130,
                 show: true
@@ -64,7 +64,7 @@ class DifficultyPieChart extends Component {
                 width: 384
               },
               legend: {
-                position: 'right',
+                position: 'left',
                 offsetY: 0,
                 height: 130,
                 show: true

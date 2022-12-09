@@ -115,7 +115,7 @@ function CourseSummary({record}) {
    }, [recordValues.length]);
       return (
         <div>
-            <span class ="writereview-form-title">
+            <span class ="courseSummary-form-title">
                {Title}
             </span>
             <h6> {offeringName} ({sectionName}) taught by {instructorsFullName} in {term} </h6>
