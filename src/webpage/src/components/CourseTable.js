@@ -116,19 +116,19 @@ const CourseTable = (props) => {
         tabListSkeleton = [
           {
             key: 'ClassPrompt',
-            tab: 'Summary',
+            tab: 'Class',
           },
           {
             key: 'AddAReview',
-            tab: 'Add Review',
+            tab: 'Add',
           },
           {
             key: 'ViewAllReviews',
-            tab: 'All Reviews',
+            tab: 'Reviews',
           },
           {
             key: 'ChartAnalysis',
-            tab: 'Course Analysis',
+            tab: 'Analysis',
           }
         ];
         tabSize = 'small'
