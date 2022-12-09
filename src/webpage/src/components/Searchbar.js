@@ -48,6 +48,16 @@ function SearchBar(props) {
 
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
+  // for form validation
+  const validateMessages = {
+    types: {
+      number: '${label} is not a valid number!',
+    },
+    number: {
+      min: '${label} must be at least ${min}',
+    },
+  };
+
   const requestData= async (params)=>{
     // edited for development and deployment usage
       async function fetchData() {
@@ -62,7 +72,7 @@ function SearchBar(props) {
           url += "?CourseNumber=" + params.CourseNumber
         }
         if(params.Credits) {
-          url += "?Credits=" + params.Credits
+          url += "?Credits=" + String(params.Credits)
         }
         const responseValue = await fetch(url)
         if(!responseValue.ok) {
@@ -189,7 +199,7 @@ function SearchBar(props) {
     <div class='searchPage'>
       <div class="searchbar">
 
-        <Form form={form}>
+        <Form form={form} validateMessages={validateMessages}>
           <Form.Item name="CourseTitle" label="Course Title">
             <Input
               placeholder="(any part of title)"
@@ -210,8 +220,10 @@ function SearchBar(props) {
               maxLength={15}
             />
           </Form.Item>
-          <Form.Item name="Credits" label="Credits">
+          <Form.Item name="Credits" label="Credits" >
             <Input
+              type="number"
+              min="0"
               placeholder="e.g. 3"
               onChange={e => {params.Credits = e.target.value
                               params.currentPage = 1}}
@@ -224,7 +236,7 @@ function SearchBar(props) {
           <Select placeholder="Please Select" onChange={e =>{params.Department = e
                                                             params.currentPage = 1}} >
             <Select.Option value="">
-              Please Selected
+              All
             </Select.Option>
             <Select.Option value="AS Agora Institute">
               AS Agora Institute
