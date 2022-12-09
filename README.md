@@ -50,13 +50,15 @@ So at the end of the day the students can take back and use college for what it'
 
 The webpage utilizes course information from the SIS.API stored in a MongoDB database to contain information about all JHU Fall 2022 courses. Users can utilize various search filters and an autocomplete dropdown menu to find the course they are looking for.
 
+Users login via the JHU SSO and create a profile upon first login.
+
 The search function has four filter conditions: Course Title, Course Number, Credits and Department. Our algorithm supports fuzzy queries for the first 3 filters. And we provide the drop down options for the Department filter with all department options from both Whiting School of Engineering and Krieger School of Arts and Science. Users could use any combination of the 4 filters to search. A list of courses will show in the table if they meet all the criteria.
 
-After clicking the desired course, it expands to show the Class Summary, Add a Review, and View All Reviews windows. In the Class Summary, the average sentiment and average difficulty is displayed along with charts depicting the data. In Add a Review, Users are given a free-form text box to write a course review and rate the difficulty on a 1-5 sliding scale. After submission, users can view their review and all other reviews under the View All Reviews tab.
+After clicking the desired course, it expands to show the Class Summary, Analysis, Add a Review, and View All Reviews windows. In Class Summary, the course title and description is shown. In the Chart Analysis, the average sentiment and average difficulty is displayed along with charts depicting the data. In Add a Review, Users are given a free-form text box to write a course review and rate the difficulty on a 1-5 sliding scale. After submission, users can view their review and all other reviews under the View All Reviews tab. Users can rate the helpfulness of reviews. 
 
-The Reccommendations tab lists course recoomendations for the current user based on interests indicated in the profile.
+The Reccommendations tab lists course recommendations for the current user based on interests indicated in the profile.
 
-In the profile page, users can update their profile info and set their interests.
+In the profile page, users can update their profile info, set their interests, as well as view and edit their course reviews.
 
 
 ## Sentiment Analysis
