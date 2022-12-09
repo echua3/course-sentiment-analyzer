@@ -1,6 +1,8 @@
 import React from "react";
+import "../style.less";
 import { Form, Input, Table, Pagination, Typography, Popconfirm } from "antd";
 import { useState, useEffect } from "react";
+import { style } from "@mui/system";
 
 const EditableCell = ({
   editing,
@@ -256,7 +258,8 @@ function UserReviews({actualID}) {
     <p class='userreviewstitle'>My Reviews</p>
     {/* <Form onSubmit={onSubmit}> */}
     <Form form={form} component={false}>
-    <Table className="userreviewstable"
+    <Table
+      className={style.table}
       components={{
         body: {
           cell: EditableCell,
@@ -267,6 +270,7 @@ function UserReviews({actualID}) {
       dataSource={datasource}
       columns={mergedColumns.filter(col => col.title !== 'ID')}
       rowKey = "reviewID"
+      scroll={{ x: true }}
     />
     </Form>
     </div>
