@@ -1,7 +1,7 @@
 import { CenterFocusStrong } from '@mui/icons-material';
 import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
-import {sentiment_list} from './CourseSummary'
+import {sentiment_list} from './ChartAnalysis'
 
 class SentimentPieChart extends Component {
     constructor(props) {

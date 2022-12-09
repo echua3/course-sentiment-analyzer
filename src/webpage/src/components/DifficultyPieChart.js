@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
-import {difficulty_list} from './CourseSummary'
+import {difficulty_list} from './ChartAnalysis'
 
 console.log('UNDEFINED????:' + difficulty_list);
 class DifficultyPieChart extends Component {
