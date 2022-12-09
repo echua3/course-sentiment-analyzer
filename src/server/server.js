@@ -8,6 +8,11 @@ const port = process.env.PORT || 4000;
 
 const PbK = process.env.PbK;
 const PvK = process.env.PvK;
+const metadata = process.env.metadata;
+
+//const PbK = fs.readFileSync(__dirname + "/certs/cert.pem", "utf8");
+//const PvK = fs.readFileSync(__dirname + "/certs/key.pem", "utf8");
+//const metadata = fs.readFileSync(__dirname + "/certs/metadata.xml", "utf8")
 
 const JHU_SSO_URL = "https://idp.jh.edu/idp/profile/SAML2/Redirect/SSO";
 const SP_NAME = "https://jhu-courses.herokuapp.com/idp";
@@ -22,9 +27,10 @@ const samlStrategy = new saml.Strategy(
     callbackUrl: `${BASE_URL}/jhu/login/callback`,
     decryptionPvk: PvK,
     privateCert: PvK,
-    cert: PbK,  //needed to prevent "cert is required" error
+    cert: metadata,  //needed to prevent "cert is required" error
   },
   (profile, done) => {
+    console.log(profile)
     return done(null, profile);
   }
 );
@@ -34,10 +40,12 @@ passport.use("samlStrategy", samlStrategy);
 
 // Serialize and deserialize user for paqssport
 passport.serializeUser(function (user, done) {
+  console.log(user);
     done(null, user);
 });
 
 passport.deserializeUser(function (user, done) {
+  console.log(user);
     done(null, user);
 });
 
@@ -73,13 +81,15 @@ app.get(
 app.post(
     "/jhu/login/callback",
     (req, res, next) => {
+      console.log(req);
       next();
     },
     passport.authenticate("samlStrategy")//,
-    //(req, res) => {
+    (req, res) => {
       // the user data is in req.user
-      //res.send(`welcome`);
-    //}
+      console.log(req.user);
+      res.send(`welcome ${req.user}`);
+    }
 );
 
 // route to metadata
