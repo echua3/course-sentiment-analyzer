@@ -92,7 +92,7 @@ const CourseTable = (props) => {
       // media responsiveness
       var tabListSkeleton;
       var tabSize = 'middle';
-      if (width > 580) {
+      if (width > 768) {
         tabListSkeleton = [
           {
             key: 'ClassPrompt',
@@ -112,6 +112,26 @@ const CourseTable = (props) => {
           }
         ];
         tabSize = 'large'
+      } else if (width > 580) {
+        tabListSkeleton = [
+          {
+            key: 'ClassPrompt',
+            tab: 'Summary',
+          },
+          {
+            key: 'AddAReview',
+            tab: 'Add Review',
+          },
+          {
+            key: 'ViewAllReviews',
+            tab: 'All Reviews',
+          },
+          {
+            key: 'ChartAnalysis',
+            tab: 'Course Analysis',
+          }
+        ];
+        tabSize = 'medium'
       } else {
         tabListSkeleton = [
           {
