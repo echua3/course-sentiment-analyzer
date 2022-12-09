@@ -11,7 +11,7 @@ const PvK = process.env.PvK;
 
 const JHU_SSO_URL = "https://idp.jh.edu/idp/profile/SAML2/Redirect/SSO";
 const SP_NAME = "https://jhu-courses.herokuapp.com/idp";
-const BASE_URL = "https://jhu-courses.herokuapp.com/";
+const BASE_URL = "https://jhu-courses.herokuapp.com";
 
 // Setup SAML strategy
 const samlStrategy = new saml.Strategy(
