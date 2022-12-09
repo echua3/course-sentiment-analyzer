@@ -4,7 +4,7 @@ import LoginCard from "../components/loginCard";
 
 function LoginPage() {
   useEffect( () => {
-      window.location.reload();
+      window.location = process.env.REACT_APP_API_ENDPOINT + "/SSOLogin";
     }
   );
 
