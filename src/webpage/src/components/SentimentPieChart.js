@@ -46,7 +46,7 @@ class SentimentPieChart extends Component {
             options: {
               chart: {
                 height: 300,
-                width: 250
+                width: 240
               },
               legend: {
                 position: 'right',
