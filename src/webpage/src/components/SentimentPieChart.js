@@ -28,21 +28,50 @@ class SentimentPieChart extends Component {
             offsetX: 0,
             offsetY: 0
           },
-          // responsive: [{
-          //   breakpoint: 880,
-          //   options: {
-          //     chart: {
-          //       height: 200,
-          //       width: 200
-          //     },
-          //     legend: {
-          //       position: 'bottom',
-          //       offsetY: 0,
-          //       height: 130,
-          //       show: true
-          //     }
-          //   }
-          // }],
+          responsive: [{
+            breakpoint: 576,
+            options: {
+              chart: {
+                height: 200,
+                width: 300
+              },
+              legend: {
+                position: 'right',
+                offsetY: 0,
+                height: 130,
+                show: true
+              }
+            }
+          }, {
+            breakpoint: 768,
+            options: {
+              chart: {
+                height: 300,
+                width: 250
+              },
+              legend: {
+                position: 'right',
+                offsetY: 0,
+                height: 130,
+                show: true
+              }
+            }
+          },
+          {
+            breakpoint: 992,
+            options: {
+              chart: {
+                height: 300,
+                width: 384
+              },
+              legend: {
+                position: 'right',
+                offsetY: 0,
+                height: 130,
+                show: true
+              }
+            }
+          }],
           legend: {
             position: 'right',
             offsetY: 0,
@@ -78,7 +107,7 @@ class SentimentPieChart extends Component {
         else
         {
           return (
-            <Chart options={this.state.options} series={this.state.series} type='donut' width={"300"} height={"300"} />
+            <Chart options={this.state.options} series={this.state.series} type='donut' width={"400"} height={"400"} />
           )
         }
   }
