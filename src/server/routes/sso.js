@@ -26,7 +26,7 @@ const samlStrategy = new saml.Strategy(
     // config options here
     entryPoint: JHU_SSO_URL,
     issuer: SP_NAME,
-    callbackUrl: `${BASE_URL}/Login/callback`,
+    callbackUrl: `${BASE_URL}/jhu/login/callback`,
     decryptionPvk: PvK,
     privateCert: PvK,
     cert: PbK
@@ -73,7 +73,7 @@ ssoRoute.get(
 
 // callback route
 ssoRoute.post(
-    "/Login/callback",
+    "/jhu/login/callback",
     (req, res, next) => {
       next();
     },

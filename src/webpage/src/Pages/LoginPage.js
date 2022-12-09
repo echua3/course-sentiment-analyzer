@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import LoginCard from "../components/loginCard";
 
 function LoginPage() {
-  /*useEffect( () => {
+  useEffect( () => {
       window.location = process.env.REACT_APP_API_ENDPOINT + "/SSOLogin";
     }
-  );*/
+  );
 
   return (
     <div>
