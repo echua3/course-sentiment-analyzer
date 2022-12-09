@@ -11,7 +11,7 @@ const CourseTable = (props) => {
     const [recordValue, setRecord] = useState([]);
     const [classInfo, setClassInfo]=useState([]);
     const [actualID, setActualID] = useState("");
-    const { height, width } = useWindowDimensions();
+    const { width } = useWindowDimensions();
 
     const [datasource, setDatasource] = useState([])
     useEffect(() => {
