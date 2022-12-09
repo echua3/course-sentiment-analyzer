@@ -6,9 +6,9 @@ const bodyParser = require("body-parser");
 const fs = require("fs");
 const port = process.env.PORT || 4000;
 
-const PbK = process.env.PbK;
-const PvK = process.env.PvK;
-const metadata = process.env.metadata;
+const PbK = process.env.PbK.split(String.raw`\n`).join('\n');
+const PvK = process.env.PvK.split(String.raw`\n`).join('\n');
+//const metadata = process.env.metadata;
 
 //const PbK = fs.readFileSync(__dirname + "/certs/cert.pem", "utf8");
 //const PvK = fs.readFileSync(__dirname + "/certs/key.pem", "utf8");
