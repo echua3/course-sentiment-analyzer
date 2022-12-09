@@ -95,7 +95,7 @@ export default function Navbar() {
                     <CustomLink key={LogoutPage} href={"/Logout"} className="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white" to="/Logout">Logout</CustomLink>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-4">
-                    <CustomLink key={LoginPage} href={"/Login"} className="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white" to="/Login">Login</CustomLink>
+                    <CustomLink key={LoginPage} href={"/SSOLogin"} className="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white" to="/SSOLogin">Login</CustomLink>
                 </div>
             </div>
           </div>
