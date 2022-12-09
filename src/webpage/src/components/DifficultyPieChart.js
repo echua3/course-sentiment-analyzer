@@ -30,14 +30,45 @@ class DifficultyPieChart extends Component {
             offsetY: 0
           },
           responsive: [{
-            breakpoint: 880,
+            breakpoint: 576,
             options: {
               chart: {
                 height: 200,
-                width: 200
+                width: 300
               },
               legend: {
-                show: false
+                position: 'right',
+                offsetY: 0,
+                height: 130,
+                show: true
+              }
+            }
+          },{
+            breakpoint: 768,
+            options: {
+              chart: {
+                height: 250,
+                width: 250
+              },
+              legend: {
+                position: 'right',
+                offsetY: 0,
+                height: 130,
+                show: true
+              }
+            }
+          },{
+            breakpoint: 992,
+            options: {
+              chart: {
+                height: 384,
+                width: 384
+              },
+              legend: {
+                position: 'right',
+                offsetY: 0,
+                height: 130,
+                show: true
               }
             }
           }],
@@ -80,7 +111,7 @@ class DifficultyPieChart extends Component {
       else
       {
         return (
-          <Chart options={this.state.options} series={this.state.series} type='donut' width={400} height={220} />
+          <Chart options={this.state.options} series={this.state.series} type='donut' width={400} height={400} />
         )
       }
      
