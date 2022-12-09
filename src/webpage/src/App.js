@@ -8,7 +8,6 @@ import UserProfileForm from "./components/UserProfileForm.js";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage.js";
 import LogoutPage from "./Pages/LogoutPage.js";
-import { useEffect, useState } from "react";
 
 function App() {
 
