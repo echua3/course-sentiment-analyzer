@@ -33,11 +33,11 @@ const CourseTable = (props) => {
             console.log("Error:" + responseValues2.statusText);
             return;
           }
-          console.log(responseValues2)
+          // console.log(responseValues2)
           await responseValues2.json().then((res) => {
             setDatasource(res.data[0]);
           });
-  
+
         }
 
         getRecords();
@@ -46,7 +46,7 @@ const CourseTable = (props) => {
       }
       fetchData().catch(console.error);
 
-      
+
 
     })
 
@@ -190,8 +190,8 @@ const CourseTable = (props) => {
             columns={columns.filter(col => col.title !== 'ID')}
             rowKey = "SSS_SectionsID"
             expandable={{
-              
-            expandedRowRender: record => 
+
+            expandedRowRender: record =>
               <Card
                 style={{ width: '100%' }}
                 tabList={tabListSkeleton}
