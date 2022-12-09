@@ -9,9 +9,18 @@ const port = process.env.PORT || 4000;
 const PbK = process.env.PbK;
 const PvK = process.env.PvK;
 
+const displayName = "urn:oid:2.16.840.1.113730.3.1.241";
+const grade = "user_field_job_title";
+const email = "email";
+const school = "urn:oid:1.3.6.1.4.1.5923.1.1.1.4";
+const affiliation = "user_field_affiliation";
+const JHEDid = "uid";
+const dept = "urn:oid:1.3.6.1.4.1.5923.1.1.1.4";
+const first = "urn:oid:2.5.4.42";
+const last = "urn:oid:2.5.4.4";
+
 //const PbK = fs.readFileSync(__dirname + "/certs/cert.pem", "utf8");
 //const PvK = fs.readFileSync(__dirname + "/certs/key.pem", "utf8");
-//const metadata = fs.readFileSync(__dirname + "/certs/metadata.xml", "utf8")
 
 const JHU_SSO_URL = "https://idp.jh.edu/idp/profile/SAML2/Redirect/SSO";
 const SP_NAME = "https://jhu-courses.herokuapp.com/idp";
@@ -29,7 +38,6 @@ const samlStrategy = new saml.Strategy(
     cert: PbK
   },
   (profile, done) => {
-    console.log(profile)
     return done(null, profile);
   }
 );
@@ -39,12 +47,10 @@ passport.use("samlStrategy", samlStrategy);
 
 // Serialize and deserialize user for paqssport
 passport.serializeUser(function (user, done) {
-    console.log(user);
     done(null, user);
 });
 
 passport.deserializeUser(function (user, done) {
-    console.log(user);
     done(null, user);
 });
 
@@ -80,14 +86,12 @@ app.get(
 app.post(
     "/jhu/login/callback",
     (req, res, next) => {
-      console.log(req);
       next();
     },
     passport.authenticate("samlStrategy"),
     (req, res) => {
       // the user data is in req.user
-      console.log(req.user);
-      res.send(`welcome ${req.user}`);
+      res.send(`welcome ${req.user[JHEDid]}, ${req.user[displayName]}, ${req.user[grade]}, ${req.user[email]}, ${req.user[school]}, ${req.user[affiliation]}, ${req.user[dept]}, ${req.user[first]}, ${req.user[last]}`);
     }
 );
 
