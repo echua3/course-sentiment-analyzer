@@ -151,20 +151,21 @@ function ChartAnalysis({record}) {
          <div>
 
          <Row>
+            {/* <Col span={8} pull={16}> */}
+            <Col xs={24} sm={10} xl={12}>
+            <span class ="courseSummary-form-title">
+            {Title}
+         </span>
+            </Col>
             {/* <Col span={16} push={8}> */}
-            <Col xs={24} sm={11} lg={8}>
+            <Col xs={24} sm={10} xl={12}>
                <span class="courseSummary-form-stars">
                   {getStars(average_difficulty)}
                </span>
                {/* <p class="courseSummary-form-sentiment"> Average Sentiment: {!isNaN(average_sentiment_score) ? average_sentiment_score : 'N/A'} </p> */}
                <p class="courseSummary-form-sentiment"> Average Sentiment: {getEmoji(average_sentiment_score)} </p>
             </Col>
-            {/* <Col span={8} pull={16}> */}
-            <Col xs={24} sm={11} lg={8}>
-            <span class ="writereview-form-title">
-            {Title}
-         </span>
-            </Col>
+            
          </Row>
        
          <Row justify="center">
