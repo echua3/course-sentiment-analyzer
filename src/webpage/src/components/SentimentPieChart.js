@@ -1,14 +1,13 @@
-import { CenterFocusStrong } from '@mui/icons-material';
 import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
-import {sentiment_list} from './ChartAnalysis'
+// import {sentiment_list} from './ChartAnalysis'
 
 class SentimentPieChart extends Component {
     constructor(props) {
       super(props);
   
       this.state = {
-        series: sentiment_list,
+        series: this.props.sentiment_list,
         options: {
           chart: {
             id: 'apexchart-example',
@@ -94,9 +93,10 @@ class SentimentPieChart extends Component {
     }
     render() {
       var temp_sum=0
-        for(let index=0; index<sentiment_list.length; index++)
+      console.log('in sent pi chart',this.state.series)
+        for(let index=0; index<this.props.sentiment_list.length; index++)
         {
-          temp_sum +=sentiment_list[index];
+          temp_sum +=this.props.sentiment_list[index];
         }
         if(temp_sum==0)
         {

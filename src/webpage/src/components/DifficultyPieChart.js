@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
-import {difficulty_list} from './ChartAnalysis'
+// import {difficulty_list} from './ChartAnalysis'
 
-console.log('UNDEFINED????:' + difficulty_list);
 class DifficultyPieChart extends Component {
     constructor(props) {
       super(props);
       // if(!difficulty_list){ difficulty_list = null } 
-      console.log('In Piechart2' + difficulty_list);
+      // console.log('In Piechart2' + difficulty_list);
       this.state = {
-        series: difficulty_list,
+        series: this.props.difficulty_list,
         options: {
           chart: {
             id: 'apexchart-example',
@@ -51,7 +50,7 @@ class DifficultyPieChart extends Component {
                 width: 250
               },
               legend: {
-                position: 'right',
+                position: 'left',
                 offsetY: 0,
                 height: 130,
                 show: true
@@ -65,7 +64,7 @@ class DifficultyPieChart extends Component {
                 width: 384
               },
               legend: {
-                position: 'right',
+                position: 'left',
                 offsetY: 0,
                 height: 130,
                 show: true
@@ -97,10 +96,11 @@ class DifficultyPieChart extends Component {
       }
     }
     render() {
+      console.log('in diff pi chart',this.state.series)
       var temp_sum=0
-      for(let index=0; index<difficulty_list.length; index++)
+      for(let index=0; index<this.props.difficulty_list.length; index++)
       {
-        temp_sum +=difficulty_list[index];
+        temp_sum +=this.props.difficulty_list[index];
       }
       if(temp_sum==0)
       {
