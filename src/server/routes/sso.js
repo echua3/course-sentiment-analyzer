@@ -77,7 +77,7 @@ ssoRoute.post(
     (req, res, next) => {
       next();
     },
-    passport.authenticate("samlStrategy"),
+    passport.authenticate("samlStrategy")/*,
     async (req, res) => {
         const id = req.user[email];
         id = id.substring(0, id.indexOf("@"));
@@ -96,7 +96,7 @@ ssoRoute.post(
         } catch (err) {
             errorHandler(res, 500, err);
         }
-    }
+    }*/
 );
 
 // route to metadata
