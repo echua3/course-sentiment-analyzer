@@ -7,6 +7,10 @@ import './style/css/CourseComponent.scss';
 
 const Review = ({review, handleUpvote, handleDownVote, userUps, userDowns}) => {
 
+  function render(value) {
+    return <span dangerouslySetInnerHTML={{__html: value}}></span>
+  }
+
     return (
         <Grid
         container
@@ -15,10 +19,10 @@ const Review = ({review, handleUpvote, handleDownVote, userUps, userDowns}) => {
         alignItems="left"
         >
           <Grid item xs={10} md={9} >
-            <Comment
+            <Comment 
               content = {
-                  <><h6>
-                  {review.comment}
+                  <><h6 Content-Type={'text/html'} charset='utf-8'>
+                  {render(review.comment)}
                 </h6><h4>
                     Difficulty: {review.difficulty}/5
                   </h4></>
