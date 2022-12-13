@@ -7,7 +7,6 @@ const userSchema = new Schema({
          type: String,
          lowercase: true,
          required: [true, "Your userID cannot be blank!"],
-         match: [/^[a-zA-Z0-9]+$/, 'Your userID is invalid!'],
          index: true,
          unique: true
      },

@@ -29,7 +29,14 @@ loginRoute.route("/login/:userID/:first/:last").get(param('userID').trim().not()
                         lastName: req.params.last
                     };
                     userModel.create(user);
+                    const token = jwt.sign(
+                        {userId: req.params.userID},
+                        "i_really_hate_express_like_so_much_like_how_does_it_mess_up_this_badly",
+                         { expiresIn: "1h"});
+    
+                    res.cookie("jwt", token, {maxAge: 3600 * 1000, httpOnly: true})
                     res.redirect(`https://jhu-courses.herokuapp.com/Profile`);
+                    //res.end();
             }
             else {
                 const token = jwt.sign(
@@ -40,7 +47,7 @@ loginRoute.route("/login/:userID/:first/:last").get(param('userID').trim().not()
                 res.cookie("jwt", token, {maxAge: 3600 * 1000, httpOnly: true})
                 console.log("AM I GETTING HERE?")
                 res.redirect(`https://jhu-courses.herokuapp.com/Profile`);
-                res.end()
+                res.end();
             }
          }
   );
