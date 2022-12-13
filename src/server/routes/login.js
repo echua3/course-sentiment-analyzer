@@ -23,12 +23,14 @@ loginRoute.route("/login/:userID/:first/:last").get(param('userID').trim().not()
   userModel.find().where("userID").equals(sanitize(req.params.userID)).exec(
         (err, result) => {
             if (Object.keys(result).length === 0) {
-                user = {
-                    userId: req.params.userID,
-                    firstName: req.params.first,
-                    lastName: req.params.last
-                };
-                userModel.create(user);
+                if(req.params.userID != "" & req.params.first != "" & req.params.last != "") {
+                    user = {
+                        userID: req.params.userID,
+                        firstName: req.params.first,
+                        lastName: req.params.last
+                    };
+                    userModel.create(user);
+                }
             }
             else {
                 const token = jwt.sign(
