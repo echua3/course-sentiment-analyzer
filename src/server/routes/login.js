@@ -29,6 +29,7 @@ loginRoute.route("/login/:userID/:first/:last").get(param('userID').trim().not()
                         lastName: req.params.last
                     };
                     userModel.create(user);
+                    res.redirect(`https://jhu-courses.herokuapp.com/Profile`);
             }
             else {
                 const token = jwt.sign(
