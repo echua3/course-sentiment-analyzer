@@ -17,13 +17,18 @@ const { param, validationResult } = require('express-validator');
 
 var sanitize = require("mongo-sanitize");
 
-loginRoute.route("/login/:userID").get(param('userID').trim().not().isEmpty(),                                                                   function (req, res) {
+loginRoute.route("/login/:userID/:first/:last").get(param('userID').trim().not().isEmpty(),                                                                   function (req, res) {
   let db_connect = dbo.getDb();
   
   userModel.find().where("userID").equals(sanitize(req.params.userID)).exec(
         (err, result) => {
             if (Object.keys(result).length === 0) {
-                res.status(500).json({error: "login failed, something went wrong"});
+                user = {
+                    userId: req.params.userID,
+                    firstName: req.params.first,
+                    lastName: req.params.last
+                };
+                userModel.create(user);
             }
             else {
                 const token = jwt.sign(
@@ -33,7 +38,7 @@ loginRoute.route("/login/:userID").get(param('userID').trim().not().isEmpty(),  
 
                 res.cookie("jwt", token, {maxAge: 3600 * 1000, httpOnly: true})
                 console.log("AM I GETTING HERE?")
-                res.send({message: "ok"})
+                res.redirect(`https://jhu-courses.herokuapp.com/Profile`);
                 res.end()
             }
          }

@@ -80,28 +80,10 @@ ssoRoute.post(
     passport.authenticate("samlStrategy"),
     (req, res) => {
         // the user data is in req.user
-        res.redirect(`https://jhu-courses.herokuapp.com/Profile`);
-    }
-    /*,
-    async (req, res) => {
         const id = req.user[email];
         id = id.substring(0, id.indexOf("@"));
-        window.userID = id;
-        let user = await userModel.findById().exec();
-        if (user === null) {
-            user = {
-                userId: id,
-                firstName: req.user[first],
-                lastName: req.user[last],
-            };
-            userModel.create(user);
-        }
-        try {
-            res.redirect(`https://jhu-courses.herokuapp.com/Profile`);
-        } catch (err) {
-            errorHandler(res, 500, err);
-        }
-    }*/
+        res.redirect(`https://jhu-courses.herokuapp.com/login/` + id + '/' + req.user[first] + '/' + req.user[last]);
+    }
 );
 
 // route to metadata
