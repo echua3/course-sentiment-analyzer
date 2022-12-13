@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom'
 
 function UserProfileForm(props) {
 
+  const [datasource, setDatasource] = useState([])
+  const [userID, setUserID] = useState(window.userID)
+  const [actualID, setActualID] = useState("");
   const [profileSubmitted, setProfile] = useState(false);
   const [form_1] = Form.useForm();
 
@@ -25,11 +28,22 @@ function UserProfileForm(props) {
     // console.log()
     // e.preventDefault();
 
-    let test={...params}
-    setParams(test)
-    await requestData(test)
-    navigate('/Profile')
-  }
+      getRecords();
+  
+      return;
+    }
+    fetchData().catch(console.error);
+
+    
+   }, [userID]);
+
+   const firstName = datasource.firstName
+    const lastName = datasource.lastName
+    const degreeType = datasource.degreeType
+    const department = datasource.dept
+    const interest_1 = datasource.firstInterest
+    const interest_2 = datasource.secondInterest
+    const interest_3 = datasource.thirdInterest
 
   const requestData= async (params)=>{
     // edited for development and deployment usage
@@ -71,7 +85,6 @@ function UserProfileForm(props) {
   const onReset = async () => {
     navigate('/Profile')
   };
-
 
   useEffect( () => {
     async function getRecords() {
@@ -123,7 +136,7 @@ function UserProfileForm(props) {
   return (
     <div>
     <div class="userprofile">
-    <p class='userprofiletitle'>My Profile</p>
+    <p class='userprofiletitle'>Please update your profile here:</p>
     {/* <Form onSubmit={onSubmit}> */}
     <Form
       form={form_1}

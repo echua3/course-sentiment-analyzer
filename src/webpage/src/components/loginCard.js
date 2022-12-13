@@ -81,26 +81,6 @@ function LoginCard() {
        </div>
       </div>
     </div>
-    
-      <div class="right">
-      <span class="writereview-form-title">
-               Login
-      </span>
-      <div class="inputs">
-        <input
-              type="text"
-              placeholder="Username"
-              onChange={e => {setUserID( e.target.value)}}
-              onPressEnter={onSubmit}
-            />
-            
-      </div>
-      {userErrorBoolean && <Alert message="Invalid userID, if you are stuck log into mongodb and find a valid userID or make one!" type="error" showIcon /> }
-        
-        <br/>
-        <button class="image-center" onClick={onSubmit}>Login</button>
-    </div>
-    
   </div>
 
     )
@@ -110,7 +90,7 @@ function LoginCard() {
       <div class="left">
          <div class="overlay">
          <span class="writereview-form-title-2">
-                 Hello {actualID}, your personal catalogue for courses is only a few keystrokes away!
+                 Hello there, your personal catalogue for courses is only a few keystrokes away!
          </span>
          <div class="wrap-input1 center-fold image-center">
          <img
