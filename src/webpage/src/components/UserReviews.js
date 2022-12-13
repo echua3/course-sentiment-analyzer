@@ -1,6 +1,9 @@
 import React from "react";
+import "../style.less";
 import { Form, Input, Table, Pagination, Typography, Popconfirm } from "antd";
 import { useState, useEffect } from "react";
+import { style } from "@mui/system";
+
 
 const EditableCell = ({
   editing,
@@ -143,31 +146,40 @@ function UserReviews({actualID}) {
       title: 'Course Number',
       dataIndex: 'OfferingName',
       key: 'OfferingName',
+      width: '10%',
     },
     {
       title: 'Course Title',
       dataIndex: 'Title',
       key: 'Title',
+      width: '20%',
     },
     {
       title: 'Instructors',
       dataIndex: 'Instructors',
       key: 'Instructors',
+      width: '10%',
     },
     {
       title: 'Review',
       dataIndex: 'comment',
+      width: '40%',
       key: 'comment',
       editable: true,
+      render: text => {
+        return <span dangerouslySetInnerHTML={{__html: text}}></span>
+      }
     },
     {
       title: 'Difficulty',
       dataIndex: 'difficulty',
-      key: 'difficulty'
+      key: 'difficulty',
+      width: '7%',
     },
     {
       title: 'Edit',
       dataIndex: 'edit',
+      width: '5%',
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
@@ -196,6 +208,7 @@ function UserReviews({actualID}) {
     {
       title: 'Delete',
       key: 'delete',
+      width: '5%',
       render: (_, record) => (
           <a onClick={(e) => { onDelete(record, e); }}>Delete</a>
       ),
@@ -204,6 +217,7 @@ function UserReviews({actualID}) {
       title: 'ID',
       dataIndex: 'classID',
       key: 'classID',
+      width: '10%',
     },
   ];
 
@@ -256,7 +270,8 @@ function UserReviews({actualID}) {
     <p class='userreviewstitle'>My Reviews</p>
     {/* <Form onSubmit={onSubmit}> */}
     <Form form={form} component={false}>
-    <Table className="userreviewstable"
+    <Table
+      className={style.table}
       components={{
         body: {
           cell: EditableCell,
@@ -267,6 +282,7 @@ function UserReviews({actualID}) {
       dataSource={datasource}
       columns={mergedColumns.filter(col => col.title !== 'ID')}
       rowKey = "reviewID"
+      scroll={{ x: true }}
     />
     </Form>
     </div>

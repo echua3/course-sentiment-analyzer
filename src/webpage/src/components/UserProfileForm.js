@@ -14,38 +14,19 @@ function UserProfileForm(props) {
 
   const navigate = useNavigate()
 
-  useEffect( () => {
-    const fetchData = async () => {
-      const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
-      console.log("Dummy")
-      if(!responseValue.ok) {
-            console.log("Error:" + responseValue.statusText);
-            window.userID = "";
-            return;
-      }
-      const records2 = await responseValue.json();
-      console.log(records2.data.userId);
-      setActualID(records2.data.userId);
-      window.userID = actualID;
-      async function getRecords() {
-        const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + records2.data.userId)
-        if(!response.ok) {
-          console.log("Error:" + response.statusText);
-          return;
-        }
-        const res = await response.json();
-        setDatasource('')
-        setDatasource(res.data[0]);
-        console.log(res.data[0])
-        form_1.setFieldsValue({
-        FirstName: res.data[0].firstName,
-        LastName: res.data[0].lastName,
-        StudentDegree: res.data[0].degreeType,
-        Department: res.data[0].dept,
-        firstInterest: res.data[0].firstInterest,
-        secondInterest: res.data[0].secondInterest,
-        thirdInterest: res.data[0].thirdInterest })
-      }
+  // const onSubmit = async (e)=> {
+  //   console.log(e)
+  //   e.preventDefault();
+
+  //   let test={...params}
+  //   setParams(test)
+  //   await requestData(test)
+  //   navigate('/Profile')
+  // }
+
+  const onFinish = async (values) => {
+    // console.log()
+    // e.preventDefault();
 
       getRecords();
   
@@ -105,24 +86,76 @@ function UserProfileForm(props) {
     navigate('/Profile')
   };
 
+  useEffect( () => {
+    async function getRecords() {
+      const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/info/" + window.userID)
+      if(!response.ok) {
+        console.log('here')
+        console.log("Error:" + response.statusText);
+        return;
+      }
+      const res = await response.json();
+      let first = '';
+      let second = '';
+      let third = '';
+      console.log(res.data[0].firstInterest=='')
+      console.log(res.data[0].secondInterest=='')
+      if (res.data[0].firstInterest==undefined){
+        first = ''
+      } else {
+        first = res.data[0].firstInterest
+      }
+      if (res.data[0].secondInterest==undefined){
+        second = ''
+      } else {
+        second = res.data[0].secondInterest
+      }
+      if (res.data[0].thirdInterest==undefined){
+        third = ''
+      } else {
+        third = res.data[0].thirdInterest
+      }
+      form_1.setFieldsValue({
+        FirstName: res.data[0].firstName,
+        LastName: res.data[0].lastName,
+        StudentDegree: res.data[0].degreeType,
+        Department: res.data[0].dept,
+        firstInterest: first,
+        secondInterest: second,
+        thirdInterest: third
+      });
+    }
+    getRecords();
+
+    return;
+  }, [window.userID]);
+
+  console.log(params.firstInterests==undefined)
+  console.log(params.secondInterests)
+
   return (
     <div>
     <div class="userprofile">
     <p class='userprofiletitle'>Please update your profile here:</p>
     {/* <Form onSubmit={onSubmit}> */}
-    <Form form={form_1}>
+    <Form
+      form={form_1}
+      onFinish={onFinish}
+    >
       <Form.Item name="FirstName" label="First Name" >
         <Input
           placeholder="Firstname"
-          onChange={e => {params.firstName = e.target.value}}
+          // onChange={e => {params.firstName = e.target.value}}
           value={params.firstName}
+          disabled={true}
         />
       </Form.Item>
       <Form.Item name="LastName" label="Last Name">
         <Input
           placeholder="Lastname"
-          onChange={e => {params.lastName = e.target.value}}
+          // onChange={e => {params.lastName = e.target.value}}
           value={params.lastName}
+          disabled={true}
         />
       </Form.Item>
 
@@ -137,8 +170,16 @@ function UserProfileForm(props) {
         </Select>
       </Form.Item>
 
-      <Form.Item name="Department" label="Department">
+      <Form.Item
+        name="Department"
+        label="Department"
+        rules={[
+          {
+            required: true,
+          },
+        ]}>
         <Select placeholder="Please Select Your Department" onChange={e =>{params.dept = e}}>
+
           <Select.Option value="AS Agora Institute">
             AS Agora Institute
           </Select.Option>
@@ -340,21 +381,31 @@ function UserProfileForm(props) {
         </Select>
       </Form.Item>
       <Form.Item name="text" label="What are you looking for in a course? (order by priority)"></Form.Item>
-      <Form.Item name="firstInterest" label="Interest 1">
+      <Form.Item
+        name="firstInterest"
+        label="Interest 1"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your interest',
+            whitespace: true,
+          },
+        ]}
+        >
         <Input
           placeholder="Research, Team Projects, etc."
           onChange={e => {params.firstInterest = e.target.value}}
           value={params.firstInterest}
         />
       </Form.Item>
-      <Form.Item name="secondInterest" label="Interest 2">
+      <Form.Item name="secondInterest" label="Interest 2" rules={[{whitespace: true,}]}>
         <Input
           placeholder="Research, Team Projects, etc."
           onChange={e => {params.secondInterest = e.target.value}}
           value={params.secondInterest}
         />
       </Form.Item>
-      <Form.Item name="thirdInterest" label="Interest 3">
+      <Form.Item name="thirdInterest" label="Interest 3" rules={[{whitespace: true,}]}>
         <Input
           placeholder="Research, Team Projects, etc."
           onChange={e => {params.thirdInterest = e.target.value}}
@@ -364,7 +415,7 @@ function UserProfileForm(props) {
 
       <Form.Item className='buttons'>
         {/* <Link to='/Profile'> */}
-        <Button className='submit' type="primary" htmlType="submit" onClick={onSubmit}>Save changes</Button>
+        <Button className='submit' type="primary" htmlType="submit" >Save changes</Button>
         {/* </Link> */}
         <Button className='reset' htmlType="button" onClick={onReset}>Cancel</Button>
       </Form.Item>

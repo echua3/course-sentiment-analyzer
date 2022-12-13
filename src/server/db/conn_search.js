@@ -11,11 +11,11 @@ const client = new MongoClient(Db, {
 // log collections
 MongoBench.mongo(mongo, {
   'logsCollection': 'mongologs',
-  calculateQueryFingeprint: false 
+  calculateQueryFingeprint: false
 });
 var _db;
 
-// Connect to the server via module exports to automatically connect when a value 
+// Connect to the server via module exports to automatically connect when a value
 // is created, more so used to create the functions we will use later.
 module.exports = {
   connectToServer: function (callback) {
