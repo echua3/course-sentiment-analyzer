@@ -35,7 +35,7 @@ loginRoute.route("/login/:userID/:first/:last").get(param('userID').trim().not()
                          { expiresIn: "1h"});
     
                     res.cookie("jwt", token, {maxAge: 3600 * 1000, httpOnly: true})
-                    res.redirect(`https://jhu-courses.herokuapp.com/Profile`);
+                    res.redirect(`https://jhu-courses.herokuapp.com/ProfileEdit`);
                     //res.end();
             }
             else {
