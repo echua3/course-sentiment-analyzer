@@ -2,8 +2,6 @@ import React from "react";
 import './style/css/CourseComponent.scss';
 import { useEffect, useState } from "react";
 
-import { Alert } from 'antd';
-
 
 function LoginCard() {
 

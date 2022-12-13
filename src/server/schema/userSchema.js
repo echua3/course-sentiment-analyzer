@@ -17,7 +17,7 @@ const userSchema = new Schema({
      lastName: String,
      degreeType: {
           type: String,
-          default: 'No degree'
+          default: 'Undergraduate'
      },
      firstInterest: {
         type: String,

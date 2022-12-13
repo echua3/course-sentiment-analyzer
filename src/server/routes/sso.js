@@ -4,7 +4,6 @@ const saml = require("passport-saml");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const fs = require("fs");
-const userModel = require("../schema/userSchema.js");
 
 const PbK = process.env.PbK;
 const PvK = process.env.PvK;
@@ -92,8 +91,3 @@ ssoRoute.get("/jhu/metadata", (req, res) => {
 });
 
 module.exports = ssoRoute;
-
-// // Start the server.
-// app.listen(port, () => {
-//     console.log(`Server is running on port: ${port}`);
-// })

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function UserProfileForm(props) {
   const [profileSubmitted, setProfile] = useState(false);
   const [form_1] = Form.useForm();
+  const [actualID, setActualID] = useState("");
 
   const navigate = useNavigate()
 
@@ -18,6 +19,19 @@ function UserProfileForm(props) {
   //   await requestData(test)
   //   navigate('/Profile')
   // }
+  const [params, setParams] = useState({
+    userID: '',
+    firstName: '',
+    lastName: '',
+    degreeType: '',
+    firstInterest: '',
+    secondInterest: '',
+    thirdInterest: '',
+    reviewIDs:'',
+    reviewUpvotedIDs: '',
+    reviewDownvotedIDs: '',
+    dept: '',
+  })
 
   const onFinish = async (values) => {
     // console.log()
@@ -25,12 +39,15 @@ function UserProfileForm(props) {
 
     let test={...params}
     setParams(test)
-    await requestData(test)
-    navigate('/Profile')
+    await requestData(test).then(
+      navigate('/Profile')
+    )
+    
   }
   const requestData= async (params)=>{
     // edited for development and deployment usage
-    const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/update/" + params.UserID, {
+    console.log(params)
+    const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/update/" + actualID, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,27 +61,57 @@ function UserProfileForm(props) {
     if(!response.ok) {
       console.log('!response.ok')
     } else {
-      console.log(response)
+      console.log(await response.json())
       setProfile(true)
     }
   }
-  const [params, setParams] = useState({
-    userID: window.userID,
-    firstName: '',
-    lastName: '',
-    degreeType: '',
-    firstInterest: '',
-    secondInterest: '',
-    thirdInterest: '',
-    reviewIDs:'',
-    reviewUpvotedIDs: '',
-    reviewDownvotedIDs: '',
-    dept: '',
-  })
+ 
   const onReset = async () => {
-    navigate('/Profile')
+      navigate('/Profile')
+        
   };
+  async function getRecords(value) {
+    const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/info/" + value)
+    if(!response.ok) {
+      console.log('here')
+      console.log("Error:" + response.statusText);
+      return;
+    }
+    const res = await response.json();
+    console.log(res.data[0])
+    let first = '';
+    let second = '';
+    let third = '';
+    console.log(res.data[0].firstInterest=='')
+    console.log(res.data[0].secondInterest=='')
+    if (res.data[0].firstInterest==undefined){
+      first = ''
+    } else {
+      first = res.data[0].firstInterest
+    }
+    if (res.data[0].secondInterest==undefined){
+      second = ''
+    } else {
+      second = res.data[0].secondInterest
+    }
+    if (res.data[0].thirdInterest==undefined){
+      third = ''
+    } else {
+      third = res.data[0].thirdInterest
+    }
+    form_1.setFieldsValue({
+      FirstName: res.data[0].firstName,
+      LastName: res.data[0].lastName,
+      StudentDegree: res.data[0].degreeType,
+      Department: res.data[0].dept,
+      firstInterest: first,
+      secondInterest: second,
+      thirdInterest: third
+    });
+  }
+
   useEffect( () => {
+    console.log("DUMMYYYY")
     const fetchData = async () => {
       const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
       if(!responseValue.ok) {
@@ -76,51 +123,19 @@ function UserProfileForm(props) {
       console.log(records2.data.userId);
       setActualID(records2.data.userId);
       window.userID = actualID;
-      async function getRecords() {
-        const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/info/" + records2.data.userId)
-        if(!response.ok) {
-          console.log('here')
-          console.log("Error:" + response.statusText);
-          return;
-        }
-        const res = await response.json();
-        let first = '';
-        let second = '';
-        let third = '';
-        console.log(res.data[0].firstInterest=='')
-        console.log(res.data[0].secondInterest=='')
-        if (res.data[0].firstInterest==undefined){
-          first = ''
-        } else {
-          first = res.data[0].firstInterest
-        }
-        if (res.data[0].secondInterest==undefined){
-          second = ''
-        } else {
-          second = res.data[0].secondInterest
-        }
-        if (res.data[0].thirdInterest==undefined){
-          third = ''
-        } else {
-          third = res.data[0].thirdInterest
-        }
-        form_1.setFieldsValue({
-          FirstName: res.data[0].firstName,
-          LastName: res.data[0].lastName,
-          StudentDegree: res.data[0].degreeType,
-          Department: res.data[0].dept,
-          firstInterest: first,
-          secondInterest: second,
-          thirdInterest: third
-        });
-      }
-      getRecords();
+      
+      getRecords(records2.data.userId);
+      params.userID = records2.data.userId
+      params.firstInterest = records2.data.firstInterest
+      params.degreeType = records2.data.degreeType
+      let test={...params}
+      setParams(test)
     }
     fetchData().catch(console.error);
     
 
     return;
-  }, [window.userID]);
+  }, []);
 
   console.log(params.firstInterests==undefined)
   console.log(params.secondInterests)
