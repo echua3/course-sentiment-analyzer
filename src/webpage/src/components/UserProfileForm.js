@@ -6,19 +6,63 @@ import { useNavigate } from 'react-router-dom'
 
 function UserProfileForm(props) {
 
+  const [datasource, setDatasource] = useState([])
+  const [userID, setUserID] = useState(window.userID)
+  const [actualID, setActualID] = useState("");
   const [profileSubmitted, setProfile] = useState(false);
   const [form_1] = Form.useForm();
 
   const navigate = useNavigate()
 
-  const onSubmit = async (e )=> {
-    e.preventDefault();
+  useEffect( () => {
+    const fetchData = async () => {
+      const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
+      console.log("Dummy")
+      if(!responseValue.ok) {
+            console.log("Error:" + responseValue.statusText);
+            window.userID = "";
+            return;
+      }
+      const records2 = await responseValue.json();
+      console.log(records2.data.userId);
+      setActualID(records2.data.userId);
+      window.userID = actualID;
+      async function getRecords() {
+        const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/" + records2.data.userId)
+        if(!response.ok) {
+          console.log("Error:" + response.statusText);
+          return;
+        }
+        const res = await response.json();
+        setDatasource('')
+        setDatasource(res.data[0]);
+        console.log(res.data[0])
+        form_1.setFieldsValue({
+        FirstName: res.data[0].firstName,
+        LastName: res.data[0].lastName,
+        StudentDegree: res.data[0].degreeType,
+        Department: res.data[0].dept,
+        firstInterest: res.data[0].firstInterest,
+        secondInterest: res.data[0].secondInterest,
+        thirdInterest: res.data[0].thirdInterest })
+      }
 
-    let test={...params}
-    setParams(test)
-    await requestData(test)
-    navigate('/Profile')
-  }
+      getRecords();
+  
+      return;
+    }
+    fetchData().catch(console.error);
+
+    
+   }, [userID]);
+
+   const firstName = datasource.firstName
+    const lastName = datasource.lastName
+    const degreeType = datasource.degreeType
+    const department = datasource.dept
+    const interest_1 = datasource.firstInterest
+    const interest_2 = datasource.secondInterest
+    const interest_3 = datasource.thirdInterest
 
   const requestData= async (params)=>{
     // edited for development and deployment usage
@@ -60,31 +104,6 @@ function UserProfileForm(props) {
   const onReset = async () => {
     navigate('/Profile')
   };
-
-
-  useEffect( () => {
-    async function getRecords() {
-      const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/info/" + window.userID)
-      if(!response.ok) {
-        console.log('here')
-        console.log("Error:" + response.statusText);
-        return;
-      }
-      const res = await response.json();
-      form_1.setFieldsValue({
-        FirstName: res.data[0].firstName,
-        LastName: res.data[0].lastName,
-        StudentDegree: res.data[0].degreeType,
-        Department: res.data[0].dept,
-        firstInterest: res.data[0].firstInterest,
-        secondInterest: res.data[0].secondInterest,
-        thirdInterest: res.data[0].thirdInterest
-      });
-    }
-    getRecords();
-
-    return;
-  }, [window.userID]);
 
   return (
     <div>
