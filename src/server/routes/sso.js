@@ -77,7 +77,12 @@ ssoRoute.post(
     (req, res, next) => {
       next();
     },
-    passport.authenticate("samlStrategy")/*,
+    passport.authenticate("samlStrategy"),
+    (req, res) => {
+        // the user data is in req.user
+        res.send(`https://jhu-courses.herokuapp.com/Profile`);
+    }
+    /*,
     async (req, res) => {
         const id = req.user[email];
         id = id.substring(0, id.indexOf("@"));
