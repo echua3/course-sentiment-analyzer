@@ -80,9 +80,11 @@ ssoRoute.post(
     passport.authenticate("samlStrategy"),
     (req, res) => {
         // the user data is in req.user
-        const id = req.user[email];
-        id = id.substring(0, id.indexOf("@"));
-        res.redirect(`https://jhu-courses.herokuapp.com/login/` + id + '/' + req.user[first] + '/' + req.user[last]);
+        // const id = req.user[email];
+        // id = id.substring(0, id.indexOf("@"));
+        res.send(req.user[email]);
+        // [Object object]
+        // res.redirect(`https://jhu-courses.herokuapp.com/login/` + id + '/' + req.user[first] + '/' + req.user[last]);
     }
 );
 
