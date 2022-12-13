@@ -80,7 +80,7 @@ ssoRoute.post(
     passport.authenticate("samlStrategy"),
     (req, res) => {
         // the user data is in req.user
-        res.send(`https://jhu-courses.herokuapp.com/Profile`);
+        res.redirect(`https://jhu-courses.herokuapp.com/Profile`);
     }
     /*,
     async (req, res) => {
