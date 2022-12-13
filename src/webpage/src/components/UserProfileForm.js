@@ -1,14 +1,9 @@
 import React from "react";
 import { Form, Input, Button, Select, InputNumber } from "antd";
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom';
 
 function UserProfileForm(props) {
-
-  const [datasource, setDatasource] = useState([])
-  const [userID, setUserID] = useState(window.userID)
-  const [actualID, setActualID] = useState("");
   const [profileSubmitted, setProfile] = useState(false);
   const [form_1] = Form.useForm();
 
@@ -28,27 +23,14 @@ function UserProfileForm(props) {
     // console.log()
     // e.preventDefault();
 
-      getRecords();
-  
-      return;
-    }
-    fetchData().catch(console.error);
-
-    
-   }, [userID]);
-
-   const firstName = datasource.firstName
-    const lastName = datasource.lastName
-    const degreeType = datasource.degreeType
-    const department = datasource.dept
-    const interest_1 = datasource.firstInterest
-    const interest_2 = datasource.secondInterest
-    const interest_3 = datasource.thirdInterest
-
+    let test={...params}
+    setParams(test)
+    await requestData(test)
+    navigate('/Profile')
+  }
   const requestData= async (params)=>{
     // edited for development and deployment usage
     const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/update/" + params.UserID, {
-
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +48,6 @@ function UserProfileForm(props) {
       setProfile(true)
     }
   }
-
   const [params, setParams] = useState({
     userID: window.userID,
     firstName: '',
@@ -80,52 +61,63 @@ function UserProfileForm(props) {
     reviewDownvotedIDs: '',
     dept: '',
   })
-
-
   const onReset = async () => {
     navigate('/Profile')
   };
-
   useEffect( () => {
-    async function getRecords() {
-      const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/info/" + window.userID)
-      if(!response.ok) {
-        console.log('here')
-        console.log("Error:" + response.statusText);
-        return;
+    const fetchData = async () => {
+      const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
+      if(!responseValue.ok) {
+            console.log("Error:" + responseValue.statusText);
+            window.userID = "";
+            return;
       }
-      const res = await response.json();
-      let first = '';
-      let second = '';
-      let third = '';
-      console.log(res.data[0].firstInterest=='')
-      console.log(res.data[0].secondInterest=='')
-      if (res.data[0].firstInterest==undefined){
-        first = ''
-      } else {
-        first = res.data[0].firstInterest
+      const records2 = await responseValue.json();
+      console.log(records2.data.userId);
+      setActualID(records2.data.userId);
+      window.userID = actualID;
+      async function getRecords() {
+        const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/user/info/" + records2.data.userId)
+        if(!response.ok) {
+          console.log('here')
+          console.log("Error:" + response.statusText);
+          return;
+        }
+        const res = await response.json();
+        let first = '';
+        let second = '';
+        let third = '';
+        console.log(res.data[0].firstInterest=='')
+        console.log(res.data[0].secondInterest=='')
+        if (res.data[0].firstInterest==undefined){
+          first = ''
+        } else {
+          first = res.data[0].firstInterest
+        }
+        if (res.data[0].secondInterest==undefined){
+          second = ''
+        } else {
+          second = res.data[0].secondInterest
+        }
+        if (res.data[0].thirdInterest==undefined){
+          third = ''
+        } else {
+          third = res.data[0].thirdInterest
+        }
+        form_1.setFieldsValue({
+          FirstName: res.data[0].firstName,
+          LastName: res.data[0].lastName,
+          StudentDegree: res.data[0].degreeType,
+          Department: res.data[0].dept,
+          firstInterest: first,
+          secondInterest: second,
+          thirdInterest: third
+        });
       }
-      if (res.data[0].secondInterest==undefined){
-        second = ''
-      } else {
-        second = res.data[0].secondInterest
-      }
-      if (res.data[0].thirdInterest==undefined){
-        third = ''
-      } else {
-        third = res.data[0].thirdInterest
-      }
-      form_1.setFieldsValue({
-        FirstName: res.data[0].firstName,
-        LastName: res.data[0].lastName,
-        StudentDegree: res.data[0].degreeType,
-        Department: res.data[0].dept,
-        firstInterest: first,
-        secondInterest: second,
-        thirdInterest: third
-      });
+      getRecords();
     }
-    getRecords();
+    fetchData().catch(console.error);
+    
 
     return;
   }, [window.userID]);
@@ -419,12 +411,9 @@ function UserProfileForm(props) {
         {/* </Link> */}
         <Button className='reset' htmlType="button" onClick={onReset}>Cancel</Button>
       </Form.Item>
-
     </Form>
     </div>
     </div>
   );
 }
-
-
 export default UserProfileForm;
