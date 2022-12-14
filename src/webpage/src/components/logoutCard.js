@@ -7,7 +7,7 @@ import { Navigate } from 'react-router';
 function LogoutCard() {
 
   useEffect( () => {
-    logoutFunction()
+    logoutFunction();
     return;
   }, []);
 
