@@ -16,6 +16,7 @@ editUserRoutes.route("/user/update/:userID").post(async function (req, res) {
     }
 
     try {
+        console.log(userModel.find({userID: req.body.userID}))
         const result = await userModel.updateMany(
             {userID: req.body.userID},
             user

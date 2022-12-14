@@ -15,6 +15,9 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+
+  const [actualID, setActualID] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/currentUser/", { credentials: 'include'})
@@ -25,8 +28,8 @@ export default function Navbar() {
             return;
       }
       const records2 = await responseValue.json();
-      console.log(records2.data.userId);
-      window.userID = records2.data.userId;
+      setActualID(records2.data.userId);
+      window.userID = actualID;
     }
     fetchData().catch(console.error);
   })
@@ -81,22 +84,24 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-4">
-                    <CustomLink key={UserProfile} href={"/Profile"} className={classNames(
-                            "bg-gray-800 flex text-sm rounded-full",
-                            "block px-4 py-2 text-sm text-gray-700"
-                    )} to="/Profile">
-                      <img
-                            className="h-8 w-8 rounded-full"
-                            src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
-                            alt=""
-                          />
-                    </CustomLink>
-                    <CustomLink key={LogoutPage} href={"/Logout"} className="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white" to="/Logout">Logout</CustomLink>
-                </div>
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-4">
-                    <CustomLink key={LoginPage} href={"/Login"} className="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white" to="/Login">Login</CustomLink>
-                </div>
+                {actualID != ""
+                  ? <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-4">
+                      <CustomLink key={UserProfile} href={"/Profile"} className={classNames(
+                          "bg-gray-800 flex text-sm rounded-full",
+                          "block px-4 py-2 text-sm text-gray-700"
+                        )} to="/Profile">
+                        <img
+                          className="h-8 w-8 rounded-full"
+                          src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
+                          alt=""
+                        />
+                      </CustomLink>
+                      <CustomLink key={LogoutPage} href={"/Logout"} className="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white" to="/Logout">Logout</CustomLink>
+                    </div>
+                  : <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-4">
+                      <CustomLink key={LoginPage} href={"/Login"} className="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white" to="/Login">Login</CustomLink>
+                    </div>
+                }
             </div>
           </div>
 

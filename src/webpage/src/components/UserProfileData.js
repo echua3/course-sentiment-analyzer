@@ -17,6 +17,7 @@ function UserProfileData({actualID}) {
           const res = await response.json();
           setDatasource('')
           setDatasource(res.data[0]);
+          console.log(res.data[0])
         }
         getRecords();
 
