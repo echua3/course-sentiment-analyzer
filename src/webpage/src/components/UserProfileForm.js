@@ -10,15 +10,6 @@ function UserProfileForm(props) {
 
   const navigate = useNavigate()
 
-  // const onSubmit = async (e)=> {
-  //   console.log(e)
-  //   e.preventDefault();
-
-  //   let test={...params}
-  //   setParams(test)
-  //   await requestData(test)
-  //   navigate('/Profile')
-  // }
   const [params, setParams] = useState({
     userID: '',
     firstName: '',
