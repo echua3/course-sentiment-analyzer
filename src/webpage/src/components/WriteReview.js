@@ -144,7 +144,7 @@ function WriteReview({actualID, record, datasource}) {
     } else {
       return (
         <div>
-            <span class="writereview-form-title-2">
+            <span class="writereview-form-title">
                Thank you for adding your review!
             </span>
         </div>

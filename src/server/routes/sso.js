@@ -5,15 +5,12 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 
-const PbK = process.env.PbK;
-const PvK = process.env.PvK;
+const PbK = process.env.PbK || fs.readFileSync(__dirname + "/../certs/cert.pem", "utf8");
+const PvK = process.env.PvK || fs.readFileSync(__dirname + "/../certs/key.pem", "utf8");
 
 const email = "email";
 const first = "urn:oid:2.5.4.42";
 const last = "urn:oid:2.5.4.4";
-
-//const PbK = fs.readFileSync(__dirname + "/../certs/cert.pem", "utf8");
-//const PvK = fs.readFileSync(__dirname + "/../certs/key.pem", "utf8");
 
 const JHU_SSO_URL = "https://idp.jh.edu/idp/profile/SAML2/Redirect/SSO";
 const SP_NAME = "https://jhu-courses.herokuapp.com/idp";
