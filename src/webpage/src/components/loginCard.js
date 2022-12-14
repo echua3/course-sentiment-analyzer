@@ -61,7 +61,7 @@ function LoginCard() {
     <div class="left">
        <div class="overlay">
        <span class="writereview-form-title-2">
-               Hello Bluejays, your journey starts here!
+            Your personal catalogue for courses is only a few keystrokes away!
        </span>
        <div class="wrap-input1 center-fold image-center">
        <img
@@ -88,7 +88,7 @@ function LoginCard() {
       <div class="left">
          <div class="overlay">
          <span class="writereview-form-title-2">
-                 Hello there, your personal catalogue for courses is only a few keystrokes away!
+                Your personal catalogue for courses is only a few keystrokes away!
          </span>
          <div class="wrap-input1 center-fold image-center">
          <img

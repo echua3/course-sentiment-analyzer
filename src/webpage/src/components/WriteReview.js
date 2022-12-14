@@ -100,8 +100,19 @@ function WriteReview({actualID, record, datasource}) {
         
     }
 
-    if (!reviewSubmitted && actualID != "" && !datasource.courseIDs.includes({record}.record)) {
-    return (
+    if (actualID == "") {
+      return (
+        <div>
+            <span class="writereview-form-title">
+              Please login to write reviews.
+            </span>
+            <span class="writereview-form-title-3">
+              Note: All reviews are anonymous. Although, we do ask you to sign-in using a JHU email to ensure that reviews are only submitted by JHU students.
+            </span>
+        </div>
+      );
+    } else if (!reviewSubmitted && !datasource.courseIDs.includes({record}.record)) {
+      return (
         <div>
             <span class="writereview-form-title">
                Write A Review
@@ -129,21 +140,12 @@ function WriteReview({actualID, record, datasource}) {
             </form>
 				   </div>
       </div>
-      
     );
-    } else if (actualID != "" || datasource.courseIDs.includes({record}.record)) {
-      return (
-        <div>
-            <span class="writereview-form-title">
-               Thank you for adding your review!
-            </span>
-        </div>
-      );
     } else {
       return (
         <div>
-            <span class="writereview-form-title">
-            Please login to write reviews.
+            <span class="writereview-form-title-2">
+               Thank you for adding your review!
             </span>
         </div>
       );
