@@ -15,7 +15,7 @@ const cookieSession = require('cookie-session')
 
 var sanitize = require("mongo-sanitize");
 
-logoutRoute.route("/logout").get(function (req, res) {
+logoutRoute.route("/jhu/logout").get(function (req, res) {
     let db_connect = dbo.getDb();
     const token = req.cookies.jwt;
   
