@@ -85,7 +85,7 @@ function UserReviews({actualID}) {
       let test={...params}
       setParams(test)
 
-      const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/update/" + actualID, {
+      const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/update/" + item.reviewID, {
 
         method: "POST",
         headers: {
