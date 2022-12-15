@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb");
 const mongo = require("mongodb")
-const MongoBench = require('mongo-bench');
+// const MongoBench = require('mongo-bench');
 const Db = process.env.ATLAS_URI;
 const client = new MongoClient(Db, {
   useNewUrlParser: true,
@@ -9,10 +9,10 @@ const client = new MongoClient(Db, {
 
 // Test variable class, use the benchmark to create mongodb values out of the
 // log collections
-MongoBench.mongo(mongo, {
-  'logsCollection': 'mongologs',
-  calculateQueryFingeprint: false
-});
+// MongoBench.mongo(mongo, {
+//   'logsCollection': 'mongologs',
+//   calculateQueryFingeprint: false
+// });
 var _db;
 
 // Connect to the server via module exports to automatically connect when a value
