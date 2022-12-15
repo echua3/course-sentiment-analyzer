@@ -61,9 +61,22 @@ function SearchBar(props) {
   const requestData= async (params)=>{
     // edited for development and deployment usage
       async function fetchData() {
+        let url = process.env.REACT_APP_API_ENDPOINT + "/totalclasscount?"
+        if(params.CourseTitle) {
+          url += "CourseTitle=" + params.CourseTitle + "&"
+        }
+        if(params.Department) {
+          url += "Department=" + params.Department + "&"
+        }
+        if(params.CourseNumber) {
+          url += "CourseNumber=" + params.CourseNumber + "&"
+        }
+        if(params.Credits) {
+          url += "Credits=" + String(params.Credits) + "&"
+        }
 
-        const responseValue = await fetch(process.env.REACT_APP_API_ENDPOINT + "/totalclasscount", {params})
-
+        const responseValue = await fetch(url)
+        console.log(url)
         if(!responseValue.ok) {
           const message = "An error occured"
           console.log("Error:" + responseValue.statusText);
@@ -72,9 +85,11 @@ function SearchBar(props) {
         } else {
           const records = await responseValue.json();
           params.total = records.Count;
+          console.log("total", params.total)
           let test = params;
           setParams(test);
           if(records) {
+            console.log("Gets here?")
             await axios.get(API_ENDPOINT + "/api/courselist", {params})
             .then((res) => {
               if (res.status === 200) {
@@ -112,6 +127,7 @@ function SearchBar(props) {
                     setRestitle('Success');
                     setRessub('Above is the course list')
                     setDatasource(res.data.data)
+                    console.log(res.data)
                     pagination.total = res.data.numberTotal
                     pagination.current = params.currentPage
                     let test={...pagination}
