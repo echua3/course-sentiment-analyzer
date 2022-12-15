@@ -15,7 +15,7 @@ const EditableCell = ({
   children,
   ...restProps
 }) => {
-  const inputNode = <Input />;
+  const inputNode = <Input.TextArea autoSize={true} />;
   return (
     <td {...restProps}>
       {editing ? (
