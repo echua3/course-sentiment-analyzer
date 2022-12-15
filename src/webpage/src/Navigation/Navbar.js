@@ -88,7 +88,7 @@ export default function Navbar() {
                   ? <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-4">
                       <CustomLink key={UserProfile} href={"/Profile"} className={classNames(
                           "bg-gray-800 flex text-sm rounded-full",
-                          "block px-4 py-2 text-sm text-gray-700"
+                          "block px-1 py-2 text-sm text-gray-700"
                         )} to="/Profile">
                         <img
                           className="h-8 w-8 rounded-full"
@@ -110,15 +110,15 @@ export default function Navbar() {
               <div className="flex space-x-4">
                 <CustomLink key={HomePage} href={"/"} className={classNames(
                     "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "px-3 py-2 rounded-md text-sm font-medium"
+                    "px-2 py-2 rounded-md text-sm font-medium"
                   )} to="/">HomePage</CustomLink>
                 <CustomLink key={CourseSearch} href={"/Courses"} className={classNames(
                     "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "px-3 py-2 rounded-md text-sm font-medium"
+                    "px-2 py-2 rounded-md text-sm font-medium"
                   )} to="/Courses">Courses</CustomLink>
                 <CustomLink key={Recommendations} href={"/Recommendations"} className={classNames(
                     "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "px-3 py-2 rounded-md text-sm font-medium"
+                    "px-2 py-2 rounded-md text-sm font-medium"
                   )} to="/Recommendations">Recommendations</CustomLink>
               </div>
             </div>
