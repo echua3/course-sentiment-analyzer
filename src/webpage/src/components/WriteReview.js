@@ -6,7 +6,7 @@ var Sentiment = require('sentiment');
 
 
 function WriteReview({actualID, record, datasource}) {
-  
+
     const [commentError, setCommentError] = useState("");
     const [commentErrorBoolean, showCommentError] = useState(false);
 
@@ -15,7 +15,7 @@ function WriteReview({actualID, record, datasource}) {
     const [form, setForm] = useState({
         sectionID: {record}.record,
         comment: "",
-        difficulty: 0,
+        difficulty: 1,
         score: 1,
         helpfulness: 0,
         date: new Date(),
@@ -30,20 +30,20 @@ function WriteReview({actualID, record, datasource}) {
     }
 
     async function enterReview(e) {
-        
-        e.preventDefault(); 
+
+        e.preventDefault();
         var sentiment_score = sentiment.analyze(form.comment).score
         console.log(sentiment_score)
-        
+
         setForm((prev) => {
           return { ...prev, sectionID: {record}.record,}})
         const newReview = { ...form };
-        
+
         hideErrors();
         const spaceCheckComments = form.comment.replace(/\s/g, '');
         console.log(spaceCheckComments);
         if (spaceCheckComments.length < 1) {
-          setCommentError("You need to add a review to you know your review!")   
+          setCommentError("You need to add a review to you know your review!")
           showCommentError(true)
         } else if (spaceCheckComments.length < 10) {
           setCommentError("Please include at least 10 characters in your review!")
@@ -51,7 +51,7 @@ function WriteReview({actualID, record, datasource}) {
         }
 
         if(spaceCheckComments.length >= 10) {
-          const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/add", { 
+          const response = await fetch(process.env.REACT_APP_API_ENDPOINT + "/review/add", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -67,12 +67,12 @@ function WriteReview({actualID, record, datasource}) {
             console.log(records);
             const basicMessage = records.error.message.split(/:(.*)/s)
             const allErrors = basicMessage[1].split(",")
-            console.log(allErrors) 
+            console.log(allErrors)
             allErrors.forEach(runErrorMessaging);
           } else {
             setReview(true)
           }
-        }   
+        }
     }
 
     function runErrorMessaging(message) {
@@ -97,7 +97,7 @@ function WriteReview({actualID, record, datasource}) {
 
     function hideErrors() {
       showCommentError(false)
-        
+
     }
 
     if (actualID == "") {
@@ -124,8 +124,8 @@ function WriteReview({actualID, record, datasource}) {
 			   	  </div>
 
              <div class="slidecontainer">
-             
-            <input type="range" min="0" max="5" class="slider" id="myRange" onInput={e => updateForm({ difficulty: e.target.value})} value={form.difficulty}/>
+
+            <input type="range" min="1" max="5" class="slider" id="myRange" onInput={e => updateForm({ difficulty: e.target.value})} value={form.difficulty}/>
             <p for="myRange" class="rangeValue">Difficulty: {form.difficulty}</p>
             </div>
 
@@ -151,5 +151,5 @@ function WriteReview({actualID, record, datasource}) {
       );
     }
   }
-  
+
   export default WriteReview;
