@@ -91,7 +91,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- GETTING STARTED -->
 # Getting Started
 
-To run the website on the web hop over to https://jhu-courses.herokuapp.com/, and login is as either af3 or jy6! There are no extra steps needed within this iteration in order to make it run smoothly, just make sure that the logins work on your end if there are any problems message the group!
+To run the website on the web hop over to ~~https://jhu-courses.herokuapp.com/~~ (deprecated) https://course-sentiment-analyzer-04b3272ce81f.herokuapp.com/, and login is as af6. ~~either af3 or jy6!~~ There are no extra steps needed within this iteration in order to make it run smoothly, just make sure that the logins work on your end if there are any problems message the group!
 
 To get a local copy up and running follow these simple example steps.
 <!-- Prerequisites -->
