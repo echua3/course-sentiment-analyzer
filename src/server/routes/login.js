@@ -35,7 +35,7 @@ loginRoute.route("/login/:userID/:first/:last").get(param('userID').trim().not()
                          { expiresIn: "1h"});
     
                     res.cookie("jwt", token, {maxAge: 3600 * 1000, httpOnly: true})
-                    res.redirect(`https://jhu-courses.herokuapp.com/ProfileEdit`);
+                    res.redirect(`https://course-sentiment-analyzer-04b3272ce81f.herokuapp.com/ProfileEdit`);
                     //res.end();
             }
             else {
@@ -46,7 +46,7 @@ loginRoute.route("/login/:userID/:first/:last").get(param('userID').trim().not()
 
                 res.cookie("jwt", token, {maxAge: 3600 * 1000, httpOnly: true})
                 console.log("AM I GETTING HERE?")
-                res.redirect(`https://jhu-courses.herokuapp.com/Profile`);
+                res.redirect(`https://course-sentiment-analyzer-04b3272ce81f.herokuapp.com/Profile`);
                 res.end();
             }
          }
