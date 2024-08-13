@@ -23,8 +23,8 @@ const last = "urn:oid:2.5.4.4";
 //const PvK = fs.readFileSync(__dirname + "/certs/key.pem", "utf8");
 
 const JHU_SSO_URL = "https://idp.jh.edu/idp/profile/SAML2/Redirect/SSO";
-const SP_NAME = "https://jhu-courses.herokuapp.com/idp";
-const BASE_URL = "https://jhu-courses.herokuapp.com";
+const SP_NAME = "https://course-sentiment-analyzer-04b3272ce81f.herokuapp.com/idp";
+const BASE_URL = "https://course-sentiment-analyzer-04b3272ce81f.herokuapp.com";
 
 // Setup SAML strategy
 const samlStrategy = new saml.Strategy(
