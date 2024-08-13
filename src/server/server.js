@@ -24,7 +24,7 @@ currentUserRoute = require("./routes/getCurrentUser")
 login = require("./routes/login")
 logout = require("./routes/logout")
 getRecsRoute = require("./routes/getRecs")
-ssoRoute = require("./routes/sso")
+// ssoRoute = require("./routes/sso")
 
 // allow cross-origin interaction:
 // app.use(cors({
@@ -64,7 +64,7 @@ app.use(logout)
 app.use(currentUserRoute)
 app.use(getRecsRoute)
 app.use(editreviewRoutes)
-app.use(ssoRoute)
+// app.use(ssoRoute)
 
 
 // Pick up React index.html file
